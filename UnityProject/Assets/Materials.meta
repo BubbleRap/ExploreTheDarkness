@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:UnityProject/Assets/Materials.meta
 guid: 9658c505fb1ae4bfd91acaa8caaa744f
+=======
+guid: db981a4c52a83ff488dce351852855d9
+>>>>>>> shadows scene and standart assets:UnityProject/Assets/Scripts.meta
 folderAsset: yes
 DefaultImporter:
   userData: 
