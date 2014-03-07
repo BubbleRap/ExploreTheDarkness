@@ -3,6 +3,14 @@
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 	}
 	SubShader {
+	
+		Stencil {
+			Ref 0
+			Comp Greater
+			Pass invert
+		}
+		
+		
 		Tags { "RenderType"="Opaque" }
 		LOD 200
 		

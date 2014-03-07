@@ -5,10 +5,7 @@
 	SubShader {
 	
 		Stencil {
-			Ref 1
-			Comp Greater
-			Pass Zero 
-			Fail Zero
+			Ref 255
 		}
 				
 		Tags { "RenderType"="Opaque" }
