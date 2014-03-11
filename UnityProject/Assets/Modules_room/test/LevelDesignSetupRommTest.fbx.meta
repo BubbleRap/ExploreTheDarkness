@@ -1,0 +1,130 @@
+fileFormatVersion: 2
+guid: c8269e3bef4da044f9778a482dbbfcdf
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: floor_regular_4x2
+    100002: floor_regular_4x2_001
+    100004: //RootNode
+    100006: wall_regular_1m_001
+    100008: wall_regular_2m
+    100010: wall_regular_2m_001
+    100012: wall_regular_3m
+    100014: wall_regular_3m_001
+    100016: wall_regular_3m_002
+    100018: wall_regular_4m
+    100020: wall_regular_4m_001
+    100022: wall_regular_cornerElement_F
+    100024: wall_regular_cornerElement_F_001
+    100026: wall_regular_cornerElement_F_002
+    100028: wall_regular_cornerElement_F_003
+    400000: floor_regular_4x2
+    400002: floor_regular_4x2_001
+    400004: //RootNode
+    400006: wall_regular_1m_001
+    400008: wall_regular_2m
+    400010: wall_regular_2m_001
+    400012: wall_regular_3m
+    400014: wall_regular_3m_001
+    400016: wall_regular_3m_002
+    400018: wall_regular_4m
+    400020: wall_regular_4m_001
+    400022: wall_regular_cornerElement_F
+    400024: wall_regular_cornerElement_F_001
+    400026: wall_regular_cornerElement_F_002
+    400028: wall_regular_cornerElement_F_003
+    2300000: floor_regular_4x2
+    2300002: floor_regular_4x2_001
+    2300004: wall_regular_1m_001
+    2300006: wall_regular_2m
+    2300008: wall_regular_2m_001
+    2300010: wall_regular_3m
+    2300012: wall_regular_3m_001
+    2300014: wall_regular_3m_002
+    2300016: wall_regular_4m
+    2300018: wall_regular_4m_001
+    2300020: wall_regular_cornerElement_F
+    2300022: wall_regular_cornerElement_F_001
+    2300024: wall_regular_cornerElement_F_002
+    2300026: wall_regular_cornerElement_F_003
+    3300000: floor_regular_4x2
+    3300002: floor_regular_4x2_001
+    3300004: wall_regular_1m_001
+    3300006: wall_regular_2m
+    3300008: wall_regular_2m_001
+    3300010: wall_regular_3m
+    3300012: wall_regular_3m_001
+    3300014: wall_regular_3m_002
+    3300016: wall_regular_4m
+    3300018: wall_regular_4m_001
+    3300020: wall_regular_cornerElement_F
+    3300022: wall_regular_cornerElement_F_001
+    3300024: wall_regular_cornerElement_F_002
+    3300026: wall_regular_cornerElement_F_003
+    4300000: floor_regular_4x2_001
+    4300002: wall_regular_1m_001
+    4300004: wall_regular_3m_002
+    4300006: wall_regular_cornerElement_F_003
+    4300008: wall_regular_4m_001
+    4300010: wall_regular_2m_001
+    4300012: wall_regular_3m_001
+    4300014: wall_regular_cornerElement_F_002
+    4300016: wall_regular_cornerElement_F_001
+    4300018: wall_regular_3m
+    4300020: wall_regular_4m
+    4300022: floor_regular_4x2
+    4300024: wall_regular_cornerElement_F
+    4300026: wall_regular_2m
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  userData: 
