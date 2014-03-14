@@ -63,8 +63,7 @@ public class DynamicLightProbe : MonoBehaviour
 
 			camera.fov = fov;
 		}
-		
-
+	
 		
 		RenderTexture.active = null;
 		
