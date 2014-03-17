@@ -42,6 +42,10 @@ ModelImporter:
     100072: wall_regular_T-corner_L
     100074: wall_regular_T-corner_R
     100076: wall_regular_CompensateCorner
+    100078: wall_regular_cornerElement_B_Compensate
+    100080: wall_regular_DoorElement_002
+    100082: wall_regular_T-corner_L_002
+    100084: wall_regular_T-corner_R_002
     400000: Armature
     400002: bird_Turntable
     400004: CageLifter
@@ -81,6 +85,10 @@ ModelImporter:
     400072: wall_regular_T-corner_L
     400074: wall_regular_T-corner_R
     400076: wall_regular_CompensateCorner
+    400078: wall_regular_cornerElement_B_Compensate
+    400080: wall_regular_DoorElement_002
+    400082: wall_regular_T-corner_L_002
+    400084: wall_regular_T-corner_R_002
     2300000: door_Regular
     2300002: floor_regular_1x1
     2300004: floor_regular_1x2
@@ -112,6 +120,10 @@ ModelImporter:
     2300056: wall_regular_T-corner_L
     2300058: wall_regular_T-corner_R
     2300060: wall_regular_CompensateCorner
+    2300062: wall_regular_cornerElement_B_Compensate
+    2300064: wall_regular_DoorElement_002
+    2300066: wall_regular_T-corner_L_002
+    2300068: wall_regular_T-corner_R_002
     3300000: door_Regular
     3300002: floor_regular_1x1
     3300004: floor_regular_1x2
@@ -143,6 +155,10 @@ ModelImporter:
     3300056: wall_regular_T-corner_L
     3300058: wall_regular_T-corner_R
     3300060: wall_regular_CompensateCorner
+    3300062: wall_regular_cornerElement_B_Compensate
+    3300064: wall_regular_DoorElement_002
+    3300066: wall_regular_T-corner_L_002
+    3300068: wall_regular_T-corner_R_002
     4300000: wall_regular_SquareHallWaySHORT
     4300002: wall_regular_BeveledHallwaySHORT
     4300004: floor_regular_ForDoubleCorners
@@ -174,6 +190,10 @@ ModelImporter:
     4300056: wall_regular_T-corner_R
     4300058: wall_regular_T-corner_L
     4300060: wall_regular_CompensateCorner
+    4300062: wall_regular_cornerElement_B_Compensate
+    4300064: wall_regular_DoorElement_002
+    4300066: wall_regular_T-corner_L_002
+    4300068: wall_regular_T-corner_R_002
     9500000: //RootNode
   materials:
     importMaterials: 0
