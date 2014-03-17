@@ -31,6 +31,7 @@ ExportedObj/
 Icon?
 ehthumbs.db
 Thumbs.db
+<<<<<<< HEAD
 UnityProject/Assets/Materials/glow.mat
 
 UnityProject/Assets/Materials/glow.mat.meta
@@ -40,3 +41,10 @@ UnityProject/Assets/mia_for_en_sikkerhesskyld_2.unity
 UnityProject/Assets/mia_for_en_sikkerhesskyld_2.unity.meta
 
 UnityProject/Assets/Mia_Silja_Home.unity
+=======
+UnityProject/Assets/Modules_room.meta
+*.meta
+UnityProject/Assets/Modules_room/test/Materials/unnamed.mat
+UnityProject/Assets/Visuals/Objects/Materials/StylizedGuitar_Diffuse.mat
+UnityProject/ProjectSettings/TagManager.asset
+>>>>>>> FETCH_HEAD
