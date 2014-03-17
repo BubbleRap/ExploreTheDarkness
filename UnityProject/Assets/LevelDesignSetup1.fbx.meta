@@ -39,6 +39,8 @@ ModelImporter:
     100066: wall_regular_3m
     100068: wall_regular_4m
     100070: wall_regular_DoorFrame
+    100072: wall_regular_T-corner_L
+    100074: wall_regular_T-corner_R
     400000: Armature
     400002: bird_Turntable
     400004: CageLifter
@@ -75,6 +77,8 @@ ModelImporter:
     400066: wall_regular_3m
     400068: wall_regular_4m
     400070: wall_regular_DoorFrame
+    400072: wall_regular_T-corner_L
+    400074: wall_regular_T-corner_R
     2300000: door_Regular
     2300002: floor_regular_1x1
     2300004: floor_regular_1x2
@@ -103,6 +107,8 @@ ModelImporter:
     2300050: wall_regular_3m
     2300052: wall_regular_4m
     2300054: wall_regular_DoorFrame
+    2300056: wall_regular_T-corner_L
+    2300058: wall_regular_T-corner_R
     3300000: door_Regular
     3300002: floor_regular_1x1
     3300004: floor_regular_1x2
@@ -131,6 +137,8 @@ ModelImporter:
     3300050: wall_regular_3m
     3300052: wall_regular_4m
     3300054: wall_regular_DoorFrame
+    3300056: wall_regular_T-corner_L
+    3300058: wall_regular_T-corner_R
     4300000: wall_regular_SquareHallWaySHORT
     4300002: wall_regular_BeveledHallwaySHORT
     4300004: floor_regular_ForDoubleCorners
@@ -159,6 +167,8 @@ ModelImporter:
     4300050: wall_regular_3m
     4300052: wall_regular_4m
     4300054: wall_regular_DoorFrame
+    4300056: wall_regular_T-corner_R
+    4300058: wall_regular_T-corner_L
     9500000: //RootNode
   materials:
     importMaterials: 0
