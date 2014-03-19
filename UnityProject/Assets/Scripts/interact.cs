@@ -1,13 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class interact : MonoBehaviour {
+public class Interact : MonoBehaviour {
 
 	public Transform firstPersonCamera;
-	public Color adventureModeAmbientLight;
-	public Color shadowModeAmbientLight;
 	bool isInteractMode = false;
-	bool darkMode = false;
 
 	// Use this for initialization
 	void Start () {
@@ -59,20 +56,6 @@ public class interact : MonoBehaviour {
 					}
 				}
 				i++;
-			}
-		}
-
-		if(Input.GetKeyDown(KeyCode.R))
-		{
-			if(darkMode)
-			{
-				RenderSettings.ambientLight = adventureModeAmbientLight;
-				darkMode = false;
-			}
-			else
-			{
-				RenderSettings.ambientLight = shadowModeAmbientLight;
-				darkMode = true;
 			}
 		}
 	}

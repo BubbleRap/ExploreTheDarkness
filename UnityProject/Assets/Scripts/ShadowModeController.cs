@@ -5,6 +5,7 @@ public class ShadowModeController : MonoBehaviour
 {
 	public CameraFade cameraFadeController;
 	public DynamicLightProbe probeController;
+	public Respawn respawnController;
 
 	[Range(0f, 1f)]
 	public float lightTreshold = 0.1f;
@@ -18,7 +19,7 @@ public class ShadowModeController : MonoBehaviour
 		cameraFadeController.fadedOut += () =>
 		{
 			// restart when out of light
-			Application.LoadLevel(Application.loadedLevel);
+			respawnController.RespawnToLastPosition();
 		};
 	}
 
