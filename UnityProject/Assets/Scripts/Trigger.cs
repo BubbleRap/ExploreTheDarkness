@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Triger : MonoBehaviour {
+public class Trigger : MonoBehaviour {
 
 	public Transitioner transitionContoller;
 	public bool DarkMode;
+
+	public DoorOpen doorController;
+	public bool OpenDoor;
+
+	public Respawn spawnController;
 
 	// Use this for initialization
 	void Start () {
@@ -15,6 +20,8 @@ public class Triger : MonoBehaviour {
 		if(other.tag == "Player")
 		{
 			transitionContoller.doTransition(DarkMode);
+			doorController.openDoor(OpenDoor);
+			spawnController.SetRespawnPosition(transform.position);
 		}
 	}
 	

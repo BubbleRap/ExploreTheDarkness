@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Interact : MonoBehaviour {
+public class interact : MonoBehaviour {
 
 	public Transform firstPersonCamera;
 	bool isInteractMode = false;
