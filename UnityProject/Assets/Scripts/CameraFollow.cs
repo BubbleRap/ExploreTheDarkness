@@ -6,8 +6,15 @@ public class CameraFollow : MonoBehaviour
 	public Transform cameraFocusTarget = null; 
 	public Vector3 cameraFocusOffset;
 
-	public float cameraHeight = 1;
+	//public float cameraHeight = 1;
 	public float cameraDistance = 2;
+
+	[Range(0f, 360f)]
+	public float yaw = 0f;
+	[Range(0f, 360f)]
+	public float pitch = 0f;
+	[Range(0f, 360f)]
+	public float roll = 0f;
 
 	public bool isFollowingPosition = true;
 	public bool isFollowingRotation = true;
@@ -47,9 +54,10 @@ public class CameraFollow : MonoBehaviour
 		while (true) 
 		{
 			if(isFollowingPosition) 
-				transform.position = Vector3.Slerp(transform.position, 
-			                                  cameraFocusTarget.TransformPoint(new Vector3(0f, cameraHeight, -cameraDistance) + cameraFocusOffset + shakeOffset)
-			                                   , followingSpeed);
+			{
+				Vector3 relativePosition = GetVectorFromAngle(pitch, yaw, roll, cameraDistance);
+				transform.position = Vector3.Slerp(transform.position, cameraFocusTarget.TransformPoint(relativePosition + shakeOffset), followingSpeed);
+			}
 			yield return null;
 		}
 	}
@@ -59,7 +67,7 @@ public class CameraFollow : MonoBehaviour
 		while (true) 
 		{
 			if( isFollowingRotation )
-				transform.rotation = Quaternion.Slerp( transform.rotation, cameraFocusTarget.rotation, orientationSpeed);
+				transform.LookAt(cameraFocusTarget.position + cameraFocusOffset);
 			yield return null;
 		}
 	}
@@ -72,5 +80,16 @@ public class CameraFollow : MonoBehaviour
 					                          Random.Range(-verticalShakeIntensity, verticalShakeIntensity), 0f);
 			yield return new WaitForSeconds(shakeFrequency);
 		}
+	}
+
+	Vector3 GetVectorFromAngle (float x, float y, float z, float distFromObj) 
+	{
+		//Quaternion rotation = Quaternion.Euler(x, y, z);
+
+		Vector3 forward = Vector3.zero; //Quaternion.Euler(x, y, z) * Vector3.forward;
+		Vector3 up = Quaternion.Euler(x, y, z) * Vector3.up;
+		Vector3 right = Vector3.zero; //Quaternion.Euler(x, y, z) * Vector3.right;
+
+		return (forward + up + right).normalized * distFromObj;
 	}
 }
