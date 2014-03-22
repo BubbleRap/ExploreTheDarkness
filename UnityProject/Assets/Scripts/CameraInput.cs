@@ -4,13 +4,11 @@ using System.Collections;
 [RequireComponent(typeof(CameraFollow))]
 public class CameraInput : MonoBehaviour 
 {
-	// make a "Min-Max" property drawer for the first 
-	// time in your life for gods sake already!
+	[MinMaxSlider(1f, 360f, 1f, 360f)]
+	public float verticalLimit = 0f;
+	[MinMaxSlider(1f, 360f, 1f, 360f)]
+	public float horizontalLimit = 0f;
 
-//	[MinMax(0f, 360f)]
-//	public float verticalLimit = 0f;
-//	[MinMax(0f, 360f)]
-//	public float horizontalLimit = 0f;
 	[Range(0f, 1f)]
 	public float verticalSensetivity = 1f;
 	[Range(0f, 1f)]
