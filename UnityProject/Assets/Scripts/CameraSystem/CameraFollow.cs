@@ -1,8 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum CameraMode
+{
+	Mouse_Free,
+	WASD_Ctrl
+}
+
 public class CameraFollow : MonoBehaviour 
 {
+	public CameraMode cameraMode = CameraMode.WASD_Ctrl;
+
 	public Transform cameraFocusTarget = null; 
 	public Vector3 cameraFocusOffset;
 	
@@ -55,8 +63,17 @@ public class CameraFollow : MonoBehaviour
 		{
 			if(isFollowingPosition) 
 			{
-				Vector3 relativePosition = GetVectorFromAngle(pitch, yaw, roll, cameraDistance, cameraFocusTarget.position);
-				transform.position = Vector3.Lerp(transform.position, /*cameraFocusTarget.TransformPoint(shakeOffset) + */relativePosition, followingSpeed);
+				Vector3 relativePosition;
+				if( cameraMode == CameraMode.WASD_Ctrl )
+				{
+					relativePosition = GetVectorFromAngle(pitch, yaw, roll, cameraDistance);
+					transform.position = Vector3.Lerp(transform.position, cameraFocusTarget.TransformPoint(/*shakeOffset +*/ relativePosition), followingSpeed);
+				}
+				else
+				{
+					relativePosition = GetVectorFromAngle(pitch, yaw, roll, cameraDistance, cameraFocusTarget.position);
+					transform.position = Vector3.Lerp(transform.position, /*cameraFocusTarget.TransformPoint(shakeOffset) + */relativePosition, followingSpeed);
+				}
 			}
 			yield return null;
 		}

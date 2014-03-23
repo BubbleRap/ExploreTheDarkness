@@ -142,7 +142,7 @@ function UpdateSmoothedMovementDirection ()
 		var right = Vector3(forward.z, 0, -forward.x);
 	
 		var v = Input.GetAxisRaw("Vertical");
-		var h = 0f;//Input.GetAxisRaw("Horizontal");
+		var h = Input.GetAxisRaw("Horizontal");
 	
 		if( v < 0 ) v = 0f;
 		
