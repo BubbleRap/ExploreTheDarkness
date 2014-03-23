@@ -10,9 +10,9 @@ public class CameraFollow : MonoBehaviour
 	public float cameraDistance = 2;
 
 	[Range(0f, 360f)]
-	public float yaw = 0f;
+	public float yaw = 180f;
 	[Range(0f, 360f)]
-	public float pitch = 0f;
+	public float pitch = 45f;
 	[Range(0f, 360f)]
 	public float roll = 0f;
 
@@ -20,16 +20,16 @@ public class CameraFollow : MonoBehaviour
 	public bool isFollowingRotation = true;
 
 	[Range(0f,0.1f)]
-	public float followingSpeed = 0.01f;
-	[Range(0f,0.1f)]
-	public float orientationSpeed = 0.01f;
+	public float followingSpeed = 0.05f;
+	[Range(0f,1.0f)]
+	public float orientationSpeed = 0.5f;
 
 	[Range(0f, 1f)]
-	public float horizontalShakeIntensity = 1.0f;
+	public float horizontalShakeIntensity = 0.0f;
 	[Range(0f, 1f)]
-	public float verticalShakeIntensity = 1.0f;
+	public float verticalShakeIntensity = 0.0f;
 	[Range(0f, 10f)]
-	public float shakeFrequency = 1f;
+	public float shakeFrequency = 0f;
 
 
 	// private sector, dude.
@@ -55,8 +55,8 @@ public class CameraFollow : MonoBehaviour
 		{
 			if(isFollowingPosition) 
 			{
-				Vector3 relativePosition = GetVectorFromAngle(pitch, yaw, roll, cameraDistance);
-				transform.position = Vector3.Slerp(transform.position, cameraFocusTarget.TransformPoint(relativePosition + shakeOffset), followingSpeed);
+				Vector3 relativePosition = GetVectorFromAngle(pitch, yaw, roll, cameraDistance, cameraFocusTarget.position);
+				transform.position = Vector3.Lerp(transform.position, /*cameraFocusTarget.TransformPoint(shakeOffset) + */relativePosition, followingSpeed);
 			}
 			yield return null;
 		}
@@ -67,7 +67,9 @@ public class CameraFollow : MonoBehaviour
 		while (true) 
 		{
 			if( isFollowingRotation )
-				transform.LookAt(cameraFocusTarget.position + cameraFocusOffset);
+			{
+				transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation((cameraFocusTarget.position - transform.position).normalized), 0.5f);
+			}
 			yield return null;
 		}
 	}
@@ -82,14 +84,12 @@ public class CameraFollow : MonoBehaviour
 		}
 	}
 
-	Vector3 GetVectorFromAngle (float x, float y, float z, float distFromObj) 
+	Vector3 GetVectorFromAngle (float x, float y, float z, float distFromObj, Vector3 relativePosition = default(Vector3)) 
 	{
-		//Quaternion rotation = Quaternion.Euler(x, y, z);
-
 		Vector3 forward = Vector3.zero; //Quaternion.Euler(x, y, z) * Vector3.forward;
 		Vector3 up = Quaternion.Euler(x, y, z) * Vector3.up;
 		Vector3 right = Vector3.zero; //Quaternion.Euler(x, y, z) * Vector3.right;
 
-		return (forward + up + right).normalized * distFromObj;
+		return (forward + up + right).normalized * distFromObj + relativePosition;
 	}
 }

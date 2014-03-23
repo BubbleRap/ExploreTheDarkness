@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 5b06af255df742f48a3d0f4d254cd984
+=======
+guid: b25e0c3e9f01d38438668607bf59f5e7
+>>>>>>> camera system improved
 MonoImporter:
   serializedVersion: 2
   defaultReferences: []
