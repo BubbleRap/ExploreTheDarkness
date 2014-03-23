@@ -86,7 +86,6 @@ public class CameraFollow : MonoBehaviour
 			if( isFollowingRotation )
 			{
 				transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(((cameraFocusTarget.position + cameraFocusOffset ) - transform.position).normalized), 0.5f);
-
 			}
 			yield return null;
 		}

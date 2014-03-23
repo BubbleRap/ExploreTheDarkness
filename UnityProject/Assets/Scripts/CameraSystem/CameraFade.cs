@@ -8,21 +8,22 @@ public class CameraFade : MonoBehaviour
 
 
 	public Color fadeColor;
+	private Renderer fadeFilter = null;
 
 	[Range(0f,1f)]
 	public float fadeIntensity = 0f;
 
-	Material glMaterial = null;
+	private Material glMaterial = null;
 
 	void Awake()
 	{
-//		glMaterial = new Material( "Shader \"Custom/GL\" {" +
-//		                          "SubShader { Tags { \"Queue\" = \"Transparent\" \"RenderType\"=\"Transparent\"}" +
-//		                          "Pass {" +
-//		                          "   BindChannels { Bind \"Color\",color }" +
-//		                          "   Blend SrcAlpha OneMinusSrcAlpha" +
-//		                          "   ZWrite Off Cull Off Fog { Mode Off }" +
-//		                          "} } }");
+		fadeFilter = GetComponentInChildren<Renderer> ();
+		glMaterial = fadeFilter.sharedMaterial;
+	}
+
+	void Update()
+	{
+		glMaterial.color = fadeColor * fadeIntensity;
 	}
 
 	void LateUpdate()
@@ -32,30 +33,5 @@ public class CameraFade : MonoBehaviour
 		if( fadeIntensity >= 1f )
 			if( fadedOut != null )
 				fadedOut();
-	}
-	
-	void OnPostRender()
-	{
-//		if (glMaterial == null)
-//		{
-//			print("Please assign a material on the inspector");
-//			return;
-//		}
-
-
-//		GL.PushMatrix();
-//		glMaterial.SetPass(0);
-//		
-//		GL.LoadPixelMatrix();
-//		GL.Viewport(new Rect(0, 0, Screen.width, Screen.height));
-//		GL.Color(fadeColor * fadeIntensity);
-//		GL.Begin(GL.QUADS);
-//		GL.Vertex3(0, 0, 0);
-//		GL.Vertex3(0, Screen.height , 0);
-//		GL.Vertex3(Screen.width , Screen.height, 0);
-//		GL.Vertex3(Screen.width , 0, 0);
-//		GL.End();
-//		GL.PopMatrix();
-
 	}
 }
