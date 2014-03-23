@@ -17,25 +17,19 @@ public class CameraInput : MonoBehaviour
 	public bool iversedVertical = false; 
 
 	private CameraFollow cameraFollow = null;
-	private Vector3 cachedMousePosition = Vector3.zero;
 
 	void Awake()
 	{
 		cameraFollow = GetComponent<CameraFollow>();
 	}
 
-	void Start()
-	{
-		cachedMousePosition = Input.mousePosition;
-	}
-
 	void Update () 
 	{
-		Vector3 deltaMousePosition = Input.mousePosition - cachedMousePosition;
-		cachedMousePosition = Input.mousePosition;
+		Vector3 deltaMousePosition = new Vector3 (Input.GetAxis ("Mouse X"), Input.GetAxis ("Mouse Y"), 0f);
+
 		float vertSensetivity = iversedVertical == false ? verticalSensetivity : -verticalSensetivity;
 
-		float pitchAngle = cameraFollow.pitch + deltaMousePosition.y * vertSensetivity;
+		float pitchAngle = cameraFollow.pitch + deltaMousePosition.y * vertSensetivity ;
 		pitchAngle = Mathf.Clamp (pitchAngle, horizontalLimit, horizontalLimit * 2f);
 
 		cameraFollow.yaw = Mathf.Repeat(cameraFollow.yaw + deltaMousePosition.x * horizontalSensetivity, 359.9f);
