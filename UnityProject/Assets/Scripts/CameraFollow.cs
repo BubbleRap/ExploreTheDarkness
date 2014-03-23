@@ -5,8 +5,7 @@ public class CameraFollow : MonoBehaviour
 {
 	public Transform cameraFocusTarget = null; 
 	public Vector3 cameraFocusOffset;
-
-	//public float cameraHeight = 1;
+	
 	public float cameraDistance = 2;
 
 	[Range(0f, 360f)]
@@ -19,7 +18,7 @@ public class CameraFollow : MonoBehaviour
 	public bool isFollowingPosition = true;
 	public bool isFollowingRotation = true;
 
-	[Range(0f,0.1f)]
+	[Range(0f,1.0f)]
 	public float followingSpeed = 0.05f;
 	[Range(0f,1.0f)]
 	public float orientationSpeed = 0.5f;
@@ -47,6 +46,7 @@ public class CameraFollow : MonoBehaviour
 		StartCoroutine (FollowPosition ());
 		StartCoroutine (FollowRotation ()); 
 		StartCoroutine (ShakeCamera	()); 
+
 	}
 
 	IEnumerator FollowPosition()
@@ -68,7 +68,8 @@ public class CameraFollow : MonoBehaviour
 		{
 			if( isFollowingRotation )
 			{
-				transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation((cameraFocusTarget.position - transform.position).normalized), 0.5f);
+				transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(((cameraFocusTarget.position + cameraFocusOffset ) - transform.position).normalized), 0.5f);
+
 			}
 			yield return null;
 		}

@@ -39,6 +39,7 @@ public class CameraInput : MonoBehaviour
 		pitchAngle = Mathf.Clamp (pitchAngle, horizontalLimit, horizontalLimit * 2f);
 
 		cameraFollow.yaw = Mathf.Repeat(cameraFollow.yaw + deltaMousePosition.x * horizontalSensetivity, 359.9f);
+
 		cameraFollow.pitch = pitchAngle;
 	}
 }
