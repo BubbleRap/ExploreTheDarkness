@@ -9,9 +9,9 @@ public class CameraInput : MonoBehaviour
 	[Range(0f, 180)]
 	public float horizontalLimit = 45f;
 
-	[Range(0f, 1f)]
+	[Range(0f, 10f)]
 	public float verticalSensetivity = 1f;
-	[Range(0f, 1f)]
+	[Range(0f, 10f)]
 	public float horizontalSensetivity = 1f;
 
 	public bool iversedVertical = false; 
