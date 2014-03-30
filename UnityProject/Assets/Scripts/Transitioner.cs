@@ -8,6 +8,8 @@ public class Transitioner : MonoBehaviour {
 	bool darkMode = false;
 	public Transform directionalLight;
 	private GameObject[] exposedLights;
+	public Transform firstPersonCamera;
+	public Transform thirdPersonCamera;
 
 	// Use this for initialization
 	void Start () {
@@ -30,15 +32,28 @@ public class Transitioner : MonoBehaviour {
 		if(theDarkMode)
 		{
 			directionalLight.gameObject.SetActive(false);
+			transform.gameObject.GetComponent<ThirdPersonController>().enabled = false;
+			transform.gameObject.GetComponent<CharacterMotor>().enabled = true;
+			transform.gameObject.GetComponent<FPSInputController>().enabled = true;
+			transform.gameObject.GetComponent<MouseLook>().enabled = true;
+			firstPersonCamera.gameObject.SetActive(true);
+			//thirdPersonCamera.gameObject.SetActive(false);
 			RenderSettings.ambientLight = shadowModeAmbientLight;
 			foreach (GameObject expolight in exposedLights) {
 				expolight.SetActive(true);
 			}
+
 			darkMode = true;
 		}
 		else
 		{
 			directionalLight.gameObject.SetActive(true);
+			transform.gameObject.GetComponent<ThirdPersonController>().enabled = true;
+			transform.gameObject.GetComponent<CharacterMotor>().enabled = false;
+			transform.gameObject.GetComponent<FPSInputController>().enabled = false;
+			transform.gameObject.GetComponent<MouseLook>().enabled = false;
+			firstPersonCamera.gameObject.SetActive(false);
+			//thirdPersonCamera.gameObject.SetActive(true);
 			RenderSettings.ambientLight = adventureModeAmbientLight;
 			foreach (GameObject expolight in exposedLights) {
 				expolight.SetActive(false);
