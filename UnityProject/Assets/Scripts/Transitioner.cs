@@ -10,6 +10,9 @@ public class Transitioner : MonoBehaviour {
 	private GameObject[] exposedLights;
 	public Transform firstPersonCamera;
 	public Transform thirdPersonCamera;
+	public Transform thirdPersonCharacterModel;
+	public Transform lightRoom;
+	public Transform darkRoom;
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +20,7 @@ public class Transitioner : MonoBehaviour {
         foreach (GameObject expolight in exposedLights) {
 			expolight.SetActive(false);
 		}
+		doTransition(darkMode);
 	}
 	
 	// Update is called once per frame
@@ -31,7 +35,10 @@ public class Transitioner : MonoBehaviour {
 	{
 		if(theDarkMode)
 		{
+			darkRoom.gameObject.SetActive(true);
+			lightRoom.gameObject.SetActive(false);
 			directionalLight.gameObject.SetActive(false);
+			//thirdPersonCharacterModel.gameObject.SetActive(false);
 			transform.gameObject.GetComponent<ThirdPersonController>().enabled = false;
 			transform.gameObject.GetComponent<CharacterMotor>().enabled = true;
 			transform.gameObject.GetComponent<FPSInputController>().enabled = true;
@@ -47,7 +54,10 @@ public class Transitioner : MonoBehaviour {
 		}
 		else
 		{
+			darkRoom.gameObject.SetActive(false);
+			lightRoom.gameObject.SetActive(true);
 			directionalLight.gameObject.SetActive(true);
+			//thirdPersonCharacterModel.gameObject.SetActive(true);
 			transform.gameObject.GetComponent<ThirdPersonController>().enabled = true;
 			transform.gameObject.GetComponent<CharacterMotor>().enabled = false;
 			transform.gameObject.GetComponent<FPSInputController>().enabled = false;
