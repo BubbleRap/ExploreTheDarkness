@@ -27,8 +27,8 @@ public class CameraFade : MonoBehaviour
 	}
 
 	void OnGUI() {
-		GUI.color = new Color(0, 0, 0, fadeIntensity);
-		GUI.DrawTexture( new Rect(0, 0, Screen.width, Screen.height ), blackTexture );
+		//GUI.color = new Color(0, 0, 0, fadeIntensity);
+		//GUI.DrawTexture( new Rect(0, 0, Screen.width, Screen.height ), blackTexture );
 	}
 
 	void LateUpdate()
