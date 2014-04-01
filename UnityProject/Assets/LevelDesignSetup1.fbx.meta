@@ -47,6 +47,11 @@ ModelImporter:
     100082: wall_regular_T-corner_L_002
     100084: wall_regular_T-corner_R_002
     100086: floor_regular_3x2
+    100088: door_Regular2
+    100090: wall_regular_cornerElement_B_N
+    100092: wall_regular_T-corner_Back
+    100094: wall_regular_1m_compensate
+    100096: wall_regular_compensate
     400000: Armature
     400002: bird_Turntable
     400004: CageLifter
@@ -91,6 +96,11 @@ ModelImporter:
     400082: wall_regular_T-corner_L_002
     400084: wall_regular_T-corner_R_002
     400086: floor_regular_3x2
+    400088: door_Regular2
+    400090: wall_regular_cornerElement_B_N
+    400092: wall_regular_T-corner_Back
+    400094: wall_regular_1m_compensate
+    400096: wall_regular_compensate
     2300000: door_Regular
     2300002: floor_regular_1x1
     2300004: floor_regular_1x2
@@ -127,6 +137,11 @@ ModelImporter:
     2300066: wall_regular_T-corner_L_002
     2300068: wall_regular_T-corner_R_002
     2300070: floor_regular_3x2
+    2300072: door_Regular2
+    2300074: wall_regular_cornerElement_B_N
+    2300076: wall_regular_T-corner_Back
+    2300078: wall_regular_1m_compensate
+    2300080: wall_regular_compensate
     3300000: door_Regular
     3300002: floor_regular_1x1
     3300004: floor_regular_1x2
@@ -163,6 +178,11 @@ ModelImporter:
     3300066: wall_regular_T-corner_L_002
     3300068: wall_regular_T-corner_R_002
     3300070: floor_regular_3x2
+    3300072: door_Regular2
+    3300074: wall_regular_cornerElement_B_N
+    3300076: wall_regular_T-corner_Back
+    3300078: wall_regular_1m_compensate
+    3300080: wall_regular_compensate
     4300000: wall_regular_SquareHallWaySHORT
     4300002: wall_regular_BeveledHallwaySHORT
     4300004: floor_regular_ForDoubleCorners
@@ -199,6 +219,11 @@ ModelImporter:
     4300066: wall_regular_T-corner_L_002
     4300068: wall_regular_T-corner_R_002
     4300070: floor_regular_3x2
+    4300072: door_Regular2
+    4300074: wall_regular_cornerElement_B_N
+    4300076: wall_regular_T-corner_Back
+    4300078: wall_regular_1m_compensate
+    4300080: wall_regular_compensate
     9500000: //RootNode
   materials:
     importMaterials: 0
