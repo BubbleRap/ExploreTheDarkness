@@ -186,8 +186,7 @@ function UpdateSmoothedMovementDirection ()
 			}
 			
 			// Smooth the speed based on the current target direction
-			var curSmooth = 
-			 * Time.deltaTime;
+			var curSmooth = 10f * Time.deltaTime;
 			
 			// Choose target speed
 			//* We want to support analog input but make sure you cant walk faster diagonally than just forward or sideways
