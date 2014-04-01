@@ -35,11 +35,11 @@ public class ShadowModeController : MonoBehaviour
 		//else
 		//	cameraFadeController.fadeIntensity += fadingOutSpeed;
 
-		if( probeController.lightIntensity > lightTreshold )
-			teddyLight.intensity += fadingInSpeed;
-		else
-			teddyLight.intensity -= fadingOutSpeed;
-
-		teddyLight.intensity = Mathf.Clamp(teddyLight.intensity, 0f, 0.25f);
+		//if( probeController.lightIntensity > lightTreshold )
+		//	teddyLight.intensity += fadingInSpeed;
+		//else
+		//	teddyLight.intensity -= fadingOutSpeed;
+//
+		//teddyLight.intensity = Mathf.Clamp(teddyLight.intensity, 0.2f, 0.25f);
 	}
 }
