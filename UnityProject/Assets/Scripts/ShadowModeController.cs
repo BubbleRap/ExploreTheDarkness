@@ -42,6 +42,6 @@ public class ShadowModeController : MonoBehaviour
 		else
 			teddyLight.intensity -= fadingOutSpeed;
 
-		teddyLight.intensity = Mathf.Clamp(teddyLight.intensity, 0f, 0.25f);
+		teddyLight.intensity = Mathf.Clamp(teddyLight.intensity, 0f, 1.5f);
 	}
 }
