@@ -19,6 +19,8 @@ public class ShadowModeController : MonoBehaviour
 	void Start()
 	{
 		teddyLight = respawnController.GetComponentInChildren<Light>();
+		teddyLight.enabled = true;
+		teddyLight.intensity = 2f;
 
 		cameraFadeController.fadedOut += () =>
 		{
