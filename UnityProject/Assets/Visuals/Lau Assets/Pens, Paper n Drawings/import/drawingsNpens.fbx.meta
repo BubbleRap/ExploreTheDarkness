@@ -1,0 +1,135 @@
+fileFormatVersion: 2
+guid: f29a776109c5b7240970b3042baf929b
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: ColorPen
+    100002: ColorPen_001
+    100004: ColorPen_002
+    100006: ColorPen_003
+    100008: ColorPen_004
+    100010: ColorPen_005
+    100012: ColorPen_006
+    100014: ColorPen_007
+    100016: ColorPen_008
+    100018: //RootNode
+    100020: paper
+    100022: paper_001
+    100024: paper_002
+    100026: paper_003
+    100028: paper_004
+    100030: paper_005
+    400000: ColorPen
+    400002: ColorPen_001
+    400004: ColorPen_002
+    400006: ColorPen_003
+    400008: ColorPen_004
+    400010: ColorPen_005
+    400012: ColorPen_006
+    400014: ColorPen_007
+    400016: ColorPen_008
+    400018: //RootNode
+    400020: paper
+    400022: paper_001
+    400024: paper_002
+    400026: paper_003
+    400028: paper_004
+    400030: paper_005
+    2300000: ColorPen
+    2300002: ColorPen_001
+    2300004: ColorPen_002
+    2300006: ColorPen_003
+    2300008: ColorPen_004
+    2300010: ColorPen_005
+    2300012: ColorPen_006
+    2300014: ColorPen_007
+    2300016: ColorPen_008
+    2300018: paper
+    2300020: paper_001
+    2300022: paper_002
+    2300024: paper_003
+    2300026: paper_004
+    2300028: paper_005
+    3300000: ColorPen
+    3300002: ColorPen_001
+    3300004: ColorPen_002
+    3300006: ColorPen_003
+    3300008: ColorPen_004
+    3300010: ColorPen_005
+    3300012: ColorPen_006
+    3300014: ColorPen_007
+    3300016: ColorPen_008
+    3300018: paper
+    3300020: paper_001
+    3300022: paper_002
+    3300024: paper_003
+    3300026: paper_004
+    3300028: paper_005
+    4300000: ColorPen_008
+    4300002: ColorPen_007
+    4300004: ColorPen_006
+    4300006: ColorPen_005
+    4300008: ColorPen_004
+    4300010: ColorPen_003
+    4300012: ColorPen_002
+    4300014: paper_005
+    4300016: paper_004
+    4300018: paper_003
+    4300020: paper_002
+    4300022: paper_001
+    4300024: ColorPen_001
+    4300026: ColorPen
+    4300028: paper
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  userData: 
