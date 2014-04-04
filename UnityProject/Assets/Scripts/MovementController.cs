@@ -16,29 +16,18 @@ public class MovementController : MonoBehaviour
 	public bool alwaysFollows = false;
 	[Range(0f, 1f)]
 	public float rotationSpeed = 0.1f;
-
+	
 	void Awake()
 	{
 		charController = GetComponent<CharacterController> ();
 		animationController = GetComponentInChildren<Animator> ();
 		animationController.SetBool ("scared", true);
 		cameraTransform = Camera.main.transform;
-
-
 	}
 
 	void Start()
 	{
-		//moveDirection = transform.TransformDirection(Vector3.forward);
-		//StartCoroutine(FollowRotation());
-
-		//foreach( AnimationInfo stateInfo in animationController.GetCurrentAnimationClipState(1) )
-		//{
-		//
-		//}
-		//
-		//AnimatorStateInfo animInfo = animationController.GetCurrentAnimatorStateInfo( 1 ));
-
+		StartCoroutine(LookAround());
 	}
 
 	void Update()
@@ -55,13 +44,15 @@ public class MovementController : MonoBehaviour
 		Vector3 right = new Vector3(forward.z, 0, -forward.x);
 		targetDirection = h * right + v * forward;
 	
-		moveDirection = forward;
+		moveDirection = Vector3.RotateTowards(transform.forward, targetDirection, 150f * Mathf.Deg2Rad * Time.deltaTime, 300f);
+		moveDirection = moveDirection.normalized;
 
 		if( alwaysFollows )
-			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDirection), rotationSpeed);
+			transform.rotation = Quaternion.LookRotation(moveDirection);
 		else
 			if( targetDirection.magnitude > 0f )
-				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDirection), rotationSpeed);
+				transform.rotation = Quaternion.LookRotation(moveDirection);
+
 
 		float curSmooth = 10f * Time.deltaTime;
 
@@ -75,17 +66,16 @@ public class MovementController : MonoBehaviour
 		charController.Move(movement);
 	}
 
-	//IEnumerator FollowRotation()
-	//{
-	//	while (true) 
-	//	{
-	//		if( alwaysFollows )
-	//			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDirection), rotationSpeed);
-	//		else
-	//			if( targetDirection.magnitude > 0f )
-	//				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDirection), rotationSpeed);
-	//
-	//		yield return null;
-	//	}
-	//}
+	IEnumerator LookAround()
+	{
+		while (true) 
+		{
+			// gasp sound to add here
+
+			yield return new WaitForSeconds( Random.Range(5f, 15f));
+			bool rightOrLeft = (Random.Range(0, 10) % 2) == 0 ;
+			string lookEvent = rightOrLeft ? "lookLeftEvent" : "lookRightEvent";
+			animationController.SetTrigger(lookEvent);
+		}
+	}
 }
