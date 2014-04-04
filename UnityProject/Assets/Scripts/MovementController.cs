@@ -31,6 +31,14 @@ public class MovementController : MonoBehaviour
 	{
 		//moveDirection = transform.TransformDirection(Vector3.forward);
 		//StartCoroutine(FollowRotation());
+
+		//foreach( AnimationInfo stateInfo in animationController.GetCurrentAnimationClipState(1) )
+		//{
+		//
+		//}
+		//
+		//AnimatorStateInfo animInfo = animationController.GetCurrentAnimatorStateInfo( 1 ));
+
 	}
 
 	void Update()
