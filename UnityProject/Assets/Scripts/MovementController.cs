@@ -8,15 +8,15 @@ public class MovementController : MonoBehaviour
 	public Transform cameraTransform = null;
 	private Vector3 moveDirection = Vector3.zero;
 	
-	private float moveSpeed = 2f;
+	private float moveSpeed = 0f;
 	public float movingSpeed = 10f;
 
 	private Vector3 targetDirection = Vector3.zero;
 
 	public bool alwaysFollows = false;
-	[Range(0f, 1f)]
-	public float rotationSpeed = 0.1f;
-	
+	public float rotationSpeed = 150f;
+	public float moveAccel = 1f;
+
 	void Awake()
 	{
 		charController = GetComponent<CharacterController> ();
@@ -44,25 +44,33 @@ public class MovementController : MonoBehaviour
 		Vector3 right = new Vector3(forward.z, 0, -forward.x);
 		targetDirection = h * right + v * forward;
 	
-		moveDirection = Vector3.RotateTowards(transform.forward, targetDirection, 150f * Mathf.Deg2Rad * Time.deltaTime, 300f);
-		moveDirection = moveDirection.normalized;
 
 		if( alwaysFollows )
+		{
+			moveDirection = forward;
 			transform.rotation = Quaternion.LookRotation(moveDirection);
+		}
 		else
 			if( targetDirection.magnitude > 0f )
+			{
+				moveDirection = Vector3.RotateTowards(transform.forward, targetDirection, rotationSpeed * Mathf.Deg2Rad * Time.deltaTime, 300f);
+				moveDirection = moveDirection.normalized;
+
 				transform.rotation = Quaternion.LookRotation(moveDirection);
+			}
 
 
-		float curSmooth = 10f * Time.deltaTime;
+		float curSmooth = moveAccel * Time.deltaTime;
 
-		float targetSpeed = Mathf.Min(targetDirection.magnitude, movingSpeed);
+		float targetSpeed = targetDirection.magnitude * movingSpeed;
 		
 		moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, curSmooth);
+
 		animationController.SetFloat ("speed", moveSpeed);
 
 		Vector3 movement = moveDirection * moveSpeed;
 		movement *= Time.deltaTime;
+
 		charController.Move(movement);
 	}
 
