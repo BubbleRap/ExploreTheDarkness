@@ -74,6 +74,7 @@ public class CameraFollow : MonoBehaviour
 					relativePosition = GetVectorFromAngle(pitch, yaw, roll, cameraDistance, cameraFocusTarget.position);
 					transform.position = Vector3.Lerp(transform.position, /*cameraFocusTarget.TransformPoint(shakeOffset) + */relativePosition, followingSpeed);
 				}
+
 			}
 			yield return null;
 		}
