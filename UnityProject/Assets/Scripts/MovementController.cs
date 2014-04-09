@@ -17,6 +17,8 @@ public class MovementController : MonoBehaviour
 	public float rotationSpeed = 150f;
 	public float moveAccel = 1f;
 
+	public bool canMove = true;
+
 	void Awake()
 	{
 		charController = GetComponent<CharacterController> ();
@@ -32,12 +34,19 @@ public class MovementController : MonoBehaviour
 
 	void Update()
 	{
+		
 		Vector3 forward = cameraTransform.TransformDirection(Vector3.forward);
 		forward.y = 0;
 		forward = forward.normalized;
-
-		float v = Input.GetAxisRaw("Vertical");
-		float h = Input.GetAxisRaw("Horizontal");
+		
+		float v = 0;
+		float h = 0;
+		
+		if(canMove)
+		{
+			v = Input.GetAxisRaw("Vertical");
+			h = Input.GetAxisRaw("Horizontal");
+		}
 
 		bool isMoving = Mathf.Abs (h) > 0.1 || Mathf.Abs (v) > 0.1;
 
