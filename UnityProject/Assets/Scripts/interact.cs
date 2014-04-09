@@ -43,6 +43,7 @@ public class interact : MonoBehaviour {
 				RaycastHit hit = hits[i];
 				if(hit.transform.tag == "Object")
 				{
+					hit.transform.GetComponent<Object>().hitObject = true;
 					if(Input.GetKeyDown(KeyCode.E))
 					{
 						if(hit.transform.GetComponent<Object>() != null)
