@@ -24,10 +24,13 @@ public class CameraPhysics : MonoBehaviour
 
 	void Update()
 	{
-		if( colliders.Count > 0 )
+		if( colliders.Count > 0 || Physics.Raycast(transform.position, -transform.forward, 1f, 1 << 0 ) )
 			follower.cameraDistance = Mathf.Lerp (follower.cameraDistance, originalDistance * minimumDistance, approachingSpeed);
 		else
-			follower.cameraDistance = Mathf.Lerp (follower.cameraDistance, originalDistance, approachingSpeed);
+		{
+			if( !Physics.Raycast(transform.position, -transform.forward, 1f ))
+				follower.cameraDistance = Mathf.Lerp (follower.cameraDistance, originalDistance, approachingSpeed);
+		}
 	}
 
 	void OnTriggerEnter(Collider other)
