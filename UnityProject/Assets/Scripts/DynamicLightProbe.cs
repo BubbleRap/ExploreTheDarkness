@@ -4,9 +4,10 @@ using System.Collections;
 public class DynamicLightProbe : MonoBehaviour 
 {
 	public Transform objectToProbe;
-	public int renderTextureSize = 16;
+	public Vector3 probeOffset;
 
-	[HideInInspector]
+	public int renderTextureSize = 16;
+	
 	public float lightIntensity = 0;
 
 	private Camera[] cameras;
@@ -27,7 +28,7 @@ public class DynamicLightProbe : MonoBehaviour
 		if( objectToProbe == null )
 			return;
 
-		transform.position = objectToProbe.position;
+		transform.position = objectToProbe.position + probeOffset;
 		transform.rotation = objectToProbe.rotation;
 	}
 
@@ -63,6 +64,8 @@ public class DynamicLightProbe : MonoBehaviour
 
 			camera.fov = fov;
 		}
+
+		objectToProbe.SendMessage("RetriveLightProbeResult", lightIntensity, SendMessageOptions.DontRequireReceiver);
 	
 		
 		RenderTexture.active = null;
