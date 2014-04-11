@@ -43,12 +43,12 @@ public class interact : MonoBehaviour {
 				RaycastHit hit = hits[i];
 				if(hit.transform.tag == "Object")
 				{
-					hit.transform.GetComponent<Object>().hitObject = true;
+					hit.transform.GetComponent<HighlightedObject>().hitObject = true;
 					if(Input.GetKeyDown(KeyCode.E))
 					{
-						if(hit.transform.GetComponent<Object>() != null)
+						if(hit.transform.GetComponent<HighlightedObject>() != null)
 						{
-							if(hit.transform.GetComponent<Object>().firstperson)
+							if(hit.transform.GetComponent<HighlightedObject>().firstperson)
 							{
 								firstPersonCamera.gameObject.SetActive(true);
 								isFirstPerson = true;
@@ -65,9 +65,9 @@ public class interact : MonoBehaviour {
 								}
 								*/
 							}
-							if(hit.transform.GetComponent<Object>().soundClip != null)
+							if(hit.transform.GetComponent<HighlightedObject>().soundClip != null)
 							{
-								hit.transform.GetComponent<Object>().PlayAudio();
+								hit.transform.GetComponent<HighlightedObject>().PlayAudio();
 							}
 						}
 					}
