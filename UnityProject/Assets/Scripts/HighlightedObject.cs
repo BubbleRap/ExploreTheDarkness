@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Object : MonoBehaviour {
+public class HighlightedObject : MonoBehaviour {
 
 	public bool firstperson;
 	public AudioClip soundClip; 
 	private AudioSource audioSource;
 	public bool internalPlay;
 	public bool hitObject = false;
-	public Shader shader1 = Shader.Find("Diffuse");
-    public Shader shader2 = Shader.Find("Rim Diffuse");
+	private Shader shader1;
+ 	private  Shader shader2;
 
 	// Use this for initialization
 	void Start () {
+		shader1 = Shader.Find("Diffuse");
+		shader2 = Shader.Find("Rim Diffuse");
+
 		if(internalPlay)
 		{
 			audioSource = transform.gameObject.GetComponent<AudioSource>();
