@@ -10,11 +10,14 @@ public class ShadowModeController : MonoBehaviour
 	private Light teddyLight = null;
 
 	[Range(0f, 1f)]
-	public float lightTreshold = 0.1f;
+	[HideInInspector]
+	public float lightTreshold = 0.15f;
 	[Range(0f, 0.1f)]
-	public float fadingOutSpeed = 0.005f;
+	[HideInInspector]
+	public float fadingOutSpeed = 0.006f;
 	[Range(0f, 0.1f)]
-	public float fadingInSpeed = 0.01f;
+	[HideInInspector]
+	public float fadingInSpeed = 0.012f;
 
 	void Start()
 	{
