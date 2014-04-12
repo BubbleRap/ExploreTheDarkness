@@ -6,7 +6,8 @@ public class interact : MonoBehaviour {
 	public Transform firstPersonCamera;
 	public Transform thirdPersonCamera;
 	bool isFirstPerson = false;
-	bool isInteractMode = false;
+	[HideInInspector]
+	public bool isInteractMode = false;
 
 	// Use this for initialization
 	void Start () {
@@ -36,7 +37,7 @@ public class interact : MonoBehaviour {
 		{
 			Vector3 fwd = thirdPersonCamera.TransformDirection(Vector3.forward);
 			RaycastHit[] hits;
-			hits = Physics.RaycastAll(thirdPersonCamera.position, fwd, 10);
+			hits = Physics.RaycastAll(thirdPersonCamera.position, fwd, 4);
 			int i = 0;
 			while (i < hits.Length) {
 
