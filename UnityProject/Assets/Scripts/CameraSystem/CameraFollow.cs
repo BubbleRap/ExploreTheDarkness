@@ -71,8 +71,8 @@ public class CameraFollow : MonoBehaviour
 				}
 				else
 				{
-					relativePosition = GetVectorFromAngle(pitch, yaw, roll, cameraDistance, cameraFocusTarget.position);
-					transform.position = Vector3.Lerp(transform.position, /*cameraFocusTarget.TransformPoint(shakeOffset) + */relativePosition, followingSpeed);
+					relativePosition = GetVectorFromAngle(pitch - shakeOffset.y, yaw - shakeOffset.x, roll, cameraDistance + shakeOffset.z, cameraFocusTarget.position);
+					transform.position = Vector3.Lerp(transform.position, relativePosition, followingSpeed);
 				}
 
 			}
@@ -96,8 +96,8 @@ public class CameraFollow : MonoBehaviour
 	{
 		while (true) 
 		{
-			shakeOffset = new Vector3( Random.Range(-horizontalShakeIntensity, horizontalShakeIntensity), 
-					                          Random.Range(-verticalShakeIntensity, verticalShakeIntensity), 0f);
+			shakeOffset = new Vector3( Random.Range(-horizontalShakeIntensity * 10, horizontalShakeIntensity * 10), 
+			              Random.Range(-verticalShakeIntensity * 10, verticalShakeIntensity * 10), 0f);
 			yield return new WaitForSeconds(shakeFrequency);
 		}
 	}
