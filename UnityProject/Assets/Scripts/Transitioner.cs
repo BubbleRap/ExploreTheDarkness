@@ -65,7 +65,7 @@ public class Transitioner : MonoBehaviour {
 					transform.gameObject.GetComponent<MovementController>().enabled = false;
 					transform.gameObject.GetComponent<CharacterMotor>().enabled = true;
 					transform.gameObject.GetComponent<FPSInputController>().enabled = true;
-					transform.gameObject.GetComponentInChildren<MouseLook>().enabled = true;
+					firstPersonCamera.gameObject.GetComponent<MouseLook>().enabled = true;
 					firstPersonCamera.gameObject.SetActive(true);
 					//thirdPersonCamera.gameObject.SetActive(false);
 					RenderSettings.ambientLight = shadowModeAmbientLight;
@@ -89,7 +89,7 @@ public class Transitioner : MonoBehaviour {
 					transform.gameObject.GetComponent<MovementController>().enabled = true;
 					transform.gameObject.GetComponent<CharacterMotor>().enabled = false;
 					transform.gameObject.GetComponent<FPSInputController>().enabled = false;
-					transform.gameObject.GetComponentInChildren<MouseLook>().enabled = false;
+					firstPersonCamera.gameObject.GetComponent<MouseLook>().enabled = false;
 					firstPersonCamera.gameObject.SetActive(false);
 					//thirdPersonCamera.gameObject.SetActive(true);
 					RenderSettings.ambientLight = adventureModeAmbientLight;
