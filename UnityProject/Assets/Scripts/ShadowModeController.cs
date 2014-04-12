@@ -7,6 +7,7 @@ public class ShadowModeController : MonoBehaviour
 	public DynamicLightProbe probeController;
 	public Respawn respawnController;
 
+
 	private Light teddyLight = null;
 
 	[Range(0f, 1f)]
@@ -19,11 +20,14 @@ public class ShadowModeController : MonoBehaviour
 	[HideInInspector]
 	public float fadingInSpeed = 0.012f;
 
+	public Material lilbroGlowMaterial = null;
+
 	void Start()
 	{
 		teddyLight = respawnController.GetComponentInChildren<Light>();
 		teddyLight.enabled = true;
 		teddyLight.intensity = 0.75f;
+		lilbroGlowMaterial.color = Color.white;
 
 		cameraFadeController.fadedOut += () =>
 		{
@@ -45,6 +49,8 @@ public class ShadowModeController : MonoBehaviour
 		else
 			teddyLight.intensity -= fadingOutSpeed;
 
+
 		teddyLight.intensity = Mathf.Clamp(teddyLight.intensity, 0f, 0.75f);
+		lilbroGlowMaterial.color = new Color(teddyLight.intensity, teddyLight.intensity, teddyLight.intensity, 1f);
 	}
 }
