@@ -11,23 +11,38 @@ public class AIBehaviour : MonoBehaviour
 	public string[] spawnPoints;
 	private GameObject renderer = null;
 
+	private bool aiIsEnabled = false;
+
 	void Awake()
 	{
 		renderer = transform.FindChild("Renderer").gameObject;
+		aiMind = transform.GetComponentInChildren<AIRig>();
 	}
 	
 	public void SpawnAI()
 	{
+		if( aiIsEnabled )
+			return;
+
 		NavigationTarget spawnPoint = NavigationManager.instance.GetNavigationTarget(spawnPoints[ Random.Range(0, spawnPoints.Length) ]);
 		transform.position = spawnPoint.Position;
 		aiMind.enabled = true;
 		renderer.SetActive(true);
+		aiIsEnabled = true;
 	}
 
 	public void DespawnAI()
 	{
+		if( !aiIsEnabled )
+			return;
+
+		aiMind.AI.WorkingMemory.SetItem("lightIntensity", 0f);
+		aiMind.AI.WorkingMemory.SetItem("characterForm", null);
+		aiMind.AI.WorkingMemory.SetItem("moveTarget", null);
+
 		aiMind.enabled = false;
 		renderer.SetActive(false);
+		aiIsEnabled = false;
 	}
 
 	public void RetriveLightProbeResult(float intensity)
