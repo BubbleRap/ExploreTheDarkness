@@ -4,6 +4,8 @@ using System.Collections;
 public class MovementController : MonoBehaviour 
 {
 	private CharacterController charController = null;
+	private CharacterMotor charMotor = null;
+
 	private Animator animationController = null;
 	public Transform cameraTransform = null;
 	private Vector3 moveDirection = Vector3.zero;
@@ -22,6 +24,7 @@ public class MovementController : MonoBehaviour
 	void Awake()
 	{
 		charController = GetComponent<CharacterController> ();
+		charMotor = GetComponent<CharacterMotor>();
 		animationController = GetComponentInChildren<Animator> ();
 		animationController.SetBool ("scared", true);
 		cameraTransform = Camera.main.transform;
@@ -78,9 +81,13 @@ public class MovementController : MonoBehaviour
 		animationController.SetFloat ("speed", moveSpeed);
 
 		Vector3 movement = moveDirection * moveSpeed;
-		movement *= Time.deltaTime;
+		if( moveSpeed < 0.1f )
+			movement = Vector3.zero;
 
-		charController.Move(movement);
+		//movement *= Time.deltaTime;
+
+		//charController.Move(movement);
+		charMotor.inputMoveDirection = movement;
 	}
 
 	IEnumerator LookAround()
