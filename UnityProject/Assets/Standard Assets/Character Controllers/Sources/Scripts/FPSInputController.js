@@ -1,8 +1,10 @@
 private var motor : CharacterMotor;
+private var animator : Animator;
 
 // Use this for initialization
 function Awake () {
 	motor = GetComponent(CharacterMotor);
+	animator = GetComponentInChildren(Animator);
 }
 
 // Update is called once per frame
@@ -29,6 +31,7 @@ function Update () {
 	
 	// Apply the direction to the CharacterMotor
 	motor.inputMoveDirection = transform.rotation * directionVector;
+	animator.SetFloat ("speed", directionVector.magnitude);
 	//motor.inputJump = Input.GetButton("Jump");
 }
 
