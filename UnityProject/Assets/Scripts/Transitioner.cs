@@ -14,12 +14,18 @@ public class Transitioner : MonoBehaviour {
 	public Transform lightRoom;
 	public Transform darkRoom;
 
+	private Transform lilBroTransform = null;
+	private Light lilBroLight = null;
+
 	// Use this for initialization
 	void Start () {
         exposedLights = GameObject.FindGameObjectsWithTag("ExposedLight");
         foreach (GameObject expolight in exposedLights) {
 			expolight.SetActive(false);
 		}
+
+		lilBroTransform = transform.FindChild("LilleBror_thirdperson");
+		lilBroLight = lilBroTransform.gameObject.GetComponentInChildren<Light>();
 
 		StartCoroutine(switchToDarkMode(2.0F));
 
@@ -72,6 +78,8 @@ public class Transitioner : MonoBehaviour {
 					foreach (GameObject expolight in exposedLights) {
 						expolight.SetActive(true);
 					}
+
+					lilBroLight.enabled = true;
 				}
 			}
 			else
@@ -96,6 +104,8 @@ public class Transitioner : MonoBehaviour {
 					foreach (GameObject expolight in exposedLights) {
 						expolight.SetActive(false);
 					}
+
+					lilBroLight.enabled = false;
 				}
 			}
 
