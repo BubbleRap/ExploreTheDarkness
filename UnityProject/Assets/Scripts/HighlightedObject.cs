@@ -10,6 +10,7 @@ public class HighlightedObject : MonoBehaviour {
 	public bool hitObject = false;
 	private Shader shader1;
  	private  Shader shader2;
+ 	private GameObject buttonPrompt;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +25,9 @@ public class HighlightedObject : MonoBehaviour {
 		{
 			audioSource = Camera.main.gameObject.GetComponent<AudioSource>();
 		}
+
+		buttonPrompt = Instantiate(Resources.Load<GameObject>("buttonPrompt"), new Vector3(transform.position.x + 0.5f, transform.position.y + 0.5f, transform.position.z + 0.5f), transform.rotation) as GameObject;
+		buttonPrompt.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -33,6 +37,8 @@ public class HighlightedObject : MonoBehaviour {
 			if(transform.renderer.material.shader == shader1)
 			{
 				transform.renderer.material.shader = shader2;
+				buttonPrompt.SetActive(true);
+				buttonPrompt.transform.LookAt(Camera.main.gameObject.transform);
 			}
 		}
 		else
@@ -40,6 +46,7 @@ public class HighlightedObject : MonoBehaviour {
 			if(transform.renderer.material.shader != shader1)
 			{
 				transform.renderer.material.shader = shader1;
+				buttonPrompt.SetActive(false);
 			}
 		}
 		hitObject = false;
