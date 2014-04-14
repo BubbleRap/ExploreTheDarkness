@@ -14,8 +14,13 @@ public class Transitioner : MonoBehaviour {
 	public Transform lightRoom;
 	public Transform darkRoom;
 
-	private Transform lilBroTransform = null;
+	public Transform lilBroTransform = null;
 	private Light lilBroLight = null;
+
+	public Transform oneHandJoint;
+	public Transform twoHandsJoint;
+
+	private Animator siljasAnimator = null;
 
 	// Use this for initialization
 	void Start () {
@@ -24,11 +29,12 @@ public class Transitioner : MonoBehaviour {
 			expolight.SetActive(false);
 		}
 
-		lilBroTransform = transform.FindChild("LilleBror_thirdperson");
+		//lilBroTransform = transform.FindChild("LilleBror_thirdperson");
 		lilBroLight = lilBroTransform.gameObject.GetComponentInChildren<Light>();
 
 		StartCoroutine(switchToDarkMode(2.0F));
 
+		siljasAnimator = GetComponentInChildren<Animator>();
 
 		doTransition(darkMode);
 	}
@@ -82,6 +88,14 @@ public class Transitioner : MonoBehaviour {
 					}
 
 					lilBroLight.enabled = true;
+
+					lilBroTransform.rigidbody.isKinematic = true;
+					lilBroTransform.parent = twoHandsJoint;
+					lilBroTransform.transform.localPosition = Vector3.zero;
+					lilBroTransform.localRotation = Quaternion.identity;
+					lilBroTransform.localScale = Vector3.one;
+
+					siljasAnimator.SetBool("darkmode", true);
 				}
 			}
 			else
