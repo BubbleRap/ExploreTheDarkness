@@ -20,14 +20,19 @@ public class ShadowModeController : MonoBehaviour
 
 	public Material lilbroGlowMaterial = null;
 
-	void Start()
+	void Awake()
 	{
 		teddyLight = respawnController.GetComponentInChildren<Light>();
-		teddyLight.enabled = true;
-		teddyLight.intensity = 2.75f;
-		lilbroGlowMaterial.color = Color.white;
+
 
 		aiEntities = FindObjectsOfType<AIBehaviour>();
+    }
+
+	void Start()
+	{
+		//teddyLight.enabled = true;
+		teddyLight.intensity = 2.75f;
+		lilbroGlowMaterial.color = Color.white;
     }
     
     // is sent by light probe itself
