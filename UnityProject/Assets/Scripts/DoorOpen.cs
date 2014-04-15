@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DoorOpen : MonoBehaviour {
 
-	private bool doorIsOpen = false;
+	private bool doorIsOpen = true;
 	// Use this for initialization
 	void Start () {
 	}
