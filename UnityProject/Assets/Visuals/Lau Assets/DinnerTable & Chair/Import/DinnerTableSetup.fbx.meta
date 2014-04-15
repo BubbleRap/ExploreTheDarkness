@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 8b56e01bace53c447b604c555bef3d7f
 ModelImporter:
-  serializedVersion: 16
+  serializedVersion: 15
   fileIDToRecycleName:
     100000: DinnerChair_regular
     100002: DinnerTable
@@ -39,7 +39,7 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 0
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     weldVertices: 1
@@ -67,5 +67,4 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
-  additionalBone: 0
   userData: 
