@@ -8,6 +8,7 @@ public class interact : MonoBehaviour {
 	bool isFirstPerson = false;
 	[HideInInspector]
 	public bool isInteractMode = false;
+	private Transform interactedObject;
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +17,19 @@ public class interact : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(interactedObject != null)
+		{
+			if(interactedObject.GetComponent<HighlightedObject>().StoppedPlaying() && interactedObject.GetComponent<HighlightedObject>().soundClip != null)
+			{
+				if(isFirstPerson)
+				{
+					firstPersonCamera.gameObject.SetActive(false);
+					transform.gameObject.GetComponent<MovementController>().canMove = true;
+					isInteractMode = false;
+				}
+				interactedObject = null;
+			}
+		}
 		if (isInteractMode && Input.GetKeyDown(KeyCode.E))
 		{
 			if(isFirstPerson)
@@ -33,7 +47,7 @@ public class interact : MonoBehaviour {
 			}
 			*/
 		}
-		else
+		else if(!isInteractMode)
 		{
 			Vector3 fwd = thirdPersonCamera.TransformDirection(Vector3.forward);
 			RaycastHit[] hits;
@@ -49,6 +63,7 @@ public class interact : MonoBehaviour {
 					{
 						if(hit.transform.GetComponent<HighlightedObject>() != null)
 						{
+							interactedObject = hit.transform;
 							if(hit.transform.GetComponent<HighlightedObject>().firstperson)
 							{
 								firstPersonCamera.gameObject.SetActive(true);

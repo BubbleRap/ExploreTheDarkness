@@ -56,4 +56,12 @@ public class HighlightedObject : MonoBehaviour {
 		audioSource.clip = soundClip;
 		audioSource.Play();
 	}
+
+	public bool StoppedPlaying () {
+		if(!audioSource.isPlaying)
+		{
+			return true;
+		}
+		return false;
+	}
 }
