@@ -34,7 +34,7 @@ public class ShadowModeController : MonoBehaviour
 	void Start()
 	{
 		//teddyLight.enabled = true;
-		teddyLight.intensity = 1.75f;
+		teddyLight.intensity = 2.75f;
 		lilbroGlowMaterial.color = Color.white;
     }
     
@@ -79,10 +79,5 @@ public class ShadowModeController : MonoBehaviour
 			if(RenderSettings.ambientLight.b > 0.00f)
 				RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.r - 0.001f, RenderSettings.ambientLight.g - 0.001f, RenderSettings.ambientLight.b - 0.002f, 0.0f);
 		}
-	}
-
-	public float getTeddyLight()
-	{
-		return teddyLight.intensity;
 	}
 }
