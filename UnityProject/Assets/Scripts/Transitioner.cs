@@ -5,7 +5,8 @@ public class Transitioner : MonoBehaviour {
 
 	public Color adventureModeAmbientLight;
 	public Color shadowModeAmbientLight;
-	bool darkMode = false;
+	[HideInInspector]
+	public bool darkMode = false;
 	public Transform directionalLight;
 	private GameObject[] exposedLights;
 	public Transform firstPersonCamera;
