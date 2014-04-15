@@ -90,6 +90,48 @@ public class interact : MonoBehaviour {
 				}
 				i++;
 			}
+
+			Vector3 fwd2 = transform.TransformDirection(Vector3.forward);
+			RaycastHit[] hits2;
+			hits2 = Physics.RaycastAll(transform.position, fwd2, 4);
+			int h = 0;
+			while (h < hits2.Length) {
+
+				RaycastHit hit = hits2[h];
+				if(hit.transform.tag == "Object")
+				{
+					hit.transform.GetComponent<HighlightedObject>().hitObject = true;
+					if(Input.GetKeyDown(KeyCode.E))
+					{
+						if(hit.transform.GetComponent<HighlightedObject>() != null)
+						{
+							interactedObject = hit.transform;
+							if(hit.transform.GetComponent<HighlightedObject>().firstperson)
+							{
+								firstPersonCamera.gameObject.SetActive(true);
+								isFirstPerson = true;
+								firstPersonCamera.LookAt(hit.transform);
+								transform.gameObject.GetComponent<MovementController>().canMove = false;
+								//Destroy(hit.transform.gameObject);
+								isInteractMode = true;
+								/*
+								foreach (Transform child in transform){
+									if(child.tag == "Player")
+									{
+										child.gameObject.SetActive(false);
+									}
+								}
+								*/
+							}
+							if(hit.transform.GetComponent<HighlightedObject>().soundClip != null)
+							{
+								hit.transform.GetComponent<HighlightedObject>().PlayAudio();
+							}
+						}
+					}
+				}
+				h++;
+			}
 		}
 	}
 }

@@ -4,7 +4,6 @@ using System.Collections;
 public class ShadowModeController : MonoBehaviour 
 {
 	public Respawn respawnController;
-	public Health healthController;
 	
 	private Light teddyLight = null;
 	private AIBehaviour[] aiEntities = null;
@@ -20,8 +19,6 @@ public class ShadowModeController : MonoBehaviour
 	public float fadingInSpeed = 3.000f;
 
 	public Material lilbroGlowMaterial = null;
-
-	private float timeLeft = 10.0f;
 
 	void Awake()
 	{
@@ -55,14 +52,6 @@ public class ShadowModeController : MonoBehaviour
 			foreach( AIBehaviour aiEntity in aiEntities )
 				aiEntity.SpawnAI();
 
-			timeLeft -= Time.deltaTime;
-
-			if(timeLeft <= 0.0f)
-			{
-				healthController.looseLife();
-				timeLeft = 10;
-			}
-
 			if(RenderSettings.ambientLight.b < 0.14f)
 				RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.b/2, RenderSettings.ambientLight.b/2, RenderSettings.ambientLight.b + 0.002f, 0.0f);
 		}
@@ -70,11 +59,6 @@ public class ShadowModeController : MonoBehaviour
 		{
 			foreach( AIBehaviour aiEntity in aiEntities )
 				aiEntity.DespawnAI();
-
-			if(timeLeft == 10)
-			{
-				timeLeft = 10;
-			}
 
 			if(RenderSettings.ambientLight.b > 0.00f)
 				RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.r - 0.001f, RenderSettings.ambientLight.g - 0.001f, RenderSettings.ambientLight.b - 0.002f, 0.0f);
