@@ -51,16 +51,13 @@ public class MovementController : MonoBehaviour
 			h = Input.GetAxisRaw("Horizontal");
 		}
 
-		bool isMoving = Mathf.Abs (h) > 0.1 || Mathf.Abs (v) > 0.1;
-
 		Vector3 right = new Vector3(forward.z, 0, -forward.x);
 		targetDirection = h * right + v * forward;
-	
 
 		if( alwaysFollows )
 		{
-			moveDirection = forward;
-			transform.rotation = Quaternion.LookRotation(moveDirection);
+			moveDirection = targetDirection;
+			transform.rotation = Quaternion.LookRotation(forward);
 		}
 		else
 			if( targetDirection.magnitude > 0f )
@@ -70,7 +67,6 @@ public class MovementController : MonoBehaviour
 
 				transform.rotation = Quaternion.LookRotation(moveDirection);
 			}
-
 
 		float curSmooth = moveAccel * Time.deltaTime;
 
@@ -84,9 +80,6 @@ public class MovementController : MonoBehaviour
 		if( moveSpeed < 0.1f )
 			movement = Vector3.zero;
 
-		//movement *= Time.deltaTime;
-
-		//charController.Move(movement);
 		charMotor.inputMoveDirection = movement;
 	}
 
