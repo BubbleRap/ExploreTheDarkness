@@ -27,4 +27,5 @@ public class Respawn : MonoBehaviour {
 	{
 		spawnPosition = newPosition;
 	}
+
 }

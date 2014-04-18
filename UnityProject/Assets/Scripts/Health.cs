@@ -4,7 +4,7 @@ using System.Collections;
 public class Health : MonoBehaviour {
 
 	public int health = 8;
-	public Transitioner transitionController;
+	public SiljaBehaviour siljaBeh;
 	public ShadowModeController shadowController;
 
 	private float barDisplay = 0;
@@ -26,7 +26,7 @@ public class Health : MonoBehaviour {
 
 	void OnGUI () {
 		// Make a background box
-		if(transitionController.darkMode)
+		if(siljaBeh.darkMode)
 		{
 			GUI.skin.label.fontSize = 100;
 			GUI.Label(new Rect (40,20,100,300), health.ToString());

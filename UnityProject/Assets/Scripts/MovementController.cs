@@ -7,7 +7,7 @@ public class MovementController : MonoBehaviour
 	private CharacterMotor charMotor = null;
 
 	private Animator animationController = null;
-	public Transform cameraTransform = null;
+	private Transform cameraTransform = null;
 	private Vector3 moveDirection = Vector3.zero;
 	
 	private float moveSpeed = 0f;
@@ -37,8 +37,8 @@ public class MovementController : MonoBehaviour
 
 	void Update()
 	{
-		
 		Vector3 forward = cameraTransform.TransformDirection(Vector3.forward);
+
 		forward.y = 0;
 		forward = forward.normalized;
 		
