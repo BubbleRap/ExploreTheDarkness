@@ -3,13 +3,13 @@ using System.Collections;
 
 public class Trigger_sound : MonoBehaviour {
 
-	public Transform thirdPersonCamera;
+	private Transform thirdPersonCamera;
 	private AudioSource audioSource;
 	public AudioClip audioClip;
 	private bool isTrigger = false;
 	// Use this for initialization
 	void Start () {
-	
+		thirdPersonCamera = Camera.main.transform;
 	}
 
 	void OnTriggerEnter(Collider other) {

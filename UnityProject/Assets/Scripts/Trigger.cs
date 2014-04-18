@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Trigger : MonoBehaviour {
 
-	public Transitioner transitionContoller;
+	private Transitioner transitionContoller = null;
 	public bool DarkMode;
 
 	public DoorOpen doorController;
@@ -12,8 +12,8 @@ public class Trigger : MonoBehaviour {
 	public Respawn spawnController;
 
 	// Use this for initialization
-	void Start () {
-	
+	void Awake () {
+		transitionContoller = Component.FindObjectOfType(typeof(Transitioner)) as Transitioner;
 	}
 
 	void OnTriggerEnter(Collider other) {
