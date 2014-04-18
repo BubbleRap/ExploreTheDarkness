@@ -58,8 +58,8 @@ public class Transitioner : MonoBehaviour {
 		{
 			if(darkMode)
 			{
-				//if(!firstPersonCamera.gameObject.activeInHierarchy)
-				//{
+				if(!darkRoom.gameObject.activeInHierarchy)
+				{
 					Camera.main.gameObject.GetComponent<CameraFollow>().horizontalShakeIntensity = 1.0f;
 					Camera.main.gameObject.GetComponent<CameraFollow>().verticalShakeIntensity = 1.0f;
 			        yield return new WaitForSeconds(waitTime);
@@ -76,12 +76,12 @@ public class Transitioner : MonoBehaviour {
 					siljaCharacter.SendMessage("EnableDarkMode", SendMessageOptions.RequireReceiver);
 
 					elevator.gameObject.SetActive(false);
-				//}
+				}
 			}
 			else
 			{
-				//if(firstPersonCamera.gameObject.activeInHierarchy && !transform.gameObject.GetComponent<interact>().isInteractMode)
-				//{
+				if(darkRoom.gameObject.activeInHierarchy)
+				{
 					Camera.main.gameObject.GetComponent<CameraFollow>().horizontalShakeIntensity = 0.0f;
 					Camera.main.gameObject.GetComponent<CameraFollow>().verticalShakeIntensity = 0.0f;
 
@@ -97,7 +97,7 @@ public class Transitioner : MonoBehaviour {
 					siljaCharacter.SendMessage("EnableStoryMode", SendMessageOptions.RequireReceiver);
 
 					elevator.gameObject.SetActive(true);
-				//}
+				}
 			}
 
 	        yield return null;
