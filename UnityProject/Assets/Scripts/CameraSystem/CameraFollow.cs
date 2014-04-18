@@ -86,7 +86,9 @@ public class CameraFollow : MonoBehaviour
 		{
 			if( isFollowingRotation )
 			{
-				transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(((cameraFocusTarget.position + cameraFocusOffset ) - transform.position).normalized), 0.5f);
+				//transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(((cameraFocusTarget.position + cameraFocusOffset ) - transform.position).normalized), 0.5f);
+				Quaternion rotateTo = Quaternion.LookRotation((cameraFocusOffset - transform.localPosition).normalized);
+				transform.localRotation = rotateTo;
 			}
 			yield return null;
 		}
@@ -104,9 +106,9 @@ public class CameraFollow : MonoBehaviour
 
 	Vector3 GetVectorFromAngle (float x, float y, float z, float distFromObj, Vector3 relativePosition = default(Vector3)) 
 	{
-		Vector3 forward = Vector3.zero; //Quaternion.Euler(x, y, z) * Vector3.forward;
+		Vector3 forward = Vector3.zero;
 		Vector3 up = Quaternion.Euler(x, y, z) * Vector3.up;
-		Vector3 right = Vector3.zero; //Quaternion.Euler(x, y, z) * Vector3.right;
+		Vector3 right = Vector3.zero; 
 
 		return (forward + up + right).normalized * distFromObj + relativePosition;
 	}
