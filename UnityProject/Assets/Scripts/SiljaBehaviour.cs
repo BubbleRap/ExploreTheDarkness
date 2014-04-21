@@ -16,6 +16,9 @@ public class SiljaBehaviour : MonoBehaviour
 	private GameObject firstPersonCamera = null;
 	private interact interactScript = null;
 
+	private ShadowModeController shadowController = null;
+	private Light teddyLight = null;
+
 	[HideInInspector]
 	public bool darkMode = false;
 
@@ -29,6 +32,9 @@ public class SiljaBehaviour : MonoBehaviour
 		fpsInputCtrl = GetComponent<FPSInputController>();
 		mLook = firstPersonCamera.GetComponent<MouseLook>();
 		interactScript = GetComponent<interact>();
+
+		shadowController = GetComponent<ShadowModeController>();
+		teddyLight = twoHandsJoint.GetComponentInChildren<Light>();
 	}
 
 	public void TakeALimb()
@@ -48,6 +54,9 @@ public class SiljaBehaviour : MonoBehaviour
 	{
 		if(firstPersonCamera.gameObject.activeInHierarchy)
 			return;
+
+		shadowController.enabled = true;
+		teddyLight.enabled = true;
 
 		charMotor.movement.maxForwardSpeed = 1.5f;
 		charMotor.movement.maxSidewaysSpeed = 1.5f;
@@ -69,6 +78,9 @@ public class SiljaBehaviour : MonoBehaviour
 	{
 		if(!firstPersonCamera.gameObject.activeInHierarchy || interactScript.isInteractMode)
 			return;
+
+		shadowController.enabled = false;
+		teddyLight.enabled = false;
 
 		charMotor.movement.maxForwardSpeed = 1;
 		charMotor.movement.maxSidewaysSpeed = 1;
