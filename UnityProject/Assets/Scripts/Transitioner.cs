@@ -60,8 +60,8 @@ public class Transitioner : MonoBehaviour {
 			{
 				if(!darkRoom.gameObject.activeInHierarchy)
 				{
-					Camera.main.gameObject.GetComponent<CameraFollow>().horizontalShakeIntensity = 1.0f;
-					Camera.main.gameObject.GetComponent<CameraFollow>().verticalShakeIntensity = 1.0f;
+					Camera.main.gameObject.GetComponent<CameraFollow>().horizontalShakeIntensity = 0.1f;
+					Camera.main.gameObject.GetComponent<CameraFollow>().verticalShakeIntensity = 0.1f;
 			        yield return new WaitForSeconds(waitTime);
 
 			        darkRoom.gameObject.SetActive(true);
