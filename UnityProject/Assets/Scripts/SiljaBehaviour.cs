@@ -18,6 +18,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 	private ShadowModeController shadowController = null;
 	private Light teddyLight = null;
+	private DynamicLightProbe dLightProbe = null;
 
 	[HideInInspector]
 	public bool darkMode = false;
@@ -35,6 +36,8 @@ public class SiljaBehaviour : MonoBehaviour
 
 		shadowController = GetComponent<ShadowModeController>();
 		teddyLight = twoHandsJoint.GetComponentInChildren<Light>();
+
+		dLightProbe = GetComponentInChildren<DynamicLightProbe> ();
 	}
 
 	public void TakeALimb()
@@ -70,6 +73,7 @@ public class SiljaBehaviour : MonoBehaviour
 		twoHandsJoint.gameObject.SetActive(true);
 
 		siljasAnimator.SetBool("darkmode", true);
+		dLightProbe.enabled = true;
 
 		darkMode = true;
 	}
@@ -94,6 +98,7 @@ public class SiljaBehaviour : MonoBehaviour
 		twoHandsJoint.gameObject.SetActive(false);
 
 		siljasAnimator.SetBool("darkmode", false);
+		dLightProbe.enabled = false;
 
 		darkMode = false;
 	}
