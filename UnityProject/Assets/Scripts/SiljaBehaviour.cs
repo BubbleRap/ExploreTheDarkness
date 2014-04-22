@@ -27,8 +27,8 @@ public class SiljaBehaviour : MonoBehaviour
 	private AIBehaviour[] aiEntities = null;
 
 	private float lightTreshold = 0.15f;
-	private float fadingOutSpeed = 0.01f;
-	private float fadingInSpeed = 0.01f;
+	private float fadingOutSpeed = 0.006f;
+	private float fadingInSpeed = 0.012f;
 
 	void Awake()
 	{
@@ -118,13 +118,11 @@ public class SiljaBehaviour : MonoBehaviour
 	// is sent by light probe itself
 	public void RetriveLightProbeResult(float intensity)
 	{
-		print(intensity);
 		if( intensity > lightTreshold )
 			teddyLight.intensity += fadingInSpeed;
 		else
 			teddyLight.intensity -= fadingOutSpeed;
 		
-		print(teddyLight.intensity);
 		teddyLight.intensity = Mathf.Clamp(teddyLight.intensity, 0f, 1.75f);
 		lilbroGlowMaterial.color = new Color(teddyLight.intensity, teddyLight.intensity, teddyLight.intensity, 1f);
 		
