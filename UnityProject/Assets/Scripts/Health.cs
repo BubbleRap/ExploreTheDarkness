@@ -5,7 +5,6 @@ public class Health : MonoBehaviour {
 
 	public int health = 8;
 	public SiljaBehaviour siljaBeh;
-	public ShadowModeController shadowController;
 
 	private float barDisplay = 0;
 	private Vector2 pos = new Vector2(Screen.width/2-400,Screen.height-50);
@@ -49,7 +48,7 @@ public class Health : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		barDisplay = shadowController.getTeddyLight();
+		barDisplay = siljaBeh.getTeddyLight();
 	}
 
 	public void looseLife() {
