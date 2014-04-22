@@ -20,7 +20,8 @@ class SunShafts extends PostEffectsBase
 	public var resolution : SunShaftsResolution = SunShaftsResolution.Normal;
 	public var screenBlendMode : ShaftsScreenBlendMode = ShaftsScreenBlendMode.Screen;
 	
-	public var sunTransform : Transform;
+	//public var sunTransform : Transform;
+	public var sunPosition : Vector3;
 	public var radialBlurIterations : int = 2;
 	public var sunColor : Color = Color.white;
 	public var sunShaftBlurRadius : float = 2.5f;
@@ -65,10 +66,11 @@ class SunShafts extends PostEffectsBase
             divider = 1;
             
 		var v : Vector3 = Vector3.one * 0.5;
-		if (sunTransform)
-			v = camera.WorldToViewportPoint (sunTransform.position);
-		else 
-			v = Vector3(0.5, 0.5, 0.0);
+		//if (sunTransform)
+		//	v = camera.WorldToViewportPoint (sunTransform.position);
+		//else 
+		//	v = Vector3(0.5, 0.5, 0.0);
+		v = camera.WorldToViewportPoint (sunPosition);
 
 		var rtW : int = source.width / divider;
 		var rtH : int = source.height / divider;

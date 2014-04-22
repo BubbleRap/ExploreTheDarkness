@@ -7,7 +7,8 @@ class SunShaftsEditor extends Editor
 {	
 	var serObj : SerializedObject;	
 		
-	var sunTransform : SerializedProperty;
+	//var sunTransform : SerializedProperty;
+	var sunPosition : SerializedProperty;
 	var radialBlurIterations : SerializedProperty;
 	var sunColor : SerializedProperty;
 	var sunShaftBlurRadius : SerializedProperty;
@@ -23,7 +24,8 @@ class SunShaftsEditor extends Editor
 		
 		screenBlendMode = serObj.FindProperty("screenBlendMode");
 		
-		sunTransform = serObj.FindProperty("sunTransform");
+		//sunTransform = serObj.FindProperty("sunTransform");
+		sunPosition = serObj.FindProperty("sunPosition");
 		sunColor = serObj.FindProperty("sunColor");
 		
 		sunShaftBlurRadius = serObj.FindProperty("sunShaftBlurRadius");
@@ -67,20 +69,21 @@ class SunShaftsEditor extends Editor
        
         EditorGUILayout.Separator ();
     
-    	EditorGUILayout.BeginHorizontal();
-    
-    	EditorGUILayout.PropertyField (sunTransform, new GUIContent("Shafts caster", "Chose a transform that acts as a root point for the produced sun shafts"));
-    	if((target as SunShafts).sunTransform && (target as SunShafts).camera) {
-    		if (GUILayout.Button("Center on " + (target as SunShafts).camera.name)) {
-    			 if (EditorUtility.DisplayDialog ("Move sun shafts source?", "The SunShafts caster named "+ (target as SunShafts).sunTransform.name +"\n will be centered along "+(target as SunShafts).camera.name+". Are you sure? ", "Please do", "Don't")) {
-    				var ray : Ray = (target as SunShafts).camera.ViewportPointToRay(Vector3(0.5,0.5,0));
-    				(target as SunShafts).sunTransform.position = ray.origin + ray.direction * 500.0;
-    				(target as SunShafts).sunTransform.LookAt ((target as SunShafts).transform);
-    			}
-    		}
-    	}
-    	
-    	EditorGUILayout.EndHorizontal();
+   		EditorGUILayout.PropertyField (sunPosition, new GUIContent("Shafts caster position"));
+    	//EditorGUILayout.BeginHorizontal();
+    	//
+    	//EditorGUILayout.PropertyField (sunTransform, new GUIContent("Shafts caster", "Chose a transform that acts as a root point for the produced sun shafts"));
+    	//if((target as SunShafts).sunTransform && (target as SunShafts).camera) {
+    	//	if (GUILayout.Button("Center on " + (target as SunShafts).camera.name)) {
+    	//		 if (EditorUtility.DisplayDialog ("Move sun shafts source?", "The SunShafts caster named "+ (target as SunShafts).sunTransform.name +"\n will be centered along "+(target as SunShafts).camera.name+". Are you sure? ", "Please do", "Don't")) {
+    	//			var ray : Ray = (target as SunShafts).camera.ViewportPointToRay(Vector3(0.5,0.5,0));
+    	//			(target as SunShafts).sunTransform.position = ray.origin + ray.direction * 500.0;
+    	//			(target as SunShafts).sunTransform.LookAt ((target as SunShafts).transform);
+    	//		}
+    	//	}
+    	//}
+    	//
+    	//EditorGUILayout.EndHorizontal();
     	
 		EditorGUILayout.Separator ();
     	
