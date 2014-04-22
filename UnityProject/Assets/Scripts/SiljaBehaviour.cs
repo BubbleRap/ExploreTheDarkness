@@ -72,7 +72,7 @@ public class SiljaBehaviour : MonoBehaviour
 		oneHandJoint.gameObject.SetActive(false);
 		twoHandsJoint.gameObject.SetActive(true);
 
-		siljasAnimator.SetBool("darkmode", true);
+		//siljasAnimator.SetBool("darkmode", true);
 		dLightProbe.enabled = true;
 
 		darkMode = true;
@@ -97,7 +97,7 @@ public class SiljaBehaviour : MonoBehaviour
 		oneHandJoint.gameObject.SetActive(true);
 		twoHandsJoint.gameObject.SetActive(false);
 
-		siljasAnimator.SetBool("darkmode", false);
+		//siljasAnimator.SetBool("darkmode", false);
 		dLightProbe.enabled = false;
 
 		darkMode = false;
