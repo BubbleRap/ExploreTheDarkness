@@ -52,7 +52,8 @@ public class SiljaBehaviour : MonoBehaviour
 	{
 		//teddyLight.enabled = true;
 		teddyLight.intensity = 1.75f;
-		lilbroGlowMaterial.color = Color.white;
+
+		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
 	}
 	
 	public float getTeddyLight()
@@ -91,6 +92,8 @@ public class SiljaBehaviour : MonoBehaviour
 		//siljasAnimator.SetBool("darkmode", true);
 		dLightProbe.enabled = true;
 
+		lilbroGlowMaterial.color = new Color(1f,1f,1f,1f);
+
 		darkMode = true;
 	}
 
@@ -112,6 +115,8 @@ public class SiljaBehaviour : MonoBehaviour
 		//siljasAnimator.SetBool("darkmode", false);
 		dLightProbe.enabled = false;
 
+		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
+
 		darkMode = false;
 	}
 
@@ -124,6 +129,7 @@ public class SiljaBehaviour : MonoBehaviour
 			teddyLight.intensity -= fadingOutSpeed;
 		
 		teddyLight.intensity = Mathf.Clamp(teddyLight.intensity, 0f, 1.75f);
+
 		lilbroGlowMaterial.color = new Color(teddyLight.intensity, teddyLight.intensity, teddyLight.intensity, 1f);
 		
 		if( teddyLight.intensity == 0f )
