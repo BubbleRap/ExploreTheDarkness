@@ -24,8 +24,10 @@ public class Trigger : MonoBehaviour {
 		if(other.tag == "Player")
 		{
 			transitionContoller.doTransition(DarkMode);
-			doorController.openDoor(OpenDoor);
-			spawnController.SetRespawnPosition(transform.position);
+			if (doorController != null)
+				doorController.openDoor(OpenDoor);
+			if (spawnController != null)
+				spawnController.SetRespawnPosition(transform.position);
 
 			for (int i=0; i<animationsToTrigger.Count; ++i){
 				StartCoroutine("DelayAndPlay",i);
