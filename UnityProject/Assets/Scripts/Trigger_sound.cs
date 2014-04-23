@@ -5,7 +5,10 @@ public class Trigger_sound : MonoBehaviour {
 
 	private Transform thirdPersonCamera;
 	private AudioSource audioSource;
+	private AudioSource audioSource2;
 	public AudioClip audioClip;
+	public Transform soundSource;
+	public bool playMultipleTimes;
 	private bool isTrigger = false;
 	// Use this for initialization
 	void Start () {
@@ -15,16 +18,22 @@ public class Trigger_sound : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if(other.tag == "Player")
 		{
-			audioSource = thirdPersonCamera.gameObject.GetComponent<AudioSource>();
-			if(!isTrigger)
+			audioSource = soundSource.GetComponent<AudioSource>();
+			audioSource2 = thirdPersonCamera.gameObject.GetComponent<AudioSource>();
+			if(audioSource == null)
 			{
-				if(!audioSource.isPlaying)
+				audioSource = audioSource2;
+			}
+
+			if(isTrigger && !playMultipleTimes)
+			return;
+
+				if(!audioSource2.isPlaying && !audioSource.isPlaying)
 				{
 					audioSource.clip = audioClip;
 					audioSource.Play();
 					isTrigger = true;
 				}
-			}
 		}
 	}
 	
