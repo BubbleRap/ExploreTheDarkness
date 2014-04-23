@@ -27,6 +27,7 @@ public class HighlightedObject : MonoBehaviour {
 		}
 
 		buttonPrompt = Instantiate(Resources.Load<GameObject>("buttonPrompt"), new Vector3(transform.position.x + 0.3f, transform.position.y + 0.2f, transform.position.z + 0.2f), transform.rotation) as GameObject;
+		buttonPrompt.GetComponent<ButtonPrompt> ().highlightedObject = this;
 		buttonPrompt.SetActive(false);
 	}
 	
