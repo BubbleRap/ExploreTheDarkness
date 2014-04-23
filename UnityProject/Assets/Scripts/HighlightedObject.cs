@@ -8,14 +8,13 @@ public class HighlightedObject : MonoBehaviour {
 	private AudioSource audioSource;
 	public bool internalPlay;
 	public bool hitObject = false;
-	private Shader shader1;
- 	private  Shader shader2;
+
  	private GameObject buttonPrompt;
 
-	// Use this for initialization
+	private bool activated = false;
+
+
 	void Start () {
-		shader1 = Shader.Find("Diffuse");
-		shader2 = Shader.Find("Rim Diffuse");
 
 		if(internalPlay)
 		{
@@ -30,24 +29,33 @@ public class HighlightedObject : MonoBehaviour {
 		buttonPrompt.GetComponent<ButtonPrompt> ().highlightedObject = this;
 		buttonPrompt.SetActive(false);
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		if(hitObject)
 		{
-			if(transform.renderer.material.shader == shader1)
+			if(!activated)
 			{
-				transform.renderer.material.shader = shader2;
+				Color curColor = renderer.material.color;
+				curColor.a = 1f;
+				renderer.material.color = curColor;
+
 				buttonPrompt.SetActive(true);
 				buttonPrompt.transform.LookAt(Camera.main.gameObject.transform);
+
+				activated = true;
 			}
 		}
 		else
 		{
-			if(transform.renderer.material.shader != shader1)
+			if(activated)
 			{
-				transform.renderer.material.shader = shader1;
+				Color curColor = renderer.material.color;
+				curColor.a = 0f;
+				renderer.material.color = curColor;
+
 				buttonPrompt.SetActive(false);
+
+				activated = false;
 			}
 		}
 		hitObject = false;
