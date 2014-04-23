@@ -34,7 +34,9 @@ public class Trigger : MonoBehaviour {
 	}
 	
 	public IEnumerator DelayAndPlay(int index){
-		yield return new WaitForSeconds(animationDelays[index]);
+		if (animationDelays.Count > index)
+			yield return new WaitForSeconds(animationDelays[index]);
+
 		animationsToTrigger[index].Play ();
 	}
 }
