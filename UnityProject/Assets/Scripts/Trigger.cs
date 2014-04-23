@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Trigger : MonoBehaviour {
 
@@ -10,6 +11,9 @@ public class Trigger : MonoBehaviour {
 	public bool OpenDoor;
 
 	public Respawn spawnController;
+
+	public List<Animation> animationsToTrigger;
+	public List<float> animationDelays;
 
 	// Use this for initialization
 	void Awake () {
@@ -22,11 +26,15 @@ public class Trigger : MonoBehaviour {
 			transitionContoller.doTransition(DarkMode);
 			doorController.openDoor(OpenDoor);
 			spawnController.SetRespawnPosition(transform.position);
+
+			for (int i=0; i<animationsToTrigger.Count; ++i){
+				StartCoroutine("DelayAndPlay",i);
+			}
 		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	public IEnumerator DelayAndPlay(int index){
+		yield return new WaitForSeconds(animationDelays[index]);
+		animationsToTrigger[index].Play ();
 	}
 }
