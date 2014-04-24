@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 public class SubtitleManager : MonoBehaviour {
 
-	private string currentText;
 	public GUIStyle style;
+
+	private string currentText = "";
 
 	Dictionary<float, string> diarySubtitles = new Dictionary<float, string>()
 	{
@@ -86,6 +87,7 @@ public class SubtitleManager : MonoBehaviour {
 	}
 
 	void OnGUI(){
-		GUI.Label(new Rect(Screen.width/2, 0, -Screen.height*(8/10), 100), currentText, style);
+			GUI.Label (new Rect (Screen.width / 2, 0, -Screen.height * (8 / 10), 100), currentText, style);
+
 	}
 }
