@@ -23,7 +23,7 @@ public class Trigger : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if(other.tag == "Player")
 		{
-			transitionContoller.doTransition(DarkMode);
+			//transitionContoller.doTransition(DarkMode);
 			if (doorController != null)
 				doorController.openDoor(OpenDoor);
 			if (spawnController != null)
