@@ -55,14 +55,17 @@ public class SubtitleManager : MonoBehaviour {
 	}
 
 	public void Diary(){
+		StopAllCoroutines ();
 		StartCoroutine ("PlayDictionary", diarySubtitles);
 	}
 
 	public void Phone(){
+		StopAllCoroutines ();
 		StartCoroutine ("PlayDictionary", phoneSubtitles);
 	}
 
 	public void Portrait(){
+		StopAllCoroutines ();
 		StartCoroutine ("PlayDictionary", picSubtitles);
 	}
 
