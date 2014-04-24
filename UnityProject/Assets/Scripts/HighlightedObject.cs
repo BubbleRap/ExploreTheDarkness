@@ -6,13 +6,13 @@ public class HighlightedObject : MonoBehaviour {
 	public bool firstperson;
 	public AudioClip soundClip; 
 	private AudioSource audioSource;
+	public string subtitlesToPlay;
 	public bool internalPlay;
 	public bool hitObject = false;
 
  	private GameObject buttonPrompt;
 
 	private bool activated = false;
-
 
 	void Start () {
 

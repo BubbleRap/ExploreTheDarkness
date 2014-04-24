@@ -85,6 +85,11 @@ public class interact : MonoBehaviour {
 							{
 								hit.transform.GetComponent<HighlightedObject>().PlayAudio();
 							}
+							if(hit.transform.GetComponent<HighlightedObject>().subtitlesToPlay != null &&
+							   hit.transform.GetComponent<HighlightedObject>().subtitlesToPlay.Length != 0)
+							{
+								SubtitleManager.Instance.SendMessage(hit.transform.GetComponent<HighlightedObject>().subtitlesToPlay);
+							}
 						}
 					}
 				}
@@ -126,6 +131,11 @@ public class interact : MonoBehaviour {
 							if(hit.transform.GetComponent<HighlightedObject>().soundClip != null)
 							{
 								hit.transform.GetComponent<HighlightedObject>().PlayAudio();
+							}
+							if(hit.transform.GetComponent<HighlightedObject>().subtitlesToPlay != null &&
+							   hit.transform.GetComponent<HighlightedObject>().subtitlesToPlay.Length != 0)
+							{
+								SubtitleManager.Instance.SendMessage(hit.transform.GetComponent<HighlightedObject>().subtitlesToPlay);
 							}
 						}
 					}
