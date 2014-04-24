@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using System.Collections;
 
 public class FadeIn : MonoBehaviour {
@@ -34,4 +34,4 @@ public class FadeIn : MonoBehaviour {
 
 			}
 		}
-	}
+	}*/
