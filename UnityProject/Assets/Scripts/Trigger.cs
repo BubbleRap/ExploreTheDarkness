@@ -12,7 +12,7 @@ public class Trigger : MonoBehaviour {
 
 	public Respawn spawnController;
 
-	public List<Animation> animationsToTrigger;
+	public List<Transform> animationsToTrigger;
 	public List<float> animationDelays;
 
 	// Use this for initialization
@@ -39,6 +39,8 @@ public class Trigger : MonoBehaviour {
 		if (animationDelays.Count > index)
 			yield return new WaitForSeconds(animationDelays[index]);
 
-		animationsToTrigger[index].Play ();
+		Debug.Log(animationsToTrigger[index]);
+
+		animationsToTrigger[index].animation.Play();
 	}
 }
