@@ -59,8 +59,10 @@ public class DynamicLightProbe : MonoBehaviour
 
 			Color [] buffer = result.GetPixels();
 			for( int i = 0; i < buffer.Length; i++ )
+			{
+				buffer[i] -= RenderSettings.ambientLight;
 				lightIntensity += (buffer[i].r  + buffer[i].g + buffer[i].b) / (3f * renderTextureSize * renderTextureSize * camerasCount);
-
+			}
 
 			camera.fov = fov;
 		}
