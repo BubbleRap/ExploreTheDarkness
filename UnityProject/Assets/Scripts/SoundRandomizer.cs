@@ -24,14 +24,18 @@ public class SoundRandomizer : MonoBehaviour
 		}
 
 		activated = true;
+		StartCoroutine(PlaySound());
+
 	}
 
-	void Update()
+	IEnumerator PlaySound()
 	{
-		if( !activated )
-			return;
+		while( activated )
+		{
+			if( !theSource.isPlaying )
+				theSource.PlayOneShot (randomSounds[Random.Range(0, randomSounds.Length)], volume);
 
-		if( !theSource.isPlaying )
-			theSource.PlayOneShot (randomSounds[Random.Range(0, randomSounds.Length)], volume);
+			yield return new WaitForSeconds(Random.Range(2f, 6f));
+		}
 	}
 }
