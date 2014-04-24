@@ -29,7 +29,7 @@ public class Transitioner : MonoBehaviour {
 			expolight.SetActive(false);
 		}
 
-		StartCoroutine(switchToDarkMode(2.0F));
+		StartCoroutine(switchToDarkMode(17.0F));
 
 		doTransition(darkMode);
 	}
