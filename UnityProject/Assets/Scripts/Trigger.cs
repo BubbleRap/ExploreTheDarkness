@@ -32,6 +32,8 @@ public class Trigger : MonoBehaviour {
 			for (int i=0; i<animationsToTrigger.Count; ++i){
 				StartCoroutine("DelayAndPlay",i);
 			}
+
+			collider.enabled = false;
 		}
 	}
 	
