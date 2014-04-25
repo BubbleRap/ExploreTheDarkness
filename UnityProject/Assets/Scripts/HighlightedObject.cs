@@ -9,6 +9,7 @@ public class HighlightedObject : MonoBehaviour {
 	public string subtitlesToPlay;
 	public bool internalPlay;
 	public bool hitObject = false;
+	public bool nextLevel = false;
 
  	private GameObject buttonPrompt;
 
