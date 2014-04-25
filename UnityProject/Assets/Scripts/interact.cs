@@ -65,7 +65,8 @@ public class interact : MonoBehaviour {
 						{
 							if(hit.transform.GetComponent<HighlightedObject>().nextLevel)
 							{
-								Application.LoadLevelAsync(1);
+								//Application.LoadLevelAsync(1);
+								Application.LoadLevel(1);
 							}
 							
 							interactedObject = hit.transform;
@@ -117,7 +118,8 @@ public class interact : MonoBehaviour {
 						{
 							if(hit.transform.GetComponent<HighlightedObject>().nextLevel)
 							{
-								Application.LoadLevelAsync(1);
+								//Application.LoadLevelAsync(1);
+								Application.LoadLevel(1);
 							}
 							interactedObject = hit.transform;
 							if(hit.transform.GetComponent<HighlightedObject>().firstperson)
