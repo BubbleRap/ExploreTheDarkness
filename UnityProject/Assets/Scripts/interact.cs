@@ -63,6 +63,11 @@ public class interact : MonoBehaviour {
 					{
 						if(hit.transform.GetComponent<HighlightedObject>() != null)
 						{
+							if(hit.transform.GetComponent<HighlightedObject>().nextLevel)
+							{
+								Application.LoadLevelAsync(1);
+							}
+							
 							interactedObject = hit.transform;
 							if(hit.transform.GetComponent<HighlightedObject>().firstperson)
 							{
@@ -110,6 +115,10 @@ public class interact : MonoBehaviour {
 					{
 						if(hit.transform.GetComponent<HighlightedObject>() != null)
 						{
+							if(hit.transform.GetComponent<HighlightedObject>().nextLevel)
+							{
+								Application.LoadLevelAsync(1);
+							}
 							interactedObject = hit.transform;
 							if(hit.transform.GetComponent<HighlightedObject>().firstperson)
 							{
