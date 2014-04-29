@@ -39,7 +39,7 @@ Category {
 
 				fixed4 frag( v2f i ) : COLOR
 				{
-					return 2.0f * _Color * tex2D( _MainTex, i.uv );
+					return 2.0 * _Color * tex2D( _MainTex, i.uv );
 				}
 			ENDCG
 		}

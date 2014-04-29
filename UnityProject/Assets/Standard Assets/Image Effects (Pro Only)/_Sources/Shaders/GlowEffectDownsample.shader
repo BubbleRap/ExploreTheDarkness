@@ -64,6 +64,7 @@ fixed4 frag( v2f i ) : COLOR
 	c += tex2D( _MainTex, i.uv[2].xy );
 	c += tex2D( _MainTex, i.uv[3].xy );
 	c /= 4;
+	//c.rgb *= c.a;
 	c.rgb *= _Color.rgb;
 	c.rgb *= (c.a + _Color.a);
 	c.a = 0;

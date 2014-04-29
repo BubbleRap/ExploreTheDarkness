@@ -6,7 +6,7 @@ using UnityEngine;
 // Usually you'd want either to make base textures to have zero alpha; or
 // set the color to have zero alpha (by default alpha is 0.5).
  
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 [RequireComponent (typeof(Camera))]
 [AddComponentMenu("Image Effects/Bloom and Glow/Glow (Deprecated)")]
 public class GlowEffect : MonoBehaviour
