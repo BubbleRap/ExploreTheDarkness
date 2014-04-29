@@ -5,7 +5,7 @@
 Properties {
 
  
-
+	_Color ("TintColor", Color) = (1,1,1,1)
     _NoiseTex ("Noise Texture (RG)", 2D) = "white" {}
 
  
@@ -131,7 +131,7 @@ CGPROGRAM
  
 
  
-
+float4 _Color;
  
 
 sampler2D _GrabTexture : register(s0);
@@ -362,7 +362,7 @@ half4 frag( v2f i ) : COLOR
 
  
 
-    return col;
+    return col * _Color;
 
  
 
