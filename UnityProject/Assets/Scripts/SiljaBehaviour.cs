@@ -30,6 +30,8 @@ public class SiljaBehaviour : MonoBehaviour
 	private float fadingOutSpeed = 0.006f;
 	private float fadingInSpeed = 0.012f;
 
+	private SkinnedMeshRenderer siljaRenderer = null;
+
 	void Awake()
 	{
 		firstPersonCamera = transform.FindChild("1st Person Camera").gameObject;
@@ -46,6 +48,7 @@ public class SiljaBehaviour : MonoBehaviour
 		dLightProbe = GetComponentInChildren<DynamicLightProbe> ();
 		aiEntities = FindObjectsOfType<AIBehaviour>();
 
+		siljaRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
 	}
 
 	void Start()
@@ -94,6 +97,8 @@ public class SiljaBehaviour : MonoBehaviour
 
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,1f);
 
+		siljaRenderer.material.shader = Shader.Find("Custom/TransparentInvisibleShadowCaster");
+
 		darkMode = true;
 	}
 
@@ -116,6 +121,8 @@ public class SiljaBehaviour : MonoBehaviour
 		dLightProbe.enabled = false;
 
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
+
+		siljaRenderer.material.shader = Shader.Find("Custom/DoubleSided/Diffuse");
 
 		darkMode = false;
 	}
