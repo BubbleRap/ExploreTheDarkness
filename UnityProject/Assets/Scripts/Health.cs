@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Health : MonoBehaviour {
 
+	private GameObject siljaCharacter = null;
 	public int health = 8;
 	public SiljaBehaviour siljaBeh;
 
@@ -20,7 +21,7 @@ public class Health : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		siljaCharacter = GameObject.FindGameObjectWithTag("Player");
 	}
 
 	void OnGUI () {
@@ -49,6 +50,12 @@ public class Health : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		barDisplay = siljaBeh.getTeddyLight();
+
+		if(health <= 0)
+		{
+			Destroy(siljaCharacter);
+			Application.LoadLevel(0);
+		}
 	}
 
 	public void looseLife() {
