@@ -5,8 +5,9 @@ using System.Collections.Generic;
 public class SubtitleManager : MonoBehaviour {
 
 	public GUIStyle style;
-
 	private string currentText = "";
+
+	public bool isPlaying = false;
 
 	Dictionary<float, string> diarySubtitles = new Dictionary<float, string>()
 	{
@@ -71,6 +72,9 @@ public class SubtitleManager : MonoBehaviour {
 	}
 
 	private IEnumerator PlayDictionary(Dictionary<float,string> dict){
+
+		isPlaying = true;
+
 		float secondsCounter = 0f;
 		foreach (float key in dict.Keys) {
 			yield return new WaitForSeconds(key - secondsCounter);
@@ -84,6 +88,14 @@ public class SubtitleManager : MonoBehaviour {
 		//this.guiText.text = "";
 		currentText = "";
 
+		isPlaying = false;
+	}
+
+	public void Stop(){
+		StopAllCoroutines ();
+		currentText = "";
+
+		isPlaying = false;
 	}
 
 	void OnGUI(){
