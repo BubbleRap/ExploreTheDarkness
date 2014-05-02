@@ -11,6 +11,12 @@ public class interact : MonoBehaviour {
 	[HideInInspector]
 	public HighlightedObject interactedObject;
 
+	private CameraInput camInput = null;
+
+	void Start()
+	{
+		camInput = GetComponentInChildren<CameraInput>();
+	}
 
 	void Update () 
 	{
@@ -22,6 +28,7 @@ public class interact : MonoBehaviour {
 				{
 					firstPersonCamera.gameObject.SetActive(false);
 					transform.gameObject.GetComponent<MovementController>().canMove = true;
+					camInput.enabled = true;
 					isInteractMode = false;
 				}
 			}
@@ -40,6 +47,7 @@ public class interact : MonoBehaviour {
 				firstPersonCamera.gameObject.SetActive(false);
 			}
 			transform.gameObject.GetComponent<MovementController>().canMove = true;
+			camInput.enabled = true;
 			isInteractMode = false;
 		}
 		else if(!isInteractMode)
@@ -59,6 +67,7 @@ public class interact : MonoBehaviour {
 				isFirstPerson = true;
 				firstPersonCamera.LookAt(interactedObject.transform);
 				transform.gameObject.GetComponent<MovementController>().canMove = false;
+				camInput.enabled = false;
 
 				isInteractMode = true;
 
