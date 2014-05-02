@@ -67,6 +67,10 @@ public class HighlightedObject : MonoBehaviour {
 		audioSource.Play();
 	}
 
+	public void StopAudio () {
+		audioSource.Stop();
+	}
+
 	public bool StoppedPlaying () {
 		if(!audioSource.isPlaying)
 		{

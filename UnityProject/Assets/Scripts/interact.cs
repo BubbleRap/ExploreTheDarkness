@@ -36,7 +36,7 @@ public class interact : MonoBehaviour {
 				SubtitleManager.Instance.Stop();
 			}
 			if (interactedObject != null && !interactedObject.GetComponent<HighlightedObject>().StoppedPlaying()) {
-				interactedObject.GetComponent<HighlightedObject>().audio.Stop();
+				interactedObject.GetComponent<HighlightedObject>().StopAudio();
 			}
 
 			if(isFirstPerson)
