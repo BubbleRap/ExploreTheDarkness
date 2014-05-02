@@ -31,6 +31,7 @@ public class SiljaBehaviour : MonoBehaviour
 	private float fadingInSpeed = 0.012f;
 
 	private SkinnedMeshRenderer siljaRenderer = null;
+	private CameraShaker firstPersonCameraShaker;
 
 	void Awake()
 	{
@@ -49,6 +50,8 @@ public class SiljaBehaviour : MonoBehaviour
 		aiEntities = FindObjectsOfType<AIBehaviour>();
 
 		siljaRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+
+		firstPersonCameraShaker = firstPersonCamera.GetComponent<CameraShaker>();
 	}
 
 	void Start()
@@ -67,6 +70,7 @@ public class SiljaBehaviour : MonoBehaviour
 	public void TakeALimb()
 	{
 		healthController.looseLife();
+		firstPersonCameraShaker.StartShake(1f);
 	}
 
 	void Update () 
