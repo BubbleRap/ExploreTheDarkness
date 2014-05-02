@@ -8,150 +8,75 @@ public class interact : MonoBehaviour {
 	bool isFirstPerson = false;
 	[HideInInspector]
 	public bool isInteractMode = false;
-	private Transform interactedObject;
+	[HideInInspector]
+	public HighlightedObject interactedObject;
 
-	// Use this for initialization
-	void Start () {
-		
+	private CameraInput camInput = null;
+
+	void Start()
+	{
+		camInput = GetComponentInChildren<CameraInput>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+	void Update () 
+	{
 		if(interactedObject != null)
 		{
-			if(interactedObject.GetComponent<HighlightedObject>().StoppedPlaying() && interactedObject.GetComponent<HighlightedObject>().soundClip != null)
+			if(interactedObject.StoppedPlaying() && interactedObject.soundClip != null)
 			{
 				if(isFirstPerson)
 				{
 					firstPersonCamera.gameObject.SetActive(false);
 					transform.gameObject.GetComponent<MovementController>().canMove = true;
+					camInput.enabled = true;
 					isInteractMode = false;
 				}
-				interactedObject = null;
 			}
 		}
 		if (isInteractMode && Input.GetKeyDown(KeyCode.E))
 		{
+			if (SubtitleManager.Instance.isPlaying){
+				SubtitleManager.Instance.Stop();
+			}
+			if (interactedObject != null && !interactedObject.StoppedPlaying()) {
+				interactedObject.StopAudio();
+			}
+
 			if(isFirstPerson)
 			{
 				firstPersonCamera.gameObject.SetActive(false);
 			}
 			transform.gameObject.GetComponent<MovementController>().canMove = true;
+			camInput.enabled = true;
 			isInteractMode = false;
-			/*
-			foreach (Transform child in transform){
-				if(child.tag == "Player")
-				{
-					child.gameObject.SetActive(true);
-				}
-			}
-			*/
 		}
 		else if(!isInteractMode)
 		{
-			Vector3 fwd = thirdPersonCamera.TransformDirection(Vector3.forward);
-			RaycastHit[] hits;
-			hits = Physics.RaycastAll(thirdPersonCamera.position, fwd, 4);
-			int i = 0;
-			while (i < hits.Length) {
+			if( interactedObject == null )
+				return;
 
-				RaycastHit hit = hits[i];
-				if(hit.transform.tag == "Object")
-				{
-					hit.transform.GetComponent<HighlightedObject>().hitObject = true;
-					if(Input.GetKeyDown(KeyCode.E))
-					{
-						if(hit.transform.GetComponent<HighlightedObject>() != null)
-						{
-							if(hit.transform.GetComponent<HighlightedObject>().nextLevel)
-							{
-								//Application.LoadLevelAsync(1);
-								Application.LoadLevel(1);
-							}
-							
-							interactedObject = hit.transform;
-							if(hit.transform.GetComponent<HighlightedObject>().firstperson)
-							{
-								firstPersonCamera.gameObject.SetActive(true);
-								isFirstPerson = true;
-								firstPersonCamera.LookAt(hit.transform);
-								transform.gameObject.GetComponent<MovementController>().canMove = false;
-								//Destroy(hit.transform.gameObject);
-								isInteractMode = true;
-								/*
-								foreach (Transform child in transform){
-									if(child.tag == "Player")
-									{
-										child.gameObject.SetActive(false);
-									}
-								}
-								*/
-							}
-							if(hit.transform.GetComponent<HighlightedObject>().soundClip != null)
-							{
-								hit.transform.GetComponent<HighlightedObject>().PlayAudio();
-							}
-							if(hit.transform.GetComponent<HighlightedObject>().subtitlesToPlay != null &&
-							   hit.transform.GetComponent<HighlightedObject>().subtitlesToPlay.Length != 0)
-							{
-								SubtitleManager.Instance.SendMessage(hit.transform.GetComponent<HighlightedObject>().subtitlesToPlay);
-							}
-						}
-					}
-				}
-				i++;
-			}
+			if(Input.GetKeyDown(KeyCode.E))
+			{
+				if (SubtitleManager.Instance.isPlaying)
+					SubtitleManager.Instance.Stop();
 
-			Vector3 fwd2 = transform.TransformDirection(Vector3.forward);
-			RaycastHit[] hits2;
-			hits2 = Physics.RaycastAll(transform.position, fwd2, 4);
-			int h = 0;
-			while (h < hits2.Length) {
+				if(interactedObject.nextLevel)
+					Application.LoadLevel(1);
 
-				RaycastHit hit = hits2[h];
-				if(hit.transform.tag == "Object")
-				{
-					hit.transform.GetComponent<HighlightedObject>().hitObject = true;
-					if(Input.GetKeyDown(KeyCode.E))
-					{
-						if(hit.transform.GetComponent<HighlightedObject>() != null)
-						{
-							if(hit.transform.GetComponent<HighlightedObject>().nextLevel)
-							{
-								//Application.LoadLevelAsync(1);
-								Application.LoadLevel(1);
-							}
-							interactedObject = hit.transform;
-							if(hit.transform.GetComponent<HighlightedObject>().firstperson)
-							{
-								firstPersonCamera.gameObject.SetActive(true);
-								isFirstPerson = true;
-								firstPersonCamera.LookAt(hit.transform);
-								transform.gameObject.GetComponent<MovementController>().canMove = false;
-								//Destroy(hit.transform.gameObject);
-								isInteractMode = true;
-								/*
-								foreach (Transform child in transform){
-									if(child.tag == "Player")
-									{
-										child.gameObject.SetActive(false);
-									}
-								}
-								*/
-							}
-							if(hit.transform.GetComponent<HighlightedObject>().soundClip != null)
-							{
-								hit.transform.GetComponent<HighlightedObject>().PlayAudio();
-							}
-							if(hit.transform.GetComponent<HighlightedObject>().subtitlesToPlay != null &&
-							   hit.transform.GetComponent<HighlightedObject>().subtitlesToPlay.Length != 0)
-							{
-								SubtitleManager.Instance.SendMessage(hit.transform.GetComponent<HighlightedObject>().subtitlesToPlay);
-							}
-						}
-					}
-				}
-				h++;
+				firstPersonCamera.gameObject.SetActive(true);
+				isFirstPerson = true;
+				firstPersonCamera.LookAt(interactedObject.transform);
+				transform.gameObject.GetComponent<MovementController>().canMove = false;
+				camInput.enabled = false;
+
+				isInteractMode = true;
+
+				if(interactedObject.soundClip != null)
+					interactedObject.PlayAudio();
+
+				if(interactedObject.subtitlesToPlay != null && interactedObject.subtitlesToPlay.Length != 0)
+					SubtitleManager.Instance.SendMessage(interactedObject.subtitlesToPlay);
+
 			}
 		}
 	}
