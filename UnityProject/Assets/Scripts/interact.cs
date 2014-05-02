@@ -32,6 +32,13 @@ public class interact : MonoBehaviour {
 		}
 		if (isInteractMode && Input.GetKeyDown(KeyCode.E))
 		{
+			if (SubtitleManager.Instance.isPlaying){
+				SubtitleManager.Instance.Stop();
+			}
+			if (interactedObject != null && !interactedObject.GetComponent<HighlightedObject>().StoppedPlaying()) {
+				interactedObject.GetComponent<HighlightedObject>().audio.Stop();
+			}
+
 			if(isFirstPerson)
 			{
 				firstPersonCamera.gameObject.SetActive(false);
@@ -61,6 +68,10 @@ public class interact : MonoBehaviour {
 					hit.transform.GetComponent<HighlightedObject>().hitObject = true;
 					if(Input.GetKeyDown(KeyCode.E))
 					{
+						if (SubtitleManager.Instance.isPlaying){
+							SubtitleManager.Instance.Stop();
+						}
+
 						if(hit.transform.GetComponent<HighlightedObject>() != null)
 						{
 							if(hit.transform.GetComponent<HighlightedObject>().nextLevel)
@@ -114,6 +125,10 @@ public class interact : MonoBehaviour {
 					hit.transform.GetComponent<HighlightedObject>().hitObject = true;
 					if(Input.GetKeyDown(KeyCode.E))
 					{
+						if (SubtitleManager.Instance.isPlaying){
+							SubtitleManager.Instance.Stop();
+						}
+
 						if(hit.transform.GetComponent<HighlightedObject>() != null)
 						{
 							if(hit.transform.GetComponent<HighlightedObject>().nextLevel)
