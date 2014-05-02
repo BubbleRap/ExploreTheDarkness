@@ -37,6 +37,14 @@ public class HighlightedObject : MonoBehaviour {
 
 	void Update () {
 
+		if( interactionScript.isInteractMode )
+		{
+			ActivateHighlights(false);
+			ActivatePromtButton(false);
+			return;
+		}
+
+
 		if( !renderer.isVisible )
 			return;
 
@@ -46,49 +54,8 @@ public class HighlightedObject : MonoBehaviour {
 		else
 			hitObject = false;
 
-
-		if(hitObject)
-		{
-			if(!activated)
-			{
-				Color curColor = renderer.material.color;
-				curColor.a = 1f;
-				renderer.material.color = curColor;
-
-				activated = true;
-			}
-		}
-		else
-		{
-			if(activated)
-			{
-				Color curColor = renderer.material.color;
-				curColor.a = 0f;
-				renderer.material.color = curColor;
-
-				activated = false;
-			}
-		}
-
-		if( (transform.position - Camera.main.transform.position).magnitude < 3f && activated)
-		{
-			if( !buttonPrompt.activeInHierarchy )
-			{
-				buttonPrompt.SetActive(true);
-				buttonPrompt.transform.LookAt(Camera.main.gameObject.transform);
-
-				interactionScript.interactedObject = this;
-			}
-		}
-		else 
-		{
-			if( buttonPrompt.activeInHierarchy )
-			{
-				buttonPrompt.SetActive(false);
-
-				interactionScript.interactedObject = null;
-			}
-		}
+		ActivateHighlights(hitObject);
+		ActivatePromtButton((transform.position - Camera.main.transform.position).magnitude < 3f && activated);
 
 
 		hitObject = false;
@@ -109,5 +76,36 @@ public class HighlightedObject : MonoBehaviour {
 			return true;
 		}
 		return false;
+	}
+
+	private void ActivateHighlights( bool state )
+	{
+		if( activated == state )
+			return;
+
+		Color curColor = renderer.material.color;
+
+		curColor.a = state ? 1f : 0f;
+
+		renderer.material.color = curColor;
+			
+		activated = state;
+
+	}
+
+	private void ActivatePromtButton( bool state )
+	{
+		if( buttonPrompt.activeInHierarchy == state )
+			return;
+
+		if( state )
+		{
+			buttonPrompt.transform.LookAt(Camera.main.gameObject.transform);		
+			interactionScript.interactedObject = this;
+		}
+		else
+			interactionScript.interactedObject = null;
+
+		buttonPrompt.SetActive(state);
 	}
 }
