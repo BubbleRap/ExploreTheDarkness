@@ -56,7 +56,10 @@ public class FadeIn : MonoBehaviour {
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.E)){
+		if (Input.GetKeyDown(KeyCode.E) ||
+		    Input.GetKeyDown(KeyCode.Space) ||
+		    Input.GetKeyDown(KeyCode.Return) ||
+		    Input.GetMouseButtonDown(0)){
 		    audio.Stop();
 		}
 
