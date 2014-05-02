@@ -15,6 +15,8 @@ public class HighlightedObject : MonoBehaviour {
 
 	private bool activated = false;
 
+	private interact interactionScript = null;
+
 	void Start () {
 
 		if(internalPlay)
@@ -29,36 +31,33 @@ public class HighlightedObject : MonoBehaviour {
 		buttonPrompt = Instantiate(Resources.Load<GameObject>("buttonPrompt"), new Vector3(transform.position.x + 0.3f, transform.position.y + 0.2f, transform.position.z + 0.2f), transform.rotation) as GameObject;
 		buttonPrompt.GetComponent<ButtonPrompt> ().highlightedObject = this;
 		buttonPrompt.SetActive(false);
+
+		interactionScript = FindObjectOfType(typeof(interact)) as interact;
 	}
 
 	void Update () {
-		if(hitObject)
+
+		if( interactionScript.isInteractMode )
 		{
-			if(!activated)
-			{
-				Color curColor = renderer.material.color;
-				curColor.a = 1f;
-				renderer.material.color = curColor;
-
-				buttonPrompt.SetActive(true);
-				buttonPrompt.transform.LookAt(Camera.main.gameObject.transform);
-
-				activated = true;
-			}
+			ActivateHighlights(false);
+			ActivatePromtButton(false);
+			return;
 		}
+
+
+		if( !renderer.isVisible )
+			return;
+
+		Vector3 cameraRelativePosition = Camera.main.transform.InverseTransformPoint(transform.position);
+		if( cameraRelativePosition.x < 0.5f * cameraRelativePosition.z && cameraRelativePosition.x > -0.5f * cameraRelativePosition.z )
+			hitObject = true;
 		else
-		{
-			if(activated)
-			{
-				Color curColor = renderer.material.color;
-				curColor.a = 0f;
-				renderer.material.color = curColor;
+			hitObject = false;
 
-				buttonPrompt.SetActive(false);
+		ActivateHighlights(hitObject);
+		ActivatePromtButton((transform.position - Camera.main.transform.position).magnitude < 3f && activated);
 
-				activated = false;
-			}
-		}
+
 		hitObject = false;
 	}
 
@@ -67,11 +66,46 @@ public class HighlightedObject : MonoBehaviour {
 		audioSource.Play();
 	}
 
+	public void StopAudio () {
+		audioSource.Stop();
+	}
+
 	public bool StoppedPlaying () {
 		if(!audioSource.isPlaying)
 		{
 			return true;
 		}
 		return false;
+	}
+
+	private void ActivateHighlights( bool state )
+	{
+		if( activated == state )
+			return;
+
+		Color curColor = renderer.material.color;
+
+		curColor.a = state ? 1f : 0f;
+
+		renderer.material.color = curColor;
+			
+		activated = state;
+
+	}
+
+	private void ActivatePromtButton( bool state )
+	{
+		if( buttonPrompt.activeInHierarchy == state )
+			return;
+
+		if( state )
+		{
+			buttonPrompt.transform.LookAt(Camera.main.gameObject.transform);		
+			interactionScript.interactedObject = this;
+		}
+		else
+			interactionScript.interactedObject = null;
+
+		buttonPrompt.SetActive(state);
 	}
 }
