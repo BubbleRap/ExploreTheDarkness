@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class SubtitleManager : MonoBehaviour {
 
 	public GUIStyle style;
+	public Material OutlineMaterial;
 	private string currentText = "";
 
 	public bool isPlaying = false;
@@ -99,7 +100,10 @@ public class SubtitleManager : MonoBehaviour {
 	}
 
 	void OnGUI(){
-			GUI.Label (new Rect (Screen.width / 2, 0, -Screen.height * (8 / 10), 100), currentText, style);
+
+		style.font.material = OutlineMaterial;
+
+		GUI.Label (new Rect (Screen.width / 2, Screen.height * (3f/4f), -Screen.height * (8/10), 100), currentText, style);
 
 	}
 }
