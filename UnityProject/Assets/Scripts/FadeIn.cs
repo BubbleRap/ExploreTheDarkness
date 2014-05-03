@@ -91,7 +91,7 @@ public class FadeIn : MonoBehaviour {
 			GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), fadeTexture);
 			if (currentText.Length != 0){
 				GUI.color = Color.white;
-				GUI.Label (new Rect (Screen.width / 2, 0, -Screen.height * (8 / 10), 100), currentText, style);
+				GUI.Label (new Rect (Screen.width / 2, Screen.height * (3f/4f), -Screen.height * (8/10), 100), currentText, style);
 			}
 		} else {
 			mainTheme.Play();
