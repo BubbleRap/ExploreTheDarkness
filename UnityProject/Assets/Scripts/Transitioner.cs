@@ -9,13 +9,13 @@ public class Transitioner : MonoBehaviour {
 	public bool darkMode = false;
 	public Transform directionalLight;
 	private GameObject[] exposedLights;
-//	public Transform firstPersonCamera;
+
 	
 	public Transform lightRoom;
 	public Transform darkRoom;
 
 
-	//public Transform elevator;
+	public float transitionTime = 17f;
 	private GameObject siljaCharacter = null;
 
 	void Awake()
@@ -29,7 +29,7 @@ public class Transitioner : MonoBehaviour {
 			expolight.SetActive(false);
 		}
 
-		StartCoroutine(switchToDarkMode(17.0F));
+		StartCoroutine(switchToDarkMode(transitionTime));
 
 		doTransition(darkMode);
 	}
@@ -74,8 +74,6 @@ public class Transitioner : MonoBehaviour {
 					}
 
 					siljaCharacter.SendMessage("EnableDarkMode", SendMessageOptions.RequireReceiver);
-
-					//elevator.gameObject.SetActive(false);
 				}
 			}
 			else
@@ -95,8 +93,6 @@ public class Transitioner : MonoBehaviour {
 					}
 
 					siljaCharacter.SendMessage("EnableStoryMode", SendMessageOptions.RequireReceiver);
-
-					//elevator.gameObject.SetActive(true);
 				}
 			}
 
