@@ -85,7 +85,7 @@ public class HighlightedObject : MonoBehaviour {
 
 		Color curColor = renderer.material.color;
 
-		curColor.a = state ? 1f : 0f;
+		curColor.a = state ? 0.5f : 0f;
 
 		renderer.material.color = curColor;
 			
