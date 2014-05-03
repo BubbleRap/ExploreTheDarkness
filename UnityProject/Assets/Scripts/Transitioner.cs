@@ -15,7 +15,7 @@ public class Transitioner : MonoBehaviour {
 	public Transform darkRoom;
 
 
-	public Transform elevator;
+	//public Transform elevator;
 	private GameObject siljaCharacter = null;
 
 	void Awake()
@@ -75,7 +75,7 @@ public class Transitioner : MonoBehaviour {
 
 					siljaCharacter.SendMessage("EnableDarkMode", SendMessageOptions.RequireReceiver);
 
-					elevator.gameObject.SetActive(false);
+					//elevator.gameObject.SetActive(false);
 				}
 			}
 			else
@@ -96,7 +96,7 @@ public class Transitioner : MonoBehaviour {
 
 					siljaCharacter.SendMessage("EnableStoryMode", SendMessageOptions.RequireReceiver);
 
-					elevator.gameObject.SetActive(true);
+					//elevator.gameObject.SetActive(true);
 				}
 			}
 
