@@ -60,9 +60,14 @@ public class Transitioner : MonoBehaviour {
 			{
 				if(!darkRoom.gameObject.activeInHierarchy)
 				{
+					MovementController moveCtrl = siljaCharacter.GetComponent<MovementController>();
+					moveCtrl.canMove = false;
+
 					Camera.main.gameObject.GetComponent<CameraFollow>().horizontalShakeIntensity = 0.1f;
 					Camera.main.gameObject.GetComponent<CameraFollow>().verticalShakeIntensity = 0.1f;
 			        yield return new WaitForSeconds(waitTime);
+
+					moveCtrl.canMove = true;
 
 			        darkRoom.gameObject.SetActive(true);
 					lightRoom.gameObject.SetActive(false);
