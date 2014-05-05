@@ -52,6 +52,8 @@ ModelImporter:
     100092: wall_regular_T-corner_Back
     100094: wall_regular_1m_compensate
     100096: wall_regular_compensate
+    100098: wall_regularBroken_2m_b
+    100100: wall_regularBroken_2m_f
     400000: Armature
     400002: bird_Turntable
     400004: CageLifter
@@ -101,6 +103,8 @@ ModelImporter:
     400092: wall_regular_T-corner_Back
     400094: wall_regular_1m_compensate
     400096: wall_regular_compensate
+    400098: wall_regularBroken_2m_b
+    400100: wall_regularBroken_2m_f
     2300000: door_Regular
     2300002: floor_regular_1x1
     2300004: floor_regular_1x2
@@ -142,6 +146,8 @@ ModelImporter:
     2300076: wall_regular_T-corner_Back
     2300078: wall_regular_1m_compensate
     2300080: wall_regular_compensate
+    2300082: wall_regularBroken_2m_b
+    2300084: wall_regularBroken_2m_f
     3300000: door_Regular
     3300002: floor_regular_1x1
     3300004: floor_regular_1x2
@@ -183,6 +189,8 @@ ModelImporter:
     3300076: wall_regular_T-corner_Back
     3300078: wall_regular_1m_compensate
     3300080: wall_regular_compensate
+    3300082: wall_regularBroken_2m_b
+    3300084: wall_regularBroken_2m_f
     4300000: wall_regular_SquareHallWaySHORT
     4300002: wall_regular_BeveledHallwaySHORT
     4300004: floor_regular_ForDoubleCorners
@@ -224,6 +232,8 @@ ModelImporter:
     4300076: wall_regular_T-corner_Back
     4300078: wall_regular_1m_compensate
     4300080: wall_regular_compensate
+    4300082: wall_regularBroken_2m_b
+    4300084: wall_regularBroken_2m_f
     9500000: //RootNode
   materials:
     importMaterials: 0
