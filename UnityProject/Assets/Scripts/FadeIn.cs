@@ -14,6 +14,7 @@ public class FadeIn : MonoBehaviour {
 	public float fadeDuration = 3f;
 
 	public AudioSource mainTheme;
+	private GameObject siljaCharacter = null;
 
 	Dictionary<float, string> subtitles = new Dictionary<float, string>()
 	{
@@ -36,6 +37,8 @@ public class FadeIn : MonoBehaviour {
 
 	void Start(){
 		StartCoroutine("PlaySubtitles");
+
+		siljaCharacter = GameObject.FindGameObjectWithTag("Player");
 	}
 
 	private IEnumerator PlaySubtitles(){
@@ -94,6 +97,7 @@ public class FadeIn : MonoBehaviour {
 				GUI.Label (new Rect (Screen.width / 2, Screen.height * (3f/4f), -Screen.height * (8/10), 100), currentText, style);
 			}
 		} else {
+			siljaCharacter.GetComponent<AudioSource>().Play();
 			mainTheme.Play();
 			MonoBehaviour.Destroy(this);
 		}
