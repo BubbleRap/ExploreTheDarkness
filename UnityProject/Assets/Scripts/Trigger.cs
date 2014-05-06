@@ -11,6 +11,7 @@ public class Trigger : MonoBehaviour {
 	public bool OpenDoor;
 
 	public Respawn spawnController;
+	private Color black = Color.black;
 
 	public List<Transform> animationsToTrigger;
 	public List<float> animationDelays;
@@ -41,8 +42,11 @@ public class Trigger : MonoBehaviour {
 		if (animationDelays.Count > index)
 			yield return new WaitForSeconds(animationDelays[index]);
 
-		Debug.Log(animationsToTrigger[index]);
-
 		animationsToTrigger[index].animation.Play();
+
+		if(index == 2)
+		{
+			RenderSettings.ambientLight = black;
+		}
 	}
 }
