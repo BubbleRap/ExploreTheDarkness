@@ -36,7 +36,6 @@ public class CameraShaker : MonoBehaviour
 			shakeOffset = new Vector3( Random.Range(-horizontalShakeIntensity , horizontalShakeIntensity ), 
 			                          Random.Range(-verticalShakeIntensity , verticalShakeIntensity), 
 			                          Random.Range(-verticalShakeIntensity , verticalShakeIntensity));
-			print (shakeOffset);
 			yield return new WaitForSeconds(shakeFrequency);
 		}
 	}

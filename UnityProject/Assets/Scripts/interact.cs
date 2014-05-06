@@ -12,10 +12,12 @@ public class interact : MonoBehaviour {
 	public HighlightedObject interactedObject;
 
 	private CameraInput camInput = null;
+	private CharacterController charMotor = null;
 
-	void Start()
+	void Awake()
 	{
 		camInput = GetComponentInChildren<CameraInput>();
+		charMotor = GetComponent<CharacterController>();
 	}
 
 	void Update () 
@@ -61,7 +63,10 @@ public class interact : MonoBehaviour {
 					SubtitleManager.Instance.Stop();
 
 				if(interactedObject.nextLevel)
+				{
 					Application.LoadLevel(1);
+					return;
+				}
 
 				firstPersonCamera.gameObject.SetActive(true);
 				isFirstPerson = true;
