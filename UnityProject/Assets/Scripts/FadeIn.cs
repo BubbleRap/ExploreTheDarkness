@@ -12,7 +12,7 @@ public class FadeIn : MonoBehaviour {
 	public bool stillFading = true;
 
 	private float titleStart = float.MaxValue;
-	public float titleDuration = 1f;
+	public float titleDuration = 3f;
 
 	private float fadeStart = float.MaxValue; 
 	public float fadeDuration = 3f;
