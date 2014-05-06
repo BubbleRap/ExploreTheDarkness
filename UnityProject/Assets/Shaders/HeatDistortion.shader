@@ -9,7 +9,6 @@ Properties
 
 Category {
 
-    //Tags { "Queue" = "Transparent+10" }
     Tags {"Queue" = "Geometry" "RenderType"="Opaque" }
     SubShader {
     
@@ -27,8 +26,6 @@ Category {
             Cull Off
             ZWrite On
             ZTest LEqual
-            //Blend SrcAlpha OneMinusSrcAlpha
-            //AlphaTest Greater 0
 
 CGPROGRAM
 // Upgrade NOTE: excluded shader from DX11 and Xbox360; has structs without semantics (struct v2f members distortion)
@@ -51,12 +48,6 @@ sampler2D _NoiseTex;
 float _Strength;
 float _Transparency;
 
-struct data {
-    float4 vertex : POSITION;
-    float3 normal : NORMAL;
-    float4 texcoord : TEXCOORD0;
-};
-
 struct v2f {
     float4 position : POSITION;
     float4 screenPos : TEXCOORD0;
@@ -64,18 +55,21 @@ struct v2f {
     float distortion;
 };
 
-v2f vert(data i){
+v2f vert(appdata_base i){
 
     v2f o;
     
-    o.position = mul(UNITY_MATRIX_MVP, i.vertex);      // compute transformed vertex position
+    //i.vertex += i.normal * sin(_Time.z) * 5.0;
+    
     o.uvmain = TRANSFORM_TEX(i.texcoord, _NoiseTex);   // compute the texcoords of the noise
     float viewAngle = dot(normalize(ObjSpaceViewDir(i.vertex)), i.normal);
     o.distortion = viewAngle * viewAngle;   // square viewAngle to make the effect fall off stronger
     float depth = -mul( UNITY_MATRIX_MV, i.vertex ).z;  // compute vertex depth
     o.distortion /= 1+depth;        // scale effect with vertex depth
     o.distortion *= _Strength;   // multiply with user controlled strength
-    o.screenPos = o.position;   // pass the position to the pixel shader
+    
+    o.position = mul(UNITY_MATRIX_MVP, i.vertex);      // compute transformed vertex position
+	o.screenPos = o.position;   // pass the position to the pixel shader
 
     return o;
 } 
@@ -104,7 +98,7 @@ half4 frag( v2f i ) : COLOR
     screenPos.y += ((offsetColor1.g + offsetColor2.g) - 1) * i.distortion;
 
     half4 col = tex2D( _GrabTexture, screenPos );
-    //col.a = i.distortion/_Transparency;
+	// discarding glow influence
     col.a = 0.0;
 
     return col;

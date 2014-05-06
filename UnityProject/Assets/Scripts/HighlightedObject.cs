@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class HighlightedObject : MonoBehaviour {
-
+	
 	public bool firstperson;
 	public AudioClip soundClip; 
 	private AudioSource audioSource;
@@ -10,6 +10,8 @@ public class HighlightedObject : MonoBehaviour {
 	public bool internalPlay;
 	public bool hitObject = false;
 	public bool nextLevel = false;
+
+	public Transform lookFromPoint = null;
 
  	private GameObject buttonPrompt;
 
