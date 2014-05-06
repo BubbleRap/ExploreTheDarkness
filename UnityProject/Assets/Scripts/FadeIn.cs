@@ -126,7 +126,6 @@ public class FadeIn : MonoBehaviour {
 			}
 		} else {
 			siljaCharacter.GetComponent<AudioSource>().Play();
-			siljaCharacter.GetComponent<MovementController>().canMove = true;
 			mainTheme.Play();
 			MonoBehaviour.Destroy(this);
 		}
