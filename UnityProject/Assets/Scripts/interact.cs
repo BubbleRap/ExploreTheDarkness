@@ -12,12 +12,12 @@ public class interact : MonoBehaviour {
 	public HighlightedObject interactedObject;
 
 	private CameraInput camInput = null;
-	private CharacterController charMotor = null;
+	private CharacterMotor charMotor = null;
 
 	void Awake()
 	{
 		camInput = GetComponentInChildren<CameraInput>();
-		charMotor = GetComponent<CharacterController>();
+		charMotor = GetComponent<CharacterMotor>();
 	}
 
 	void Update () 
@@ -29,6 +29,7 @@ public class interact : MonoBehaviour {
 				if(isFirstPerson)
 				{
 					firstPersonCamera.gameObject.SetActive(false);
+					charMotor.enabled = true;
 					transform.gameObject.GetComponent<MovementController>().canMove = true;
 					camInput.enabled = true;
 					isInteractMode = false;
@@ -47,6 +48,7 @@ public class interact : MonoBehaviour {
 			if(isFirstPerson)
 			{
 				firstPersonCamera.gameObject.SetActive(false);
+				charMotor.enabled = true;
 			}
 			transform.gameObject.GetComponent<MovementController>().canMove = true;
 			camInput.enabled = true;
@@ -75,6 +77,8 @@ public class interact : MonoBehaviour {
 						Vector3 lookFrom = interactedObject.lookFromPoint.position;
 						transform.position = new Vector3(lookFrom.x, transform.position.y, lookFrom.z);
 					}
+
+					charMotor.enabled = false;
 
 					firstPersonCamera.gameObject.SetActive(true);
 					isFirstPerson = true;
