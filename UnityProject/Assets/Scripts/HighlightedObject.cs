@@ -49,7 +49,8 @@ public class HighlightedObject : MonoBehaviour {
 			return;
 
 		Vector3 cameraRelativePosition = Camera.main.transform.InverseTransformPoint(transform.position);
-		if( cameraRelativePosition.x < 0.5f * cameraRelativePosition.z && cameraRelativePosition.x > -0.5f * cameraRelativePosition.z )
+		if( cameraRelativePosition.x < 0.8f * cameraRelativePosition.z && cameraRelativePosition.x > -0.8f * cameraRelativePosition.z
+		   && cameraRelativePosition.z < 5f)
 			hitObject = true;
 		else
 			hitObject = false;
