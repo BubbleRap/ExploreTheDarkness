@@ -8,13 +8,19 @@ public class FadeIn : MonoBehaviour {
 	private Texture2D fadeTexture = null; 
 
 	public bool stillBlack = true;
+	public bool isTitleScreen = false;
 	public bool stillFading = true;
+
+	private float titleStart = float.MaxValue;
+	public float titleDuration = 1f;
 
 	private float fadeStart = float.MaxValue; 
 	public float fadeDuration = 3f;
 
 	public AudioSource mainTheme;
 	private GameObject siljaCharacter = null;
+
+	public Texture titleTexture;
 
 	Dictionary<float, string> subtitles = new Dictionary<float, string>()
 	{
@@ -39,6 +45,7 @@ public class FadeIn : MonoBehaviour {
 		StartCoroutine("PlaySubtitles");
 
 		siljaCharacter = GameObject.FindGameObjectWithTag("Player");
+		siljaCharacter.GetComponent<MovementController>().canMove = false;
 	}
 
 	private IEnumerator PlaySubtitles(){
@@ -66,11 +73,18 @@ public class FadeIn : MonoBehaviour {
 		    audio.Stop();
 		}
 
-		if (!audio.isPlaying && stillBlack)
+		if (!audio.isPlaying && !isTitleScreen)
 		{
 			StopAllCoroutines ();
 			currentText = "";
 			
+			isTitleScreen = true;
+
+			titleStart = Time.time;
+		}
+
+		if (Time.time - titleStart > titleDuration && stillBlack)
+		{
 			stillBlack = false;
 			fadeStart = Time.time;
 		}
@@ -92,12 +106,19 @@ public class FadeIn : MonoBehaviour {
 
 		if (stillFading) {
 			GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), fadeTexture);
+			
+			if(isTitleScreen)
+			{
+				GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), titleTexture, ScaleMode.ScaleToFit, true, 0.0F);
+			}
+
 			if (currentText.Length != 0){
 				GUI.color = Color.white;
 				GUI.Label (new Rect (Screen.width / 2, Screen.height * (3f/4f), -Screen.height * (8/10), 100), currentText, style);
 			}
 		} else {
 			siljaCharacter.GetComponent<AudioSource>().Play();
+			siljaCharacter.GetComponent<MovementController>().canMove = true;
 			mainTheme.Play();
 			MonoBehaviour.Destroy(this);
 		}
