@@ -70,6 +70,12 @@ public class interact : MonoBehaviour {
 
 				if(interactedObject.firstperson)
 				{
+					if( interactedObject.lookFromPoint != null )
+					{
+						Vector3 lookFrom = interactedObject.lookFromPoint.position;
+						transform.position = new Vector3(lookFrom.x, transform.position.y, lookFrom.z);
+					}
+
 					firstPersonCamera.gameObject.SetActive(true);
 					isFirstPerson = true;
 					firstPersonCamera.LookAt(interactedObject.transform);
