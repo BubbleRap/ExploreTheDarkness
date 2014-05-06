@@ -21,6 +21,11 @@ public class MovementController : MonoBehaviour
 
 	public bool canMove = true;
 
+	[HideInInspector]
+	public float v = 0;
+	[HideInInspector]
+	public float h = 0;
+
 	void Awake()
 	{
 		charController = GetComponent<CharacterController> ();
@@ -41,9 +46,6 @@ public class MovementController : MonoBehaviour
 
 		forward.y = 0;
 		forward = forward.normalized;
-		
-		float v = 0;
-		float h = 0;
 		
 		if(canMove)
 		{
