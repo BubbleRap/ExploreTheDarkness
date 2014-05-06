@@ -68,13 +68,18 @@ public class interact : MonoBehaviour {
 					return;
 				}
 
-				firstPersonCamera.gameObject.SetActive(true);
-				isFirstPerson = true;
-				firstPersonCamera.LookAt(interactedObject.transform);
-				transform.gameObject.GetComponent<MovementController>().canMove = false;
-				camInput.enabled = false;
+				if(interactedObject.firstperson)
+				{
+					firstPersonCamera.gameObject.SetActive(true);
+					isFirstPerson = true;
+					firstPersonCamera.LookAt(interactedObject.transform);
 
-				isInteractMode = true;
+
+					transform.gameObject.GetComponent<MovementController>().canMove = false;
+					camInput.enabled = false;
+
+					isInteractMode = true;
+				}
 
 				if(interactedObject.soundClip != null)
 					interactedObject.PlayAudio();
