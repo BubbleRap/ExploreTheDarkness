@@ -30,7 +30,7 @@ public class HighlightedObject : MonoBehaviour {
 			audioSource = Camera.main.gameObject.GetComponent<AudioSource>();
 		}
 
-		buttonPrompt = Instantiate(Resources.Load<GameObject>("buttonPrompt"), new Vector3(transform.position.x + 0.3f, transform.position.y + 0.2f, transform.position.z + 0.2f), transform.rotation) as GameObject;
+		buttonPrompt = Instantiate(Resources.Load<GameObject>("buttonPrompt")) as GameObject;
 		buttonPrompt.GetComponent<ButtonPrompt> ().highlightedObject = this;
 		buttonPrompt.SetActive(false);
 
@@ -46,7 +46,6 @@ public class HighlightedObject : MonoBehaviour {
 			return;
 		}
 
-
 		if( !renderer.isVisible )
 			return;
 
@@ -60,8 +59,13 @@ public class HighlightedObject : MonoBehaviour {
 		ActivateHighlights(hitObject);
 		ActivatePromtButton((transform.position - Camera.main.transform.position).magnitude < 3f && activated);
 
-
 		hitObject = false;
+
+		if( !buttonPrompt.activeInHierarchy )
+			return;
+
+		Vector3 direction = ((transform.position - Vector3.up * 1.5f) - Camera.main.transform.position).normalized;
+		buttonPrompt.transform.position = transform.position - direction * 0.25f;
 	}
 
 	public void PlayAudio () {
