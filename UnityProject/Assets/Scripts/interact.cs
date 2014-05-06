@@ -67,7 +67,6 @@ public class interact : MonoBehaviour {
 				if(interactedObject.nextLevel)
 				{
 					Application.LoadLevel(1);
-					return;
 				}
 
 				if(interactedObject.firstperson)
