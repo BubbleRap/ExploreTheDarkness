@@ -24,11 +24,17 @@ public class FadeIn : MonoBehaviour {
 
 	Dictionary<float, string> subtitles = new Dictionary<float, string>()
 	{
-		{ 1f, "Those subtitles will"},
-		{ 4f, "Display during the intro."},
-		{ 8f, ""},
-		{ 10f, "They're cool."},
-		{ 14f, ""},
+		{ 1f, "Silja: Dad, it’s always like this \n Father: You know it’s not my fault"},
+		{ 5f, "Silja: Still, you’re not without blame. \n Father: Okay. So it’s my fault he called in sick?."},
+		{ 10f, "Silja: You should have droven more carefully, \n then this wouldn’t be a problem."},
+		{ 15f, "Father: You better stay here!  \n That’s the least you can do, after all I’ve done for you …"},
+		{ 21f, ""},
+		{ 23f, "- … Silja, listen. It’s been a very long day. \n Silja: I don’t see how? You never do anything!"},
+		{ 30f, "Father: Silja, just please start on dinner, will you? \n Silja: No."},
+		{ 34f, "Silja, I need you to grow up. \n - I’ll need help going to to bathroom soon."},
+		{ 41f, "- Silja? You can’t just leave. \n Silja: I can."},
+		{ 45f, "Father: Silja, for crying out - please come back. Come back!"},
+		{ 52f, ""},
 	};
 
 	public GUIStyle style;
