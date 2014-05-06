@@ -75,8 +75,10 @@ public class FadeIn : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.E) ||
 		    Input.GetKeyDown(KeyCode.Space) ||
 		    Input.GetKeyDown(KeyCode.Return) ||
-		    Input.GetMouseButtonDown(0)){
+		    Input.GetMouseButtonDown(0))
+		{
 		    audio.Stop();
+			siljaCharacter.animation.Play("cutscene_beginning");
 		}
 
 		if (!audio.isPlaying && !isTitleScreen)
