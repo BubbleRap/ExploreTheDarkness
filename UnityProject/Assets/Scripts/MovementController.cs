@@ -97,4 +97,10 @@ public class MovementController : MonoBehaviour
 			animationController.SetTrigger(lookEvent);
 		}
 	}
+
+	// called by animation event
+	public void EnableMoving()
+	{
+		canMove = true;
+	}
 }
