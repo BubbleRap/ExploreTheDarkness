@@ -37,7 +37,6 @@ public class SiljaBehaviour : MonoBehaviour
 	{
 		firstPersonCamera = transform.FindChild("1st Person Camera").gameObject;
 
-		siljasAnimator = GetComponentInChildren<Animator>();
 		charMotor = GetComponent<CharacterMotor>();
 		moveCtrl = GetComponent<MovementController>();
 		fpsInputCtrl = GetComponent<FPSInputController>();
@@ -96,7 +95,6 @@ public class SiljaBehaviour : MonoBehaviour
 		oneHandJoint.gameObject.SetActive(false);
 		twoHandsJoint.gameObject.SetActive(true);
 
-		//siljasAnimator.SetBool("darkmode", true);
 		dLightProbe.enabled = true;
 
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,1f);
@@ -121,7 +119,6 @@ public class SiljaBehaviour : MonoBehaviour
 		oneHandJoint.gameObject.SetActive(true);
 		twoHandsJoint.gameObject.SetActive(false);
 
-		//siljasAnimator.SetBool("darkmode", false);
 		dLightProbe.enabled = false;
 
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
