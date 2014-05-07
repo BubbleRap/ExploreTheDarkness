@@ -4,7 +4,7 @@ using System.Collections;
 public class Health : MonoBehaviour {
 
 	private GameObject siljaCharacter = null;
-	public int health = 8;
+	public int health = 4;
 	public SiljaBehaviour siljaBeh;
 
 	private float barDisplay = 0;
