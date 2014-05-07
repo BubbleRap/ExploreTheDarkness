@@ -6,7 +6,9 @@ public class MovementController : MonoBehaviour
 	private CharacterController charController = null;
 	private CharacterMotor charMotor = null;
 
-	private Animator animationController = null;
+	public Animator characterAnimator;
+	public Animator firstPersonAnimator;
+
 	private Transform cameraTransform = null;
 	private Vector3 moveDirection = Vector3.zero;
 	
@@ -30,8 +32,8 @@ public class MovementController : MonoBehaviour
 	{
 		charController = GetComponent<CharacterController> ();
 		charMotor = GetComponent<CharacterMotor>();
-		animationController = GetComponentInChildren<Animator> ();
-		animationController.SetBool ("scared", true);
+
+		characterAnimator.SetBool ("scared", true);
 		cameraTransform = Camera.main.transform;
 	}
 
@@ -76,7 +78,10 @@ public class MovementController : MonoBehaviour
 		
 		moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, curSmooth);
 
-		animationController.SetFloat ("speed", moveSpeed);
+		characterAnimator.SetFloat ("speed", moveSpeed);
+
+		if( firstPersonAnimator.gameObject.activeInHierarchy )
+			firstPersonAnimator.SetFloat ("speed", moveSpeed);
 
 		Vector3 movement = moveDirection * moveSpeed;
 		if( moveSpeed < 0.1f )
@@ -94,7 +99,7 @@ public class MovementController : MonoBehaviour
 			yield return new WaitForSeconds( Random.Range(5f, 15f));
 			bool rightOrLeft = (Random.Range(0, 10) % 2) == 0 ;
 			string lookEvent = rightOrLeft ? "lookLeftEvent" : "lookRightEvent";
-			animationController.SetTrigger(lookEvent);
+			characterAnimator.SetTrigger(lookEvent);
 		}
 	}
 
