@@ -48,7 +48,7 @@ public class MovementController : MonoBehaviour
 
 		forward.y = 0;
 		forward = forward.normalized;
-		
+
 		if(canMove)
 		{
 			v = Input.GetAxisRaw("Vertical");
@@ -88,6 +88,9 @@ public class MovementController : MonoBehaviour
 			movement = Vector3.zero;
 
 		charMotor.inputMoveDirection = movement;
+
+		// reseting values used by animator
+		v = 0f; h = 0f;
 	}
 
 	IEnumerator LookAround()
