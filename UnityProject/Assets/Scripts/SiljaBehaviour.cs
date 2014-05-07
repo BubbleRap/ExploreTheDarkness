@@ -7,7 +7,7 @@ public class SiljaBehaviour : MonoBehaviour
 	public Transform oneHandJoint;
 	public Transform twoHandsJoint;
 
-	private Animator siljasAnimator = null;
+	public Animator firstPersonAnimator;
 	private CharacterMotor charMotor = null;
 	private MovementController moveCtrl = null;
 	private FPSInputController fpsInputCtrl = null;
@@ -69,6 +69,8 @@ public class SiljaBehaviour : MonoBehaviour
 	public void TakeALimb()
 	{
 		healthController.looseLife();
+		firstPersonAnimator.SetTrigger("riplimb" + healthController.health);
+
 		firstPersonCameraShaker.StartShake(1f);
 	}
 
