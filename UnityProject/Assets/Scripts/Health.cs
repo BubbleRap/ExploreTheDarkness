@@ -50,15 +50,21 @@ public class Health : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		barDisplay = siljaBeh.getTeddyLight();
-
-		if(health <= 0)
-		{
-			Destroy(siljaCharacter);
-			Application.LoadLevel(0);
-		}
 	}
 
 	public void looseLife() {
 		health --;
+
+		if(health <= 0)
+		{
+			StartCoroutine(DelayedDeathAction(2f));
+		}
+	}
+
+	IEnumerator DelayedDeathAction(float time)
+	{
+		yield return new WaitForSeconds(time);
+		Destroy(siljaCharacter);
+		Application.LoadLevel(0);
 	}
 }
