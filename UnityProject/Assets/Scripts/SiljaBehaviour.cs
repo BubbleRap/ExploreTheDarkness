@@ -8,6 +8,9 @@ public class SiljaBehaviour : MonoBehaviour
 	public Transform twoHandsJoint;
 
 	public Animator firstPersonAnimator;
+	public GameObject[] limbs;
+	public GameObject[] limbPrefabs;
+
 	private CharacterMotor charMotor = null;
 	private MovementController moveCtrl = null;
 	private FPSInputController fpsInputCtrl = null;
@@ -72,6 +75,8 @@ public class SiljaBehaviour : MonoBehaviour
 		firstPersonAnimator.SetTrigger("riplimb" + healthController.health);
 
 		firstPersonCameraShaker.StartShake(1f);
+
+		StartCoroutine(RipLimbDelayedAction(healthController.health, 1f));
 	}
 
 	void Update () 
@@ -101,7 +106,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,1f);
 
-		siljaRenderer.material.shader = Shader.Find("Custom/TransparentInvisibleShadowCaster");
+		//siljaRenderer.material.shader = Shader.Find("Custom/TransparentInvisibleShadowCaster");
 
 		darkMode = true;
 	}
@@ -125,7 +130,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
 
-		siljaRenderer.material.shader = Shader.Find("Custom/DoubleSided/Diffuse");
+		//siljaRenderer.material.shader = Shader.Find("Custom/DoubleSided/Diffuse");
 
 		darkMode = false;
 	}
@@ -158,5 +163,16 @@ public class SiljaBehaviour : MonoBehaviour
 			if(RenderSettings.ambientLight.b > 0.00f)
 				RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.r - 0.001f, RenderSettings.ambientLight.g - 0.001f, RenderSettings.ambientLight.b - 0.002f, 0.0f);
 		}
+	}
+
+	IEnumerator RipLimbDelayedAction(int index, float ripLimbIn)
+	{
+		yield return new WaitForSeconds(ripLimbIn);
+
+		GameObject newLimb = Instantiate(limbPrefabs[index], teddyLight.transform.position, teddyLight.transform.rotation) as GameObject;
+		newLimb.AddComponent<DestroyInSeconds>();
+		newLimb.rigidbody.AddForce(Camera.main.transform.forward * 30f, ForceMode.Impulse);
+
+		limbs[index].SetActive(false);
 	}
 }
