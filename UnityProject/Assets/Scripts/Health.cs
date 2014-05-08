@@ -65,7 +65,7 @@ public class Health : MonoBehaviour {
 	IEnumerator DelayedDeathAction(float time)
 	{
 		yield return new WaitForSeconds(time);
-		Destroy(siljaCharacter);
-		Application.LoadLevel(0);
+
+		(GameObject.FindObjectOfType<MenuController> () as MenuController).Restart ();
 	}
 }

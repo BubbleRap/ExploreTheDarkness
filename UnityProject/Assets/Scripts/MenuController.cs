@@ -35,7 +35,7 @@ public class MenuController : MonoBehaviour {
 		menuCamera.enabled = !menuCamera.enabled;
 
 		if (Time.timeScale == 1){
-			Time.timeScale = 0;
+			Time.timeScale = 0.0001f;
 			foreach (AudioSource audio in GameObject.FindObjectsOfType<AudioSource>()){
 				if (audio.time != 0f){
 					audio.Pause();
@@ -84,7 +84,7 @@ public class MenuController : MonoBehaviour {
 	public void Restart(){
 
 		foreach (DontDestroyOnLoad obj in GameObject.FindObjectsOfType<DontDestroyOnLoad>()){
-			GameObject.Destroy(obj);
+			GameObject.Destroy(obj.gameObject);
 		} 
 
 		canToggleMenu = false;
