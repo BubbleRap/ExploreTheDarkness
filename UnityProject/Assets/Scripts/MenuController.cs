@@ -62,6 +62,11 @@ public class MenuController : MonoBehaviour {
 	public void Resume(){
 		toggleMenu ();
 
+		if (Time.timeScale == 1)
+			Time.timeScale = 0;
+		else
+			Time.timeScale = 1;
+
 		options [currentOption].ToggleHighlight ();
 		currentOption = 0;
 		options [currentOption].ToggleHighlight ();
