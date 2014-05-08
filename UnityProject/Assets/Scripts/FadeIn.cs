@@ -128,7 +128,7 @@ public class FadeIn : MonoBehaviour {
 		} else {
 			siljaCharacter.GetComponent<AudioSource>().Play();
 			mainTheme.Play();
-			QuitGame.canQuit = true;
+			MenuController.canToggleMenu = true;
 			MonoBehaviour.Destroy(this);
 		}
 	}
