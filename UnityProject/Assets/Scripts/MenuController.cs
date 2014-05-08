@@ -49,8 +49,6 @@ public class MenuController : MonoBehaviour {
 				}
 			}
 		}
-
-		//TODO freeze time!
 	}
 
 	private void changeOption(bool forward){
@@ -84,6 +82,14 @@ public class MenuController : MonoBehaviour {
 	}
 
 	public void Restart(){
+
+		foreach (DontDestroyOnLoad obj in GameObject.FindObjectsOfType<DontDestroyOnLoad>()){
+			GameObject.Destroy(obj);
+		} 
+
+		canToggleMenu = false;
+		Time.timeScale = 1f;
+
 		Application.LoadLevel(0);
 	}
 
