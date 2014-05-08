@@ -89,6 +89,7 @@ public class FadeIn : MonoBehaviour {
 			isTitleScreen = true;
 
 			titleStart = Time.time;
+			siljaCharacter.animation.Play("cutscene_beginning");
 		}
 
 		if (Time.time - titleStart > titleDuration && stillBlack)

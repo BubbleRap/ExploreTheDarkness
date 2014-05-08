@@ -34,7 +34,7 @@ public class Health : MonoBehaviour {
         	currentStyle.normal.background = texture;
         	currentStyle2.normal.background = texture2;
 
-
+        	/*
 			GUI.BeginGroup (new Rect (pos.x, pos.y, size.x, size.y));
 		        GUI.Box (new Rect (0,0, size.x, size.y),progressBarEmpty, currentStyle);
 		 
@@ -44,6 +44,7 @@ public class Health : MonoBehaviour {
 		        GUI.EndGroup ();
 	 
 	    	GUI.EndGroup ();
+	    	*/
 		}
 	}
 	
