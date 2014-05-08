@@ -128,6 +128,7 @@ public class FadeIn : MonoBehaviour {
 		} else {
 			siljaCharacter.GetComponent<AudioSource>().Play();
 			mainTheme.Play();
+			QuitGame.canQuit = true;
 			MonoBehaviour.Destroy(this);
 		}
 	}
