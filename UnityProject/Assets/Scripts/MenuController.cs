@@ -34,6 +34,22 @@ public class MenuController : MonoBehaviour {
 		menuOn = !menuOn;
 		menuCamera.enabled = !menuCamera.enabled;
 
+		if (Time.timeScale == 1){
+			Time.timeScale = 0;
+			foreach (AudioSource audio in GameObject.FindObjectsOfType<AudioSource>()){
+				if (audio.time != 0f){
+					audio.Pause();
+				}
+			}
+		} else {
+			Time.timeScale = 1;
+			foreach (AudioSource audio in GameObject.FindObjectsOfType<AudioSource>()){
+				if (audio.time != 0f){
+					audio.Play();
+				}
+			}
+		}
+
 		//TODO freeze time!
 	}
 
@@ -61,11 +77,6 @@ public class MenuController : MonoBehaviour {
 
 	public void Resume(){
 		toggleMenu ();
-
-		if (Time.timeScale == 1)
-			Time.timeScale = 0;
-		else
-			Time.timeScale = 1;
 
 		options [currentOption].ToggleHighlight ();
 		currentOption = 0;
