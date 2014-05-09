@@ -75,15 +75,9 @@ public class SiljaBehaviour : MonoBehaviour
 		return teddyLight.intensity;
 	}
 
-	public void TakeALimb()
+	public void TakeALimb(Transform entity)
 	{
-		healthController.looseLife();
-		firstPersonAnimator.SetTrigger("riplimb" + healthController.health);
-
-		firstPersonCameraShaker.StartShake(1f);
-
-		StartCoroutine(RipLimbDelayedAction(healthController.health, 1f));
-		SetLightIntensity(1f);
+		StartCoroutine(RipLimbDelayedAction(entity, 1f));
 	}
 
 	void Update () 
@@ -186,14 +180,42 @@ public class SiljaBehaviour : MonoBehaviour
 		teddyLight.intensity = intensity;
 	}
 
-	IEnumerator RipLimbDelayedAction(int index, float ripLimbIn)
+	IEnumerator RipLimbDelayedAction(Transform entity, float ripLimbIn)
 	{
+		fpsInputCtrl.enabled = false;
+		mLook.enabled = false;
+
+
+		float t = 0f;
+		Quaternion originalLook = transform.rotation;
+		while(t < 1f)
+		{
+			Vector3 direction = (entity.position - transform.position).normalized;
+			direction.y = 0f;
+
+			transform.rotation = Quaternion.Lerp(originalLook, Quaternion.LookRotation(direction), t);
+
+			t += Time.deltaTime;
+			yield return null;
+		}
+
+		healthController.looseLife();
+		firstPersonAnimator.SetTrigger("riplimb" + healthController.health);
+
+		firstPersonCameraShaker.StartShake(1f);
+		SetLightIntensity(1f);
+
 		yield return new WaitForSeconds(ripLimbIn);
+		int index = healthController.health;
 
 		GameObject newLimb = Instantiate(limbPrefabs[index], teddyLight.transform.position, teddyLight.transform.rotation) as GameObject;
 		newLimb.AddComponent<DestroyInSeconds>();
 		newLimb.rigidbody.AddForce(Camera.main.transform.forward * 30f, ForceMode.Impulse);
 
 		limbs[index].SetActive(false);
+
+
+		fpsInputCtrl.enabled = true;
+		mLook.enabled = true;
 	}
 }

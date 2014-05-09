@@ -34,7 +34,7 @@ public class AIRippingALimb : RAINAction
 		if (silja == null)
 			return ActionResult.FAILURE;
 
-		silja.TakeALimb ();
+		silja.TakeALimb (ai.Body.transform);
 
         return ActionResult.SUCCESS;
     }
