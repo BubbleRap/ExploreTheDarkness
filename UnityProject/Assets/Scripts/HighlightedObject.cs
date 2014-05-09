@@ -18,6 +18,7 @@ public class HighlightedObject : MonoBehaviour {
 	private bool activated = false;
 
 	private interact interactionScript = null;
+	private float originalAlpha = 1f;
 
 	void Start () {
 
@@ -35,6 +36,11 @@ public class HighlightedObject : MonoBehaviour {
 		buttonPrompt.SetActive(false);
 
 		interactionScript = FindObjectOfType(typeof(interact)) as interact;
+
+		Color defaultColor = renderer.material.color;
+		originalAlpha = defaultColor.a;
+		defaultColor.a = 0f;
+		renderer.material.color = defaultColor;
 	}
 
 	void Update () {
@@ -92,7 +98,7 @@ public class HighlightedObject : MonoBehaviour {
 
 		Color curColor = renderer.material.color;
 
-		curColor.a = state ? 0.5f : 0f;
+		curColor.a = state ? originalAlpha : 0f;
 
 		renderer.material.color = curColor;
 			

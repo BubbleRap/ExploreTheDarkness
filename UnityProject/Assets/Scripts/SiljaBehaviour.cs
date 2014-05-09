@@ -33,7 +33,7 @@ public class SiljaBehaviour : MonoBehaviour
 	private float fadingOutSpeed = 0.006f;
 	private float fadingInSpeed = 0.012f;
 
-	private SkinnedMeshRenderer siljaRenderer = null;
+	//private SkinnedMeshRenderer siljaRenderer = null;
 	private CameraShaker firstPersonCameraShaker;
 
 	void Awake()
@@ -51,7 +51,7 @@ public class SiljaBehaviour : MonoBehaviour
 		dLightProbe = GetComponentInChildren<DynamicLightProbe> ();
 		aiEntities = FindObjectsOfType<AIBehaviour>();
 
-		siljaRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+		//siljaRenderer = transform.FindChild("Silja_Animated").GetComponentInChildren<SkinnedMeshRenderer>();
 
 		firstPersonCameraShaker = firstPersonCamera.GetComponent<CameraShaker>();
 	}
