@@ -33,6 +33,12 @@ public class SiljaBehaviour : MonoBehaviour
 	private float fadingOutSpeed = 0.006f;
 	private float fadingInSpeed = 0.012f;
 
+	private float maximumIntensity = 1.75f;
+	private float mimimumIntensity = 0.25f;
+
+	private float maximumGlow = 0.75f;
+	private float minimumGlow = 0.25f;
+
 	//private SkinnedMeshRenderer siljaRenderer = null;
 	private CameraShaker firstPersonCameraShaker;
 
@@ -59,7 +65,7 @@ public class SiljaBehaviour : MonoBehaviour
 	void Start()
 	{
 		//teddyLight.enabled = true;
-		teddyLight.intensity = 1.75f;
+		teddyLight.intensity = maximumIntensity;
 
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
 	}
@@ -77,6 +83,7 @@ public class SiljaBehaviour : MonoBehaviour
 		firstPersonCameraShaker.StartShake(1f);
 
 		StartCoroutine(RipLimbDelayedAction(healthController.health, 1f));
+		SetLightIntensity(1f);
 	}
 
 	void Update () 
@@ -142,12 +149,10 @@ public class SiljaBehaviour : MonoBehaviour
 			teddyLight.intensity += fadingInSpeed;
 		else
 			teddyLight.intensity -= fadingOutSpeed;
+	
+		SetLightIntensity(teddyLight.intensity);
 		
-		teddyLight.intensity = Mathf.Clamp(teddyLight.intensity, 0f, 1.75f);
-
-		lilbroGlowMaterial.color = new Color(teddyLight.intensity, teddyLight.intensity, teddyLight.intensity, 1f);
-		
-		if( teddyLight.intensity == 0f )
+		if( teddyLight.intensity <= mimimumIntensity )
 		{
 			foreach( AIBehaviour aiEntity in aiEntities )
 				aiEntity.SpawnAI();
@@ -155,7 +160,8 @@ public class SiljaBehaviour : MonoBehaviour
 			if(RenderSettings.ambientLight.b < 0.14f)
 				RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.b/2, RenderSettings.ambientLight.b/2, RenderSettings.ambientLight.b + 0.002f, 0.0f);
 		}
-		else
+
+		if( teddyLight.intensity >= maximumIntensity )
 		{
 			foreach( AIBehaviour aiEntity in aiEntities )
 				aiEntity.DespawnAI();
@@ -163,6 +169,21 @@ public class SiljaBehaviour : MonoBehaviour
 			if(RenderSettings.ambientLight.b > 0.00f)
 				RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.r - 0.001f, RenderSettings.ambientLight.g - 0.001f, RenderSettings.ambientLight.b - 0.002f, 0.0f);
 		}
+	}
+
+	public void SetLightIntensity(float intensity)
+	{
+		intensity = Mathf.Clamp(intensity, mimimumIntensity, maximumIntensity);
+		
+		// map from 0 to 1
+		float glowIntensity = (intensity - mimimumIntensity) / (maximumIntensity - mimimumIntensity);
+		
+		// from minimum glow to maximum glow
+		glowIntensity = glowIntensity * (maximumGlow - minimumGlow) + minimumGlow;
+		
+		float colorIntensity = glowIntensity;
+		lilbroGlowMaterial.color = new Color(colorIntensity, colorIntensity, colorIntensity, glowIntensity);
+		teddyLight.intensity = intensity;
 	}
 
 	IEnumerator RipLimbDelayedAction(int index, float ripLimbIn)
