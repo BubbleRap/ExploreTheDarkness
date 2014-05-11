@@ -45,6 +45,8 @@ public class FadeIn : MonoBehaviour {
 		fadeTexture = new Texture2D(1,1, TextureFormat.RGBA32, false, false);
 		fadeTexture.SetPixel(0,0, fadeColor);
 		fadeTexture.Apply();
+
+		Screen.showCursor = false;
 	}
 
 	void Start(){
