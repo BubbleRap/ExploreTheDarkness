@@ -6,13 +6,18 @@ public class Trigger_sound : MonoBehaviour {
 	private Transform thirdPersonCamera;
 	private AudioSource audioSource;
 	private AudioSource audioSource2;
+
 	public AudioClip audioClip;
 	public Transform soundSource;
 	public bool playMultipleTimes;
+
 	private bool isTrigger = false;
-	// Use this for initialization
+
+	[Range(0f, 1f)]
+	public float volume = 1f;
+
 	void Start () {
-	//	thirdPersonCamera = Camera.main.transform;
+		thirdPersonCamera = Camera.main.transform;
 	}
 
 	void OnTriggerEnter(Collider other) {
@@ -25,19 +30,20 @@ public class Trigger_sound : MonoBehaviour {
 			//	audioSource = audioSource2;
 			//}
 
-			//if(isTrigger && !playMultipleTimes)
-			//return;
-			//
-			//	if(!audioSource2.isPlaying && !audioSource.isPlaying)
-			//	{
-			//		//audioSource.clip = audioClip;
-			//		//audioSource.Play();
-			//		
-			//		isTrigger = true;
-			//	}
+			if(isTrigger && !playMultipleTimes)
+			return;
 
-			AudioSource.PlayClipAtPoint(audioClip, transform.position);
+			if( soundSource == null || soundSource == transform)
+			{
+				AudioSource.PlayClipAtPoint(audioClip, transform.position, volume);
+			}
+			else
+			//if(!audioSource2.isPlaying && !audioSource.isPlaying)	
+			if( !soundSource.audio.isPlaying )
+			{
+				soundSource.audio.PlayOneShot(audioClip, volume);
+				isTrigger = true;
+			}
 		}
 	}
-
 }
