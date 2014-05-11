@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Health : MonoBehaviour {
 
@@ -19,7 +20,7 @@ public class Health : MonoBehaviour {
 	private GUIStyle currentStyle2 = new GUIStyle();
 	public Texture2D texture2;
 
-	public AudioClip healthLooseClip;
+	public List<AudioSource> healthLooseClips;
 
 	// Use this for initialization
 	void Start () {
@@ -30,13 +31,14 @@ public class Health : MonoBehaviour {
 		// Make a background box
 		if(siljaBeh.darkMode)
 		{
+			/*
 			GUI.skin.label.fontSize = 100;
 			GUI.Label(new Rect (40,20,100,300), health.ToString());
 
         	currentStyle.normal.background = texture;
         	currentStyle2.normal.background = texture2;
 
-        	/*
+        	
 			GUI.BeginGroup (new Rect (pos.x, pos.y, size.x, size.y));
 		        GUI.Box (new Rect (0,0, size.x, size.y),progressBarEmpty, currentStyle);
 		 
@@ -58,10 +60,8 @@ public class Health : MonoBehaviour {
 	public void looseLife() {
 		health --;
 
-		if (this.audio != null){
-			this.audio.clip = healthLooseClip;
-			this.audio.Play();
-		}
+		foreach (AudioSource s in healthLooseClips)
+			s.Play ();
 
 
 		if(health <= 0)
