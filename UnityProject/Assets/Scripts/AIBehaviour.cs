@@ -47,6 +47,9 @@ public class AIBehaviour : MonoBehaviour
 		renderer.SetActive(false);
 		aiIsEnabled = false;
 
+		foreach (AudioSource s in GetComponentsInChildren<AudioSource>())
+			s.Stop();
+
 		if (this.audio != null)
 			audio.Play();
 	}

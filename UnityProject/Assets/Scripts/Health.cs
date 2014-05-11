@@ -20,7 +20,8 @@ public class Health : MonoBehaviour {
 	private GUIStyle currentStyle2 = new GUIStyle();
 	public Texture2D texture2;
 
-	public List<AudioSource> healthLooseClips;
+	public List<AudioSource> playAllOfThose;
+	public List<AudioSource> playOneOfThose;
 
 	// Use this for initialization
 	void Start () {
@@ -60,9 +61,11 @@ public class Health : MonoBehaviour {
 	public void looseLife() {
 		health --;
 
-		foreach (AudioSource s in healthLooseClips)
+		foreach (AudioSource s in playAllOfThose)
 			s.Play ();
 
+		if (playOneOfThose.Count > 0 )
+			playOneOfThose[Random.Range(0,playOneOfThose.Count-1)].Play();
 
 		if(health <= 0)
 		{
