@@ -29,6 +29,9 @@ public class AIBehaviour : MonoBehaviour
 		aiMind.enabled = true;
 		renderer.SetActive(true);
 		aiIsEnabled = true;
+
+		if (this.audio != null && audio.isPlaying)
+			audio.Stop();
 	}
 
 	public void DespawnAI()
@@ -43,6 +46,9 @@ public class AIBehaviour : MonoBehaviour
 		aiMind.enabled = false;
 		renderer.SetActive(false);
 		aiIsEnabled = false;
+
+		if (this.audio != null)
+			audio.Play();
 	}
 
 	public void RetriveLightProbeResult(float intensity)
