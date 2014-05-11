@@ -116,8 +116,6 @@ public class HighlightedObject : MonoBehaviour {
 			buttonPrompt.transform.LookAt(Camera.main.gameObject.transform);		
 			interactionScript.interactedObject = this;
 		}
-		else
-			interactionScript.interactedObject = null;
 
 		buttonPrompt.SetActive(state);
 	}
