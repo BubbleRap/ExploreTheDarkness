@@ -19,6 +19,8 @@ public class Health : MonoBehaviour {
 	private GUIStyle currentStyle2 = new GUIStyle();
 	public Texture2D texture2;
 
+	public AudioClip healthLooseClip;
+
 	// Use this for initialization
 	void Start () {
 		siljaCharacter = GameObject.FindGameObjectWithTag("Player");
@@ -55,6 +57,12 @@ public class Health : MonoBehaviour {
 
 	public void looseLife() {
 		health --;
+
+		if (this.audio != null){
+			this.audio.clip = healthLooseClip;
+			this.audio.Play();
+		}
+
 
 		if(health <= 0)
 		{
