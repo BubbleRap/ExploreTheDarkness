@@ -28,6 +28,8 @@ public class MovementController : MonoBehaviour
 	[HideInInspector]
 	public float h = 0;
 
+	private bool lookingAround = false;
+
 	void Awake()
 	{
 		charController = GetComponent<CharacterController> ();
@@ -95,7 +97,8 @@ public class MovementController : MonoBehaviour
 
 	IEnumerator LookAround()
 	{
-		while (true) 
+		lookingAround = true;
+		while (lookingAround) 
 		{
 			// gasp sound to add here
 
@@ -115,6 +118,7 @@ public class MovementController : MonoBehaviour
 	// called by Trigger.cs by sending message
 	public void StartMonsterHandCutScene()
 	{
+		lookingAround = false;
 		characterAnimator.SetTrigger("handCutSceneStart");
 	}
 
