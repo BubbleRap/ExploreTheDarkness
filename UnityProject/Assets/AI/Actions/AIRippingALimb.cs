@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using RAIN.Core;
 using RAIN.Action;
 using RAIN.Representation;
+using RAIN.Navigation;
+using RAIN.Navigation.Targets;
 
 [RAINAction]
 public class AIRippingALimb : RAINAction
@@ -11,6 +13,8 @@ public class AIRippingALimb : RAINAction
 	public Expression characterForm;
 	private SiljaBehaviour silja = null;
 	private GameObject siljaGO = null;
+
+	string[] spawnPoints = new string[]{ "Spawn Point 1", "Spawn Point 2" };
 
     public AIRippingALimb()
     {
