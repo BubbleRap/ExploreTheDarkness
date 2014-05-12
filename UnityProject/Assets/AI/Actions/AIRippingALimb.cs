@@ -36,6 +36,9 @@ public class AIRippingALimb : RAINAction
 
 		silja.TakeALimb (ai.Body.transform);
 
+		NavigationTarget spawnPoint = NavigationManager.instance.GetNavigationTarget(spawnPoints[ Random.Range(0, spawnPoints.Length) ]);
+		GameObject.FindObjectOfType<AIBehaviour>().transform.position = spawnPoint.Position;
+
         return ActionResult.SUCCESS;
     }
 
