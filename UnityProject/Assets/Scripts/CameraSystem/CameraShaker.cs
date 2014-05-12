@@ -3,9 +3,9 @@ using System.Collections;
 
 public class CameraShaker : MonoBehaviour 
 {
-	private float horizontalShakeIntensity = 0.3f;
-	private float verticalShakeIntensity = 0.3f;
-	private float shakeFrequency = 0.1f;
+	public float horizontalShakeIntensity = 0.3f;
+	public float verticalShakeIntensity = 0.3f;
+	public float shakeFrequency = 0.1f;
 
 	private Vector3 shakeOffset = Vector3.zero;
 	private Vector3 originalPosition = Vector3.zero;
