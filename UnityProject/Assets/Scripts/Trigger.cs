@@ -24,6 +24,8 @@ public class Trigger : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if(other.tag == "Player")
 		{
+			other.SendMessage("StartMonsterHandCutScene", SendMessageOptions.RequireReceiver);
+
 			transitionContoller.doTransition(DarkMode);
 			if (doorController != null)
 				doorController.openDoor(OpenDoor);

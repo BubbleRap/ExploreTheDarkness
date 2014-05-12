@@ -28,6 +28,8 @@ public class MovementController : MonoBehaviour
 	[HideInInspector]
 	public float h = 0;
 
+	private bool lookingAround = false;
+
 	void Awake()
 	{
 		charController = GetComponent<CharacterController> ();
@@ -95,14 +97,16 @@ public class MovementController : MonoBehaviour
 
 	IEnumerator LookAround()
 	{
-		while (true) 
-		{
-			// gasp sound to add here
+		lookingAround = true;
+		yield return new WaitForSeconds( Random.Range(5f, 15f));
 
-			yield return new WaitForSeconds( Random.Range(5f, 15f));
+		while (lookingAround) 
+		{
 			bool rightOrLeft = (Random.Range(0, 10) % 2) == 0 ;
 			string lookEvent = rightOrLeft ? "lookLeftEvent" : "lookRightEvent";
 			characterAnimator.SetTrigger(lookEvent);
+
+			yield return new WaitForSeconds( Random.Range(5f, 15f));
 		}
 	}
 
@@ -110,5 +114,18 @@ public class MovementController : MonoBehaviour
 	public void EnableMoving()
 	{
 		canMove = true;
+	}
+
+	// called by Trigger.cs by sending message
+	public void StartMonsterHandCutScene()
+	{
+		lookingAround = false;
+		characterAnimator.SetTrigger("handCutSceneStart");
+	}
+
+	// called from Monster Hand class by sending message
+	public void MonsterHandHitEvent()
+	{
+		characterAnimator.SetTrigger("handCutSceneHit");
 	}
 }
