@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using RAIN.Core;
 using RAIN.Action;
 using RAIN.Representation;
-using RAIN.Navigation;
-using RAIN.Navigation.Targets;
 
 [RAINAction]
 public class AIRippingALimb : RAINAction
@@ -13,8 +11,6 @@ public class AIRippingALimb : RAINAction
 	public Expression characterForm;
 	private SiljaBehaviour silja = null;
 	private GameObject siljaGO = null;
-
-	string[] spawnPoints = new string[]{ "Spawn Point 1", "Spawn Point 2" };
 
     public AIRippingALimb()
     {
@@ -40,8 +36,8 @@ public class AIRippingALimb : RAINAction
 
 		silja.TakeALimb (ai.Body.transform);
 
-		NavigationTarget spawnPoint = NavigationManager.instance.GetNavigationTarget(spawnPoints[ Random.Range(0, spawnPoints.Length) ]);
-		GameObject.FindObjectOfType<AIBehaviour>().transform.position = spawnPoint.Position;
+		GameObject.FindObjectOfType<AIBehaviour>().DespawnAI();
+		GameObject.FindObjectOfType<AIBehaviour>().Invoke("SpawnAI",1);
 
         return ActionResult.SUCCESS;
     }
