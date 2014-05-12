@@ -111,4 +111,16 @@ public class MovementController : MonoBehaviour
 	{
 		canMove = true;
 	}
+
+	// called by Trigger.cs by sending message
+	public void StartMonsterHandCutScene()
+	{
+		characterAnimator.SetTrigger("handCutSceneStart");
+	}
+
+	// called from Monster Hand class by sending message
+	public void MonsterHandHitEvent()
+	{
+		characterAnimator.SetTrigger("handCutSceneHit");
+	}
 }
