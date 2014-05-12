@@ -77,7 +77,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 	public void TakeALimb(Transform entity)
 	{
-		StartCoroutine(RipLimbDelayedAction(entity, 1f));
+		StartCoroutine(RipLimbDelayedAction(entity, 0.3f));
 	}
 
 	void Update () 
@@ -187,17 +187,17 @@ public class SiljaBehaviour : MonoBehaviour
 
 
 		float t = 0f;
-		/*Quaternion originalLook = transform.rotation;
-		while(t < 1f)
+		Quaternion originalLook = transform.rotation;
+		while(t < ripLimbIn)
 		{
 			Vector3 direction = (entity.position - transform.position).normalized;
 			direction.y = 0f;
 
-			transform.rotation = Quaternion.Lerp(originalLook, Quaternion.LookRotation(direction), t);
+			transform.rotation = Quaternion.Lerp(originalLook, Quaternion.LookRotation(direction), (t/ripLimbIn));
 
 			t += Time.deltaTime;
 			yield return null;
-		}*/
+		}
 
 		healthController.looseLife();
 		firstPersonAnimator.SetTrigger("riplimb" + healthController.health);
