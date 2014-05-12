@@ -98,14 +98,15 @@ public class MovementController : MonoBehaviour
 	IEnumerator LookAround()
 	{
 		lookingAround = true;
+		yield return new WaitForSeconds( Random.Range(5f, 15f));
+
 		while (lookingAround) 
 		{
-			// gasp sound to add here
-
-			yield return new WaitForSeconds( Random.Range(5f, 15f));
 			bool rightOrLeft = (Random.Range(0, 10) % 2) == 0 ;
 			string lookEvent = rightOrLeft ? "lookLeftEvent" : "lookRightEvent";
 			characterAnimator.SetTrigger(lookEvent);
+
+			yield return new WaitForSeconds( Random.Range(5f, 15f));
 		}
 	}
 
