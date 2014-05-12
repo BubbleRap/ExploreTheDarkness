@@ -187,7 +187,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 
 		float t = 0f;
-		Quaternion originalLook = transform.rotation;
+		/*Quaternion originalLook = transform.rotation;
 		while(t < 1f)
 		{
 			Vector3 direction = (entity.position - transform.position).normalized;
@@ -197,7 +197,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 			t += Time.deltaTime;
 			yield return null;
-		}
+		}*/
 
 		healthController.looseLife();
 		firstPersonAnimator.SetTrigger("riplimb" + healthController.health);

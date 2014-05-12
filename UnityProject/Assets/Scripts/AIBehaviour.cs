@@ -24,7 +24,12 @@ public class AIBehaviour : MonoBehaviour
 		if( aiIsEnabled )
 			return;
 
-		NavigationTarget spawnPoint = NavigationManager.instance.GetNavigationTarget(spawnPoints[ Random.Range(0, spawnPoints.Length) ]);
+		NavigationTarget spawnPoint;
+
+		do {
+			spawnPoint = NavigationManager.instance.GetNavigationTarget(spawnPoints[ Random.Range(0, spawnPoints.Length) ]);
+		} while ((spawnPoint.Position - GameObject.FindObjectOfType<Health>().transform.position).magnitude < 6f );
+
 		transform.position = spawnPoint.Position;
 		aiMind.enabled = true;
 		renderer.SetActive(true);
