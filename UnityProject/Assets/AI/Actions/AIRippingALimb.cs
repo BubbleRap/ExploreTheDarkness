@@ -37,7 +37,7 @@ public class AIRippingALimb : RAINAction
 		silja.TakeALimb (ai.Body.transform);
 
 		GameObject.FindObjectOfType<AIBehaviour>().DespawnAI();
-		GameObject.FindObjectOfType<AIBehaviour>().SpawnAI();
+		GameObject.FindObjectOfType<AIBehaviour>().Invoke("SpawnAI",1);
 
         return ActionResult.SUCCESS;
     }
