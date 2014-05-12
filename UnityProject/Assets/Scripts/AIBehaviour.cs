@@ -24,11 +24,15 @@ public class AIBehaviour : MonoBehaviour
 		if( aiIsEnabled )
 			return;
 
-		NavigationTarget spawnPoint;
+		NavigationTarget spawnPoint = NavigationManager.instance.GetNavigationTarget(spawnPoints[0]);
+		float maxDist = 0f;
 
-		do {
-			spawnPoint = NavigationManager.instance.GetNavigationTarget(spawnPoints[ Random.Range(0, spawnPoints.Length) ]);
-		} while ((spawnPoint.Position - GameObject.FindObjectOfType<Health>().transform.position).magnitude < 6f );
+		foreach (string t in spawnPoints){
+			NavigationTarget targ = NavigationManager.instance.GetNavigationTarget(t);
+			if ((targ.Position - GameObject.FindObjectOfType<Health>().transform.position).magnitude > maxDist){
+				spawnPoint = targ;
+			}
+		}
 
 		transform.position = spawnPoint.Position;
 		aiMind.enabled = true;
