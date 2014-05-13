@@ -44,7 +44,7 @@ public class interact : MonoBehaviour {
 				}
 			}
 		}
-		if (isInteractMode && Input.GetKeyDown(KeyCode.E))
+		if (isInteractMode && Input.GetKeyDown(KeyCode.E) && !interactedObject.transitionToDarkness)
 		{
 			if (SubtitleManager.Instance.isPlaying){
 				SubtitleManager.Instance.Stop();
