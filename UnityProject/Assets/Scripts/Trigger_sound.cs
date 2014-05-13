@@ -25,13 +25,6 @@ public class Trigger_sound : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if(other.tag == "Player")
 		{
-			//audioSource = soundSource.GetComponent<AudioSource>();
-			//audioSource2 = thirdPersonCamera.gameObject.GetComponent<AudioSource>();
-			//if(audioSource == null)
-			//{
-			//	audioSource = audioSource2;
-			//}
-
 			if(isTrigger && !playMultipleTimes)
 			return;
 
@@ -42,7 +35,6 @@ public class Trigger_sound : MonoBehaviour {
 					SubtitleManager.Instance.SendMessage(SubtitlesToPlay);
 			}
 			else
-			//if(!audioSource2.isPlaying && !audioSource.isPlaying)	
 			if( !soundSource.audio.isPlaying )
 			{
 				soundSource.audio.PlayOneShot(audioClip, volume);
