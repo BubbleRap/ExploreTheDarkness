@@ -16,6 +16,8 @@ public class Trigger : MonoBehaviour {
 	public List<Transform> animationsToTrigger;
 	public List<float> animationDelays;
 
+	public string messageToSendToTheObject;
+
 	// Use this for initialization
 	void Awake () {
 		transitionContoller = Component.FindObjectOfType(typeof(Transitioner)) as Transitioner;
@@ -24,7 +26,8 @@ public class Trigger : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if(other.tag == "Player")
 		{
-			other.SendMessage("StartMonsterHandCutScene", SendMessageOptions.RequireReceiver);
+			if( !string.IsNullOrEmpty(messageToSendToTheObject) )
+				other.SendMessage(messageToSendToTheObject, SendMessageOptions.RequireReceiver);
 
 			transitionContoller.doTransition(DarkMode);
 			if (doorController != null)
