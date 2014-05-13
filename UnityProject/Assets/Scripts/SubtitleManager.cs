@@ -116,9 +116,9 @@ public class SubtitleManager : MonoBehaviour {
 
 	Dictionary<float, string> SorryDadSubs = new Dictionary<float, string>()
 	{
-		{ 1f, "Daddy, I'm sorry..."},
-		{ 2f, "Daddy? Hello?"},
-		{ 4f, ""},
+		{ 4f, "Daddy, I'm sorry..."},
+		{ 7f, "Daddy? Hello?"},
+		{ 10f, ""},
 	};
 
 	public void SorryDad(){
