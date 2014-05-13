@@ -10,12 +10,14 @@ public class interact : MonoBehaviour {
 	public bool isInteractMode = false;
 	[HideInInspector]
 	public HighlightedObject interactedObject;
+	private Transitioner transitionContoller = null;
 
 	private CameraInput camInput = null;
 	private CharacterMotor charMotor = null;
 
 	void Awake()
 	{
+		transitionContoller = Component.FindObjectOfType(typeof(Transitioner)) as Transitioner;
 		camInput = GetComponentInChildren<CameraInput>();
 		charMotor = GetComponent<CharacterMotor>();
 	}
@@ -33,6 +35,12 @@ public class interact : MonoBehaviour {
 					transform.gameObject.GetComponent<MovementController>().canMove = true;
 					camInput.enabled = true;
 					isInteractMode = false;
+
+					if(interactedObject.transitionToDarkness && !isInteractMode)
+					{
+						transitionContoller.doTransition(true);
+						interactedObject = null;
+					}
 				}
 			}
 		}

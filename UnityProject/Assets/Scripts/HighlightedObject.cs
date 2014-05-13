@@ -7,9 +7,11 @@ public class HighlightedObject : MonoBehaviour {
 	public AudioClip soundClip; 
 	private AudioSource audioSource;
 	public string subtitlesToPlay;
+	[HideInInspector]
 	public bool internalPlay;
 	public bool hitObject = false;
 	public bool nextLevel = false;
+	public bool transitionToDarkness = false;
 
 	public Transform lookFromPoint = null;
 
