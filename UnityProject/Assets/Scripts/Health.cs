@@ -77,6 +77,6 @@ public class Health : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(time);
 
-		(GameObject.FindObjectOfType<MenuController> () as MenuController).Restart ();
+		(GameObject.FindObjectOfType<EndScreenController> () as EndScreenController).ShowEndScreen (false);
 	}
 }
