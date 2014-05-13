@@ -15,6 +15,8 @@ public class interact : MonoBehaviour {
 	private CameraInput camInput = null;
 	private CharacterMotor charMotor = null;
 
+	public float darknessDelay = 10f;
+
 	void Awake()
 	{
 		transitionContoller = Component.FindObjectOfType(typeof(Transitioner)) as Transitioner;
@@ -28,19 +30,13 @@ public class interact : MonoBehaviour {
 		{
 			if(interactedObject.StoppedPlaying() && interactedObject.soundClip != null)
 			{
-				if(isFirstPerson)
-				{
+ 				if(isFirstPerson && !interactedObject.transitionToDarkness) {
+
 					firstPersonCamera.gameObject.SetActive(false);
 					charMotor.enabled = true;
 					transform.gameObject.GetComponent<MovementController>().canMove = true;
 					camInput.enabled = true;
 					isInteractMode = false;
-
-					if(interactedObject.transitionToDarkness && !isInteractMode)
-					{
-						transitionContoller.doTransition(true);
-						interactedObject = null;
-					}
 				}
 			}
 		}
@@ -105,7 +101,22 @@ public class interact : MonoBehaviour {
 				if(interactedObject.subtitlesToPlay != null && interactedObject.subtitlesToPlay.Length != 0)
 					SubtitleManager.Instance.SendMessage(interactedObject.subtitlesToPlay);
 
+				if (interactedObject.transitionToDarkness){
+					Invoke("TriggerDarkness",darknessDelay);
+				}
+
 			}
 		}
+	}
+
+	public void TriggerDarkness(){
+		transitionContoller.doTransition(true);
+
+		firstPersonCamera.gameObject.SetActive(false);
+		interactedObject = null;
+		charMotor.enabled = true;
+		transform.gameObject.GetComponent<MovementController>().canMove = true;
+		camInput.enabled = true;
+		isInteractMode = false;
 	}
 }
