@@ -6,6 +6,7 @@ public class HighlightedObject : MonoBehaviour {
 	public bool firstperson;
 	public AudioClip soundClip; 
 	private AudioSource audioSource;
+	[Multiline]
 	public string subtitlesToPlay;
 	[HideInInspector]
 	public bool internalPlay;
