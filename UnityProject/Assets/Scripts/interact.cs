@@ -74,7 +74,8 @@ public class interact : MonoBehaviour {
 
 				if(interactedObject.nextLevel)
 				{
-					(GameObject.FindObjectOfType<EndScreenController>() as EndScreenController).ShowLoadingScreen(Application.LoadLevelAsync(1));
+					//(GameObject.FindObjectOfType<EndScreenController>() as EndScreenController).ShowLoadingScreen(Application.LoadLevelAsync(1));
+					Application.LoadLevelAsync(1);
 				}
 
 				if(interactedObject.firstperson)
