@@ -11,6 +11,8 @@ public class Trigger_sound : MonoBehaviour {
 	public Transform soundSource;
 	public bool playMultipleTimes;
 
+	public string SubtitlesToPlay;
+
 	private bool isTrigger = false;
 
 	[Range(0f, 1f)]
@@ -36,6 +38,8 @@ public class Trigger_sound : MonoBehaviour {
 			if( soundSource == null || soundSource == transform)
 			{
 				AudioSource.PlayClipAtPoint(audioClip, transform.position, volume);
+				if (SubtitlesToPlay.Length >0)
+					SubtitleManager.Instance.SendMessage(SubtitlesToPlay);
 			}
 			else
 			//if(!audioSource2.isPlaying && !audioSource.isPlaying)	
@@ -43,6 +47,9 @@ public class Trigger_sound : MonoBehaviour {
 			{
 				soundSource.audio.PlayOneShot(audioClip, volume);
 				isTrigger = true;
+
+				if (SubtitlesToPlay.Length >0)
+					SubtitleManager.Instance.SendMessage(SubtitlesToPlay);
 			}
 		}
 	}
