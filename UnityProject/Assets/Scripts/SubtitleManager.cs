@@ -210,6 +210,65 @@ public class SubtitleManager : MonoBehaviour {
 		StartCoroutine ("PlayDictionary", DaddysPillsSubs);
 	}
 
+	Dictionary<float, string>	MelodiSubs = new Dictionary<float, string>()
+	{
+		{ 12f, "What do you think, Lillebror? I made it on my own."},
+		{ 16f, "Whaat, I think I know that better than you!"},
+		{ 21f, "Really? Of course I do!"},
+		{ 24f, ""},
+	};
+	
+	public void Melodi(){
+		StopAllCoroutines ();
+		StartCoroutine ("PlayDictionary", MelodiSubs);
+	}
+
+	Dictionary<float, string> TrorDuViKanSubs = new Dictionary<float, string>()
+	{
+		{ 2f, " Lillebror do you.. Do you think that we may enter?"},
+		{ 5f, ""},
+	};
+	
+	public void TrorDuViKan(){
+		StopAllCoroutines ();
+		StartCoroutine ("PlayDictionary", TrorDuViKanSubs);
+	}
+
+	Dictionary<float, string> ViMaFindeSubs = new Dictionary<float, string>()
+	{
+		{ 2f, "Lillebror, I have to find someone who can help me find dad!"},
+		{ 5f, ""},
+	};
+	
+	public void ViMaFinde(){
+		StopAllCoroutines ();
+		StartCoroutine ("PlayDictionary", ViMaFindeSubs);
+	}
+
+	Dictionary<float, string> FarErDuHinSubs = new Dictionary<float, string>()
+	{
+		{ 3f, "Daddy? Are you here?"},
+		{ 5f, ""},
+	};
+	
+	public void FarErDuHin(){
+		StopAllCoroutines ();
+		StartCoroutine ("PlayDictionary", FarErDuHinSubs);
+	}
+
+	Dictionary<float, string> ManyPicturesSubs = new Dictionary<float, string>()
+	{
+		{ 2f, "Wow... Look at that!"},
+		{ 5f, "He has so many photos..."},
+		{ 7f, "He surely has a lot of children!"},
+		{ 9f, ""},
+	};
+	
+	public void ManyPictures(){
+		StopAllCoroutines ();
+		StartCoroutine ("PlayDictionary", ManyPicturesSubs);
+	}
+
 	private static SubtitleManager _Instance;
 	public static SubtitleManager Instance {
 		get {return _Instance;}
