@@ -111,6 +111,9 @@ public class interact : MonoBehaviour {
 	}
 
 	public void TriggerDarkness(){
+
+		transitionContoller = Component.FindObjectOfType(typeof(Transitioner)) as Transitioner;
+
 		transitionContoller.doTransition(true);
 
 		firstPersonCamera.gameObject.SetActive(false);

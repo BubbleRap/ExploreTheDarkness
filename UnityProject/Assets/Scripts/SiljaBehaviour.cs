@@ -62,6 +62,10 @@ public class SiljaBehaviour : MonoBehaviour
 		firstPersonCameraShaker = firstPersonCamera.GetComponent<CameraShaker>();
 	}
 
+	public void refreshAIReferences(){
+		aiEntities = FindObjectsOfType<AIBehaviour>();
+	}
+
 	void Start()
 	{
 		//teddyLight.enabled = true;
@@ -90,6 +94,8 @@ public class SiljaBehaviour : MonoBehaviour
 
 	public void EnableDarkMode()
 	{
+		refreshAIReferences();
+
 		teddyLight.enabled = true;
 
 		charMotor.movement.maxForwardSpeed = 1.5f;
