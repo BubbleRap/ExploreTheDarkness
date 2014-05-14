@@ -26,7 +26,7 @@ public class interact : MonoBehaviour {
 
 	void Update () 
 	{
-		if(interactedObject != null)
+		if(interactedObject != null && isInteractMode)
 		{
 			if(interactedObject.StoppedPlaying() && interactedObject.soundClip != null)
 			{
@@ -37,7 +37,7 @@ public class interact : MonoBehaviour {
 					transform.gameObject.GetComponent<MovementController>().canMove = true;
 					camInput.enabled = true;
 					isInteractMode = false;
-					interactedObject = null;
+					//interactedObject = null;
 				}
 			}
 		}
@@ -64,7 +64,7 @@ public class interact : MonoBehaviour {
 			if( interactedObject == null )
 				return;
 
-			if(Input.GetKeyDown(KeyCode.E))
+			if(Input.GetKeyDown(KeyCode.E) && interactedObject.GetState())
 			{
 				if (SubtitleManager.Instance.isPlaying)
 					SubtitleManager.Instance.Stop();
