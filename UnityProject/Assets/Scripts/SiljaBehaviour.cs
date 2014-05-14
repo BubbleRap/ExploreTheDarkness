@@ -86,10 +86,10 @@ public class SiljaBehaviour : MonoBehaviour
 
 	void Update () 
 	{
-		if(Input.GetKeyDown(KeyCode.Y))
+		/*if(Input.GetKeyDown(KeyCode.Y))
 		{
 			Application.LoadLevelAsync(1);
-		}
+		}*/
 	}
 
 	public void EnableDarkMode()
