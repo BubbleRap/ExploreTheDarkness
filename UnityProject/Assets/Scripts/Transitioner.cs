@@ -33,10 +33,10 @@ public class Transitioner : MonoBehaviour {
 	}
 
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.T))
+		/*if(Input.GetKeyDown(KeyCode.T))
 		{
 			doTransition(!darkMode);
-		}
+		}*/
 	}
 
 	public void doTransition (bool theDarkMode)
