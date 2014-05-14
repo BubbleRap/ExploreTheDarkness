@@ -9,6 +9,7 @@ public class Trigger_sound : MonoBehaviour {
 
 	public AudioClip audioClip;
 	public Transform soundSource;
+	public bool soundFromHead;
 	public bool playMultipleTimes;
 
 	public string SubtitlesToPlay;
@@ -27,6 +28,9 @@ public class Trigger_sound : MonoBehaviour {
 		{
 			if(isTrigger && !playMultipleTimes)
 			return;
+
+			if (soundFromHead)
+				soundSource = GameObject.Find("HeadAudioSource").transform;
 
 			if( soundSource == null || soundSource == transform)
 			{

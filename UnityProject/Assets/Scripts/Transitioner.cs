@@ -10,10 +10,8 @@ public class Transitioner : MonoBehaviour {
 	public Transform directionalLight;
 	private GameObject[] exposedLights;
 
-	
 	public Transform lightRoom;
 	public Transform darkRoom;
-
 
 	public float transitionTime = 17f;
 	private GameObject siljaCharacter = null;
@@ -60,6 +58,8 @@ public class Transitioner : MonoBehaviour {
 			{
 				if(!darkRoom.gameObject.activeInHierarchy)
 				{
+					siljaCharacter = GameObject.FindGameObjectWithTag("Player");
+
 					MovementController moveCtrl = siljaCharacter.GetComponent<MovementController>();
 					moveCtrl.canMove = false;
 
@@ -85,6 +85,8 @@ public class Transitioner : MonoBehaviour {
 			{
 				if(darkRoom.gameObject.activeInHierarchy)
 				{
+					siljaCharacter = GameObject.FindGameObjectWithTag("Player");
+
 					Camera.main.gameObject.GetComponent<CameraFollow>().horizontalShakeIntensity = 0.0f;
 					Camera.main.gameObject.GetComponent<CameraFollow>().verticalShakeIntensity = 0.0f;
 
