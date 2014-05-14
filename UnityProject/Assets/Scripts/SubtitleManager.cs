@@ -201,7 +201,7 @@ public class SubtitleManager : MonoBehaviour {
 
 	Dictionary<float, string>	DaddysPillsSubs = new Dictionary<float, string>()
 	{
-		{ 1f, "Daddy’s pills."},
+		{ 0.01f, "Daddy’s pills."},
 		{ 3f, ""},
 	};
 
