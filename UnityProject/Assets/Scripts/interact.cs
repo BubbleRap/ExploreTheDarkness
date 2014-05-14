@@ -37,6 +37,7 @@ public class interact : MonoBehaviour {
 					transform.gameObject.GetComponent<MovementController>().canMove = true;
 					camInput.enabled = true;
 					isInteractMode = false;
+					interactedObject = null;
 				}
 			}
 		}
