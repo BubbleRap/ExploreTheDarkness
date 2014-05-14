@@ -93,6 +93,10 @@ public class HighlightedObject : MonoBehaviour {
 		return false;
 	}
 
+	public bool GetState(){
+		return activated;
+	}
+
 	private void ActivateHighlights( bool state )
 	{
 		if( activated == state )
