@@ -18,6 +18,8 @@ public class Trigger : MonoBehaviour {
 
 	public string messageToSendToTheObject;
 
+	public bool victoryTrigger;
+
 	// Use this for initialization
 	void Awake () {
 		transitionContoller = Component.FindObjectOfType(typeof(Transitioner)) as Transitioner;
@@ -34,6 +36,8 @@ public class Trigger : MonoBehaviour {
 				doorController.openDoor(OpenDoor);
 			if (spawnController != null)
 				spawnController.SetRespawnPosition(transform.position);
+			if (victoryTrigger)
+				(GameObject.FindObjectOfType<EndScreenController>() as EndScreenController).ShowEndScreen(true);
 
 			for (int i=0; i<animationsToTrigger.Count; ++i){
 				StartCoroutine("DelayAndPlay",i);
