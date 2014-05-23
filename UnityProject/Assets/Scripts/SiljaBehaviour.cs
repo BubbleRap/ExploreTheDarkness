@@ -29,7 +29,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 	private AIBehaviour[] aiEntities = null;
 
-	private float lightTreshold = 0.15f;
+	private float lightTreshold = 0.08f;
 	private float fadingOutSpeed = 0.006f;
 	private float fadingInSpeed = 0.012f;
 
