@@ -23,7 +23,6 @@ public class EndScreenController : MonoBehaviour {
 		fadeTexture.Apply();
 	}
 
-	// Update is called once per frame
 	void Update () {
 		
 		if (EndScreenActive) {
@@ -44,45 +43,6 @@ public class EndScreenController : MonoBehaviour {
 		}
 
 		StartCoroutine("FadeToEndScreen");
-	}
-
-	private AsyncOperation loadingProgress;
-	public void ShowLoadingScreen(AsyncOperation loadingProgress){
-
-		LoadingScreen.SetActive(true);
-		EndScreenCamera.enabled = true;
-
-		this.loadingProgress = loadingProgress;
-		StartCoroutine("DisableLoadingScreen");
-	}
-
-	private IEnumerator DisableLoadingScreen(){
-
-		/* Debug.Log("lol");
-
-		float fadeStart = Time.time;
-		
-		while (Time.time < fadeStart + fadeTime){
-			currentAlpha = (Time.time - fadeStart)/fadeTime;
-			yield return null;
-		}
-
-		LoadingScreen.SetActive(true);
-		EndScreenCamera.enabled = true;
-
-		while (Time.time < fadeStart + fadeTime){
-			currentAlpha = 1f - (Time.time - fadeStart)/fadeTime;
-			yield return null;
-		}
-		
-		currentAlpha = 0f;*/
-
-		while (!loadingProgress.isDone){
-			yield return null;
-		}
-
-		LoadingScreen.SetActive(false);
-		EndScreenCamera.enabled = false;
 	}
 
 	private IEnumerator FadeToEndScreen(){
