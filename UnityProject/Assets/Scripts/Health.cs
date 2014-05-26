@@ -23,37 +23,10 @@ public class Health : MonoBehaviour {
 	public List<AudioSource> playAllOfThose;
 	public List<AudioSource> playOneOfThose;
 
-	// Use this for initialization
 	void Start () {
 		siljaCharacter = GameObject.FindGameObjectWithTag("Player");
 	}
-
-	void OnGUI () {
-		// Make a background box
-		if(siljaBeh.darkMode)
-		{
-			/*
-			GUI.skin.label.fontSize = 100;
-			GUI.Label(new Rect (40,20,100,300), health.ToString());
-
-        	currentStyle.normal.background = texture;
-        	currentStyle2.normal.background = texture2;
-
-        	
-			GUI.BeginGroup (new Rect (pos.x, pos.y, size.x, size.y));
-		        GUI.Box (new Rect (0,0, size.x, size.y),progressBarEmpty, currentStyle);
-		 
-		        // draw the filled-in part:
-		        GUI.BeginGroup (new Rect (0, 0, size.x * (barDisplay/1.75f), size.y));
-		            GUI.Box (new Rect (0,0, size.x, size.y),progressBarFull, currentStyle2);
-		        GUI.EndGroup ();
-	 
-	    	GUI.EndGroup ();
-	    	*/
-		}
-	}
 	
-	// Update is called once per frame
 	void Update () {
 		barDisplay = siljaBeh.getTeddyLight();
 	}
