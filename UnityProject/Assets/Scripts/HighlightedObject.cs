@@ -47,6 +47,10 @@ public class HighlightedObject : MonoBehaviour {
 
 	void Update () {
 
+		if (interactionScript == null) {
+			interactionScript = FindObjectOfType(typeof(interact)) as interact;
+		}
+
 		if( interactionScript.isInteractMode )
 		{
 			ActivateHighlights(false);
