@@ -74,6 +74,7 @@ public class Transitioner : MonoBehaviour {
 					directionalLight.gameObject.SetActive(false);
 
 					RenderSettings.ambientLight = shadowModeAmbientLight;
+					RenderSettings.fogColor = shadowModeAmbientLight;
 					foreach (GameObject expolight in exposedLights) {
 						expolight.SetActive(true);
 					}
