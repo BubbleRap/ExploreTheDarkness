@@ -157,8 +157,8 @@ public class SiljaBehaviour : MonoBehaviour
 			/* foreach( AIBehaviour aiEntity in aiEntities )
 				aiEntity.SpawnAI();
 			*/
-			if(RenderSettings.ambientLight.b < 0.14f)
-				RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.b/2, RenderSettings.ambientLight.b/2, RenderSettings.ambientLight.b + 0.002f, 0.0f);
+			if(RenderSettings.ambientLight.b > 0.00f)
+				RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.r - 0.001f, RenderSettings.ambientLight.g - 0.001f, RenderSettings.ambientLight.b - 0.002f, 0.0f);
 		}
 
 		if( teddyLight.intensity >= maximumIntensity )
@@ -166,8 +166,8 @@ public class SiljaBehaviour : MonoBehaviour
 			/* foreach( AIBehaviour aiEntity in aiEntities )
 				aiEntity.DespawnAI();
 			*/
-			if(RenderSettings.ambientLight.b > 0.00f)
-				RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.r - 0.001f, RenderSettings.ambientLight.g - 0.001f, RenderSettings.ambientLight.b - 0.002f, 0.0f);
+			if(RenderSettings.ambientLight.b < 0.14f)
+				RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.b/2, RenderSettings.ambientLight.b/2, RenderSettings.ambientLight.b + 0.002f, 0.0f);
 		}
 	}
 
