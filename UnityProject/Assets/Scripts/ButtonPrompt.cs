@@ -3,7 +3,6 @@ using System.Collections;
 
 public class ButtonPrompt : MonoBehaviour {
 
-	public HighlightedObject highlightedObject;
 	public float distance = 0.5f;
 
 	public Camera hudCamera;
