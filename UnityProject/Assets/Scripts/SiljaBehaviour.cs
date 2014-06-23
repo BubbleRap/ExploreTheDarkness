@@ -15,10 +15,10 @@ public class SiljaBehaviour : MonoBehaviour
 	private MovementController moveCtrl = null;
 	private FPSInputController fpsInputCtrl = null;
 	private MouseLook mLook = null;
+	private CameraInput camInput = null;
 
 	private GameObject firstPersonCamera = null;
-	private interact interactScript = null;
-	
+
 	private Light teddyLight = null;
 	private DynamicLightProbe dLightProbe = null;
 
@@ -50,7 +50,7 @@ public class SiljaBehaviour : MonoBehaviour
 		moveCtrl = GetComponent<MovementController>();
 		fpsInputCtrl = GetComponent<FPSInputController>();
 		mLook = firstPersonCamera.GetComponent<MouseLook>();
-		interactScript = GetComponent<interact>();
+		camInput = GetComponentInChildren<CameraInput>();
 
 		teddyLight = twoHandsJoint.GetComponentInChildren<Light>();
 
@@ -223,5 +223,27 @@ public class SiljaBehaviour : MonoBehaviour
 
 		fpsInputCtrl.enabled = true;
 		mLook.enabled = true;
+	}
+
+	public void FreezeSilja(bool state, Transform lookAtObject, Transform lookFromPoint)
+	{
+		charMotor.enabled = !state;
+		
+		firstPersonCamera.gameObject.SetActive(state);
+		charMotor.enabled = !state;
+
+		if( state )
+		{
+			if( lookFromPoint != null )
+			{
+				Vector3 lookFrom = lookFromPoint.position;
+				transform.position = new Vector3(lookFrom.x, transform.position.y, lookFrom.z);
+			}
+
+			firstPersonCamera.transform.LookAt(lookAtObject);
+		}
+		
+		transform.gameObject.GetComponent<MovementController>().canMove = !state;
+		camInput.enabled = !state;
 	}
 }
