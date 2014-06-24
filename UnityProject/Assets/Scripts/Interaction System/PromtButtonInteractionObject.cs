@@ -23,7 +23,7 @@ public class PromtButtonInteractionObject : IInteractableObject
 
 	private void Update()
 	{
-		ActivatePromtButton((transform.position - Camera.main.transform.position).magnitude < 3f);
+		ActivatePromtButton((transform.position - interactor.transform.position).magnitude < 3f);
 		
 		Vector3 direction = ((transform.position - Vector3.up * 1.5f) - Camera.main.transform.position).normalized;
 		buttonPrompt.transform.position = transform.position - direction * 0.25f;
@@ -35,7 +35,10 @@ public class PromtButtonInteractionObject : IInteractableObject
 		if( interactionIsActive == state )
 			return;
 
-		interactor.ObjectToInteract = state == true ? gameObject : null;
+		if( state )
+			interactor.OnInteractionEnter( gameObject );
+		else
+			interactor.OnInteractionExit( gameObject );
 	
 		buttonPrompt.SetActive(state);
 		interactionIsActive = state;
