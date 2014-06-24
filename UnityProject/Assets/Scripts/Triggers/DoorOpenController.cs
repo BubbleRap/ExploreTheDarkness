@@ -31,11 +31,9 @@ public class DoorOpenController : MonoBehaviour {
 		while(t < 1)
 		{
 			t += (openingSpeed*Time.deltaTime);
-			Debug.Log("Opening");
 			yawRot = Mathf.LerpAngle(yawRot, 245f , t);
 			myTransform.localEulerAngles = new Vector3(0,0,yawRot);
 			yield return null;
 		}
-		Debug.Log("Opened!!!");
 	}
 }

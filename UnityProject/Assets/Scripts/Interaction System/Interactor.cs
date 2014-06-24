@@ -1,14 +1,37 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Interactor : MonoBehaviour 
 {	
-	private GameObject interactionObject = null;
+	private GameObject currentInteractionObject = null;
+	private List<GameObject> interactionObjects = new List<GameObject>();
 
-	public GameObject ObjectToInteract
+	public void OnInteractionEnter( GameObject interactionObject )
 	{
-		get { return interactionObject; }
-		set { interactionObject = value; }
+		print (interactionObject.name + " is in");
+		if( !interactionObjects.Contains( interactionObject ) )
+			interactionObjects.Add( interactionObject );
+		
+		currentInteractionObject = interactionObject;
+		Debug.Log("current interaction: " + currentInteractionObject.gameObject.name);
+	}
+
+	public void OnInteractionExit( GameObject interactionObject)
+	{
+		print (interactionObject.name + " is out");
+		if( interactionObjects.Contains( interactionObject ) )
+			interactionObjects.Remove( interactionObject );
+
+		if( currentInteractionObject == interactionObject && interactionObjects.Count > 0 )
+		{
+			currentInteractionObject = interactionObjects[0];
+			Debug.Log("current interaction: " + currentInteractionObject.gameObject.name);
+		}
+		else
+		{
+			currentInteractionObject = null;
+			Debug.Log("No objects left");
+		}
 	}
 
 	void Update () 
@@ -19,11 +42,11 @@ public class Interactor : MonoBehaviour
 		// 3. interaction ends on itself
 
 		// IF INTERACTION BUTTON PRESSED
-		if( Input.GetKeyDown(KeyCode.E) && interactionObject != null )
+		if( Input.GetKeyDown(KeyCode.E) && currentInteractionObject != null )
 		{
 			// I would not use SendMessage, as "Find References" won't work
 			// ... And maybe some other reasons
-			foreach( MonoBehaviour behaviour in interactionObject.GetComponents<MonoBehaviour>() )
+			foreach( MonoBehaviour behaviour in currentInteractionObject.GetComponents<MonoBehaviour>() )
 			{
 				IInteractableObject interactableInterface = behaviour as IInteractableObject;
 
