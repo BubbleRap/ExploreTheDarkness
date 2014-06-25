@@ -8,30 +8,23 @@ public class Interactor : MonoBehaviour
 
 	public void OnInteractionEnter( GameObject interactionObject )
 	{
-		print (interactionObject.name + " is in");
 		if( !interactionObjects.Contains( interactionObject ) )
 			interactionObjects.Add( interactionObject );
 		
 		currentInteractionObject = interactionObject;
-		Debug.Log("current interaction: " + currentInteractionObject.gameObject.name);
 	}
 
 	public void OnInteractionExit( GameObject interactionObject)
 	{
-		print (interactionObject.name + " is out");
+		if( interactionObject == currentInteractionObject )
+			currentInteractionObject = null;
+
 		if( interactionObjects.Contains( interactionObject ) )
 			interactionObjects.Remove( interactionObject );
 
-		if( currentInteractionObject == interactionObject && interactionObjects.Count > 0 )
-		{
+		if( currentInteractionObject == null && interactionObjects.Count > 0 )
 			currentInteractionObject = interactionObjects[0];
-			Debug.Log("current interaction: " + currentInteractionObject.gameObject.name);
-		}
-		else
-		{
-			currentInteractionObject = null;
-			Debug.Log("No objects left");
-		}
+		
 	}
 
 	void Update () 
