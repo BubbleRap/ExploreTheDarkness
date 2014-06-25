@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class SwitchModeInteractionObject : IInteractableObject 
@@ -30,7 +30,7 @@ public class SwitchModeInteractionObject : IInteractableObject
 		Transitioner transitionContoller = Component.FindObjectOfType(typeof(Transitioner)) as Transitioner;
 		transitionContoller.doTransition(true);
 
-		siljaBeh.FreezeSilja(false, null, null);
+		siljaBeh.LookAtPointFP(false, null, null);
 
 		// COMMENTED AS I THINK THERE IS SOME DIFFERENCE
 

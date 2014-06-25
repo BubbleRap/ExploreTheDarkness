@@ -16,12 +16,12 @@ public class HidingInteractionObject : IInteractableObject
 		// gettin in the object
 		if( interactionIsActive )
 		{			
-			siljaBeh.FreezeSilja(true, unhidePositionPoint, hidePositionPoint);
+			siljaBeh.LookAtPoint(true, unhidePositionPoint, hidePositionPoint);
 		}
 		// getting out of the object
 		else
 		{
-			siljaBeh.FreezeSilja(false, hidePositionPoint, unhidePositionPoint);
+			siljaBeh.LookAtPoint(false, hidePositionPoint, unhidePositionPoint);
 		}
 	}
 }
