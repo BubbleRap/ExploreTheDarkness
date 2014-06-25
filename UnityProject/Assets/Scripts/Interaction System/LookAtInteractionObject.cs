@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class LookAtInteractionObject : IInteractableObject 
@@ -14,6 +14,6 @@ public class LookAtInteractionObject : IInteractableObject
 		GameObject siljaGO = GameObject.FindGameObjectWithTag("Player");
 		SiljaBehaviour siljaBeh = siljaGO.GetComponent<SiljaBehaviour>();
 
-		siljaBeh.FreezeSilja( interactionIsActive, transform, lookFromPoint );
+		siljaBeh.LookAtPointFP( interactionIsActive, transform, lookFromPoint );
     }
 }

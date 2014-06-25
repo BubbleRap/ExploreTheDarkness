@@ -225,24 +225,25 @@ public class SiljaBehaviour : MonoBehaviour
 		mLook.enabled = true;
 	}
 
-	public void FreezeSilja(bool state, Transform lookAtObject, Transform lookFromPoint)
+	public void LookAtPointFP(bool state, Transform lookAtObject, Transform lookFromPoint)
+	{
+		firstPersonCamera.gameObject.SetActive(state);
+		LookAtPoint(state, lookAtObject, lookFromPoint);
+	}
+
+	public void LookAtPoint(bool state, Transform lookAtObject, Transform lookFromPoint)
 	{
 		charMotor.enabled = !state;
-		
-		firstPersonCamera.gameObject.SetActive(state);
-		charMotor.enabled = !state;
-
-		if( state )
-		{
-			if( lookFromPoint != null )
-			{
+		//if( state )
+		//{
+			//if( lookFromPoint != null )
+			//{
 				Vector3 lookFrom = lookFromPoint.position;
 				transform.position = new Vector3(lookFrom.x, transform.position.y, lookFrom.z);
-			}
-
+			//}
+			
 			firstPersonCamera.transform.LookAt(lookAtObject);
-		}
-		
+		//}
 		transform.gameObject.GetComponent<MovementController>().canMove = !state;
 		camInput.enabled = !state;
 	}
