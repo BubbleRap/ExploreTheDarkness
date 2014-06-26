@@ -79,6 +79,11 @@ public class SiljaBehaviour : MonoBehaviour
 		return teddyLight.intensity;
 	}
 
+	public float getMimimumIntensity()
+	{
+		return mimimumIntensity;
+	}
+
 	public void TakeALimb(Transform entity)
 	{
 		StartCoroutine(RipLimbDelayedAction(entity, 0.3f));
@@ -151,23 +156,32 @@ public class SiljaBehaviour : MonoBehaviour
 			teddyLight.intensity -= fadingOutSpeed;
 	
 		SetLightIntensity(teddyLight.intensity);
+
+		RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.b/2, RenderSettings.ambientLight.b/2, teddyLight.intensity/10, 0.0f);
 		
 		if( teddyLight.intensity <= mimimumIntensity )
 		{
 			/* foreach( AIBehaviour aiEntity in aiEntities )
 				aiEntity.SpawnAI();
 			*/
+			/*
 			if(RenderSettings.ambientLight.b > 0.00f)
 				RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.r - 0.001f, RenderSettings.ambientLight.g - 0.001f, RenderSettings.ambientLight.b - 0.002f, 0.0f);
+			*/
+		}
+
+		if( teddyLight.intensity > mimimumIntensity )
+		{
+			foreach( AIBehaviour aiEntity in aiEntities )
+				aiEntity.DespawnAI();
 		}
 
 		if( teddyLight.intensity >= maximumIntensity )
 		{
-			/* foreach( AIBehaviour aiEntity in aiEntities )
-				aiEntity.DespawnAI();
-			*/
+			/*
 			if(RenderSettings.ambientLight.b < 0.14f)
 				RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.b/2, RenderSettings.ambientLight.b/2, RenderSettings.ambientLight.b + 0.002f, 0.0f);
+			*/
 		}
 	}
 
