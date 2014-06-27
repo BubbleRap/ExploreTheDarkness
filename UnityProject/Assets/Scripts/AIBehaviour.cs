@@ -9,13 +9,13 @@ public class AIBehaviour : MonoBehaviour
 	private AIRig aiMind = null;
 
 	public string[] spawnPoints;
-	private GameObject renderer = null;
+	private GameObject aiRenderer = null;
 
 	private bool aiIsEnabled = false;
 
 	void Awake()
 	{
-		renderer = transform.FindChild("Renderer").gameObject;
+		aiRenderer = transform.FindChild("Renderer").gameObject;
 		aiMind = transform.GetComponentInChildren<AIRig>();
 	}
 	
@@ -36,7 +36,7 @@ public class AIBehaviour : MonoBehaviour
 
 		transform.position = spawnPoint.Position;
 		aiMind.enabled = true;
-		renderer.SetActive(true);
+		aiRenderer.SetActive(true);
 		aiIsEnabled = true;
 
 		if (this.audio != null && audio.isPlaying)
@@ -53,7 +53,7 @@ public class AIBehaviour : MonoBehaviour
 		aiMind.AI.WorkingMemory.SetItem("moveTarget", null);
 
 		aiMind.enabled = false;
-		renderer.SetActive(false);
+		aiRenderer.SetActive(false);
 		aiIsEnabled = false;
 
 		foreach (AudioSource s in GetComponentsInChildren<AudioSource>())
