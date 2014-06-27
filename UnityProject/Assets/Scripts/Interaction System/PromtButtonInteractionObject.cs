@@ -5,11 +5,12 @@ public class PromtButtonInteractionObject : IInteractableObject
 {
 	private GameObject buttonPrompt;
 	private Interactor interactor;
+
+	private bool objectIsClose = false;
 	
 	public override void Activate()
 	{
-		// doing nothing
-		// this script is controlled by itself
+		interactionIsActive = !interactionIsActive;
 	}
 	
 	void Start()
@@ -32,7 +33,9 @@ public class PromtButtonInteractionObject : IInteractableObject
 
 	private void ActivatePromtButton( bool state )
 	{
-		if( interactionIsActive == state )
+		buttonPrompt.SetActive(state && !interactionIsActive);
+
+		if( objectIsClose == state )
 			return;
 
 		if( state )
@@ -40,8 +43,7 @@ public class PromtButtonInteractionObject : IInteractableObject
 		else
 			interactor.OnInteractionExit( gameObject );
 	
-		buttonPrompt.SetActive(state);
-		interactionIsActive = state;
+		objectIsClose = state;
 	}
 
 	void OnDestroy()
