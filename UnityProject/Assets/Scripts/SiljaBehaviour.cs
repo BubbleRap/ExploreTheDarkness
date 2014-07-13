@@ -36,6 +36,14 @@ public class SiljaBehaviour : MonoBehaviour
 	private float maximumIntensity = 1.75f;
 	private float mimimumIntensity = 0.25f;
 
+	private float flickerIntervalTimer = 0;
+	private float flickerTime = 0;
+	private float flickerDelay = 0.2f;
+	private float flickerDelayTimer = 0;
+	private float maxFlickerIntensity = 0;
+	private float minFlickerIntensity = 0;
+	private float flickerSpeed = 0.06f;
+
 	private float maximumGlow = 0.75f;
 	private float minimumGlow = 0.25f;
 
@@ -60,6 +68,9 @@ public class SiljaBehaviour : MonoBehaviour
 		//siljaRenderer = transform.FindChild("Silja_Animated").GetComponentInChildren<SkinnedMeshRenderer>();
 
 		firstPersonCameraShaker = firstPersonCamera.GetComponent<CameraShaker>();
+
+		maxFlickerIntensity = mimimumIntensity * 5;
+		minFlickerIntensity = mimimumIntensity * 1.5f;
 	}
 
 	public void refreshAIReferences(){
@@ -159,29 +170,53 @@ public class SiljaBehaviour : MonoBehaviour
 
 		RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.b/2, RenderSettings.ambientLight.b/2, teddyLight.intensity/10, 0.0f);
 		
-		if( teddyLight.intensity <= mimimumIntensity )
+		Debug.Log(flickerIntervalTimer);
+		if( teddyLight.intensity <= maxFlickerIntensity)
 		{
-			/* foreach( AIBehaviour aiEntity in aiEntities )
-				aiEntity.SpawnAI();
-			*/
-			/*
-			if(RenderSettings.ambientLight.b > 0.00f)
-				RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.r - 0.001f, RenderSettings.ambientLight.g - 0.001f, RenderSettings.ambientLight.b - 0.002f, 0.0f);
-			*/
+			flickerIntervalTimer += Time.deltaTime;
+
+			if(intensity <= lightTreshold && maxFlickerIntensity >= (minFlickerIntensity * 1.2f) && flickerIntervalTimer > 4)
+			{
+				flickerTime += flickerSpeed;
+				teddyLight.intensity = Mathf.Lerp(maxFlickerIntensity, minFlickerIntensity, flickerTime);
+
+				if( teddyLight.intensity <= minFlickerIntensity)
+				{
+					flickerDelayTimer += Time.deltaTime;
+					if(flickerDelayTimer > flickerDelay)
+					{
+						flickerDelayTimer = 0;
+						flickerTime = 0;
+						if(flickerIntervalTimer > 8)
+						{
+							flickerDelay = flickerDelay * Random.Range(0.90f, 1.20f);
+							flickerSpeed = flickerSpeed * Random.Range(0.85f, 1.15f);
+							maxFlickerIntensity = maxFlickerIntensity * Random.Range(0.80f, 0.90f);
+						}
+						else
+						{
+							maxFlickerIntensity = maxFlickerIntensity * Random.Range(0.80f, 1.30f);
+						}
+						minFlickerIntensity = minFlickerIntensity;
+					}
+				}
+			}
+		}
+
+		if(teddyLight.intensity >= (maximumIntensity * 0.95) && maxFlickerIntensity < (mimimumIntensity * 5))
+		{
+			flickerTime = 0;
+			flickerIntervalTimer = 0;
+			flickerSpeed = 0.06f;
+			flickerDelay = 0.2f;
+			maxFlickerIntensity = mimimumIntensity * 5;
+			minFlickerIntensity = mimimumIntensity * 1.5f;
 		}
 
 		if( teddyLight.intensity > mimimumIntensity )
 		{
 			foreach( AIBehaviour aiEntity in aiEntities )
 				aiEntity.DespawnAI();
-		}
-
-		if( teddyLight.intensity >= maximumIntensity )
-		{
-			/*
-			if(RenderSettings.ambientLight.b < 0.14f)
-				RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.b/2, RenderSettings.ambientLight.b/2, RenderSettings.ambientLight.b + 0.002f, 0.0f);
-			*/
 		}
 	}
 
