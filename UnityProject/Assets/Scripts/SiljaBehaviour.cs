@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SiljaBehaviour : MonoBehaviour 
 {
@@ -41,7 +42,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 	//private SkinnedMeshRenderer siljaRenderer = null;
 	private CameraShaker firstPersonCameraShaker;
-
+	
 	void Awake()
 	{
 		firstPersonCamera = transform.FindChild("1st Person Camera").gameObject;
