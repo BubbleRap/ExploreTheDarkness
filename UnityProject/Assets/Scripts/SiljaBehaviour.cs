@@ -171,7 +171,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 		RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.b/2, RenderSettings.ambientLight.b/2, teddyLight.intensity/10, 0.0f);
 		
-		Debug.Log(flickerIntervalTimer);
+		//Debug.Log(flickerIntervalTimer);
 		if( teddyLight.intensity <= maxFlickerIntensity)
 		{
 			flickerIntervalTimer += Time.deltaTime;
