@@ -44,6 +44,10 @@ public class SiljaBehaviour : MonoBehaviour
 	private float maxFlickerIntensity = 0;
 	private float minFlickerIntensity = 0;
 	private float flickerSpeed = 0.06f;
+	private float colorTime = 1;
+	private float colorSpeed = 0.02f;
+
+	private Color GlowLightBasic = new Color(1f,1f,1f,1f);
 
 	private float maximumGlow = 0.75f;
 	private float minimumGlow = 0.25f;
@@ -84,6 +88,7 @@ public class SiljaBehaviour : MonoBehaviour
 		teddyLight.intensity = maximumIntensity;
 
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
+		GlowLightBasic = teddyLight.color;
 	}
 	
 	public float getTeddyLight()
@@ -169,8 +174,12 @@ public class SiljaBehaviour : MonoBehaviour
 	
 		SetLightIntensity(teddyLight.intensity);
 
-		RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.b/2, RenderSettings.ambientLight.b/2, teddyLight.intensity/10, 0.0f);
+		RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.b/2, (RenderSettings.ambientLight.b/2)*GlowLightBasic.g, (teddyLight.intensity/10)*GlowLightBasic.b, 0.0f);
 		
+		lilbroGlowMaterial.color = new Color(lilbroGlowMaterial.color.r, lilbroGlowMaterial.color.g/colorTime, lilbroGlowMaterial.color.b/colorTime, 1.0f);
+
+		teddyLight.color = new Color(GlowLightBasic.r, GlowLightBasic.g/colorTime, GlowLightBasic.b/colorTime);
+
 		//Debug.Log(flickerIntervalTimer);
 		if( teddyLight.intensity <= maxFlickerIntensity)
 		{
@@ -201,6 +210,18 @@ public class SiljaBehaviour : MonoBehaviour
 						minFlickerIntensity = minFlickerIntensity;
 					}
 				}
+			}
+
+			if(flickerIntervalTimer > 6)
+			{
+				colorTime += colorSpeed;
+			}
+		}
+		else
+		{
+			if(colorTime > 1)
+			{
+				colorTime -= (colorSpeed * 3);
 			}
 		}
 
