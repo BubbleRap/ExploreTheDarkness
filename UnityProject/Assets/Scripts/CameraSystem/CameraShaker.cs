@@ -9,7 +9,10 @@ public class CameraShaker : MonoBehaviour
 
 	private Vector3 shakeOffset = Vector3.zero;
 	private Vector3 originalPosition = Vector3.zero;
-	private bool shaking = false;
+	[HideInInspector]
+	public bool shaking = false;
+
+
 
 	void Start()
 	{
@@ -18,8 +21,7 @@ public class CameraShaker : MonoBehaviour
 
 	public void StartShake (float time) 
 	{
-		shaking = true;
-		StartCoroutine(ShakeCamera());
+		EnableShake ();
 		StartCoroutine(StopShaking(time));
 	}
 
@@ -43,6 +45,17 @@ public class CameraShaker : MonoBehaviour
 	IEnumerator StopShaking(float time)
 	{
 		yield return new WaitForSeconds(time);
+		DisableShake ();
+	}
+
+	public void EnableShake()
+	{
+		shaking = true;
+		StartCoroutine(ShakeCamera());
+	}
+
+	public void DisableShake()
+	{
 		shaking = false;
 		shakeOffset = Vector3.zero;
 	}
