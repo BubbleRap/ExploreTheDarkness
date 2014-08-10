@@ -66,12 +66,13 @@ public class CameraFollow : MonoBehaviour
 				Vector3 relativePosition;
 				if( cameraMode == CameraMode.WASD_Ctrl )
 				{
-					relativePosition = GetVectorFromAngle(pitch, yaw, roll, cameraDistance);
-					transform.position = Vector3.Lerp(transform.position, cameraFocusTarget.TransformPoint(/*shakeOffset +*/ relativePosition), followingSpeed);
+//					relativePosition = GetVectorFromAngle(pitch, yaw, roll, cameraDistance);
+//					transform.position = Vector3.Lerp(transform.position, cameraFocusTarget.TransformPoint(/*shakeOffset +*/ relativePosition), followingSpeed);
 				}
 				else
 				{
-					relativePosition = GetVectorFromAngle(pitch - shakeOffset.y, yaw - shakeOffset.x, roll, cameraDistance + shakeOffset.z, cameraFocusTarget.position);
+					Vector3 camDirection = new Vector3( pitch, yaw, roll );// + transform.parent.localRotation.eulerAngles;
+					relativePosition = GetVectorFromAngle(camDirection.x - shakeOffset.y, camDirection.y - shakeOffset.x, camDirection.z, cameraDistance + shakeOffset.z, cameraFocusTarget.position);
 					transform.position = Vector3.Lerp(transform.position, relativePosition, followingSpeed);
 				}
 
@@ -86,7 +87,6 @@ public class CameraFollow : MonoBehaviour
 		{
 			if( isFollowingRotation )
 			{
-				//transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(((cameraFocusTarget.position + cameraFocusOffset ) - transform.position).normalized), 0.5f);
 				Quaternion rotateTo = Quaternion.LookRotation((cameraFocusOffset - transform.localPosition).normalized);
 				transform.localRotation = rotateTo;
 			}
@@ -106,10 +106,8 @@ public class CameraFollow : MonoBehaviour
 
 	Vector3 GetVectorFromAngle (float x, float y, float z, float distFromObj, Vector3 relativePosition = default(Vector3)) 
 	{
-		Vector3 forward = Vector3.zero;
 		Vector3 up = Quaternion.Euler(x, y, z) * Vector3.up;
-		Vector3 right = Vector3.zero; 
 
-		return (forward + up + right).normalized * distFromObj + relativePosition;
+		return up.normalized * distFromObj + relativePosition;
 	}
 }
