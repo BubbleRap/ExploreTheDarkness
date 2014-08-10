@@ -29,6 +29,8 @@ public class MovementController : MonoBehaviour
 	public float h = 0;
 
 	private bool lookingAround = false;
+	private CameraFollow camFollowComp = null;
+	private CameraInput camInputComp = null;
 
 	void Awake()
 	{
@@ -37,6 +39,8 @@ public class MovementController : MonoBehaviour
 
 		characterAnimator.SetBool ("scared", true);
 		cameraTransform = Camera.main.transform;
+		camFollowComp = GetComponentInChildren<CameraFollow>();
+		camInputComp = GetComponentInChildren<CameraInput>();
 	}
 
 	void Start()
@@ -46,7 +50,7 @@ public class MovementController : MonoBehaviour
 
 	void Update()
 	{
-		Vector3 forward = cameraTransform.TransformDirection(Vector3.forward);
+		Vector3 forward = cameraTransform.forward;
 
 		forward.y = 0;
 		forward = forward.normalized;
@@ -60,10 +64,12 @@ public class MovementController : MonoBehaviour
 		Vector3 right = new Vector3(forward.z, 0, -forward.x);
 		targetDirection = h * right + v * forward;
 
+
+
 		if( alwaysFollows )
 		{
-			moveDirection = targetDirection;
-			transform.rotation = Quaternion.LookRotation(forward);
+//			moveDirection = targetDirection;
+//			transform.rotation = Quaternion.LookRotation(forward);
 		}
 		else
 			if( targetDirection.magnitude > 0f )
@@ -121,11 +127,30 @@ public class MovementController : MonoBehaviour
 	{
 		lookingAround = false;
 		characterAnimator.SetTrigger("handCutSceneStart");
+
+		camInputComp.enabled = false;
+	}
+
+	// called from Monster Hand class by sending message
+	public void MonsterHandStartEvent(Transform handTransform)
+	{
+		StartCoroutine(LookingAtMonsterHand(handTransform));
 	}
 
 	// called from Monster Hand class by sending message
 	public void MonsterHandHitEvent()
 	{
 		characterAnimator.SetTrigger("handCutSceneHit");
+	
+		camInputComp.enabled = true;
+	}
+
+	private IEnumerator LookingAtMonsterHand(Transform handTransform)
+	{
+		while( !camInputComp.enabled )
+		{
+			camFollowComp.yaw = Mathf.Lerp( camFollowComp.yaw, Mathf.Repeat(transform.localRotation.eulerAngles.y + 180f, 360f), Time.deltaTime ); 
+			yield return null;
+		}
 	}
 }

@@ -21,6 +21,8 @@ public class CameraInput : MonoBehaviour
 	void Awake()
 	{
 		cameraFollow = GetComponent<CameraFollow>();
+
+//		Screen.lockCursor = true;
 	}
 
 	void Update () 

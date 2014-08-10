@@ -11,6 +11,12 @@ public class MonsterHand : MonoBehaviour
 	}
 
 	// called from monster hand animation
+
+	public void StartAnimationEvent()
+	{
+		siljaGO.SendMessage("MonsterHandStartEvent", transform, SendMessageOptions.RequireReceiver);
+	}
+
 	public void HitAnimationEvent()
 	{
 		siljaGO.SendMessage("MonsterHandHitEvent", SendMessageOptions.RequireReceiver);
