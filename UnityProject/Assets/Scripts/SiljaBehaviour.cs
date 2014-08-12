@@ -30,12 +30,20 @@ public class SiljaBehaviour : MonoBehaviour
 
 	private AIBehaviour[] aiEntities = null;
 
-	private float lightTreshold = 0.08f;
-	private float fadingOutSpeed = 0.006f;
-	private float fadingInSpeed = 0.012f;
+	[Range(0f, 0.10f)]
+	public float lightTreshold = 0.08f;
 
-	private float maximumIntensity = 1.75f;
-	private float mimimumIntensity = 0.25f;
+	[Range(0f, 0.020f)]
+	public float fadingOutSpeed = 0.006f;
+
+	[Range(0f, 0.020f)]
+	public float fadingInSpeed = 0.012f;
+
+	[Range(0f, 2.50f)]
+	public float maximumIntensity = 1.75f;
+
+	[Range(0f, 1.00f)]
+	public float mimimumIntensity = 0.25f;
 
 	private float flickerIntervalTimer = 0;
 	private float flickerTime = 0;
