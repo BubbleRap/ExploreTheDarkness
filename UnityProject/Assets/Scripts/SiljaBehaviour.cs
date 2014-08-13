@@ -47,13 +47,21 @@ public class SiljaBehaviour : MonoBehaviour
 
 	private float flickerIntervalTimer = 0;
 	private float flickerTime = 0;
-	private float flickerDelay = 0.2f;
+
+	[Range(0f, 1.0f)]
+	public float flickerDelay = 0.2f;
+
 	private float flickerDelayTimer = 0;
 	private float maxFlickerIntensity = 0;
 	private float minFlickerIntensity = 0;
-	private float flickerSpeed = 0.06f;
+
+	[Range(0f, 0.20f)]
+	public float flickerSpeed = 0.06f;
+
 	private float colorTime = 1;
-	private float colorSpeed = 0.02f;
+
+	[Range(0f, 0.10f)]
+	public float colorSpeed = 0.02f;
 
 	private Color GlowLightBasic = new Color(1f,1f,1f,1f);
 
