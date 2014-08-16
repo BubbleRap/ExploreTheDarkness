@@ -10,17 +10,16 @@ public class AudioInteractionObject : IInteractableObject
 	public bool internalPlay;
 	public string subtitlesToPlay;
 
-	private AudioSource audioSource;
+	private AudioSource soundSource;
 
 	void Start()
 	{
 		if(internalPlay)
-			audioSource = transform.gameObject.GetComponent<AudioSource>();
+			soundSource = transform.gameObject.GetComponent<AudioSource>();
 		else
-			audioSource = Camera.main.gameObject.GetComponent<AudioSource>();
+			soundSource = Camera.main.gameObject.GetComponent<AudioSource>();
 
-
-		if( audioSource == null )
+		if( soundSource == null )
 			Debug.LogError("Look, I think there must be an audio source somewhere here.");
 	}
 
@@ -35,18 +34,53 @@ public class AudioInteractionObject : IInteractableObject
 			SubtitleManager.Instance.Stop();
 
 			if( soundClip != null )
-				audioSource.PlayOneShot(soundClip, volume);
+			{
+				PlayOneShot(soundClip, volume);
+				Debug.Log("Audio clip " + soundClip.name + " has started on " + soundSource.gameObject.name);
+			}
 			else
-				Debug.LogError("You forgot to attach the goddamit audio clip!");
+			{
+				Debug.LogError("You forgot to attach the goddamn audio clip!");
+			}
 			
 			if( !string.IsNullOrEmpty( subtitlesToPlay ) )
 				SubtitleManager.Instance.SendMessage(subtitlesToPlay);
+
+			StartCoroutine( DisactivateOnStopPlaying() );
 		}
 		// EXIT FROM INTERACTION
 		else
 		{
 			SubtitleManager.Instance.Stop();
-			audioSource.Stop();
+			soundSource.Stop();
+			StopAllCoroutines();
+		}
+	}
+
+	private void PlayOneShot(AudioClip clip, float volume)
+	{
+		soundSource.clip = clip;
+		soundSource.volume = volume;
+		soundSource.Play();
+	}
+
+	private IEnumerator DisactivateOnStopPlaying()
+	{
+		if(! soundSource.isPlaying )
+		{
+			Debug.Log("Nooo, something is wrong with the " + soundSource.gameObject.name);
+			yield break;
+		}
+
+		while( soundSource.isPlaying )
+			yield return null;
+
+		// disactivate all the interaction components
+		foreach( MonoBehaviour behaviour in gameObject.GetComponents<MonoBehaviour>() )
+		{
+			IInteractableObject interactableInterface = behaviour as IInteractableObject;
+			if( interactableInterface != null )
+				interactableInterface.Activate();
 		}
 	}
 }
