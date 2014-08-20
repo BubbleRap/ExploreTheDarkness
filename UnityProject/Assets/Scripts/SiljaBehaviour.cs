@@ -132,6 +132,8 @@ public class SiljaBehaviour : MonoBehaviour
 
 	public void EnableDarkMode()
 	{
+		StartCoroutine(BlinkingEffect());
+
 		refreshAIReferences();
 
 		teddyLight.enabled = true;
@@ -150,6 +152,8 @@ public class SiljaBehaviour : MonoBehaviour
 		dLightProbe.enabled = true;
 
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,1f);
+
+		animation.Play("waking_up");
 
 		//siljaRenderer.material.shader = Shader.Find("Custom/TransparentInvisibleShadowCaster");
 
@@ -333,5 +337,21 @@ public class SiljaBehaviour : MonoBehaviour
 		//}
 		transform.gameObject.GetComponent<MovementController>().canMove = !state;
 		camInput.enabled = !state;
+	}
+
+	private IEnumerator BlinkingEffect()
+	{
+		// keep in mind, that fader takes the time, you specify,
+		// which means, you gotta yield the time first, and plus the pause
+
+		Fader.Instance.FadeScreen(false, 2.0f);
+		yield return new WaitForSeconds(2.5f);
+		Fader.Instance.FadeScreen(true, 1.0f);
+		yield return new WaitForSeconds(2f);
+		Fader.Instance.FadeScreen(false, 1.0f);
+		yield return new WaitForSeconds(1.5f);
+		Fader.Instance.FadeScreen(true, 0.5f);
+		yield return new WaitForSeconds(0.5f);
+		Fader.Instance.FadeScreen(false, 0.25f);
 	}
 }
