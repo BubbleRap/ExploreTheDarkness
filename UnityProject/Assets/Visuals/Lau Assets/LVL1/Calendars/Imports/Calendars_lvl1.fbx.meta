@@ -1,25 +1,20 @@
 fileFormatVersion: 2
-guid: 8b56e01bace53c447b604c555bef3d7f
+guid: 77b0af16d5768f84c9e5017be4fe79d5
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
-    100000: DinnerChair_regular
-    100002: DinnerTable
+    100000: Calendar_DadsRoom
+    100002: Calendar_Kitchen
     100004: //RootNode
-    100006: DinnerTableCloth
-    400000: DinnerChair_regular
-    400002: DinnerTable
+    400000: Calendar_DadsRoom
+    400002: Calendar_Kitchen
     400004: //RootNode
-    400006: DinnerTableCloth
-    2300000: DinnerChair_regular
-    2300002: DinnerTable
-    2300004: DinnerTableCloth
-    3300000: DinnerChair_regular
-    3300002: DinnerTable
-    3300004: DinnerTableCloth
-    4300000: DinnerChair_regular
-    4300002: DinnerTable
-    4300004: DinnerTableCloth
+    2300000: Calendar_DadsRoom
+    2300002: Calendar_Kitchen
+    3300000: Calendar_DadsRoom
+    3300002: Calendar_Kitchen
+    4300000: Calendar_Kitchen
+    4300002: Calendar_DadsRoom
     9500000: //RootNode
   materials:
     importMaterials: 1
