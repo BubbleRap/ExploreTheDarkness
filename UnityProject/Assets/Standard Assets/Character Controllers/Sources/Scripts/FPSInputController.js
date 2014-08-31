@@ -1,5 +1,9 @@
 private var motor : CharacterMotor;
 private var animator : Animator;
+public var firstpersonCam : Transform;
+private var timer = 0.0;
+private var bobbingSpeed  = 0.18f; 
+private var shimmycam : float = 5.0f;
 
 // Use this for initialization
 function Awake () {
@@ -12,9 +16,11 @@ function Update () {
 	// Get the input vector from keyboard or analog stick
 	var directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 	
+	animator.speed = 1;
 	if (directionVector != Vector3.zero) {
 		// Get the length of the directon vector and then normalize it
 		// Dividing by the length is cheaper than normalizing when we already have the length anyway
+		//Debug.Log(directionVector.magnitude);
 		var directionLength = directionVector.magnitude;
 		directionVector = directionVector / directionLength;
 		
@@ -27,6 +33,22 @@ function Update () {
 		
 		// Multiply the normalized direction vector by the modified length
 		directionVector = directionVector * directionLength;
+
+		if(directionVector.magnitude >= 1)
+		{
+			animator.speed = directionVector.magnitude * 1.7f;
+		}
+
+		waveslice = Mathf.Sin(Time.time * 9.7f * directionVector.magnitude)*0.004f;
+
+	   	firstpersonCam.localPosition.y += waveslice;
+	}
+	else
+	{
+		if(firstpersonCam.localEulerAngles.z != 0)
+		{
+			firstpersonCam.localEulerAngles = Vector3(firstpersonCam.localEulerAngles.x, firstpersonCam.localEulerAngles.y, 0);
+		}
 	}
 	
 	// Apply the direction to the CharacterMotor
