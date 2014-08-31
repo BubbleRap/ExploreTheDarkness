@@ -19,8 +19,13 @@ public class SiljaBehaviour : MonoBehaviour
 	private CameraInput camInput = null;
 
 	private GameObject firstPersonCamera = null;
+	private GameObject thirdPersonCamera = null;
+
+	private float ambientGlow = 0.0f;
 
 	private Light teddyLight = null;
+	private Light teddyLightFlash = null;
+	private Light teddyLightFlash2 = null;
 	private DynamicLightProbe dLightProbe = null;
 
 	[HideInInspector]
@@ -43,7 +48,7 @@ public class SiljaBehaviour : MonoBehaviour
 	public float maximumIntensity = 1.75f;
 
 	[Range(0f, 1.00f)]
-	public float mimimumIntensity = 0.25f;
+	public float mimimumIntensity = 0.5f;
 
 	private float flickerIntervalTimer = 0;
 	private float flickerTime = 0;
@@ -68,12 +73,14 @@ public class SiljaBehaviour : MonoBehaviour
 	private float maximumGlow = 0.75f;
 	private float minimumGlow = 0.25f;
 
-	//private SkinnedMeshRenderer siljaRenderer = null;
+	private SkinnedMeshRenderer siljaRenderer = null;
+	private Animator siljaAnimation = null;
 	private CameraShaker firstPersonCameraShaker;
 	
 	void Awake()
 	{
 		firstPersonCamera = transform.FindChild("1st Person Camera").gameObject;
+		thirdPersonCamera = transform.FindChild("3rd Person Camera").gameObject;
 
 		charMotor = GetComponent<CharacterMotor>();
 		moveCtrl = GetComponent<MovementController>();
@@ -81,16 +88,19 @@ public class SiljaBehaviour : MonoBehaviour
 		mLook = firstPersonCamera.GetComponent<MouseLook>();
 		camInput = GetComponentInChildren<CameraInput>();
 
-		teddyLight = twoHandsJoint.GetComponentInChildren<Light>();
+		teddyLight = twoHandsJoint.GetComponentsInChildren<Light>()[0];
+		teddyLightFlash = twoHandsJoint.GetComponentsInChildren<Light>()[0];
+		teddyLightFlash2 = twoHandsJoint.GetComponentsInChildren<Light>()[1];
 
 		dLightProbe = GetComponentInChildren<DynamicLightProbe> ();
 		aiEntities = FindObjectsOfType<AIBehaviour>();
 
-		//siljaRenderer = transform.FindChild("Silja_Animated").GetComponentInChildren<SkinnedMeshRenderer>();
+		siljaRenderer = transform.FindChild("Silja_Animated").GetComponentInChildren<SkinnedMeshRenderer>();
+		siljaAnimation = transform.FindChild("Silja_Animated").GetComponentInChildren<Animator>();
 
 		firstPersonCameraShaker = firstPersonCamera.GetComponent<CameraShaker>();
 
-		maxFlickerIntensity = mimimumIntensity * 5;
+		maxFlickerIntensity = mimimumIntensity * 2;
 		minFlickerIntensity = mimimumIntensity * 1.5f;
 	}
 
@@ -145,19 +155,21 @@ public class SiljaBehaviour : MonoBehaviour
 		fpsInputCtrl.enabled = true;
 		mLook.enabled = true;
 		firstPersonCamera.SetActive(true);
+		thirdPersonCamera.SetActive(false);
 
 		oneHandJoint.gameObject.SetActive(false);
 		twoHandsJoint.gameObject.SetActive(true);
 
-		dLightProbe.enabled = true;
+		//dLightProbe.enabled = true;
 
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,1f);
 
 		animation.Play("waking_up");
 
-		//siljaRenderer.material.shader = Shader.Find("Custom/TransparentInvisibleShadowCaster");
+		siljaRenderer.material.shader = Shader.Find("Custom/TransparentInvisibleShadowCaster");
 
 		darkMode = true;
+		siljaAnimation.SetBool ("darkmode", darkMode);
 	}
 
 	public void EnableStoryMode()
@@ -171,17 +183,19 @@ public class SiljaBehaviour : MonoBehaviour
 		fpsInputCtrl.enabled = false;
 		mLook.enabled = false;
 		firstPersonCamera.SetActive(false);
+		thirdPersonCamera.SetActive(true);
 
 		oneHandJoint.gameObject.SetActive(true);
 		twoHandsJoint.gameObject.SetActive(false);
 
-		dLightProbe.enabled = false;
+		//dLightProbe.enabled = false;
 
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
 
-		//siljaRenderer.material.shader = Shader.Find("Custom/DoubleSided/Diffuse");
+		siljaRenderer.material.shader = Shader.Find("Custom/DoubleSided/Diffuse");
 
 		darkMode = false;
+		siljaAnimation.SetBool ("darkmode", darkMode);
 	}
 
 	// is sent by light probe itself
@@ -194,17 +208,18 @@ public class SiljaBehaviour : MonoBehaviour
 	
 		SetLightIntensity(teddyLight.intensity);
 
-		RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.b/2, (RenderSettings.ambientLight.b/2)*GlowLightBasic.g, (teddyLight.intensity/10)*GlowLightBasic.b, 0.0f);
+		RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.b/2, (RenderSettings.ambientLight.b/2)/* * GlowLightBasic.g*/, ambientGlow/* * GlowLightBasic.b*/, 0.0f);
 		
-		lilbroGlowMaterial.color = new Color(lilbroGlowMaterial.color.r, lilbroGlowMaterial.color.g/colorTime, lilbroGlowMaterial.color.b/colorTime, 1.0f);
+		lilbroGlowMaterial.color = new Color(lilbroGlowMaterial.color.r, lilbroGlowMaterial.color.g, lilbroGlowMaterial.color.b, 1.0f);
 
-		teddyLight.color = new Color(GlowLightBasic.r, GlowLightBasic.g/colorTime, GlowLightBasic.b/colorTime);
+		//teddyLight.color = new Color(GlowLightBasic.r, GlowLightBasic.g, GlowLightBasic.b);
 
 		//Debug.Log(flickerIntervalTimer);
 		if( teddyLight.intensity <= maxFlickerIntensity)
 		{
 			flickerIntervalTimer += Time.deltaTime;
 
+			/*
 			if(intensity <= lightTreshold && maxFlickerIntensity >= (minFlickerIntensity * 1.2f) && flickerIntervalTimer > 4)
 			{
 				flickerTime += flickerSpeed;
@@ -231,29 +246,51 @@ public class SiljaBehaviour : MonoBehaviour
 					}
 				}
 			}
+			*/
 
+			/*
 			if(flickerIntervalTimer > 6)
 			{
 				colorTime += colorSpeed;
 			}
+			*/
 		}
 		else
 		{
+			/*
 			if(colorTime > 1)
 			{
 				colorTime -= (colorSpeed * 3);
 			}
+			*/
 		}
 
-		if(teddyLight.intensity >= (maximumIntensity * 0.95) && maxFlickerIntensity < (mimimumIntensity * 5))
+		if(teddyLight.intensity >= (maximumIntensity * 0.95) /* && maxFlickerIntensity < (mimimumIntensity * 5) */)
 		{
 			flickerTime = 0;
 			flickerIntervalTimer = 0;
 			flickerSpeed = 0.06f;
 			flickerDelay = 0.2f;
-			maxFlickerIntensity = mimimumIntensity * 5;
+			maxFlickerIntensity = mimimumIntensity * 2;
 			minFlickerIntensity = mimimumIntensity * 1.5f;
 		}
+
+		if( teddyLight.intensity <= mimimumIntensity)
+		{
+			if(ambientGlow < 0.1f)
+			{
+				ambientGlow += 0.001f;
+			}
+		}
+		else
+		{
+			if(ambientGlow > 0.0f)
+			{
+				ambientGlow -= 0.005f;
+			}
+		}
+
+		teddyLightFlash2.intensity = teddyLightFlash.intensity;
 
 		if( teddyLight.intensity > mimimumIntensity )
 		{

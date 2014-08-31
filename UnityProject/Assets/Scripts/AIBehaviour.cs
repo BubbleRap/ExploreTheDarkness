@@ -24,6 +24,7 @@ public class AIBehaviour : MonoBehaviour
 		if( aiIsEnabled )
 			return;
 
+		/*
 		NavigationTarget spawnPoint = NavigationManager.instance.GetNavigationTarget(spawnPoints[0]);
 		float maxDist = 0f;
 
@@ -35,6 +36,8 @@ public class AIBehaviour : MonoBehaviour
 		}
 
 		transform.position = spawnPoint.Position;
+		*/
+
 		aiMind.enabled = true;
 		aiRenderer.SetActive(true);
 		aiIsEnabled = true;
@@ -49,8 +52,8 @@ public class AIBehaviour : MonoBehaviour
 			return;
 
 		aiMind.AI.WorkingMemory.SetItem("lightIntensity", 0f);
-		aiMind.AI.WorkingMemory.SetItem("characterForm", null);
-		aiMind.AI.WorkingMemory.SetItem("moveTarget", null);
+		//aiMind.AI.WorkingMemory.SetItem("characterForm", null);
+		//aiMind.AI.WorkingMemory.SetItem("moveTarget", null);
 
 		aiMind.enabled = false;
 		aiRenderer.SetActive(false);

@@ -10,6 +10,8 @@ public class SiljaSound : MonoBehaviour
 		Silja_Feet
 	}
 
+	private int randomNumber = 0;
+	private int lastNumber = 0;
 	public SoundLocation location = SoundLocation.Silja_Camera;
 	public AudioSource[] audioSources;
 
@@ -19,6 +21,12 @@ public class SiljaSound : MonoBehaviour
 
 	public void OnStep()
 	{
-		audioSources [(int)location].PlayOneShot (stepSounds[Random.Range(0, stepSounds.Length)], volume);
+		while(randomNumber == lastNumber)
+		{
+			randomNumber = Random.Range(0, stepSounds.Length);
+		}
+
+		audioSources [(int)location].PlayOneShot (stepSounds[randomNumber], volume);
+		lastNumber = randomNumber;
 	}
 }
