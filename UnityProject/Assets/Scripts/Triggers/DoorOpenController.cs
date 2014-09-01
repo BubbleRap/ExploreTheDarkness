@@ -4,6 +4,7 @@ using System.Collections;
 public class DoorOpenController : MonoBehaviour {
 
 	bool doorIsOpened = false;
+	public bool isLocked = false;
 	Transform myTransform;
 	public float yawRot;
 	float openSpeed = 2.5f;
@@ -16,7 +17,7 @@ public class DoorOpenController : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other) 
 	{
-		if(other.tag == "Player" && !doorIsOpened)
+		if(other.tag == "Player" && !doorIsOpened && !isLocked)
 		{
 			StartCoroutine("OpenDatDoor");
 		}
@@ -35,5 +36,10 @@ public class DoorOpenController : MonoBehaviour {
 			myTransform.localEulerAngles = new Vector3(0,0,yawRot);
 			yield return null;
 		}
+	}
+
+	public void swingDoorTo(float rotateTo)
+	{
+		this.gameObject.transform.localEulerAngles = new Vector3(0,0,rotateTo);
 	}
 }

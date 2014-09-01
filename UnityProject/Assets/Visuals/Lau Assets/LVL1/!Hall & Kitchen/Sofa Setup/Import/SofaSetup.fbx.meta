@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 7a35974bf2f5ebf48a0ae2393d5d785f
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: ChairBlanket
     100002: Couch_Fundament_1
@@ -82,4 +82,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
+  additionalBone: 0
   userData: 

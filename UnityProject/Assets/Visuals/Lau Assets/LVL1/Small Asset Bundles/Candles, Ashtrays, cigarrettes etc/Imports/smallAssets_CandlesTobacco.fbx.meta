@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 8f5a5ebdf091d8f449863c3aaff89208
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: Ashtray_1
     100002: Ashtray_2
@@ -102,4 +102,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
+  additionalBone: 0
   userData: 

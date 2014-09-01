@@ -45,6 +45,7 @@ public class DynamicLightProbe : MonoBehaviour
 
 		float camerasCount = (float) cameras.Length;
 
+		
 		foreach (Camera camera in cameras)
 		{
 			float fov = camera.fov;
@@ -52,7 +53,6 @@ public class DynamicLightProbe : MonoBehaviour
 			camera.targetTexture = renderTexture;
 			camera.Render();
 			camera.targetTexture = null;
-
 
 			result.ReadPixels(new Rect(0.0f, 0.0f, renderTextureSize, renderTextureSize), 0, 0, false);
 			result.Apply();

@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: bf979a89dae9e5f46bf8cfad503f61f3
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: BigShelf
     100002: BigShelf_Destroyed
@@ -77,4 +77,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
+  additionalBone: 0
   userData: 
