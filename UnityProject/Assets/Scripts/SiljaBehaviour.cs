@@ -21,6 +21,8 @@ public class SiljaBehaviour : MonoBehaviour
 	private GameObject firstPersonCamera = null;
 	private GameObject thirdPersonCamera = null;
 
+	private GameObject lightProbeOnSilja; // The lightprobe gameobject so it can be switched on/off -> disabling it in void Start and enabling it again in void EnableDarkMode
+
 	private float ambientGlow = 0.0f;
 
 	private Light teddyLight = null;
@@ -76,11 +78,13 @@ public class SiljaBehaviour : MonoBehaviour
 	private SkinnedMeshRenderer siljaRenderer = null;
 	private Animator siljaAnimation = null;
 	private CameraShaker firstPersonCameraShaker;
-	
+
 	void Awake()
 	{
 		firstPersonCamera = transform.FindChild("1st Person Camera").gameObject;
 		thirdPersonCamera = transform.FindChild("3rd Person Camera").gameObject;
+
+		lightProbeOnSilja = transform.FindChild("LightProbe_Silja").gameObject;
 
 		charMotor = GetComponent<CharacterMotor>();
 		moveCtrl = GetComponent<MovementController>();
@@ -110,6 +114,11 @@ public class SiljaBehaviour : MonoBehaviour
 
 	void Start()
 	{
+		if(darkMode == false)
+		{
+			lightProbeOnSilja.SetActive(false); //Lightprobe disabled in adventure mode
+		}
+
 		//teddyLight.enabled = true;
 		teddyLight.intensity = maximumIntensity;
 
@@ -147,6 +156,7 @@ public class SiljaBehaviour : MonoBehaviour
 		refreshAIReferences();
 
 		teddyLight.enabled = true;
+		lightProbeOnSilja.SetActive(true); //Lightprobe enabled in adventure mode
 
 		charMotor.movement.maxForwardSpeed = 1.5f;
 		charMotor.movement.maxSidewaysSpeed = 1.5f;
