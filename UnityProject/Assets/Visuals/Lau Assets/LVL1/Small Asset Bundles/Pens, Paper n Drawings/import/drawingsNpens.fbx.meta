@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: f29a776109c5b7240970b3042baf929b
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: ColorPen
     100002: ColorPen_001
@@ -132,4 +132,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
+  additionalBone: 0
   userData: 

@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 59a36a1b81bbcca44b172e35d5108fe6
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: Cup_Regular
     100002: Glass_Regular
@@ -92,4 +92,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
+  additionalBone: 0
   userData: 
