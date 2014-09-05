@@ -98,7 +98,7 @@ public class SubtitleManager : MonoBehaviour {
 		{ 3f, ""},
 	};
 
-	public void farHvorErDu2(){
+	public void FarHvorErDu2(){
 		StopAllCoroutines ();
 		StartCoroutine ("PlayDictionary", farHvorErDu2Subs);
 	}
@@ -109,7 +109,7 @@ public class SubtitleManager : MonoBehaviour {
 		{ 3f, ""},
 	};
 
-	public void farHvorErDu(){
+	public void FarHvorErDu(){
 		StopAllCoroutines ();
 		StartCoroutine ("PlayDictionary", farHvorErDuSubs);
 	}

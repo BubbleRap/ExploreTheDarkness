@@ -37,9 +37,9 @@ public class GlowInteractionObject : IInteractableObject
 
 	private void ActivateHighlights( bool state )
 	{
-		if( activated == state )
+		if( activated == state || !renderer.isVisible)
 			return;
-
+		
 		Color curColor = renderer.material.color;
 		curColor.a = state ? originalAlpha : 0f;
 		renderer.material.color = curColor;	
