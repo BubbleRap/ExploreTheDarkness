@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using RAIN.Core;
+using RAIN.Entities;
 using RAIN.Navigation;
 using RAIN.Navigation.Targets;
 
@@ -24,19 +25,17 @@ public class AIBehaviour : MonoBehaviour
 		if( aiIsEnabled )
 			return;
 
-		/*
-		NavigationTarget spawnPoint = NavigationManager.instance.GetNavigationTarget(spawnPoints[0]);
+		NavigationTarget spawnPoint = NavigationManager.Instance.GetNavigationTarget(spawnPoints[0]);
 		float maxDist = 0f;
 
 		foreach (string t in spawnPoints){
-			NavigationTarget targ = NavigationManager.instance.GetNavigationTarget(t);
+			NavigationTarget targ = NavigationManager.Instance.GetNavigationTarget(t);
 			if ((targ.Position - GameObject.FindObjectOfType<Health>().transform.position).magnitude > maxDist){
 				spawnPoint = targ;
 			}
 		}
 
 		transform.position = spawnPoint.Position;
-		*/
 
 		aiMind.enabled = true;
 		aiRenderer.SetActive(true);

@@ -4,6 +4,7 @@ using System.Collections;
 public class Trigger_enable : MonoBehaviour {
 
 	public GameObject theGameObject;
+	public bool setEnable = false;
 
 	// Use this for initialization
 	void Start () {
@@ -14,7 +15,7 @@ public class Trigger_enable : MonoBehaviour {
 	{
 		if(other.tag == "Player")
 		{
-			theGameObject.SetActive(true);
+			theGameObject.SetActive(setEnable);
 		}
 	}
 
