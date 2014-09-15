@@ -352,9 +352,9 @@ public class SiljaBehaviour : MonoBehaviour
 		yield return new WaitForSeconds(ripLimbIn);
 		int index = healthController.health;
 
-		GameObject newLimb = Instantiate(limbPrefabs[index], teddyLight.transform.position, teddyLight.transform.rotation) as GameObject;
-		newLimb.AddComponent<DestroyInSeconds>();
-		newLimb.rigidbody.AddForce(Camera.main.transform.forward * 30f, ForceMode.Impulse);
+//		GameObject newLimb = Instantiate(limbPrefabs[index], teddyLight.transform.position, teddyLight.transform.rotation) as GameObject;
+//		newLimb.AddComponent<DestroyInSeconds>();
+//		newLimb.rigidbody.AddForce(Camera.main.transform.forward * 30f, ForceMode.Impulse);
 
 		limbs[index].SetActive(false);
 
