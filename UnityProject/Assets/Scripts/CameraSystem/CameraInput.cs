@@ -21,8 +21,6 @@ public class CameraInput : MonoBehaviour
 	void Awake()
 	{
 		cameraFollow = GetComponent<CameraFollow>();
-
-//		Screen.lockCursor = true;
 	}
 
 	void Update () 
@@ -34,9 +32,7 @@ public class CameraInput : MonoBehaviour
 		float pitchAngle = cameraFollow.pitch + deltaMousePosition.y * vertSensetivity ;
 		pitchAngle = Mathf.Clamp (pitchAngle, horizontalLimit, horizontalLimit * 2f);
 
-		cameraFollow.yaw = Mathf.Repeat(cameraFollow.yaw + deltaMousePosition.x * horizontalSensetivity, 359.9f);
-		//cameraFollow.transform.RotateAround( cameraFollow.cameraFocusTarget.position, cameraFollow.cameraFocusTarget.up, deltaMousePosition.x);
-		//cameraFollow.transform.RotateAround( cameraFollow.cameraFocusTarget.position, cameraFollow.cameraFocusTarget.right, deltaMousePosition.y);
+		cameraFollow.yaw = Mathf.Repeat(cameraFollow.yaw + deltaMousePosition.x * horizontalSensetivity, 359.999f);
 
 		cameraFollow.pitch = pitchAngle;
 	}

@@ -1,16 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum CameraMode
-{
-	Mouse_Free,
-	WASD_Ctrl
-}
-
 public class CameraFollow : MonoBehaviour 
 {
-	public CameraMode cameraMode = CameraMode.WASD_Ctrl;
-
 	public Transform cameraFocusTarget = null; 
 	public Vector3 cameraFocusOffset;
 	
@@ -20,11 +12,8 @@ public class CameraFollow : MonoBehaviour
 	public float yaw = 180f;
 	[Range(0f, 360f)]
 	public float pitch = 45f;
-	[Range(0f, 360f)]
-	public float roll = 0f;
-
-	public bool isFollowingPosition = true;
-	public bool isFollowingRotation = true;
+//	[Range(0f, 360f)]
+//	public float roll = 0f;
 
 	[Range(0f,1.0f)]
 	public float followingSpeed = 0.05f;
@@ -52,7 +41,6 @@ public class CameraFollow : MonoBehaviour
 		}
 
 		StartCoroutine (FollowPosition ());
-		StartCoroutine (FollowRotation ()); 
 		StartCoroutine (ShakeCamera	()); 
 
 	}
@@ -61,35 +49,12 @@ public class CameraFollow : MonoBehaviour
 	{
 		while (true) 
 		{
-			if(isFollowingPosition) 
-			{
-				Vector3 relativePosition;
-				if( cameraMode == CameraMode.WASD_Ctrl )
-				{
-//					relativePosition = GetVectorFromAngle(pitch, yaw, roll, cameraDistance);
-//					transform.position = Vector3.Lerp(transform.position, cameraFocusTarget.TransformPoint(/*shakeOffset +*/ relativePosition), followingSpeed);
-				}
-				else
-				{
-					Vector3 camDirection = new Vector3( pitch, yaw, roll );// + transform.parent.localRotation.eulerAngles;
-					relativePosition = GetVectorFromAngle(camDirection.x - shakeOffset.y, camDirection.y - shakeOffset.x, camDirection.z, cameraDistance + shakeOffset.z, cameraFocusTarget.position);
-					transform.position = Vector3.Lerp(transform.position, relativePosition, followingSpeed);
-				}
+			Vector3 relativePosition = GetVectorFromAngle(pitch - shakeOffset.y, yaw - shakeOffset.x, cameraDistance) + cameraFocusTarget.position;
 
-			}
-			yield return null;
-		}
-	}
+			transform.position = Vector3.Slerp(transform.position, relativePosition, followingSpeed);
+			transform.localRotation = Quaternion.LookRotation((cameraFocusOffset -transform.localPosition).normalized);
+			transform.Rotate( Vector3.up, 15f, Space.World );
 
-	IEnumerator FollowRotation()
-	{
-		while (true) 
-		{
-			if( isFollowingRotation )
-			{
-				Quaternion rotateTo = Quaternion.LookRotation((cameraFocusOffset - transform.localPosition).normalized);
-				transform.localRotation = rotateTo;
-			}
 			yield return null;
 		}
 	}
@@ -104,10 +69,10 @@ public class CameraFollow : MonoBehaviour
 		}
 	}
 
-	Vector3 GetVectorFromAngle (float x, float y, float z, float distFromObj, Vector3 relativePosition = default(Vector3)) 
+	Vector3 GetVectorFromAngle (float x, float y, float distFromObj, Vector3 relativePosition = default(Vector3)) 
 	{
-		Vector3 up = Quaternion.Euler(x, y, z) * Vector3.up;
+		Vector3 up = (Quaternion.Euler(x, y, 0f) * Vector3.up).normalized;
 
-		return up.normalized * distFromObj + relativePosition;
+		return up * distFromObj;
 	}
 }
