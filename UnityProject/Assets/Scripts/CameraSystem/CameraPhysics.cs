@@ -41,12 +41,11 @@ public class CameraPhysics : MonoBehaviour
 		   // if camera center point raycast hits a wall
 		   ||  	Physics.Raycast(transform.position, transform.forward, transform.localPosition.magnitude, 1 << 0 ) 
 		   // if raycast to character hits a wall
-		   ||	Physics.Raycast(transform.position, (follower.cameraFocusTarget.position - transform.position).normalized/*, out hit*/, follower.cameraDistance, 1 << 0) 
+		   ||	Physics.Raycast(transform.position, (follower.cameraFocusTarget.position - transform.position).normalized, follower.cameraDistance, 1 << 0) 
 		   )
 		{
+			// if there is a hit, then get a close up
 			follower.cameraDistance = Mathf.Lerp (follower.cameraDistance, originalDistance * minimumDistance, approachingSpeed);
-
-//			Debug.Log(hit.collider.gameObject.name);
 
 			_timer = 0f;
 			fallbackFrom = follower.cameraDistance;
@@ -55,7 +54,7 @@ public class CameraPhysics : MonoBehaviour
 		{
 			if( _timer < fallbackTime )
 			{
-	//			Debug.Log(_timer);
+				// fallback the camera if there is no collision happening
 				follower.cameraDistance = Mathf.Lerp (fallbackFrom, originalDistance, fallbackCurve.Evaluate(_timer / fallbackTime ) );
 			}
 		}
