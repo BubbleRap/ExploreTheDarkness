@@ -4,6 +4,7 @@ using System.Collections;
 public class Inventory : MonoBehaviour {
 
 	private int lilleBrorPieces = 0;
+	public bool lillebrorComplete = false;
 
 	// Use this for initialization
 	void Start () {
