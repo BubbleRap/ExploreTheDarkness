@@ -24,6 +24,25 @@ public class PickUpLillebrorPiece : IInteractableObject
 			siljaGO.GetComponent<CollectLillebrorUI>().multipleTask = false;
 		}
 
+		if(GameObject.Find("PuzzleTrigger") != null)
+		{
+			AudioClip[] audioClips = GameObject.Find("PuzzleTrigger").GetComponent<PuzzleLillebror>().collectLillebrorSounds;
+			if(audioClips.Length > 0)
+			{
+				AudioSource soundSource = GameObject.Find("HeadAudioSource").transform.audio;
+				if(siljaGO.GetComponent<Inventory>().getLilleBrorPieces() < audioClips.Length)
+				{
+					soundSource.clip = audioClips[siljaGO.GetComponent<Inventory>().getLilleBrorPieces()];
+					soundSource.Play();
+				}
+				else if(siljaGO.GetComponent<Inventory>().getLilleBrorPieces() >= audioClips.Length)
+				{
+					soundSource.clip = audioClips[siljaGO.GetComponent<Inventory>().getLilleBrorPieces() % audioClips.Length];
+					soundSource.Play();
+				}
+			}
+		}
+
 		siljaInventory.setLilleBrorPieces();
 		Destroy(transform.gameObject);
     }
