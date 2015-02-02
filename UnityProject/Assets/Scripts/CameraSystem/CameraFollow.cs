@@ -4,9 +4,11 @@ using System.Collections;
 public class CameraFollow : MonoBehaviour 
 {
 	public Transform cameraFocusTarget = null; 
-	public Vector3 cameraFocusOffset;
-	
+
+	[HideInInspector]
 	public float cameraDistance = 2;
+	public float minDistance = 0.01f;
+	public float maxDistance = 1.15f;
 
 	[Range(0f, 360f)]
 	public float yaw = 180f;
@@ -25,7 +27,8 @@ public class CameraFollow : MonoBehaviour
 	[Range(0f, 10f)]
 	public float shakeFrequency = 0f;
 
-	
+	public float collisionFixMinHeight = 0.45f;
+	public float collisionFixMaxHeight = 0.7f;
 	private Vector3 shakeOffset;
 
 	private void Start()
@@ -45,16 +48,22 @@ public class CameraFollow : MonoBehaviour
 	{
 		while (true) 
 		{
+			float distanceFactor = Mathf.Clamp01((cameraDistance - minDistance) / (maxDistance - minDistance));
+			float collisionFixHeight = Mathf.Lerp(collisionFixMinHeight, collisionFixMaxHeight, 1f - distanceFactor );
+
 			// offset the camera corresponding to the angles and the shaking offsets
-			Vector3 relativePosition = GetVectorFromAngle(pitch - shakeOffset.y, yaw - shakeOffset.x, cameraDistance) + cameraFocusTarget.position;
+			Vector3 relativePosition = GetVectorFromAngle(pitch - shakeOffset.y, yaw - shakeOffset.x, cameraDistance) + cameraFocusTarget.position + Vector3.up * collisionFixHeight;
 
 			// Set up the camera on the orbit around the camera, using PITCH and YAW angles taken from CameraInput
 			transform.position = Vector3.Slerp(transform.position, relativePosition, followingSpeed);
-			// Look at the character with a bot of vertical offset, so it looks at the head
-			transform.localRotation = Quaternion.LookRotation((cameraFocusOffset -transform.localPosition).normalized);
+
+			float focusDistance = 1f;
+			Vector3 camLocalDirection = new Vector3(-transform.localPosition.x, 0f, -transform.localPosition.z).normalized;
+			camLocalDirection = (Quaternion.Euler(0f, 30f, 0f) * camLocalDirection) * focusDistance;
+			transform.localRotation = Quaternion.LookRotation( ((-transform.localPosition + Vector3.up * collisionFixHeight) + camLocalDirection).normalized );
 
 			// Offset the rotation a bit, so the character is positioned a bit on the left
-			transform.Rotate( Vector3.up, 15f, Space.World );
+//			transform.Rotate( Vector3.up, 15f, Space.World );
 
 			yield return null;
 		}

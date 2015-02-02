@@ -8,8 +8,6 @@ public class CameraPhysics : MonoBehaviour
 {
 	// Percents
 	[Range(0f, 1f)]
-	public float minimumDistance = 0.5f;
-	[Range(0f, 1f)]
 	public float approachingSpeed = 0.1f;
 
 	public AnimationCurve fallbackCurve;
@@ -17,7 +15,7 @@ public class CameraPhysics : MonoBehaviour
 	public float fallbackTime = 5f;
 
 	private CameraFollow follower = null;
-	private float originalDistance = 0f;
+
 	private List<Collider> colliders = new List<Collider>();
 
 	private float _timer = 0f;
@@ -26,7 +24,6 @@ public class CameraPhysics : MonoBehaviour
 	void Awake()
 	{
 		follower = GetComponent<CameraFollow> ();
-		originalDistance = follower.cameraDistance;
 	}
 
 	void Update()
@@ -45,7 +42,7 @@ public class CameraPhysics : MonoBehaviour
 		   )
 		{
 			// if there is a hit, then get a close up
-			follower.cameraDistance = Mathf.Lerp (follower.cameraDistance, originalDistance * minimumDistance, approachingSpeed);
+			follower.cameraDistance = Mathf.Lerp (follower.cameraDistance, follower.maxDistance * follower.minDistance, approachingSpeed);
 
 			_timer = 0f;
 			fallbackFrom = follower.cameraDistance;
@@ -55,7 +52,7 @@ public class CameraPhysics : MonoBehaviour
 			if( _timer < fallbackTime )
 			{
 				// fallback the camera if there is no collision happening
-				follower.cameraDistance = Mathf.Lerp (fallbackFrom, originalDistance, fallbackCurve.Evaluate(_timer / fallbackTime ) );
+				follower.cameraDistance = Mathf.Lerp (fallbackFrom, follower.maxDistance, fallbackCurve.Evaluate(_timer / fallbackTime ) );
 			}
 		}
 
