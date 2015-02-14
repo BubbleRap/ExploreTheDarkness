@@ -18,7 +18,7 @@ public class CameraPhysics : MonoBehaviour
 
 	private List<Collider> colliders = new List<Collider>();
 
-	private float _timer = 0f;
+	private float _timer = 5f;
 	private float fallbackFrom = 0f;
 
 	void Awake()
@@ -31,18 +31,19 @@ public class CameraPhysics : MonoBehaviour
 		_timer += Time.deltaTime;
 		_timer = Mathf.Clamp(_timer, 0f, fallbackTime);
 
-//		RaycastHit hit = default(RaycastHit);
+		RaycastHit hit = default(RaycastHit);
 
 		// if camera collides itself
 		if( colliders.Count > 0 
 		   // if camera center point raycast hits a wall
-		   ||  	Physics.Raycast(transform.position, transform.forward, transform.localPosition.magnitude, 1 << 0 ) 
+		   ||  	Physics.Raycast(transform.position, transform.forward, out hit, transform.localPosition.magnitude, 1 << 0 ) 
 		   // if raycast to character hits a wall
-		   ||	Physics.Raycast(transform.position, (follower.cameraFocusTarget.position - transform.position).normalized, follower.cameraDistance, 1 << 0) 
+		   ||	Physics.Raycast(transform.position, (follower.cameraFocusTarget.position - transform.position).normalized, out hit, follower.cameraDistance, 1 << 0) 
 		   )
 		{
 			// if there is a hit, then get a close up
 			follower.cameraDistance = Mathf.Lerp (follower.cameraDistance, follower.maxDistance * follower.minDistance, approachingSpeed);
+
 
 			_timer = 0f;
 			fallbackFrom = follower.cameraDistance;
@@ -60,6 +61,8 @@ public class CameraPhysics : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
+	//	Debug.Log(other.name);
+
 		colliders.Add (other);
 	}
 	

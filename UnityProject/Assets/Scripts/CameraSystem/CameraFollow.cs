@@ -31,6 +31,11 @@ public class CameraFollow : MonoBehaviour
 	public float collisionFixMaxHeight = 0.7f;
 	private Vector3 shakeOffset;
 
+	[Range(0f, 2f)]
+	public float focusDistance = 0.5f;
+	[Range(0f, 45f)]
+	public float focusAngleOffset = 30f;
+
 	private void Start()
 	{
 		if (cameraFocusTarget == null) 
@@ -57,9 +62,9 @@ public class CameraFollow : MonoBehaviour
 			// Set up the camera on the orbit around the camera, using PITCH and YAW angles taken from CameraInput
 			transform.position = Vector3.Slerp(transform.position, relativePosition, followingSpeed);
 
-			float focusDistance = 1f;
+
 			Vector3 camLocalDirection = new Vector3(-transform.localPosition.x, 0f, -transform.localPosition.z).normalized;
-			camLocalDirection = (Quaternion.Euler(0f, 30f, 0f) * camLocalDirection) * focusDistance;
+			camLocalDirection = (Quaternion.Euler(0f, focusAngleOffset, 0f) * camLocalDirection) * focusDistance;
 			transform.localRotation = Quaternion.LookRotation( ((-transform.localPosition + Vector3.up * collisionFixHeight) + camLocalDirection).normalized );
 
 			// Offset the rotation a bit, so the character is positioned a bit on the left
