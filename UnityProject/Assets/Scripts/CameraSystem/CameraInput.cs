@@ -4,10 +4,10 @@ using System.Collections;
 [RequireComponent(typeof(CameraFollow))]
 public class CameraInput : MonoBehaviour 
 {
-	[Range(0f, 180)]
-	public float verticalLimit = 45f;
-	[Range(0f, 180)]
-	public float horizontalLimit = 45f;
+//	[Range(0f, 180)]
+//	public float verticalLimit = 45f;
+//	[Range(0f, 180)]
+//	private float horizontalLimit = 120f;
 
 	[Range(0f, 10f)]
 	public float verticalSensetivity = 1f;
@@ -30,7 +30,7 @@ public class CameraInput : MonoBehaviour
 		float vertSensetivity = iversedVertical == false ? verticalSensetivity : -verticalSensetivity;
 
 		float pitchAngle = cameraFollow.pitch + deltaMousePosition.y * vertSensetivity ;
-		pitchAngle = Mathf.Clamp (pitchAngle, horizontalLimit, horizontalLimit * 2f);
+		pitchAngle = Mathf.Clamp (pitchAngle, 30f, 110f);
 
 		cameraFollow.yaw = Mathf.Repeat(cameraFollow.yaw + deltaMousePosition.x * horizontalSensetivity, 359.999f);
 
