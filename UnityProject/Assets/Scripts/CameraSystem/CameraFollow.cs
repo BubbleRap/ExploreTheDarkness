@@ -35,6 +35,11 @@ public class CameraFollow : MonoBehaviour
 	public float focusDistance = 0.5f;
 	[Range(0f, 45f)]
 	public float focusAngleOffset = 30f;
+	
+	[HideInInspector]
+	public bool isFocusing = false;
+	[HideInInspector]
+	public Transform focusPoint = null;
 
 	private void Start()
 	{
@@ -53,22 +58,27 @@ public class CameraFollow : MonoBehaviour
 	{
 		while (true) 
 		{
-			float distanceFactor = Mathf.Clamp01((cameraDistance - minDistance) / (maxDistance - minDistance));
-			float collisionFixHeight = Mathf.Lerp(collisionFixMinHeight, collisionFixMaxHeight, 1f - distanceFactor );
-
-			// offset the camera corresponding to the angles and the shaking offsets
-			Vector3 relativePosition = GetVectorFromAngle(pitch - shakeOffset.y, yaw - shakeOffset.x, cameraDistance) + cameraFocusTarget.position + Vector3.up * collisionFixHeight;
-
-			// Set up the camera on the orbit around the camera, using PITCH and YAW angles taken from CameraInput
-			transform.position = Vector3.Slerp(transform.position, relativePosition, followingSpeed);
-
-
-			Vector3 camLocalDirection = new Vector3(-transform.localPosition.x, 0f, -transform.localPosition.z).normalized;
-			camLocalDirection = (Quaternion.Euler(0f, focusAngleOffset, 0f) * camLocalDirection) * focusDistance;
-			transform.localRotation = Quaternion.LookRotation( ((-transform.localPosition + Vector3.up * collisionFixHeight) + camLocalDirection).normalized );
-
-			// Offset the rotation a bit, so the character is positioned a bit on the left
-//			transform.Rotate( Vector3.up, 15f, Space.World );
+			if( isFocusing )
+			{
+				transform.rotation = Quaternion.Slerp( transform.rotation, Quaternion.LookRotation( focusPoint.position - transform.position ), Time.deltaTime );
+			}
+			else
+			{
+				float distanceFactor = Mathf.Clamp01((cameraDistance - minDistance) / (maxDistance - minDistance));
+				float collisionFixHeight = Mathf.Lerp(collisionFixMinHeight, collisionFixMaxHeight, 1f - distanceFactor );
+				
+				// offset the camera corresponding to the angles and the shaking offsets
+				Vector3 relativePosition = GetVectorFromAngle(pitch - shakeOffset.y, yaw - shakeOffset.x, cameraDistance) + cameraFocusTarget.position + Vector3.up * collisionFixHeight;
+				
+				// Set up the camera on the orbit around the camera, using PITCH and YAW angles taken from CameraInput
+				transform.position = Vector3.Slerp(transform.position, relativePosition, followingSpeed);
+				
+				
+				Vector3 camLocalDirection = new Vector3(-transform.localPosition.x, 0f, -transform.localPosition.z).normalized;
+				camLocalDirection = (Quaternion.Euler(0f, focusAngleOffset, 0f) * camLocalDirection) * focusDistance;
+							
+				transform.localRotation = Quaternion.LookRotation( ((-transform.localPosition + Vector3.up * collisionFixHeight) + camLocalDirection).normalized );
+			}
 
 			yield return null;
 		}

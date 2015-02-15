@@ -78,6 +78,7 @@ public class SiljaBehaviour : MonoBehaviour
 	private SkinnedMeshRenderer siljaRenderer = null;
 	private Animator siljaAnimation = null;
 	private CameraShaker firstPersonCameraShaker;
+	private CameraFollow cameraFollowCom = null;
 
 	void Awake()
 	{
@@ -103,6 +104,7 @@ public class SiljaBehaviour : MonoBehaviour
 		siljaAnimation = transform.FindChild("Silja_Animated").GetComponentInChildren<Animator>();
 
 		firstPersonCameraShaker = firstPersonCamera.GetComponent<CameraShaker>();
+		cameraFollowCom = thirdPersonCamera.GetComponent<CameraFollow>();
 
 		maxFlickerIntensity = mimimumIntensity * 2;
 		minFlickerIntensity = mimimumIntensity * 1.5f;
@@ -365,8 +367,13 @@ public class SiljaBehaviour : MonoBehaviour
 
 	public void LookAtPointFP(bool state, Transform lookAtObject, Transform lookFromPoint)
 	{
-		firstPersonCamera.gameObject.SetActive(state);
-		LookAtPoint(state, lookAtObject, lookFromPoint);
+//		firstPersonCamera.gameObject.SetActive(state);
+//		LookAtPoint(state, lookAtObject, lookFromPoint);
+
+		cameraFollowCom.isFocusing = state;
+		cameraFollowCom.focusPoint = lookAtObject;
+
+		camInput.enabled = !state;
 	}
 
 	public void LookAtPoint(bool state, Transform lookAtObject, Transform lookFromPoint)
