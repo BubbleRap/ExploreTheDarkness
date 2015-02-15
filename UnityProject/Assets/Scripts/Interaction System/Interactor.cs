@@ -45,7 +45,24 @@ public class Interactor : MonoBehaviour
 
 				// Toggling all the scripts on the object, that implement the "interface"
 				if( interactableInterface != null )
+				{
+
+					// So here, I am thinkering having a check, if an Activate returns false, the whole sequence returns false
+					// but now, it is time for hacks
+
+
+					// >>>da hack
+					// check, if there is a glow component, which will tell us
+					// whether player is looking at the object
+					GlowInteractionObject glowCom = interactableInterface as GlowInteractionObject;
+					if( glowCom != null )
+						if( !glowCom.activated )
+							return;
+
+
+					// not a hack
 					interactableInterface.Activate();
+				}
 			}
 		}
 	}

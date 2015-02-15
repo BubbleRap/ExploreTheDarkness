@@ -4,7 +4,10 @@ using System.Collections;
 public class GlowInteractionObject : IInteractableObject 
 {
 	private float originalAlpha = 1f;
-	private bool activated = false;
+
+
+	[HideInInspector]
+	public bool activated = false;
 
 	public override void Activate()
 	{
