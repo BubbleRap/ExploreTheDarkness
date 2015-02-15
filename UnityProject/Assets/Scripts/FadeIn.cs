@@ -116,12 +116,11 @@ public class FadeIn : MonoBehaviour {
 		}
 
 		if (stillFading) {
-			GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), fadeTexture);
-			
+
 			if(isTitleScreen)
-			{
-				GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), titleTexture, ScaleMode.ScaleToFit, true, 0.0F);
-			}
+				GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), titleTexture, ScaleMode.StretchToFill, true, 0.0F);
+			else
+				GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), fadeTexture);
 
 			if (currentText.Length != 0){
 				GUI.color = Color.white;
@@ -132,7 +131,7 @@ public class FadeIn : MonoBehaviour {
 			SubtitleManager.Instance.SorryDad();
 			mainTheme.Play();
 			MenuController.canToggleMenu = true;
-			MonoBehaviour.Destroy(this);
+			MonoBehaviour.Destroy(gameObject);//this);
 		}
 	}
 }
