@@ -8,6 +8,7 @@ public class SiljaBehaviour : MonoBehaviour
 	public Transform oneHandJoint;
 	public Transform twoHandsJoint;
 
+	public Animator siljaAnimation;
 	public Animator firstPersonAnimator;
 	public GameObject[] limbs;
 	public GameObject[] limbPrefabs;
@@ -75,8 +76,8 @@ public class SiljaBehaviour : MonoBehaviour
 	private float maximumGlow = 0.75f;
 	private float minimumGlow = 0.25f;
 
-	private SkinnedMeshRenderer siljaRenderer = null;
-	private Animator siljaAnimation = null;
+//	private SkinnedMeshRenderer siljaRenderer = null;
+
 	private CameraShaker firstPersonCameraShaker;
 	private CameraFollow cameraFollowCom = null;
 
@@ -100,8 +101,8 @@ public class SiljaBehaviour : MonoBehaviour
 		dLightProbe = GetComponentInChildren<DynamicLightProbe> ();
 		aiEntities = FindObjectsOfType<AIBehaviour>();
 
-		siljaRenderer = transform.FindChild("Silja_Animated").GetComponentInChildren<SkinnedMeshRenderer>();
-		siljaAnimation = transform.FindChild("Silja_Animated").GetComponentInChildren<Animator>();
+//		siljaRenderer = transform.FindChild("Silja_Animated").GetComponentInChildren<SkinnedMeshRenderer>();
+//		siljaAnimation = transform.FindChild("Silja_Animated").GetComponentInChildren<Animator>();
 
 		firstPersonCameraShaker = firstPersonCamera.GetComponent<CameraShaker>();
 		cameraFollowCom = thirdPersonCamera.GetComponent<CameraFollow>();
@@ -178,7 +179,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 		animation.Play("waking_up");
 
-		siljaRenderer.material.shader = Shader.Find("Custom/TransparentInvisibleShadowCaster");
+//		siljaRenderer.material.shader = Shader.Find("Custom/TransparentInvisibleShadowCaster");
 
 		darkMode = true;
 		siljaAnimation.SetBool ("darkmode", darkMode);
@@ -204,7 +205,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
 
-		siljaRenderer.material.shader = Shader.Find("Custom/DoubleSided/Diffuse");
+//		siljaRenderer.material.shader = Shader.Find("Custom/DoubleSided/Diffuse");
 
 		darkMode = false;
 		siljaAnimation.SetBool ("darkmode", darkMode);
