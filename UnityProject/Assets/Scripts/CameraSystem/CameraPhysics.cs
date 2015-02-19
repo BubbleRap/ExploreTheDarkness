@@ -36,7 +36,7 @@ public class CameraPhysics : MonoBehaviour
 		// if camera collides itself
 		if( colliders.Count > 0 
 		   // if camera center point raycast hits a wall
-		   ||  	Physics.Raycast(transform.position, transform.forward, out hit, transform.localPosition.magnitude, 1 << 0 ) 
+	//	   ||  	Physics.Raycast(transform.position, transform.forward, out hit, transform.localPosition.magnitude, 1 << 0 ) 
 		   // if raycast to character hits a wall
 		   ||	Physics.Raycast(transform.position, (follower.cameraFocusTarget.position - transform.position).normalized, out hit, follower.cameraDistance, 1 << 0) 
 		   )
