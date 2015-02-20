@@ -182,7 +182,7 @@ public class SiljaBehaviour : MonoBehaviour
 //		siljaRenderer.material.shader = Shader.Find("Custom/TransparentInvisibleShadowCaster");
 
 		darkMode = true;
-		siljaAnimation.SetBool ("darkmode", darkMode);
+//		siljaAnimation.SetBool ("darkmode", darkMode);
 	}
 
 	public void EnableStoryMode()
@@ -208,7 +208,7 @@ public class SiljaBehaviour : MonoBehaviour
 //		siljaRenderer.material.shader = Shader.Find("Custom/DoubleSided/Diffuse");
 
 		darkMode = false;
-		siljaAnimation.SetBool ("darkmode", darkMode);
+//		siljaAnimation.SetBool ("darkmode", darkMode);
 	}
 
 	// is sent by light probe itself
