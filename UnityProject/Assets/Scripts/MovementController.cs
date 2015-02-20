@@ -37,7 +37,7 @@ public class MovementController : MonoBehaviour
 		charController = GetComponent<CharacterController> ();
 		charMotor = GetComponent<CharacterMotor>();
 
-		characterAnimator.SetBool ("scared", true);
+//		characterAnimator.SetBool ("scared", true);
 		cameraTransform = Camera.main.transform;
 		camFollowComp = GetComponentInChildren<CameraFollow>();
 		camInputComp = GetComponentInChildren<CameraInput>();
@@ -45,7 +45,7 @@ public class MovementController : MonoBehaviour
 
 	void Start()
 	{
-		StartCoroutine(LookAround());
+//		StartCoroutine(LookAround());
 	}
 
 	void Update()
