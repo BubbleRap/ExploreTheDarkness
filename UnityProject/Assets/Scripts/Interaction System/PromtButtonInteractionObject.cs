@@ -33,7 +33,7 @@ public class PromtButtonInteractionObject : IInteractableObject
 
 	private void ActivatePromtButton( bool state )
 	{
-		buttonPrompt.SetActive(state && !interactionIsActive);
+//		buttonPrompt.SetActive(state && !interactionIsActive);
 
 		if( objectIsClose == state )
 			return;
