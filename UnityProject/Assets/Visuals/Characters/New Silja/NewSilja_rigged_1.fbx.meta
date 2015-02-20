@@ -133,6 +133,9 @@ ModelImporter:
     3300000: '!Silja_Hair'
     4300000: '!Silja_Hair'
     4300002: '!Silja_LowPoly'
+    7400000: '!Silja_DeformRig|!NewSilja_PlaceHolderAnims'
+    7400002: NewSilja_Walk_PlaceHolder
+    7400004: NewSilja_Idle_PlaceHolder
     9500000: //RootNode
     13700000: '!Silja_LowPoly'
   materials:
@@ -150,7 +153,463 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: '!Silja_DeformRig|!NewSilja_PlaceHolderAnims'
+      takeName: '!Silja_DeformRig|!NewSilja_PlaceHolderAnims'
+      firstFrame: 0
+      lastFrame: 84
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: '!Silja_DeformRig'
+        weight: 1
+      - path: '!Silja_DeformRig/hips'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/neck'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/neck/head'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/neck/head/!Silja_Hair'
+        weight: 0
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/f_index.01.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/f_index.01.L/f_index.02.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/f_index.01.L/f_index.02.L/f_index.03.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/thumb.01.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/thumb.01.L/thumb.02.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/thumb.01.L/thumb.02.L/thumb.03.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.02.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.02.L/f_middle.01.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.02.L/f_middle.01.L/f_middle.02.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.02.L/f_middle.01.L/f_middle.02.L/f_middle.03.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.03.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.03.L/f_ring.01.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.03.L/f_ring.01.L/f_ring.02.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.03.L/f_ring.01.L/f_ring.02.L/f_ring.03.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.04.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.04.L/f_pinky.01.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.04.L/f_pinky.01.L/f_pinky.02.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.04.L/f_pinky.01.L/f_pinky.02.L/f_pinky.03.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/f_index.01.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/f_index.01.R/f_index.02.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/f_index.01.R/f_index.02.R/f_index.03.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/thumb.01.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/thumb.01.R/thumb.02.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/thumb.01.R/thumb.02.R/thumb.03.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.02.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.02.R/f_middle.01.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.02.R/f_middle.01.R/f_middle.02.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.02.R/f_middle.01.R/f_middle.02.R/f_middle.03.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.03.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.03.R/f_ring.01.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.03.R/f_ring.01.R/f_ring.02.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.03.R/f_ring.01.R/f_ring.02.R/f_ring.03.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.04.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.04.R/f_pinky.01.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.04.R/f_pinky.01.R/f_pinky.02.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.04.R/f_pinky.01.R/f_pinky.02.R/f_pinky.03.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.L/shin.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.L/shin.L/foot.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.L/shin.L/foot.L/toe.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.R/shin.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.R/shin.R/foot.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.R/shin.R/foot.R/toe.R'
+        weight: 1
+      - path: '!Silja_LowPoly'
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: NewSilja_Walk_PlaceHolder
+      takeName: '!Silja_DeformRig|!NewSilja_PlaceHolderAnims'
+      firstFrame: 1
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: '!Silja_DeformRig'
+        weight: 1
+      - path: '!Silja_DeformRig/hips'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/neck'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/neck/head'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/neck/head/!Silja_Hair'
+        weight: 0
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/f_index.01.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/f_index.01.L/f_index.02.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/f_index.01.L/f_index.02.L/f_index.03.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/thumb.01.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/thumb.01.L/thumb.02.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/thumb.01.L/thumb.02.L/thumb.03.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.02.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.02.L/f_middle.01.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.02.L/f_middle.01.L/f_middle.02.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.02.L/f_middle.01.L/f_middle.02.L/f_middle.03.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.03.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.03.L/f_ring.01.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.03.L/f_ring.01.L/f_ring.02.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.03.L/f_ring.01.L/f_ring.02.L/f_ring.03.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.04.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.04.L/f_pinky.01.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.04.L/f_pinky.01.L/f_pinky.02.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.04.L/f_pinky.01.L/f_pinky.02.L/f_pinky.03.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/f_index.01.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/f_index.01.R/f_index.02.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/f_index.01.R/f_index.02.R/f_index.03.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/thumb.01.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/thumb.01.R/thumb.02.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/thumb.01.R/thumb.02.R/thumb.03.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.02.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.02.R/f_middle.01.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.02.R/f_middle.01.R/f_middle.02.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.02.R/f_middle.01.R/f_middle.02.R/f_middle.03.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.03.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.03.R/f_ring.01.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.03.R/f_ring.01.R/f_ring.02.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.03.R/f_ring.01.R/f_ring.02.R/f_ring.03.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.04.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.04.R/f_pinky.01.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.04.R/f_pinky.01.R/f_pinky.02.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.04.R/f_pinky.01.R/f_pinky.02.R/f_pinky.03.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.L/shin.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.L/shin.L/foot.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.L/shin.L/foot.L/toe.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.R/shin.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.R/shin.R/foot.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.R/shin.R/foot.R/toe.R'
+        weight: 1
+      - path: '!Silja_LowPoly'
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: NewSilja_Idle_PlaceHolder
+      takeName: '!Silja_DeformRig|!NewSilja_PlaceHolderAnims'
+      firstFrame: 45
+      lastFrame: 84
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: '!Silja_DeformRig'
+        weight: 1
+      - path: '!Silja_DeformRig/hips'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/neck'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/neck/head'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/neck/head/!Silja_Hair'
+        weight: 0
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/f_index.01.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/f_index.01.L/f_index.02.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/f_index.01.L/f_index.02.L/f_index.03.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/thumb.01.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/thumb.01.L/thumb.02.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/thumb.01.L/thumb.02.L/thumb.03.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.02.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.02.L/f_middle.01.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.02.L/f_middle.01.L/f_middle.02.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.02.L/f_middle.01.L/f_middle.02.L/f_middle.03.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.03.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.03.L/f_ring.01.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.03.L/f_ring.01.L/f_ring.02.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.03.L/f_ring.01.L/f_ring.02.L/f_ring.03.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.04.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.04.L/f_pinky.01.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.04.L/f_pinky.01.L/f_pinky.02.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.04.L/f_pinky.01.L/f_pinky.02.L/f_pinky.03.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/f_index.01.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/f_index.01.R/f_index.02.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/f_index.01.R/f_index.02.R/f_index.03.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/thumb.01.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/thumb.01.R/thumb.02.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/thumb.01.R/thumb.02.R/thumb.03.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.02.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.02.R/f_middle.01.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.02.R/f_middle.01.R/f_middle.02.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.02.R/f_middle.01.R/f_middle.02.R/f_middle.03.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.03.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.03.R/f_ring.01.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.03.R/f_ring.01.R/f_ring.02.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.03.R/f_ring.01.R/f_ring.02.R/f_ring.03.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.04.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.04.R/f_pinky.01.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.04.R/f_pinky.01.R/f_pinky.02.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.04.R/f_pinky.01.R/f_pinky.02.R/f_pinky.03.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.L/shin.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.L/shin.L/foot.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.L/shin.L/foot.L/toe.L'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.R/shin.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.R/shin.R/foot.R'
+        weight: 1
+      - path: '!Silja_DeformRig/hips/thigh.R/shin.R/foot.R/toe.R'
+        weight: 1
+      - path: '!Silja_LowPoly'
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
