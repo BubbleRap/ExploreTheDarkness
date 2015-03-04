@@ -177,7 +177,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,1f);
 
-		animation.Play("waking_up");
+		GetComponent<Animation>().Play("waking_up");
 
 //		siljaRenderer.material.shader = Shader.Find("Custom/TransparentInvisibleShadowCaster");
 

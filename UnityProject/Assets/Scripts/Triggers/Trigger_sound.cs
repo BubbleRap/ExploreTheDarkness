@@ -50,9 +50,9 @@ public class Trigger_sound : MonoBehaviour {
 					SubtitleManager.Instance.SendMessage(SubtitlesToPlay);
 			}
 			else
-			if( !soundSource.audio.isPlaying )
+			if( !soundSource.GetComponent<AudioSource>().isPlaying )
 			{
-				soundSource.audio.PlayOneShot(audioClip[randomNumber], volume);
+				soundSource.GetComponent<AudioSource>().PlayOneShot(audioClip[randomNumber], volume);
 				isTrigger = true;
 
 				if (SubtitlesToPlay.Length >0)

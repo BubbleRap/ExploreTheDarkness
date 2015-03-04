@@ -41,8 +41,8 @@ public class AIBehaviour : MonoBehaviour
 		aiRenderer.SetActive(true);
 		aiIsEnabled = true;
 
-		if (this.audio != null && audio.isPlaying)
-			audio.Stop();
+		if (this.GetComponent<AudioSource>() != null && GetComponent<AudioSource>().isPlaying)
+			GetComponent<AudioSource>().Stop();
 	}
 
 	public void DespawnAI()
@@ -61,8 +61,8 @@ public class AIBehaviour : MonoBehaviour
 		foreach (AudioSource s in GetComponentsInChildren<AudioSource>())
 			s.Stop();
 
-		if (this.audio != null)
-			audio.Play();
+		if (this.GetComponent<AudioSource>() != null)
+			GetComponent<AudioSource>().Play();
 	}
 
 	public void RetriveLightProbeResult(float intensity)

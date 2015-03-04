@@ -48,8 +48,8 @@ class SunShaftsEditor extends Editor
     	
 		var oldVal : boolean = useDepthTexture.boolValue;
 		EditorGUILayout.PropertyField (useDepthTexture, new GUIContent ("Rely on Z Buffer?"));
-		if((target as SunShafts).camera)
-			GUILayout.Label("Current camera mode: "+ (target as SunShafts).camera.depthTextureMode, EditorStyles.miniBoldLabel);
+		if((target as SunShafts).GetComponent.<Camera>())
+			GUILayout.Label("Current camera mode: "+ (target as SunShafts).GetComponent.<Camera>().depthTextureMode, EditorStyles.miniBoldLabel);
 		
     	EditorGUILayout.EndHorizontal();
 		

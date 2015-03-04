@@ -21,7 +21,7 @@ public class Trigger_animation : MonoBehaviour {
 				StartCoroutine("DelayAndPlay",i);
 			}
 
-			collider.enabled = false;
+			GetComponent<Collider>().enabled = false;
 		}
 	}
 	
@@ -29,7 +29,7 @@ public class Trigger_animation : MonoBehaviour {
 		if (animationDelays.Count > index)
 			yield return new WaitForSeconds(animationDelays[index]);
 
-		animationsToTrigger[index].animation.Play();
+		animationsToTrigger[index].GetComponent<Animation>().Play();
 
 		if(animationsToTrigger[index].GetComponent<AudioSource>() != null)
 			animationsToTrigger[index].GetComponent<AudioSource>().Play();

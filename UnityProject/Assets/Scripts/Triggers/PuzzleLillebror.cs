@@ -18,7 +18,7 @@ public class PuzzleLillebror : MonoBehaviour {
 	{
 		if(other.tag == "Player")
 		{
-			AudioSource soundSource = GameObject.Find("HeadAudioSource").transform.audio;
+			AudioSource soundSource = GameObject.Find("HeadAudioSource").transform.GetComponent<AudioSource>();
 			if(other.transform.GetComponent<Inventory>().lillebrorComplete)
 			{
 				soundSource.clip = haveLillebrorSound;
