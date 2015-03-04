@@ -27,8 +27,8 @@ public class DoorOpenController : MonoBehaviour {
 	{
 		doorIsOpened = true;
 
-		if (audio != null)
-			audio.Play();
+		if (GetComponent<AudioSource>() != null)
+			GetComponent<AudioSource>().Play();
 
 		float t = 0.0f;
 		float openingSpeed = 0.25f;

@@ -15,7 +15,7 @@ public class SewLillebror :IInteractableObject
 			if(GameObject.Find("PuzzleTrigger") != null)
 			{
 				AudioClip audioClip = GameObject.Find("PuzzleTrigger").GetComponent<PuzzleLillebror>().sewingLillebrorSound;
-				AudioSource soundSource = GameObject.Find("HeadAudioSource").transform.audio;
+				AudioSource soundSource = GameObject.Find("HeadAudioSource").transform.GetComponent<AudioSource>();
 				soundSource.clip = audioClip;
 				soundSource.Play();
 			}

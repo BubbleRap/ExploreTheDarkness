@@ -29,7 +29,7 @@ public class PickUpLillebrorPiece : IInteractableObject
 			AudioClip[] audioClips = GameObject.Find("PuzzleTrigger").GetComponent<PuzzleLillebror>().collectLillebrorSounds;
 			if(audioClips.Length > 0)
 			{
-				AudioSource soundSource = GameObject.Find("HeadAudioSource").transform.audio;
+				AudioSource soundSource = GameObject.Find("HeadAudioSource").transform.GetComponent<AudioSource>();
 				if(siljaGO.GetComponent<Inventory>().getLilleBrorPieces() < audioClips.Length)
 				{
 					soundSource.clip = audioClips[siljaGO.GetComponent<Inventory>().getLilleBrorPieces()];

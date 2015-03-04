@@ -18,7 +18,7 @@ public class AIStopAudio : RAINAction
 
     public override void Start(AI ai)
     {
-		source = ai.Body.transform.FindChild(audioSource.ExpressionAsEntered).audio;
+		source = ai.Body.transform.FindChild(audioSource.ExpressionAsEntered).GetComponent<AudioSource>();
 		if( source == null )
 		{
 			Debug.Log("non found");

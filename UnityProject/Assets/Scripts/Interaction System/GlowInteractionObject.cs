@@ -17,10 +17,10 @@ public class GlowInteractionObject : IInteractableObject
 
 	void Start () 
 	{
-		Color defaultColor = renderer.material.color;
+		Color defaultColor = GetComponent<Renderer>().material.color;
 		originalAlpha = defaultColor.a;
 		defaultColor.a = 0f;
-		renderer.material.color = defaultColor;
+		GetComponent<Renderer>().material.color = defaultColor;
 	}
 	
 	void Update()
@@ -40,12 +40,12 @@ public class GlowInteractionObject : IInteractableObject
 
 	private void ActivateHighlights( bool state )
 	{
-		if( activated == state || !renderer.isVisible)
+		if( activated == state || !GetComponent<Renderer>().isVisible)
 			return;
 		
-		Color curColor = renderer.material.color;
+		Color curColor = GetComponent<Renderer>().material.color;
 		curColor.a = state ? originalAlpha : 0f;
-		renderer.material.color = curColor;	
+		GetComponent<Renderer>().material.color = curColor;	
 
 		activated = state;
 	}

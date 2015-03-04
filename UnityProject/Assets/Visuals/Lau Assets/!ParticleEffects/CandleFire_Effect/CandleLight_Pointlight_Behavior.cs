@@ -12,7 +12,7 @@ public class CandleLight_Pointlight_Behavior : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		candleLight = this.gameObject.light;
+		candleLight = this.gameObject.GetComponent<Light>();
 		randomValue = Random.Range(0.0f, 65535.0f);
 	}
 	

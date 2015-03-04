@@ -46,7 +46,7 @@ public class FadeIn : MonoBehaviour {
 		fadeTexture.SetPixel(0,0, fadeColor);
 		fadeTexture.Apply();
 
-		Screen.showCursor = false;
+		Cursor.visible = false;
 	}
 
 	void Start(){
@@ -79,11 +79,11 @@ public class FadeIn : MonoBehaviour {
 		    Input.GetKeyDown(KeyCode.Return) ||
 		    Input.GetMouseButtonDown(0))
 		{
-		    audio.Stop();
-			siljaCharacter.animation.Play("cutscene_beginning");
+		    GetComponent<AudioSource>().Stop();
+			siljaCharacter.GetComponent<Animation>().Play("cutscene_beginning");
 		}
 
-		if (!audio.isPlaying && !isTitleScreen)
+		if (!GetComponent<AudioSource>().isPlaying && !isTitleScreen)
 		{
 			StopAllCoroutines ();
 			currentText = "";
@@ -91,7 +91,7 @@ public class FadeIn : MonoBehaviour {
 			isTitleScreen = true;
 
 			titleStart = Time.time;
-			siljaCharacter.animation.Play("cutscene_beginning");
+			siljaCharacter.GetComponent<Animation>().Play("cutscene_beginning");
 		}
 
 		if (Time.time - titleStart > titleDuration && stillBlack)
