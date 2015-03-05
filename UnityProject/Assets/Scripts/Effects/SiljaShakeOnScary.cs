@@ -7,8 +7,8 @@ public class SiljaShakeOnScary : MonoBehaviour
 	public CameraShaker firstPersonCameraShaker;
 	private List<GameObject> scaryObjectsInSight = new List<GameObject> ();
 
-	private CameraMotionBlur blurComponent;
-	private MotionBlur motionBlurComponent;
+//	private CameraMotionBlur blurComponent;
+//	private MotionBlur motionBlurComponent;
 
 	private bool isScared = false;
 	private float scaryAmount = 0f;
@@ -22,8 +22,8 @@ public class SiljaShakeOnScary : MonoBehaviour
 	void Awake()
 	{
 		firstPersonCameraShaker = transform.FindChild("1st Person Camera").GetComponent<CameraShaker>();
-		blurComponent = firstPersonCameraShaker.GetComponent<CameraMotionBlur> ();
-		motionBlurComponent = firstPersonCameraShaker.GetComponent<MotionBlur> ();
+//		blurComponent = firstPersonCameraShaker.GetComponent<CameraMotionBlur> ();
+//		motionBlurComponent = firstPersonCameraShaker.GetComponent<MotionBlur> ();
 	}
 
 	void Update()
@@ -38,7 +38,7 @@ public class SiljaShakeOnScary : MonoBehaviour
 
 				firstPersonCameraShaker.horizontalShakeIntensity = scaryAmount;
 				firstPersonCameraShaker.verticalShakeIntensity = scaryAmount;
-				motionBlurComponent.blurAmount = scaryAmount;
+//				motionBlurComponent.blurAmount = scaryAmount;
 			}
 			else
 			{
@@ -47,9 +47,9 @@ public class SiljaShakeOnScary : MonoBehaviour
 				firstPersonCameraShaker.shakeFrequency = 0.05f;
 				
 				firstPersonCameraShaker.EnableShake ();
-				blurComponent.enabled = true;
+//				blurComponent.enabled = true;
 				
-				motionBlurComponent.enabled = true;
+//				motionBlurComponent.enabled = true;
 			
 			}
 		} 
@@ -63,14 +63,14 @@ public class SiljaShakeOnScary : MonoBehaviour
 				
 				firstPersonCameraShaker.horizontalShakeIntensity = scaryAmount;
 				firstPersonCameraShaker.verticalShakeIntensity = scaryAmount;
-				motionBlurComponent.blurAmount = scaryAmount;
+//				motionBlurComponent.blurAmount = scaryAmount;
 
 				// disable, where shake amount is 0
 				if( scaryAmount <= 0 )
 				{
 					firstPersonCameraShaker.DisableShake ();
-					blurComponent.enabled = false;
-					motionBlurComponent.enabled = false;
+//					blurComponent.enabled = false;
+//					motionBlurComponent.enabled = false;
 				}
 			}
 		}

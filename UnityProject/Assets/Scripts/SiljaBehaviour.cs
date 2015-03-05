@@ -94,9 +94,9 @@ public class SiljaBehaviour : MonoBehaviour
 		mLook = firstPersonCamera.GetComponent<MouseLook>();
 		camInput = GetComponentInChildren<CameraInput>();
 
-		teddyLight = twoHandsJoint.GetComponentsInChildren<Light>()[0];
-		teddyLightFlash = twoHandsJoint.GetComponentsInChildren<Light>()[0];
-		teddyLightFlash2 = twoHandsJoint.GetComponentsInChildren<Light>()[1];
+//		teddyLight = twoHandsJoint.GetComponentsInChildren<Light>()[0];
+//		teddyLightFlash = twoHandsJoint.GetComponentsInChildren<Light>()[0];
+//		teddyLightFlash2 = twoHandsJoint.GetComponentsInChildren<Light>()[1];
 
 		dLightProbe = GetComponentInChildren<DynamicLightProbe> ();
 		aiEntities = FindObjectsOfType<AIBehaviour>();
@@ -120,6 +120,7 @@ public class SiljaBehaviour : MonoBehaviour
 		if(darkMode == false)
 		{
 			lightProbeOnSilja.SetActive(false); //Lightprobe disabled in adventure mode
+			return;
 		}
 
 		//teddyLight.enabled = true;
