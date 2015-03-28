@@ -41,17 +41,10 @@ public class CameraFollow : MonoBehaviour
 	[HideInInspector]
 	public Transform focusPoint = null;
 
-	private void Start()
+	private void OnEnable()
 	{
-		if (cameraFocusTarget == null) 
-		{
-			Debug.LogError ("You forgot to assign the object to follow!");
-			return;
-		}
-
 		StartCoroutine (FollowPosition ());
 		StartCoroutine (ShakeCamera	()); 
-
 	}
 
 	IEnumerator FollowPosition()

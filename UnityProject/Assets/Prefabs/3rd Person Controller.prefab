@@ -2616,7 +2616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &100334
 GameObject:
   m_ObjectHideFlags: 1
@@ -9060,7 +9060,11 @@ MonoBehaviour:
   - {fileID: 100000, guid: 637119db53a73da419090a7054c66693, type: 2}
   - {fileID: 100000, guid: 51544b8c9c68d6147a3e622cdec7516c, type: 2}
   - {fileID: 100002, guid: 9a71961a4c94bd9468d4b795287a5ef8, type: 2}
-  darkMode: 0
+  firstPersonCamera: {fileID: 100332}
+  thirdPersonCamera: {fileID: 100260}
+  teddyLight: {fileID: 10800000}
+  teddyLightFlash: {fileID: 10800004}
+  teddyLightFlash2: {fileID: 10800002}
   lilbroGlowMaterial: {fileID: 2100000, guid: 905cf80df59f3e949a6f5aa8f3edcbd4, type: 2}
   lightTreshold: .0799999982
   fadingOutSpeed: .00400000019
