@@ -19,20 +19,20 @@ public class SiljaBehaviour : MonoBehaviour
 	private MouseLook mLook = null;
 	private CameraInput camInput = null;
 
-	private GameObject firstPersonCamera = null;
-	private GameObject thirdPersonCamera = null;
+	public GameObject firstPersonCamera = null;
+	public GameObject thirdPersonCamera = null;
 
 	private GameObject lightProbeOnSilja; // The lightprobe gameobject so it can be switched on/off -> disabling it in void Start and enabling it again in void EnableDarkMode
 
 	private float ambientGlow = 0.0f;
 
-	private Light teddyLight = null;
-	private Light teddyLightFlash = null;
-	private Light teddyLightFlash2 = null;
+	public Light teddyLight = null;
+	public Light teddyLightFlash = null;
+	public Light teddyLightFlash2 = null;
 	private DynamicLightProbe dLightProbe = null;
 
 	[HideInInspector]
-	public bool darkMode = false;
+	static public bool darkMode = false;
 
 	public Material lilbroGlowMaterial = null;
 
@@ -83,8 +83,8 @@ public class SiljaBehaviour : MonoBehaviour
 
 	void Awake()
 	{
-		firstPersonCamera = transform.FindChild("1st Person Camera").gameObject;
-		thirdPersonCamera = transform.FindChild("3rd Person Camera").gameObject;
+//		firstPersonCamera = transform.FindChild("1st Person Camera").gameObject;
+//		thirdPersonCamera = transform.FindChild("3rd Person Camera").gameObject;
 
 		lightProbeOnSilja = transform.FindChild("LightProbe_Silja").gameObject;
 
@@ -119,7 +119,8 @@ public class SiljaBehaviour : MonoBehaviour
 	{
 		if(darkMode == false)
 		{
-			lightProbeOnSilja.SetActive(false); //Lightprobe disabled in adventure mode
+			EnableStoryMode();
+//			lightProbeOnSilja.SetActive(false); //Lightprobe disabled in adventure mode
 			return;
 		}
 
@@ -151,16 +152,24 @@ public class SiljaBehaviour : MonoBehaviour
 		{
 			Application.LoadLevelAsync(1);
 		}
+
+		if( Input.GetKeyUp( KeyCode.Q ) )
+		{
+			if( darkMode )
+				EnableStoryMode();
+			else
+				EnableDarkMode();
+		}
 	}
 
 	public void EnableDarkMode()
 	{
-		StartCoroutine(BlinkingEffect());
+//		StartCoroutine(BlinkingEffect());
 
-		refreshAIReferences();
+//		refreshAIReferences();
 
 		teddyLight.enabled = true;
-		lightProbeOnSilja.SetActive(true); //Lightprobe enabled in adventure mode
+//		lightProbeOnSilja.SetActive(true); //Lightprobe enabled in adventure mode
 
 		charMotor.movement.maxForwardSpeed = 1.5f;
 		charMotor.movement.maxSidewaysSpeed = 1.5f;
@@ -178,7 +187,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,1f);
 
-		GetComponent<Animation>().Play("waking_up");
+//		GetComponent<Animation>().Play("waking_up");
 
 //		siljaRenderer.material.shader = Shader.Find("Custom/TransparentInvisibleShadowCaster");
 
