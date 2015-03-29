@@ -7,6 +7,7 @@ public class DarknessLevel1 : MonoBehaviour {
 	public Transform horrorLights;
 	public Camera firstPersonCam;
 	public Camera thirdPersonCam;
+	public Transform lightProbe;
 	// Use this for initialization
 	void Start () {
 	
@@ -23,6 +24,7 @@ public class DarknessLevel1 : MonoBehaviour {
 			firstPersonCam.backgroundColor = Color.black;
 			thirdPersonCam.clearFlags = CameraClearFlags.SolidColor;
 			thirdPersonCam.backgroundColor = Color.black;
+			lightProbe.gameObject.SetActive(true);
 		}
 	}
 	

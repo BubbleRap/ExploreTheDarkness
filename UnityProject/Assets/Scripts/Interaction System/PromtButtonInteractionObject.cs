@@ -24,9 +24,6 @@ public class PromtButtonInteractionObject : IInteractableObject
 
 	private void Update()
 	{
-		if( SiljaBehaviour.darkMode )
-			return;
-
 		ActivatePromtButton((transform.position - interactor.transform.position).magnitude < 3f);
 		
 		Vector3 direction = ((transform.position - Vector3.up * 1.5f) - Camera.main.transform.position).normalized;
