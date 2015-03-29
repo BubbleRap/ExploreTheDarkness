@@ -2612,7 +2612,7 @@ GameObject:
   - 81: {fileID: 8100002}
   m_Layer: 10
   m_Name: 1st Person Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4160,8 +4160,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100042}
-  m_LocalRotation: {x: 0, y: .641592801, z: 0, w: -.767045498}
-  m_LocalPosition: {x: 14.4610863, y: 1.11559892, z: -29.0763836}
+  m_LocalRotation: {x: 0, y: .689498127, z: 0, w: -.72428751}
+  m_LocalPosition: {x: 21.0760002, y: 1.12, z: -21.9099998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400332}
@@ -9062,6 +9062,7 @@ MonoBehaviour:
   - {fileID: 100002, guid: 9a71961a4c94bd9468d4b795287a5ef8, type: 2}
   firstPersonCamera: {fileID: 100332}
   thirdPersonCamera: {fileID: 100260}
+  lightProbeOnSilja: {fileID: 100152}
   teddyLight: {fileID: 10800000}
   teddyLightFlash: {fileID: 10800004}
   teddyLightFlash2: {fileID: 10800002}
@@ -9110,6 +9111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterAnimator: {fileID: 9500004}
   firstPersonAnimator: {fileID: 9500002}
+  cameraTransform: {fileID: 400260}
   movingSpeed: 1
   alwaysFollows: 0
   rotationSpeed: 150

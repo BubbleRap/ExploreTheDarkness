@@ -22,7 +22,7 @@ public class SiljaBehaviour : MonoBehaviour
 	public GameObject firstPersonCamera = null;
 	public GameObject thirdPersonCamera = null;
 
-	private GameObject lightProbeOnSilja; // The lightprobe gameobject so it can be switched on/off -> disabling it in void Start and enabling it again in void EnableDarkMode
+	public GameObject lightProbeOnSilja;
 
 	private float ambientGlow = 0.0f;
 
@@ -117,18 +117,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 	void Start()
 	{
-		if(darkMode == false)
-		{
-			EnableStoryMode();
-//			lightProbeOnSilja.SetActive(false); //Lightprobe disabled in adventure mode
-			return;
-		}
-
-		//teddyLight.enabled = true;
-		teddyLight.intensity = maximumIntensity;
-
-		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
-		GlowLightBasic = teddyLight.color;
+		EnableStoryMode();
 	}
 	
 	public float getTeddyLight()
@@ -168,8 +157,19 @@ public class SiljaBehaviour : MonoBehaviour
 
 //		refreshAIReferences();
 
+
 		teddyLight.enabled = true;
-//		lightProbeOnSilja.SetActive(true); //Lightprobe enabled in adventure mode
+		lightProbeOnSilja.SetActive(true); 
+
+		teddyLight.intensity = maximumIntensity;
+		
+		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
+		GlowLightBasic = teddyLight.color;
+
+
+
+
+
 
 		charMotor.movement.maxForwardSpeed = 1.5f;
 		charMotor.movement.maxSidewaysSpeed = 1.5f;
@@ -198,6 +198,7 @@ public class SiljaBehaviour : MonoBehaviour
 	public void EnableStoryMode()
 	{
 		teddyLight.enabled = false;
+		lightProbeOnSilja.SetActive(false); 
 
 		charMotor.movement.maxForwardSpeed = 1;
 		charMotor.movement.maxSidewaysSpeed = 1;
