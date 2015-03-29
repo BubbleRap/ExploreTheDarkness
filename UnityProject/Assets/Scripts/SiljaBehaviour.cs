@@ -86,7 +86,7 @@ public class SiljaBehaviour : MonoBehaviour
 //		firstPersonCamera = transform.FindChild("1st Person Camera").gameObject;
 //		thirdPersonCamera = transform.FindChild("3rd Person Camera").gameObject;
 
-		lightProbeOnSilja = transform.FindChild("LightProbe_Silja").gameObject;
+//		lightProbeOnSilja = transform.FindChild("LightProbe_Silja").gameObject;
 
 		charMotor = GetComponent<CharacterMotor>();
 		moveCtrl = GetComponent<MovementController>();
@@ -112,7 +112,7 @@ public class SiljaBehaviour : MonoBehaviour
 	}
 
 	public void refreshAIReferences(){
-		aiEntities = FindObjectsOfType<AIBehaviour>();
+//		aiEntities = FindObjectsOfType<AIBehaviour>();
 	}
 
 	void Start()
@@ -159,7 +159,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 
 		teddyLight.enabled = true;
-		lightProbeOnSilja.SetActive(true); 
+//		lightProbeOnSilja.SetActive(true); 
 
 		teddyLight.intensity = maximumIntensity;
 		
@@ -198,7 +198,7 @@ public class SiljaBehaviour : MonoBehaviour
 	public void EnableStoryMode()
 	{
 		teddyLight.enabled = false;
-		lightProbeOnSilja.SetActive(false); 
+//		lightProbeOnSilja.SetActive(false); 
 
 		charMotor.movement.maxForwardSpeed = 1;
 		charMotor.movement.maxSidewaysSpeed = 1;
@@ -229,6 +229,8 @@ public class SiljaBehaviour : MonoBehaviour
 			teddyLight.intensity += fadingInSpeed;
 		else
 			teddyLight.intensity -= fadingOutSpeed;
+
+		Debug.Log(teddyLight.intensity);
 	
 		SetLightIntensity(teddyLight.intensity);
 
@@ -316,11 +318,11 @@ public class SiljaBehaviour : MonoBehaviour
 
 		teddyLightFlash2.intensity = teddyLightFlash.intensity;
 
-		if( teddyLight.intensity > mimimumIntensity )
-		{
-			foreach( AIBehaviour aiEntity in aiEntities )
-				aiEntity.DespawnAI();
-		}
+//		if( teddyLight.intensity > mimimumIntensity )
+//		{
+//			foreach( AIBehaviour aiEntity in aiEntities )
+//				aiEntity.DespawnAI();
+//		}
 	}
 
 	public void SetLightIntensity(float intensity)
