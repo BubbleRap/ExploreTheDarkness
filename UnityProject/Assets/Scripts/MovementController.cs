@@ -9,7 +9,7 @@ public class MovementController : MonoBehaviour
 	public Animator characterAnimator;
 	public Animator firstPersonAnimator;
 
-	private Transform cameraTransform = null;
+	public Transform cameraTransform = null;
 	private Vector3 moveDirection = Vector3.zero;
 	
 	private float moveSpeed = 0f;
@@ -38,7 +38,8 @@ public class MovementController : MonoBehaviour
 		charMotor = GetComponent<CharacterMotor>();
 
 //		characterAnimator.SetBool ("scared", true);
-		cameraTransform = Camera.main.transform;
+//		cameraTransform = Camera.main.transform;
+
 		camFollowComp = GetComponentInChildren<CameraFollow>();
 		camInputComp = GetComponentInChildren<CameraInput>();
 	}

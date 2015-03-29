@@ -43,6 +43,7 @@ public class CameraFollow : MonoBehaviour
 
 	private void OnEnable()
 	{
+		StopAllCoroutines();
 		StartCoroutine (FollowPosition ());
 		StartCoroutine (ShakeCamera	()); 
 	}
