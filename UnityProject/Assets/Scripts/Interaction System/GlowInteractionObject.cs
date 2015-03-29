@@ -25,8 +25,6 @@ public class GlowInteractionObject : IInteractableObject
 	
 	void Update()
 	{
-		if( SiljaBehaviour.darkMode )
-			return;
 
 		bool hitObject = false;
 
