@@ -38,8 +38,8 @@ public class SiljaBehaviour : MonoBehaviour
 
 	private AIBehaviour[] aiEntities = null;
 
-	[Range(0f, 0.10f)]
-	public float lightTreshold = 0.08f;
+//	[Range(0f, 0.10f)]
+//	public float lightTreshold = 0.08f;
 
 	[Range(0f, 0.020f)]
 	public float fadingOutSpeed = 0.006f;
@@ -80,6 +80,9 @@ public class SiljaBehaviour : MonoBehaviour
 
 	private CameraShaker firstPersonCameraShaker;
 	private CameraFollow cameraFollowCom = null;
+
+	private bool lightWasGivenLastFrame = false;
+	private float _lightIntensity = 0f;
 
 	void Awake()
 	{
@@ -122,7 +125,7 @@ public class SiljaBehaviour : MonoBehaviour
 	
 	public float getTeddyLight()
 	{
-		return teddyLight.intensity;
+		return _lightIntensity;//teddyLight.intensity;
 	}
 
 	public float getMimimumIntensity()
@@ -159,9 +162,10 @@ public class SiljaBehaviour : MonoBehaviour
 
 
 		teddyLight.enabled = true;
-//		lightProbeOnSilja.SetActive(true); 
+		lightProbeOnSilja.SetActive(false); 
 
-		teddyLight.intensity = maximumIntensity;
+		//teddyLight.intensity = maximumIntensity;
+		_lightIntensity = maximumIntensity;
 		
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
 		GlowLightBasic = teddyLight.color;
@@ -198,7 +202,7 @@ public class SiljaBehaviour : MonoBehaviour
 	public void EnableStoryMode()
 	{
 		teddyLight.enabled = false;
-//		lightProbeOnSilja.SetActive(false); 
+		lightProbeOnSilja.SetActive(false); 
 
 		charMotor.movement.maxForwardSpeed = 1;
 		charMotor.movement.maxSidewaysSpeed = 1;
@@ -225,33 +229,70 @@ public class SiljaBehaviour : MonoBehaviour
 	// is sent by light probe itself
 	public void RetriveLightProbeResult(float intensity)
 	{
-		if( intensity > lightTreshold )
-			teddyLight.intensity += fadingInSpeed;
-		else
-			teddyLight.intensity -= fadingOutSpeed;
+//		if( intensity > lightTreshold )
+		/*teddyLight.intensity*/ _lightIntensity += fadingInSpeed;
+//		else
+//			teddyLight.intensity -= fadingOutSpeed;
 
-		Debug.Log(teddyLight.intensity);
-	
-		SetLightIntensity(teddyLight.intensity);
+		SetLightIntensity(/*teddyLight.intensity*/);
+
+		lightWasGivenLastFrame = true;
+	}
+
+	private void LateUpdate()
+	{
+		if( !lightWasGivenLastFrame )
+		{
+			/*teddyLight.intensity*/ _lightIntensity -= fadingOutSpeed;
+			SetLightIntensity(/*teddyLight.intensity*/);
+		}
+
+//		Debug.Log(teddyLight.intensity);
+		lightWasGivenLastFrame = false;
+	}
+
+	private void OnGUI()
+	{
+		GUILayout.Label("Light intensity: " + _lightIntensity);
+	}
+
+	public void SetLightIntensity(/*float intensity*/)
+	{
+		_lightIntensity = Mathf.Clamp(_lightIntensity, mimimumIntensity, maximumIntensity);
+		
+		// map from 0 to 1
+		float glowIntensity = (_lightIntensity - mimimumIntensity) / (maximumIntensity - mimimumIntensity);
+		
+		// from minimum glow to maximum glow
+		glowIntensity = glowIntensity * (maximumGlow - minimumGlow) + minimumGlow;
+		
+		float colorIntensity = glowIntensity;
+		lilbroGlowMaterial.color = new Color(colorIntensity, colorIntensity, colorIntensity, glowIntensity);
+		teddyLight.intensity = _lightIntensity;
+
+
+
+
+
 
 		RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.b/2, (RenderSettings.ambientLight.b/2)/* * GlowLightBasic.g*/, ambientGlow/* * GlowLightBasic.b*/, 0.0f);
 		
 		lilbroGlowMaterial.color = new Color(lilbroGlowMaterial.color.r, lilbroGlowMaterial.color.g, lilbroGlowMaterial.color.b, 1.0f);
-
+		
 		//teddyLight.color = new Color(GlowLightBasic.r, GlowLightBasic.g, GlowLightBasic.b);
-
+		
 		//Debug.Log(flickerIntervalTimer);
-		if( teddyLight.intensity <= maxFlickerIntensity)
+		if( _lightIntensity <= maxFlickerIntensity)
 		{
 			flickerIntervalTimer += Time.deltaTime;
-
+			
 			/*
 			if(intensity <= lightTreshold && maxFlickerIntensity >= (minFlickerIntensity * 1.2f) && flickerIntervalTimer > 4)
 			{
 				flickerTime += flickerSpeed;
-				teddyLight.intensity = Mathf.Lerp(maxFlickerIntensity, minFlickerIntensity, flickerTime);
+				_lightIntensity = Mathf.Lerp(maxFlickerIntensity, minFlickerIntensity, flickerTime);
 
-				if( teddyLight.intensity <= minFlickerIntensity)
+				if( _lightIntensity <= minFlickerIntensity)
 				{
 					flickerDelayTimer += Time.deltaTime;
 					if(flickerDelayTimer > flickerDelay)
@@ -273,7 +314,7 @@ public class SiljaBehaviour : MonoBehaviour
 				}
 			}
 			*/
-
+			
 			/*
 			if(flickerIntervalTimer > 6)
 			{
@@ -290,8 +331,8 @@ public class SiljaBehaviour : MonoBehaviour
 			}
 			*/
 		}
-
-		if(teddyLight.intensity >= (maximumIntensity * 0.95) /* && maxFlickerIntensity < (mimimumIntensity * 5) */)
+		
+		if(_lightIntensity >= (maximumIntensity * 0.95) /* && maxFlickerIntensity < (mimimumIntensity * 5) */)
 		{
 			flickerTime = 0;
 			flickerIntervalTimer = 0;
@@ -300,8 +341,8 @@ public class SiljaBehaviour : MonoBehaviour
 			maxFlickerIntensity = mimimumIntensity * 2;
 			minFlickerIntensity = mimimumIntensity * 1.5f;
 		}
-
-		if( teddyLight.intensity <= mimimumIntensity)
+		
+		if( _lightIntensity <= mimimumIntensity)
 		{
 			if(ambientGlow < 0.1f)
 			{
@@ -315,29 +356,14 @@ public class SiljaBehaviour : MonoBehaviour
 				ambientGlow -= 0.005f;
 			}
 		}
-
+		
 		teddyLightFlash2.intensity = teddyLightFlash.intensity;
-
-//		if( teddyLight.intensity > mimimumIntensity )
-//		{
-//			foreach( AIBehaviour aiEntity in aiEntities )
-//				aiEntity.DespawnAI();
-//		}
-	}
-
-	public void SetLightIntensity(float intensity)
-	{
-		intensity = Mathf.Clamp(intensity, mimimumIntensity, maximumIntensity);
 		
-		// map from 0 to 1
-		float glowIntensity = (intensity - mimimumIntensity) / (maximumIntensity - mimimumIntensity);
-		
-		// from minimum glow to maximum glow
-		glowIntensity = glowIntensity * (maximumGlow - minimumGlow) + minimumGlow;
-		
-		float colorIntensity = glowIntensity;
-		lilbroGlowMaterial.color = new Color(colorIntensity, colorIntensity, colorIntensity, glowIntensity);
-		teddyLight.intensity = intensity;
+		//		if( _lightIntensity > mimimumIntensity )
+		//		{
+		//			foreach( AIBehaviour aiEntity in aiEntities )
+		//				aiEntity.DespawnAI();
+		//		}
 	}
 
 	IEnumerator RipLimbDelayedAction(Transform entity, float ripLimbIn)
@@ -363,7 +389,9 @@ public class SiljaBehaviour : MonoBehaviour
 		firstPersonAnimator.SetTrigger("riplimb" + healthController.health);
 
 		firstPersonCameraShaker.StartShake(1f);
-		SetLightIntensity(1f);
+
+		_lightIntensity = 1f;
+		SetLightIntensity();
 
 		yield return new WaitForSeconds(ripLimbIn);
 		int index = healthController.health;
