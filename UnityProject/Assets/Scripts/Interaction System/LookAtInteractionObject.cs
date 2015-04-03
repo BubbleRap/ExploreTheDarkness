@@ -6,14 +6,18 @@ public class LookAtInteractionObject : IInteractableObject
 	// The point to look at object from
 	public Transform lookFromPoint = null;
 
+	private SiljaBehaviour _siljaBeh = null;
+
 	// called by Interactor.cs
 	public override void Activate()
 	{
+		if( _siljaBeh == null )
+		{
+			GameObject siljaGO = GameObject.FindGameObjectWithTag("Player");
+			_siljaBeh = siljaGO.GetComponent<SiljaBehaviour>();
+		}
+
 		interactionIsActive = !interactionIsActive;
-
-		GameObject siljaGO = GameObject.FindGameObjectWithTag("Player");
-		SiljaBehaviour siljaBeh = siljaGO.GetComponent<SiljaBehaviour>();
-
-		siljaBeh.LookAtPointFP( interactionIsActive, transform, lookFromPoint );
+		_siljaBeh.LookAtPointFP( interactionIsActive, transform, lookFromPoint );
     }
 }
