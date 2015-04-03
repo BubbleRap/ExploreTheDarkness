@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PromtButtonInteractionObject : IInteractableObject
 {
+	public bool disableOnActive = true;
+
 	private GameObject buttonPrompt;
 	private Interactor interactor;
 
@@ -33,7 +35,7 @@ public class PromtButtonInteractionObject : IInteractableObject
 
 	private void ActivatePromtButton( bool state )
 	{
-		buttonPrompt.SetActive(state && !interactionIsActive);
+		buttonPrompt.SetActive(state && (!interactionIsActive || !disableOnActive));
 
 		if( objectIsClose == state )
 			return;
