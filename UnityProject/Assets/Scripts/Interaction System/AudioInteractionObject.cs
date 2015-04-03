@@ -20,7 +20,7 @@ public class AudioInteractionObject : IInteractableObject
 			soundSource = Camera.main.gameObject.GetComponent<AudioSource>();
 
 		if( soundSource == null )
-			Debug.LogError("Look, I think there must be an audio source somewhere here.");
+			Debug.LogError("Look, I think there must be an audio source somewhere here: " + gameObject.name);
 	}
 
 	// called by Interactor.cs

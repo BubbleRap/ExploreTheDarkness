@@ -82,30 +82,21 @@ public class SiljaBehaviour : MonoBehaviour
 	private CameraFollow cameraFollowCom = null;
 
 	private bool lightWasGivenLastFrame = false;
+
+	private float availableTimeInDark = 20f;
 	private float _lightIntensity = 0f;
+	private float _looseConditionTimer = 0f;
 
 	void Awake()
 	{
-//		firstPersonCamera = transform.FindChild("1st Person Camera").gameObject;
-//		thirdPersonCamera = transform.FindChild("3rd Person Camera").gameObject;
-
-//		lightProbeOnSilja = transform.FindChild("LightProbe_Silja").gameObject;
-
 		charMotor = GetComponent<CharacterMotor>();
 		moveCtrl = GetComponent<MovementController>();
 		fpsInputCtrl = GetComponent<FPSInputController>();
 		mLook = firstPersonCamera.GetComponent<MouseLook>();
 		camInput = GetComponentInChildren<CameraInput>();
 
-//		teddyLight = twoHandsJoint.GetComponentsInChildren<Light>()[0];
-//		teddyLightFlash = twoHandsJoint.GetComponentsInChildren<Light>()[0];
-//		teddyLightFlash2 = twoHandsJoint.GetComponentsInChildren<Light>()[1];
-
 		dLightProbe = GetComponentInChildren<DynamicLightProbe> ();
 		aiEntities = FindObjectsOfType<AIBehaviour>();
-
-//		siljaRenderer = transform.FindChild("Silja_Animated").GetComponentInChildren<SkinnedMeshRenderer>();
-//		siljaAnimation = transform.FindChild("Silja_Animated").GetComponentInChildren<Animator>();
 
 		firstPersonCameraShaker = firstPersonCamera.GetComponent<CameraShaker>();
 		cameraFollowCom = thirdPersonCamera.GetComponent<CameraFollow>();
@@ -125,7 +116,7 @@ public class SiljaBehaviour : MonoBehaviour
 	
 	public float getTeddyLight()
 	{
-		return _lightIntensity;//teddyLight.intensity;
+		return _lightIntensity;
 	}
 
 	public float getMimimumIntensity()
@@ -157,22 +148,15 @@ public class SiljaBehaviour : MonoBehaviour
 	public void EnableDarkMode()
 	{
 //		StartCoroutine(BlinkingEffect());
-
 //		refreshAIReferences();
 
 
 		teddyLight.enabled = true;
 		lightProbeOnSilja.SetActive(false); 
 
-		//teddyLight.intensity = maximumIntensity;
-		_lightIntensity = maximumIntensity;
-		
+
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
 		GlowLightBasic = teddyLight.color;
-
-
-
-
 
 
 		charMotor.movement.maxForwardSpeed = 1.5f;
@@ -187,16 +171,11 @@ public class SiljaBehaviour : MonoBehaviour
 		oneHandJoint.gameObject.SetActive(false);
 		twoHandsJoint.gameObject.SetActive(true);
 
-		//dLightProbe.enabled = true;
-
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,1f);
 
 //		GetComponent<Animation>().Play("waking_up");
 
-//		siljaRenderer.material.shader = Shader.Find("Custom/TransparentInvisibleShadowCaster");
-
 		darkMode = true;
-//		siljaAnimation.SetBool ("darkmode", darkMode);
 	}
 
 	public void EnableStoryMode()
@@ -216,25 +195,17 @@ public class SiljaBehaviour : MonoBehaviour
 		oneHandJoint.gameObject.SetActive(true);
 		twoHandsJoint.gameObject.SetActive(false);
 
-		//dLightProbe.enabled = false;
 
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
 
-//		siljaRenderer.material.shader = Shader.Find("Custom/DoubleSided/Diffuse");
-
 		darkMode = false;
-//		siljaAnimation.SetBool ("darkmode", darkMode);
 	}
-
-	// is sent by light probe itself
+	
 	public void RetriveLightProbeResult(float intensity)
 	{
-//		if( intensity > lightTreshold )
-		/*teddyLight.intensity*/ _lightIntensity += fadingInSpeed;
-//		else
-//			teddyLight.intensity -= fadingOutSpeed;
+		_lightIntensity += fadingInSpeed;
 
-		SetLightIntensity(/*teddyLight.intensity*/);
+		SetLightIntensity();
 
 		lightWasGivenLastFrame = true;
 	}
@@ -243,20 +214,25 @@ public class SiljaBehaviour : MonoBehaviour
 	{
 		if( !lightWasGivenLastFrame )
 		{
-			/*teddyLight.intensity*/ _lightIntensity -= fadingOutSpeed;
-			SetLightIntensity(/*teddyLight.intensity*/);
+			_lightIntensity -= fadingOutSpeed;
+			SetLightIntensity();
 		}
 
-//		Debug.Log(teddyLight.intensity);
+		_looseConditionTimer = _lightIntensity == 0f ? _looseConditionTimer + Time.deltaTime : 0f;
+
+		if( _lightIntensity == 0f )
+			healthController.PlayScaredAudio();
+
 		lightWasGivenLastFrame = false;
 	}
 
 	private void OnGUI()
 	{
-		GUILayout.Label("Light intensity: " + _lightIntensity);
+		GUILayout.Label("Light intensity: " + _lightIntensity.ToString("0.0"));
+		GUILayout.Label("Time left: " + (Mathf.Clamp(availableTimeInDark - _looseConditionTimer, 0, availableTimeInDark)).ToString("0"));
 	}
 
-	public void SetLightIntensity(/*float intensity*/)
+	public void SetLightIntensity()
 	{
 		_lightIntensity = Mathf.Clamp(_lightIntensity, mimimumIntensity, maximumIntensity);
 		
