@@ -66,9 +66,6 @@ public class SiljaBehaviour : MonoBehaviour
 
 	private AIBehaviour[] aiEntities = null;
 
-	[Range(-0.06f, 0.10f)]
-	public float lightTreshold = -0.045f;
-
 	[Range(0f, 0.020f)]
 	public float fadingOutSpeed = 0.002f;
 
@@ -109,28 +106,22 @@ public class SiljaBehaviour : MonoBehaviour
 	private CameraShaker firstPersonCameraShaker;
 	private CameraFollow cameraFollowCom = null;
 
+	private bool lightWasGivenLastFrame = false;
+
+	private float availableTimeInDark = 20f;
+	private float _lightIntensity = 0f;
+	private float _looseConditionTimer = 0f;
+
 	void Awake()
 	{
-//		firstPersonCamera = transform.FindChild("1st Person Camera").gameObject;
-//		thirdPersonCamera = transform.FindChild("3rd Person Camera").gameObject;
-
-//		lightProbeOnSilja = transform.FindChild("LightProbe_Silja").gameObject;
-
 		charMotor = GetComponent<CharacterMotor>();
 		moveCtrl = GetComponent<MovementController>();
 		fpsInputCtrl = GetComponent<FPSInputController>();
 		mLook = firstPersonCamera.GetComponent<MouseLook>();
 		camInput = GetComponentInChildren<CameraInput>();
 
-//		teddyLight = twoHandsJoint.GetComponentsInChildren<Light>()[0];
-//		teddyLightFlash = twoHandsJoint.GetComponentsInChildren<Light>()[0];
-//		teddyLightFlash2 = twoHandsJoint.GetComponentsInChildren<Light>()[1];
-
 		dLightProbe = GetComponentInChildren<DynamicLightProbe> ();
 		aiEntities = FindObjectsOfType<AIBehaviour>();
-
-//		siljaRenderer = transform.FindChild("Silja_Animated").GetComponentInChildren<SkinnedMeshRenderer>();
-//		siljaAnimation = transform.FindChild("Silja_Animated").GetComponentInChildren<Animator>();
 
 		firstPersonCameraShaker = firstPersonCamera.GetComponent<CameraShaker>();
 		cameraFollowCom = thirdPersonCamera.GetComponent<CameraFollow>();
@@ -151,7 +142,7 @@ public class SiljaBehaviour : MonoBehaviour
 	
 	public float getTeddyLight()
 	{
-		return teddyLight.intensity;
+		return _lightIntensity;
 	}
 
 	public float getMimimumIntensity()
@@ -183,21 +174,15 @@ public class SiljaBehaviour : MonoBehaviour
 	public void EnableDarkMode()
 	{
 //		StartCoroutine(BlinkingEffect());
-
 //		refreshAIReferences();
 
 
 		teddyLight.enabled = true;
-//		lightProbeOnSilja.SetActive(true); 
+		lightProbeOnSilja.SetActive(false); 
 
-		teddyLight.intensity = maximumIntensity;
-		
+
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
 		GlowLightBasic = teddyLight.color;
-
-
-
-
 
 
 		charMotor.movement.maxForwardSpeed = 1.5f;
@@ -212,22 +197,17 @@ public class SiljaBehaviour : MonoBehaviour
 		oneHandJoint.gameObject.SetActive(false);
 		twoHandsJoint.gameObject.SetActive(true);
 
-		//dLightProbe.enabled = true;
-
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,1f);
 
 //		GetComponent<Animation>().Play("waking_up");
 
-//		siljaRenderer.material.shader = Shader.Find("Custom/TransparentInvisibleShadowCaster");
-
 		darkMode = true;
-//		siljaAnimation.SetBool ("darkmode", darkMode);
 	}
 
 	public void EnableStoryMode()
 	{
 		teddyLight.enabled = false;
-//		lightProbeOnSilja.SetActive(false); 
+		lightProbeOnSilja.SetActive(false); 
 
 		charMotor.movement.maxForwardSpeed = 1;
 		charMotor.movement.maxSidewaysSpeed = 1;
@@ -241,34 +221,28 @@ public class SiljaBehaviour : MonoBehaviour
 		oneHandJoint.gameObject.SetActive(true);
 		twoHandsJoint.gameObject.SetActive(false);
 
-		//dLightProbe.enabled = false;
 
 		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
 
-//		siljaRenderer.material.shader = Shader.Find("Custom/DoubleSided/Diffuse");
-
 		darkMode = false;
-//		siljaAnimation.SetBool ("darkmode", darkMode);
 	}
-
-	// is sent by light probe itself
+	
 	public void RetriveLightProbeResult(float intensity)
 	{
-		if( intensity > lightTreshold)
-		{
-			if(DarknessApproachingTimer < (LillebrorLightLifetime + TimeInDarknessTotal))
-			{
-				DarknessApproachingTimer += Time.deltaTime * rechargeSpeed;
-			}
-			else
-			{
-				DarknessApproachingTimer = LillebrorLightLifetime + TimeInDarknessTotal;
-			}
+		_lightIntensity += fadingInSpeed;
 
-			inDarkness = false;
-		}
-		else
+		SetLightIntensity();
+
+		lightWasGivenLastFrame = true;
+	}
+
+	private void LateUpdate()
+	{
+		if( !lightWasGivenLastFrame )
 		{
+			_lightIntensity -= fadingOutSpeed;
+			SetLightIntensity();
+
 			if(DarknessApproachingTimer >= TimeInDarknessTotal && !darkMode)
 			{
 				DarknessApproachingTimer -= Time.deltaTime * darknessIntensifier;
@@ -281,16 +255,59 @@ public class SiljaBehaviour : MonoBehaviour
 			}
 			inDarkness = true;
 		}
+		else
+		{
+			if(DarknessApproachingTimer < (LillebrorLightLifetime + TimeInDarknessTotal))
+			{
+				DarknessApproachingTimer += Time.deltaTime * rechargeSpeed;
+			}
+			else
+			{
+				DarknessApproachingTimer = LillebrorLightLifetime + TimeInDarknessTotal;
+			}
+			
+			inDarkness = false;
+		}
 
+		_looseConditionTimer = _lightIntensity == 0f ? _looseConditionTimer + Time.deltaTime : 0f;
+
+		/*
+		if( _lightIntensity == 0f )
+			healthController.PlayScaredAudio();
+		*/
+
+		lightWasGivenLastFrame = false;
+	}
+
+	private void OnGUI()
+	{
+		GUILayout.Label("Light intensity: " + _lightIntensity.ToString("0.0"));
+		GUILayout.Label("Time left: " + (Mathf.Clamp(availableTimeInDark - _looseConditionTimer, 0, availableTimeInDark)).ToString("0"));
+	}
+
+	public void SetLightIntensity()
+	{
+		_lightIntensity = Mathf.Clamp(_lightIntensity, mimimumIntensity, maximumIntensity);
+		
+		// map from 0 to 1
+		float glowIntensity = (_lightIntensity - mimimumIntensity) / (maximumIntensity - mimimumIntensity);
+		
+		// from minimum glow to maximum glow
+		glowIntensity = glowIntensity * (maximumGlow - minimumGlow) + minimumGlow;
+		
+		float colorIntensity = glowIntensity;
+		lilbroGlowMaterial.color = new Color(colorIntensity, colorIntensity, colorIntensity, glowIntensity);
+		teddyLight.intensity = _lightIntensity;
+		
 		//Sounds of darkness & fear
 		if(!heartBeatAudioSource.isPlaying)
 		{
 			heartBeatAudioSource.Play();
 		}
-
+		
 		volume = 2.0f - (DarknessApproachingTimer*2 / (LillebrorLightLifetime + TimeInDarknessTotal));
 		heartBeatAudioSource.volume = volume;
-
+		
 		if(!breathingAudioSource.isPlaying)
 		{
 			breathingAudioSource.Play();
@@ -298,14 +315,14 @@ public class SiljaBehaviour : MonoBehaviour
 		
 		volume2 = 1.0f - Mathf.Pow(DarknessApproachingTimer / (LillebrorLightLifetime + TimeInDarknessTotal),0.4f);
 		breathingAudioSource.volume = volume2;
-
+		
 		Debug.Log(volume2);
-
+		
 		if(!monsterAudioSource.isPlaying)
 		{
 			monsterAudioSource.Play();
 		}
-
+		
 		if(thirdPersonInDark || teddyLightFlash.intensity == 0 && volume3 < 1)
 		{
 			volume3 += Time.deltaTime;
@@ -314,9 +331,9 @@ public class SiljaBehaviour : MonoBehaviour
 		{
 			volume3 -= Time.deltaTime;
 		}
-
+		
 		monsterAudioSource.volume = volume3;
-
+		
 		//Lights charge & flicker
 		if(inDarkness)
 		{
@@ -326,28 +343,31 @@ public class SiljaBehaviour : MonoBehaviour
 				
 				if(lightFlickerInterval < 0.2f)
 				{
-					teddyLight.intensity = 0.3f;
+					_lightIntensity = 0.3f;
+					//teddyLight.intensity = 0.3f;
 					teddyLightFlash.intensity = 1.0f;
 					teddyLightFlash2.intensity = 1.0f;
 				}
 				else if(lightFlickerInterval >= 0.2f && lightFlickerInterval < ((TimeInDarknessTotal / 1.3f) - (TimeInDarknessTotal / 1.35f)))
 				{
-					teddyLight.intensity = 1.0f;
+					_lightIntensity = 1.0f;
+					//teddyLight.intensity = 1.0f;
 					teddyLightFlash.intensity = 2.0f;
 					teddyLightFlash2.intensity = 2.0f;
 				}
 				else
 				{
-					teddyLight.intensity = 0.3f;
+					_lightIntensity = 0.3f;
+					//teddyLight.intensity = 0.3f;
 					teddyLightFlash.intensity = 1.0f;
 					teddyLightFlash2.intensity = 1.0f;
 				}
 			}
-
+			
 			if(DarknessApproachingTimer <= TimeInDarknessTotal + 1.0f)
 			{
 				float lightIntensity = DarknessApproachingTimer - TimeInDarknessTotal;
-
+				
 				Debug.Log(lightIntensity);
 				
 				teddyLightFlash.intensity = lightIntensity;
@@ -357,22 +377,24 @@ public class SiljaBehaviour : MonoBehaviour
 		else
 		{
 			lightFlickerInterval = 0.0f;
-
-			float lightIntensity = DarknessApproachingTimer*2 / (LillebrorLightLifetime + TimeInDarknessTotal);
 			
+			float lightIntensity = DarknessApproachingTimer*2 / (LillebrorLightLifetime + TimeInDarknessTotal);
+
+			_lightIntensity = (lightIntensity / 2);
 			teddyLight.intensity = (lightIntensity / 2);
 			teddyLightFlash.intensity = lightIntensity;
 			teddyLightFlash2.intensity = lightIntensity;
 		}
-
+		
 		//Out of light, monster coming
 		if(DarknessApproachingTimer <= TimeInDarknessTotal)
 		{
+			_lightIntensity = 0.3f;
 			teddyLight.intensity = 0.3f;
 			teddyLightFlash.intensity = 0.0f;
 			teddyLightFlash2.intensity = 0.0f;
 		}
-
+		
 		if(DarknessApproachingTimer <= TimeInDarknessTotal - (TimeInDarknessTotal / 1.3f))
 		{
 			monsterAudioSource.clip = monsterChase;
@@ -381,22 +403,22 @@ public class SiljaBehaviour : MonoBehaviour
 		{
 			monsterAudioSource.clip = monsterSearching;
 		}
-
+		
 		if(DarknessApproachingTimer <= 0)
 		{
 			//Monster comes
 			caughtTimer += Time.deltaTime;
 			transform.gameObject.GetComponent<MovementController>().canMove = false;
-
+			
 			EnableStoryMode();
-
+			
 			AudioSource soundSource = GameObject.Find("HeadAudioSource").transform.GetComponent<AudioSource>();
 			if(!soundSource.isPlaying && caughtTimer < 0.5f)
 			{
 				soundSource.clip = monsterCatchSiljaSound[Random.Range(0, monsterCatchSiljaSound.Length)];
 				soundSource.Play();
 			}
-
+			
 			if(caughtTimer > captureTimeTotal - 0.1f && caughtTimer <= captureTimeTotal)
 			{
 				volume = 0.0f;
@@ -407,25 +429,26 @@ public class SiljaBehaviour : MonoBehaviour
 				isCaught = true;
 			}
 		}
-
+		
 		if(isCaught)
 		{
 			caughtTimer = 0;
 			transform.gameObject.GetComponent<MovementController>().canMove = true;
-
+			
 			DarknessApproachingTimer = LillebrorLightLifetime + TimeInDarknessTotal;
 			transform.position = spawnPoint.position;
 
+			_lightIntensity = 1.0f; 
 			teddyLight.intensity = 1.0f;
 			teddyLightFlash.intensity = 2.0f;
 			teddyLightFlash2.intensity = 2.0f;
-
+			
 			EnableDarkMode();
 			StartCoroutine(BlinkingEffect());
 			GetComponent<Animation>().Play("waking_up");
 			isCaught = false;
 		}
-
+		
 		/*
 		if( intensity > lightTreshold )
 			teddyLight.intensity += fadingInSpeed;
@@ -436,118 +459,14 @@ public class SiljaBehaviour : MonoBehaviour
 	
 		SetLightIntensity(teddyLight.intensity);
 		*/
-
-		//RenderSettings.ambientLight = new Color(RenderSettings.ambientLight.b/2, (RenderSettings.ambientLight.b/2)/* * GlowLightBasic.g*/, ambientGlow/* * GlowLightBasic.b*/, 0.0f);
 		
-		//lilbroGlowMaterial.color = new Color(lilbroGlowMaterial.color.r, lilbroGlowMaterial.color.g, lilbroGlowMaterial.color.b, 1.0f);
-
-		//teddyLight.color = new Color(GlowLightBasic.r, GlowLightBasic.g, GlowLightBasic.b);
-
-		//Debug.Log(flickerIntervalTimer);
-
-		if( teddyLight.intensity <= maxFlickerIntensity)
-		{
-			/*
-			flickerIntervalTimer += Time.deltaTime;
-
-			if(intensity <= lightTreshold && maxFlickerIntensity >= (minFlickerIntensity * 1.2f) && flickerIntervalTimer > 4)
-			{
-				flickerTime += flickerSpeed;
-				teddyLight.intensity = Mathf.Lerp(maxFlickerIntensity, minFlickerIntensity, flickerTime);
-
-				if( teddyLight.intensity <= minFlickerIntensity)
-				{
-					flickerDelayTimer += Time.deltaTime;
-					if(flickerDelayTimer > flickerDelay)
-					{
-						flickerDelayTimer = 0;
-						flickerTime = 0;
-						if(flickerIntervalTimer > 8)
-						{
-							flickerDelay = flickerDelay * Random.Range(0.90f, 1.20f);
-							flickerSpeed = flickerSpeed * Random.Range(0.85f, 1.15f);
-							maxFlickerIntensity = maxFlickerIntensity * Random.Range(0.80f, 0.90f);
-						}
-						else
-						{
-							maxFlickerIntensity = maxFlickerIntensity * Random.Range(0.80f, 1.30f);
-						}
-						minFlickerIntensity = minFlickerIntensity;
-					}
-				}
-			}
-			*/
-
-			/*
-			if(flickerIntervalTimer > 6)
-			{
-				colorTime += colorSpeed;
-			}
-			*/
-		}
-		else
-		{
-			/*
-			if(colorTime > 1)
-			{
-				colorTime -= (colorSpeed * 3);
-			}
-			*/
-		}
-
-		if(teddyLight.intensity >= (maximumIntensity * 0.95) /* && maxFlickerIntensity < (mimimumIntensity * 5) */)
-		{
-			/*
-			flickerTime = 0;
-			flickerIntervalTimer = 0;
-			flickerSpeed = 0.06f;
-			flickerDelay = 0.2f;
-			maxFlickerIntensity = mimimumIntensity * 2;
-			minFlickerIntensity = mimimumIntensity * 1.5f;
-			*/
-		}
-
-		if( teddyLight.intensity <= mimimumIntensity)
-		{
-			/*
-			if(ambientGlow < 0.1f)
-			{
-				ambientGlow += 0.001f;
-			}
-			*/
-		}
-		else
-		{
-			/*
-			if(ambientGlow > 0.0f)
-			{
-				ambientGlow -= 0.005f;
-			}
-			*/
-		}
-
-		//teddyLightFlash2.intensity = teddyLightFlash.intensity;
-
-//		if( teddyLight.intensity > mimimumIntensity )
-//		{
-//			foreach( AIBehaviour aiEntity in aiEntities )
-//				aiEntity.DespawnAI();
-//		}
-	}
-
-	public void SetLightIntensity(float intensity)
-	{
-		intensity = Mathf.Clamp(intensity, mimimumIntensity, maximumIntensity);
+		teddyLightFlash2.intensity = teddyLightFlash.intensity;
 		
-		// map from 0 to 1
-		float glowIntensity = (intensity - mimimumIntensity) / (maximumIntensity - mimimumIntensity);
-		
-		// from minimum glow to maximum glow
-		glowIntensity = glowIntensity * (maximumGlow - minimumGlow) + minimumGlow;
-		
-		float colorIntensity = glowIntensity;
-		lilbroGlowMaterial.color = new Color(colorIntensity, colorIntensity, colorIntensity, glowIntensity);
-		teddyLight.intensity = intensity;
+		//		if( _lightIntensity > mimimumIntensity )
+		//		{
+		//			foreach( AIBehaviour aiEntity in aiEntities )
+		//				aiEntity.DespawnAI();
+		//		}
 	}
 
 	IEnumerator RipLimbDelayedAction(Transform entity, float ripLimbIn)
@@ -573,7 +492,9 @@ public class SiljaBehaviour : MonoBehaviour
 		firstPersonAnimator.SetTrigger("riplimb" + healthController.health);
 
 		firstPersonCameraShaker.StartShake(1f);
-		SetLightIntensity(1f);
+
+		_lightIntensity = 1f;
+		SetLightIntensity();
 
 		yield return new WaitForSeconds(ripLimbIn);
 		int index = healthController.health;
