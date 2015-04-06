@@ -282,7 +282,7 @@ public class SiljaBehaviour : MonoBehaviour
 	private void OnGUI()
 	{
 		GUILayout.Label("Light intensity: " + _lightIntensity.ToString("0.0"));
-		GUILayout.Label("Time left: " + (Mathf.Clamp(availableTimeInDark - _looseConditionTimer, 0, availableTimeInDark)).ToString("0"));
+		GUILayout.Label("Time left: " + DarknessApproachingTimer.ToString("0"));
 	}
 
 	public void SetLightIntensity()
@@ -297,7 +297,7 @@ public class SiljaBehaviour : MonoBehaviour
 		
 		float colorIntensity = glowIntensity;
 		lilbroGlowMaterial.color = new Color(colorIntensity, colorIntensity, colorIntensity, glowIntensity);
-		teddyLight.intensity = _lightIntensity;
+		//teddyLight.intensity = _lightIntensity;
 		
 		//Sounds of darkness & fear
 		if(!heartBeatAudioSource.isPlaying)
@@ -315,8 +315,6 @@ public class SiljaBehaviour : MonoBehaviour
 		
 		volume2 = 1.0f - Mathf.Pow(DarknessApproachingTimer / (LillebrorLightLifetime + TimeInDarknessTotal),0.4f);
 		breathingAudioSource.volume = volume2;
-		
-		Debug.Log(volume2);
 		
 		if(!monsterAudioSource.isPlaying)
 		{
@@ -343,22 +341,19 @@ public class SiljaBehaviour : MonoBehaviour
 				
 				if(lightFlickerInterval < 0.2f)
 				{
-					_lightIntensity = 0.3f;
-					//teddyLight.intensity = 0.3f;
+					teddyLight.intensity = 0.3f;
 					teddyLightFlash.intensity = 1.0f;
 					teddyLightFlash2.intensity = 1.0f;
 				}
 				else if(lightFlickerInterval >= 0.2f && lightFlickerInterval < ((TimeInDarknessTotal / 1.3f) - (TimeInDarknessTotal / 1.35f)))
 				{
-					_lightIntensity = 1.0f;
-					//teddyLight.intensity = 1.0f;
+					teddyLight.intensity = 1.0f;
 					teddyLightFlash.intensity = 2.0f;
 					teddyLightFlash2.intensity = 2.0f;
 				}
 				else
 				{
-					_lightIntensity = 0.3f;
-					//teddyLight.intensity = 0.3f;
+					teddyLight.intensity = 0.3f;
 					teddyLightFlash.intensity = 1.0f;
 					teddyLightFlash2.intensity = 1.0f;
 				}
@@ -367,8 +362,6 @@ public class SiljaBehaviour : MonoBehaviour
 			if(DarknessApproachingTimer <= TimeInDarknessTotal + 1.0f)
 			{
 				float lightIntensity = DarknessApproachingTimer - TimeInDarknessTotal;
-				
-				Debug.Log(lightIntensity);
 				
 				teddyLightFlash.intensity = lightIntensity;
 				teddyLightFlash2.intensity = lightIntensity;
@@ -389,7 +382,6 @@ public class SiljaBehaviour : MonoBehaviour
 		//Out of light, monster coming
 		if(DarknessApproachingTimer <= TimeInDarknessTotal)
 		{
-			_lightIntensity = 0.3f;
 			teddyLight.intensity = 0.3f;
 			teddyLightFlash.intensity = 0.0f;
 			teddyLightFlash2.intensity = 0.0f;
@@ -438,7 +430,6 @@ public class SiljaBehaviour : MonoBehaviour
 			DarknessApproachingTimer = LillebrorLightLifetime + TimeInDarknessTotal;
 			transform.position = spawnPoint.position;
 
-			_lightIntensity = 1.0f; 
 			teddyLight.intensity = 1.0f;
 			teddyLightFlash.intensity = 2.0f;
 			teddyLightFlash2.intensity = 2.0f;
