@@ -24,6 +24,7 @@ public class PuzzleLillebror : MonoBehaviour {
 				soundSource.clip = haveLillebrorSound;
 				soundSource.Play();
 				Door.isLocked = false;
+				Destroy(this);
 			}
 			else
 			{
