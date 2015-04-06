@@ -31,6 +31,13 @@ public class Health : MonoBehaviour {
 		barDisplay = siljaBeh.getTeddyLight();
 	}
 
+	public void PlayScaredAudio()
+	{
+		foreach (AudioSource s in playAllOfThose)
+			if( !s.isPlaying )
+				s.Play ();
+	}	                         
+
 	public void looseLife() {
 		health --;
 

@@ -34,7 +34,7 @@ public class DarknessLevel1 : MonoBehaviour {
 			firstPersonCam.backgroundColor = Color.black;
 			thirdPersonCam.clearFlags = CameraClearFlags.SolidColor;
 			thirdPersonCam.backgroundColor = Color.black;
-			lightProbe.gameObject.SetActive(true);
+//			lightProbe.gameObject.SetActive(true);
 		}
 	}
 	
