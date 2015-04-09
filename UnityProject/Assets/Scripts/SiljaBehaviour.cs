@@ -112,6 +112,14 @@ public class SiljaBehaviour : MonoBehaviour
 	private float _lightIntensity = 0f;
 	private float _looseConditionTimer = 0f;
 
+
+	// accessors
+	public bool IsFPSLookEnabled 
+	{
+		get { return mLook.enabled; }
+		set { mLook.enabled = value; }
+	}
+
 	void Awake()
 	{
 		charMotor = GetComponent<CharacterMotor>();
