@@ -36,6 +36,7 @@ public class LookInDetailInteraction : IInteractableObject
 		{
 			_siljaBeh.EnableDarkMode();
 			_siljaBeh.IsFPSLookEnabled = false;
+			_siljaBeh.IsFPSMoveEnabled = false;
 
 			Transform fpCamTransform = _siljaBeh.firstPersonCamera.transform;
 			fpCamTransform.LookAt(transform.position);

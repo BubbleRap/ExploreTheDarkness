@@ -120,6 +120,16 @@ public class SiljaBehaviour : MonoBehaviour
 		set { mLook.enabled = value; }
 	}
 
+	public bool IsFPSMoveEnabled 
+	{
+		get { return fpsInputCtrl.enabled; }
+		set 
+		{
+			charMotor.inputMoveDirection = Vector3.zero;
+			fpsInputCtrl.enabled = value; 
+		}
+	}
+
 	void Awake()
 	{
 		charMotor = GetComponent<CharacterMotor>();
