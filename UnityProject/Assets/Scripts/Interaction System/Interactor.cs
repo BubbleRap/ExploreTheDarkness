@@ -16,6 +16,14 @@ public class Interactor : MonoBehaviour
 	{
 		if( interactionObjects.Contains( interactionObject ) )
 			interactionObjects.Remove( interactionObject );	
+
+		if( currentInteractionObject == interactionObject )
+		{
+			PromtButtonInteractionObject currentPromt = currentInteractionObject.GetComponent<PromtButtonInteractionObject>();
+			currentPromt.ActivatePromtButton(false);
+
+			currentInteractionObject = null;
+		}
 	}
 
 	void Update () 
@@ -56,7 +64,6 @@ public class Interactor : MonoBehaviour
 		if( currentInteractionObject != interactionObjects[closestIdx] )
 		{
 			PromtButtonInteractionObject currentPromt;
-
 
 			// disabling promt for the old object
 			if( currentInteractionObject != null )

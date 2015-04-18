@@ -4,6 +4,7 @@ using System.Collections;
 public class PromtButtonInteractionObject : IInteractableObject
 {
 	public bool disableOnActive = true;
+	public bool interactionWorksInFP = false;
 
 	private GameObject buttonPrompt;
 	private Interactor interactor;
@@ -35,7 +36,9 @@ public class PromtButtonInteractionObject : IInteractableObject
 
 	private void Update()
 	{
-		OnInteractionClose((transform.position - interactor.transform.position).magnitude < 3f);
+		bool isClose = (transform.position - interactor.transform.position).magnitude < 3f;
+		bool isEligable = (interactionWorksInFP && SiljaBehaviour.darkMode) || !SiljaBehaviour.darkMode || interactionIsActive;
+		OnInteractionClose(isClose && isEligable);
 
 		Vector3 direction = ((transform.position - Vector3.up * 1.5f) - Camera.main.transform.position).normalized;
 		buttonPrompt.transform.position = transform.position - direction * 0.25f;
@@ -63,9 +66,13 @@ public class PromtButtonInteractionObject : IInteractableObject
 			return;
 		
 		if( state )
+		{
 			interactor.OnInteractionEnter( gameObject );
+		}
 		else
+		{
 			interactor.OnInteractionExit( gameObject );
+		}
 		
 		objectIsClose = state;
 	}
