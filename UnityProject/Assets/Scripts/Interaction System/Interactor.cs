@@ -10,21 +10,12 @@ public class Interactor : MonoBehaviour
 	{
 		if( !interactionObjects.Contains( interactionObject ) )
 			interactionObjects.Add( interactionObject );
-		
-		currentInteractionObject = interactionObject;
 	}
 
 	public void OnInteractionExit( GameObject interactionObject)
 	{
-		if( interactionObject == currentInteractionObject )
-			currentInteractionObject = null;
-
 		if( interactionObjects.Contains( interactionObject ) )
-			interactionObjects.Remove( interactionObject );
-
-		if( currentInteractionObject == null && interactionObjects.Count > 0 )
-			currentInteractionObject = interactionObjects[0];
-		
+			interactionObjects.Remove( interactionObject );	
 	}
 
 	void Update () 
@@ -34,11 +25,56 @@ public class Interactor : MonoBehaviour
 		// 2. stop interaction
 		// 3. interaction ends on itself
 
-		// IF INTERACTION BUTTON PRESSED
-		if( Input.GetKeyDown(KeyCode.E) && currentInteractionObject != null )
+
+		// select current interaction object going through the list
+		float closestDistToCenter = Mathf.Infinity;
+		int closestIdx = -1;
+
+		for( int i = 0; i < interactionObjects.Count; i++ )
 		{
-			// I would not use SendMessage, as "Find References" won't work
-			// ... And maybe some other reasons
+			// check if object was destroyed
+			if( interactionObjects[i] == null )
+			{
+				interactionObjects.RemoveAt( i );	
+				i--;
+				continue;
+			}
+
+			Vector3 viewPos = Camera.main.WorldToViewportPoint( interactionObjects[i].transform.position );
+			float distance = Vector2.Distance( viewPos, Vector2.one * 0.5f );
+			if( distance < closestDistToCenter )
+			{
+				closestDistToCenter = distance;
+				closestIdx = i;
+			}
+		}
+
+		if( interactionObjects.Count == 0 )
+			return;
+
+		// switching to the new interactable object
+		if( currentInteractionObject != interactionObjects[closestIdx] )
+		{
+			PromtButtonInteractionObject currentPromt;
+
+
+			// disabling promt for the old object
+			if( currentInteractionObject != null )
+			{
+				currentPromt = currentInteractionObject.GetComponent<PromtButtonInteractionObject>();
+				currentPromt.ActivatePromtButton(false);
+			}
+
+			currentInteractionObject = interactionObjects[closestIdx];
+
+			// enabling promt for the new object
+			currentPromt = currentInteractionObject.GetComponent<PromtButtonInteractionObject>();
+			currentPromt.ActivatePromtButton(true);
+		}
+
+
+		if( Input.GetKeyDown(KeyCode.E) /* || Input.GetMouseButtonDown(0) */)
+		{
 			foreach( MonoBehaviour behaviour in currentInteractionObject.GetComponents<MonoBehaviour>() )
 			{
 				IInteractableObject interactableInterface = behaviour as IInteractableObject;
@@ -54,13 +90,13 @@ public class Interactor : MonoBehaviour
 					// >>>da hack
 					// check, if there is a glow component, which will tell us
 					// whether player is looking at the object
-					GlowInteractionObject glowCom = interactableInterface as GlowInteractionObject;
-					if( glowCom != null )
-						if( !glowCom.activated )
-							return;
+
+//					GlowInteractionObject glowCom = interactableInterface as GlowInteractionObject;
+//					if( glowCom != null )
+//						if( !glowCom.activated )
+//							return;
 
 
-					// not a hack
 					interactableInterface.Activate();
 				}
 			}
