@@ -2818,6 +2818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnActive: 1
+  interactionWorksInFP: 0
 --- !u!114 &73158791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6669,6 +6670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnActive: 1
+  interactionWorksInFP: 0
 --- !u!1 &201118039
 GameObject:
   m_ObjectHideFlags: 0
@@ -12564,6 +12566,10 @@ Prefab:
       propertyPath: _lightSource
       value: 
       objectReference: {fileID: 1981934398}
+    - target: {fileID: 11416858, guid: 781fc850527a4814aafefc9887d821a6, type: 2}
+      propertyPath: interactionWorksInFP
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 781fc850527a4814aafefc9887d821a6, type: 2}
   m_IsPrefabParent: 0
@@ -14728,6 +14734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnActive: 1
+  interactionWorksInFP: 0
 --- !u!114 &442153140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15782,6 +15789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnActive: 1
+  interactionWorksInFP: 0
 --- !u!114 &483026928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17518,6 +17526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnActive: 1
+  interactionWorksInFP: 0
 --- !u!114 &543410383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21267,6 +21276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnActive: 1
+  interactionWorksInFP: 0
 --- !u!1001 &690135831
 Prefab:
   m_ObjectHideFlags: 0
@@ -22189,6 +22199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnActive: 1
+  interactionWorksInFP: 0
 --- !u!23 &721473361
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -28766,6 +28777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnActive: 1
+  interactionWorksInFP: 0
 --- !u!1 &886342876
 GameObject:
   m_ObjectHideFlags: 0
@@ -34403,6 +34415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnActive: 1
+  interactionWorksInFP: 0
 --- !u!114 &1066815627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35960,6 +35973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnActive: 1
+  interactionWorksInFP: 0
 --- !u!114 &1119405634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37991,6 +38005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnActive: 1
+  interactionWorksInFP: 0
 --- !u!114 &1188909279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41146,6 +41161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnActive: 1
+  interactionWorksInFP: 0
 --- !u!1 &1289456153
 GameObject:
   m_ObjectHideFlags: 0
@@ -41766,6 +41782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnActive: 1
+  interactionWorksInFP: 0
 --- !u!114 &1305687334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44878,6 +44895,10 @@ Prefab:
     - target: {fileID: 6524220, guid: 781fc850527a4814aafefc9887d821a6, type: 2}
       propertyPath: m_Size.x
       value: 12.6199999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11416858, guid: 781fc850527a4814aafefc9887d821a6, type: 2}
+      propertyPath: interactionWorksInFP
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 781fc850527a4814aafefc9887d821a6, type: 2}
@@ -55632,6 +55653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnActive: 1
+  interactionWorksInFP: 0
 --- !u!114 &1791470006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56746,6 +56768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnActive: 1
+  interactionWorksInFP: 0
 --- !u!1001 &1818341719
 Prefab:
   m_ObjectHideFlags: 0
@@ -59518,6 +59541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnActive: 1
+  interactionWorksInFP: 0
 --- !u!114 &1899710130
 MonoBehaviour:
   m_ObjectHideFlags: 0
