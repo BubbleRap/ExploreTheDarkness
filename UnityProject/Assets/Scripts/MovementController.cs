@@ -123,6 +123,21 @@ public class MovementController : MonoBehaviour
 		canMove = true;
 	}
 
+	public bool isMoving()
+	{
+		bool isMovement;
+		if(targetDirection != Vector3.zero)
+		{
+			isMovement = true;
+		}
+		else
+		{
+			isMovement = false;
+		}
+
+		return isMovement;
+	}
+
 	// called by Trigger.cs by sending message
 	public void StartMonsterHandCutScene()
 	{
