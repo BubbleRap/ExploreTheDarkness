@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour {
 
 	private int lilleBrorPieces = 0;
 	public bool lillebrorComplete = false;
+
+	private List<string> inv = new List<string>(); 
 
 	// Use this for initialization
 	void Start () {
@@ -24,5 +27,24 @@ public class Inventory : MonoBehaviour {
 	public void setLilleBrorPieces()
 	{
 		lilleBrorPieces ++;
+	}
+
+	public void putInInventory(string theObject)
+	{
+		inv.Add (theObject);
+	}
+
+	public bool lookUpInventory(string theObject)
+	{
+		int pos = inv.IndexOf(theObject);
+
+		if(pos > -1)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

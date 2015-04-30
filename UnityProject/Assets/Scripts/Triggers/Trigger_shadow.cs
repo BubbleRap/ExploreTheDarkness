@@ -15,6 +15,7 @@ public class Trigger_shadow : MonoBehaviour {
 		if(other.tag == "Player")
 		{
 			doorController.openDoor(OpenDoor);
+			Destroy(this.transform.gameObject);
 		}
 	}
 	

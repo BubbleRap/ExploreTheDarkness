@@ -34,6 +34,7 @@ public class SiljaBehaviour : MonoBehaviour
 	private bool inDarkness = false;
 	private bool thirdPersonInDark = false;
 
+	private bool DarknessApproaching = false;
 	private float DarknessApproachingTimer;
 	public float LillebrorLightLifetime = 40.0f;
 	public float TimeInDarknessTotal = 10.0f;
@@ -258,6 +259,11 @@ public class SiljaBehaviour : MonoBehaviour
 	{
 		if( !lightWasGivenLastFrame )
 		{
+			if(!DarknessApproaching)
+			{
+				DarknessApproachingTimer = LillebrorLightLifetime + TimeInDarknessTotal;
+			}
+
 			_lightIntensity -= fadingOutSpeed;
 			SetLightIntensity();
 
@@ -404,8 +410,8 @@ public class SiljaBehaviour : MonoBehaviour
 			teddyLightFlash.intensity = 0.0f;
 			teddyLightFlash2.intensity = 0.0f;
 		}
-		
-		if(DarknessApproachingTimer <= TimeInDarknessTotal - (TimeInDarknessTotal / 1.3f))
+
+		if(DarknessApproachingTimer <= TimeInDarknessTotal - (TimeInDarknessTotal / 1.3f) && moveCtrl.isMoving())
 		{
 			monsterAudioSource.clip = monsterChase;
 		}
@@ -418,9 +424,7 @@ public class SiljaBehaviour : MonoBehaviour
 		{
 			//Monster comes
 			caughtTimer += Time.deltaTime;
-			transform.gameObject.GetComponent<MovementController>().canMove = false;
-			
-			EnableStoryMode();
+			moveCtrl.canMove = false;
 			
 			AudioSource soundSource = GameObject.Find("HeadAudioSource").transform.GetComponent<AudioSource>();
 			if(!soundSource.isPlaying && caughtTimer < 0.5f)
@@ -443,7 +447,7 @@ public class SiljaBehaviour : MonoBehaviour
 		if(isCaught)
 		{
 			caughtTimer = 0;
-			transform.gameObject.GetComponent<MovementController>().canMove = true;
+			moveCtrl.canMove = true;
 			
 			DarknessApproachingTimer = LillebrorLightLifetime + TimeInDarknessTotal;
 			transform.position = spawnPoint.position;
@@ -545,6 +549,11 @@ public class SiljaBehaviour : MonoBehaviour
 		//}
 		transform.gameObject.GetComponent<MovementController>().canMove = !state;
 		camInput.enabled = !state;
+	}
+
+	public void isDarknessApproaching(bool boolean)
+	{
+		DarknessApproaching = boolean;
 	}
 
 	private IEnumerator BlinkingEffect()
