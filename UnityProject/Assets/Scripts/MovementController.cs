@@ -16,8 +16,8 @@ public class MovementController : MonoBehaviour
 	public float movingSpeed = 10f;
 
 	private Vector3 targetDirection = Vector3.zero;
-
-	public bool alwaysFollows = false;
+	private Vector3 motorMovement = Vector3.zero;
+	
 	public float rotationSpeed = 150f;
 	public float moveAccel = 1f;
 
@@ -63,26 +63,19 @@ public class MovementController : MonoBehaviour
 		}
 
 		Vector3 right = new Vector3(forward.z, 0, -forward.x);
-		targetDirection = h * right + v * forward;
+		targetDirection = (h * right + v * forward).normalized;
 
 
-
-		if( alwaysFollows )
+		if( targetDirection.magnitude > 0f )
 		{
-//			moveDirection = targetDirection;
-//			transform.rotation = Quaternion.LookRotation(forward);
-		}
-		else
-			if( targetDirection.magnitude > 0f )
-			{
-				moveDirection = Vector3.RotateTowards(transform.forward, targetDirection, rotationSpeed * Mathf.Deg2Rad * Time.deltaTime, 300f);
-				moveDirection = moveDirection.normalized;
+			moveDirection = Vector3.RotateTowards(transform.forward, forward, rotationSpeed * Mathf.Deg2Rad * Time.deltaTime, 300f);
+			moveDirection = moveDirection.normalized;
 
-				transform.rotation = Quaternion.LookRotation(moveDirection);
-			}
+			transform.rotation = Quaternion.LookRotation(moveDirection);
+		}
+
 
 		float curSmooth = moveAccel * Time.deltaTime;
-
 		float targetSpeed = targetDirection.magnitude * movingSpeed;
 		
 		moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, curSmooth);
@@ -92,11 +85,13 @@ public class MovementController : MonoBehaviour
 		if( firstPersonAnimator.gameObject.activeInHierarchy )
 			firstPersonAnimator.SetFloat ("speed", moveSpeed);
 
-		Vector3 movement = moveDirection * moveSpeed;
-		if( moveSpeed < 0.1f )
-			movement = Vector3.zero;
+		if( targetDirection.magnitude > 0f )
+			motorMovement = targetDirection.normalized;
 
-		charMotor.inputMoveDirection = movement;
+
+		charMotor.inputMoveDirection = motorMovement * moveSpeed;
+		if( moveSpeed < 0.175f )
+			charMotor.inputMoveDirection = Vector3.zero;
 
 		// reseting values used by animator
 		v = 0f; h = 0f;
