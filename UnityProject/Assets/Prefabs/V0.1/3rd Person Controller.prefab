@@ -4971,7 +4971,7 @@ Transform:
   - {fileID: 400008}
   - {fileID: 400308}
   m_Father: {fileID: 400042}
-  m_RootOrder: 9
+  m_RootOrder: 12
 --- !u!4 &400164
 Transform:
   m_ObjectHideFlags: 1
@@ -9317,7 +9317,6 @@ MonoBehaviour:
   blackscreenTime: 5
   spawnPoint: {fileID: 0}
   lilbroGlowMaterial: {fileID: 2100000, guid: 905cf80df59f3e949a6f5aa8f3edcbd4, type: 2}
-  lightTreshold: -.0450000018
   fadingOutSpeed: .000199999995
   fadingInSpeed: .0120000001
   maximumIntensity: 1
@@ -9363,7 +9362,6 @@ MonoBehaviour:
   firstPersonAnimator: {fileID: 9500002}
   cameraTransform: {fileID: 400260}
   movingSpeed: 1
-  alwaysFollows: 0
   rotationSpeed: 150
   moveAccel: 2.5
   canMove: 0
