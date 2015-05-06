@@ -3492,8 +3492,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a4a33be68904e56a66eb4a4dfeaf94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 400002}
-  Origin: {fileID: 400000}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
