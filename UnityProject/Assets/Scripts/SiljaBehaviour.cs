@@ -63,7 +63,7 @@ public class SiljaBehaviour : MonoBehaviour
 	[HideInInspector]
 	static public bool darkMode = false;
 
-	public Material lilbroGlowMaterial = null;
+//	public Material lilbroGlowMaterial = null;
 
 	private AIBehaviour[] aiEntities = null;
 
@@ -200,7 +200,7 @@ public class SiljaBehaviour : MonoBehaviour
 		lightProbeOnSilja.SetActive(false); 
 
 
-		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
+//		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
 		GlowLightBasic = teddyLight.color;
 
 
@@ -216,7 +216,7 @@ public class SiljaBehaviour : MonoBehaviour
 		oneHandJoint.gameObject.SetActive(false);
 		twoHandsJoint.gameObject.SetActive(true);
 
-		lilbroGlowMaterial.color = new Color(1f,1f,1f,1f);
+//		lilbroGlowMaterial.color = new Color(1f,1f,1f,1f);
 
 //		GetComponent<Animation>().Play("waking_up");
 
@@ -241,7 +241,7 @@ public class SiljaBehaviour : MonoBehaviour
 		twoHandsJoint.gameObject.SetActive(false);
 
 
-		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
+//		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
 
 		darkMode = false;
 	}
@@ -319,8 +319,8 @@ public class SiljaBehaviour : MonoBehaviour
 		// from minimum glow to maximum glow
 		glowIntensity = glowIntensity * (maximumGlow - minimumGlow) + minimumGlow;
 		
-		float colorIntensity = glowIntensity;
-		lilbroGlowMaterial.color = new Color(colorIntensity, colorIntensity, colorIntensity, glowIntensity);
+//		float colorIntensity = glowIntensity;
+//		lilbroGlowMaterial.color = new Color(colorIntensity, colorIntensity, colorIntensity, glowIntensity);
 		//teddyLight.intensity = _lightIntensity;
 		
 		//Sounds of darkness & fear
