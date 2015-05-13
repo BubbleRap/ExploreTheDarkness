@@ -12,11 +12,11 @@ public class BilboardObject : MonoBehaviour
 
 	void OnBecameVisible()
 	{
-		Debug.Log("Became Visible");
+//		Debug.Log("Became Visible");
 	}
 
 	void OnBecameInvisible()
 	{
-		Debug.Log("Became Invisible");
+//		Debug.Log("Became Invisible");
 	}
 }
