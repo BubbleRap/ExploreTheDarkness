@@ -196,10 +196,10 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    secondaryUVAngleDistortion: 20
-    secondaryUVAreaDistortion: 20
-    secondaryUVHardAngle: 100
-    secondaryUVPackMargin: 25
+    secondaryUVAngleDistortion: 1
+    secondaryUVAreaDistortion: 1
+    secondaryUVHardAngle: 60
+    secondaryUVPackMargin: 35
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
