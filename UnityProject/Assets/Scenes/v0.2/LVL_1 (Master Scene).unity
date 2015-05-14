@@ -57,18 +57,19 @@ LightmapSettings:
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
     serializedVersion: 3
-    m_Resolution: 2
-    m_BakeResolution: 40
+    m_Resolution: 4
+    m_BakeResolution: 60
     m_TextureWidth: 1024
     m_TextureHeight: 1024
     m_AOMaxDistance: 1
     m_Padding: 2
-    m_CompAOExponent: 0
+    m_CompAOExponent: 1
     m_LightmapParameters: {fileID: 0}
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
-  m_LightmapSnapshot: {fileID: 0}
+  m_LightmapSnapshot: {fileID: 112000000, guid: 572a7e0614e3125459985c9829209082,
+    type: 2}
   m_RuntimeCPUUsage: 25
 --- !u!196 &5
 NavMeshSettings:
@@ -1646,8 +1647,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 278636607}
-  m_LocalRotation: {x: .20341818, y: 0, z: 0, w: .979091942}
-  m_LocalPosition: {x: 0, y: 5.13999987, z: -11.4700003}
+  m_LocalRotation: {x: .203376666, y: -.0198072698, z: .00411519501, w: .978891611}
+  m_LocalPosition: {x: -2.81999993, y: 5.13999987, z: -11.4700003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1846688544}
@@ -1719,7 +1720,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400254, guid: 8eff8f194b8c7974c99dfbc283e61377, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.71000004
+      value: 3.96000004
       objectReference: {fileID: 0}
     - target: {fileID: 400254, guid: 8eff8f194b8c7974c99dfbc283e61377, type: 3}
       propertyPath: m_LocalRotation.x
@@ -9035,7 +9036,7 @@ Camera:
     height: 1
   near clip plane: .300000012
   far clip plane: 1000
-  field of view: 60
+  field of view: 39
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -9084,7 +9085,7 @@ MonoBehaviour:
   OcclusionColor: {r: 0, g: 0, b: 0, a: 1}
   CutoffDistance: 150
   CutoffFalloff: 50
-  Blur: 1
+  Blur: 0
   BlurDownsampling: 0
   DebugAO: 0
 --- !u!4 &1656145171 stripped
