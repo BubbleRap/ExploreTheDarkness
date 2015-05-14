@@ -2656,6 +2656,18 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 442700, guid: ffb44d417b675034c81036a8412368ab, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -.83121407
+      objectReference: {fileID: 0}
+    - target: {fileID: 442700, guid: ffb44d417b675034c81036a8412368ab, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: .555952609
+      objectReference: {fileID: 0}
+    - target: {fileID: 442700, guid: ffb44d417b675034c81036a8412368ab, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: .511006355
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ffb44d417b675034c81036a8412368ab, type: 2}
   m_IsPrefabParent: 0
