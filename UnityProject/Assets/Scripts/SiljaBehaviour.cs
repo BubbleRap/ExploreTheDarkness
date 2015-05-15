@@ -228,8 +228,8 @@ public class SiljaBehaviour : MonoBehaviour
 		teddyLight.enabled = false;
 		lightProbeOnSilja.SetActive(false); 
 
-		charMotor.movement.maxForwardSpeed = 1;
-		charMotor.movement.maxSidewaysSpeed = 1;
+		charMotor.movement.maxForwardSpeed = 1.1f;
+		charMotor.movement.maxSidewaysSpeed = 0.9f;
 		moveCtrl.enabled = true;
 		
 		fpsInputCtrl.enabled = false;
