@@ -65,8 +65,6 @@ public class SiljaBehaviour : MonoBehaviour
 
 //	public Material lilbroGlowMaterial = null;
 
-	private AIBehaviour[] aiEntities = null;
-
 	[Range(0f, 0.020f)]
 	public float fadingOutSpeed = 0.002f;
 
@@ -140,7 +138,6 @@ public class SiljaBehaviour : MonoBehaviour
 		camInput = GetComponentInChildren<CameraInput>();
 
 		dLightProbe = GetComponentInChildren<DynamicLightProbe> ();
-		aiEntities = FindObjectsOfType<AIBehaviour>();
 
 		firstPersonCameraShaker = firstPersonCamera.GetComponent<CameraShaker>();
 		cameraFollowCom = thirdPersonCamera.GetComponent<CameraFollow>();
