@@ -88,7 +88,7 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: .180999994
+        second: .193000004
       data:
         first:
           name: _SrcBlend
