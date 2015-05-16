@@ -181,37 +181,42 @@ public class SiljaBehaviour : MonoBehaviour
 		if( Input.GetKeyUp( KeyCode.Q ) )
 		{
 			if( darkMode )
-				EnableStoryMode();
+				ShiftToStoryMode();
 			else
-				EnableDarkMode();
+				ShiftToDarkMode();
 		}
 	}
 
-	public void EnableDarkMode()
+	public float ShiftDuration = 1f;
+
+	public void ShiftToDarkMode()
 	{
+		StartCoroutine(SwitchCameras(thirdPersonCamera,firstPersonCamera));
+		Invoke("EnableDarkMode",ShiftDuration);
+	}
+
+	public void EnableDarkMode() {
+
 //		StartCoroutine(BlinkingEffect());
 //		refreshAIReferences();
-
-
 		teddyLight.enabled = true;
 		lightProbeOnSilja.SetActive(false); 
 
-
 //		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
 		GlowLightBasic = teddyLight.color;
-
-
+	
 		charMotor.movement.maxForwardSpeed = 1.5f;
 		charMotor.movement.maxSidewaysSpeed = 1.5f;
 		moveCtrl.enabled = false;
 		
 		fpsInputCtrl.enabled = true;
 		mLook.enabled = true;
-		firstPersonCamera.SetActive(true);
-		thirdPersonCamera.SetActive(false);
 
 		oneHandJoint.gameObject.SetActive(false);
 		twoHandsJoint.gameObject.SetActive(true);
+
+		firstPersonCamera.SetActive (true);
+		thirdPersonCamera.SetActive (false);
 
 //		lilbroGlowMaterial.color = new Color(1f,1f,1f,1f);
 
@@ -220,8 +225,14 @@ public class SiljaBehaviour : MonoBehaviour
 		darkMode = true;
 	}
 
-	public void EnableStoryMode()
+	public void ShiftToStoryMode()
 	{
+		StartCoroutine(SwitchCameras(firstPersonCamera,thirdPersonCamera));
+		Invoke("EnableStoryMode",ShiftDuration);
+	}
+	
+	public void EnableStoryMode() {
+
 		teddyLight.enabled = false;
 		lightProbeOnSilja.SetActive(false); 
 
@@ -231,16 +242,77 @@ public class SiljaBehaviour : MonoBehaviour
 		
 		fpsInputCtrl.enabled = false;
 		mLook.enabled = false;
-		firstPersonCamera.SetActive(false);
-		thirdPersonCamera.SetActive(true);
 
 		oneHandJoint.gameObject.SetActive(true);
 		twoHandsJoint.gameObject.SetActive(false);
 
+		firstPersonCamera.SetActive (false);
+		thirdPersonCamera.SetActive (true);
 
 //		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
 
 		darkMode = false;
+	}
+
+	IEnumerator SwitchCameras (GameObject movingCamera, GameObject targetCamera)
+	{
+		Vector3 startPos = movingCamera.transform.position;
+		Vector3 startRot = movingCamera.transform.rotation.eulerAngles;
+
+		Vector3 endPos = targetCamera.transform.position;
+		Vector3 endRot = targetCamera.transform.rotation.eulerAngles;
+
+		targetCamera.transform.position = startPos;
+		targetCamera.transform.rotation = Quaternion.Euler(startRot);
+
+		iTween.MoveTo(movingCamera, iTween.Hash(
+			"position"    , endPos,
+			"islocal" , false,
+			"time"    , ShiftDuration,
+			"easeType", iTween.EaseType.easeOutSine,
+			"ignoretimescale", true
+			));
+
+		iTween.MoveTo(targetCamera, iTween.Hash(
+			"position"    , endPos,
+			"islocal" , false,
+			"time"    , ShiftDuration,
+			"easeType", iTween.EaseType.easeOutSine,
+			"ignoretimescale", true
+			));
+
+		iTween.RotateTo(movingCamera, iTween.Hash(
+			"rotation"    , endRot,
+			"islocal" , false,
+			"time"    , ShiftDuration,
+			"easeType", iTween.EaseType.easeOutSine,
+			"ignoretimescale", true
+			));
+
+		iTween.RotateTo(targetCamera, iTween.Hash(
+			"rotation"    , endRot,
+			"islocal" , false,
+			"time"    , ShiftDuration,
+			"easeType", iTween.EaseType.easeOutSine,
+			"ignoretimescale", true
+			));
+
+		/*StartCoroutine(
+			ScreenWipe.use.CrossFadePro(
+				movingCamera.GetComponent<Camera>(), 
+				targetCamera.GetComponent<Camera>(), 
+				ShiftDuration
+			)
+		);*/
+
+		yield return new WaitForSeconds(ShiftDuration);
+
+		targetCamera.transform.position = endPos;
+		targetCamera.transform.rotation = Quaternion.Euler(endRot);
+
+		movingCamera.transform.position = startPos;
+		movingCamera.transform.rotation = Quaternion.Euler(startRot);
+		
 	}
 	
 	public void RetriveLightProbeResult(float intensity)
