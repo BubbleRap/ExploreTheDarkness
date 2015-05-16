@@ -8,6 +8,7 @@ TagManager:
   - ExposedLight
   - playerModel
   - Trash
+  - roof
   layers:
   - Default
   - TransparentFX
