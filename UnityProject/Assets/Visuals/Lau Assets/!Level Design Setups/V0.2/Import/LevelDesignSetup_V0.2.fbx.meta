@@ -38,6 +38,10 @@ ModelImporter:
     100060: Floor_1*1m
     100062: Floor_1*2m
     100064: Floor_2*2m
+    100066: WallMoldings_2m.010
+    100068: WallMoldings_2m.011
+    100070: Window_Big_Glass
+    100072: Window_Big_Glass.001
     400000: Door_Indoors
     400002: Door_Outdoors
     400004: DoorFrame
@@ -71,6 +75,10 @@ ModelImporter:
     400060: Floor_1*1m
     400062: Floor_1*2m
     400064: Floor_2*2m
+    400066: WallMoldings_2m.010
+    400068: WallMoldings_2m.011
+    400070: Window_Big_Glass
+    400072: Window_Big_Glass.001
     2300000: Door_Indoors
     2300002: Door_Outdoors
     2300004: DoorFrame
@@ -103,6 +111,10 @@ ModelImporter:
     2300058: Floor_1*1m
     2300060: Floor_1*2m
     2300062: Floor_2*2m
+    2300064: WallMoldings_2m.010
+    2300066: WallMoldings_2m.011
+    2300068: Window_Big_Glass
+    2300070: Window_Big_Glass.001
     3300000: Door_Indoors
     3300002: Door_Outdoors
     3300004: DoorFrame
@@ -135,6 +147,10 @@ ModelImporter:
     3300058: Floor_1*1m
     3300060: Floor_1*2m
     3300062: Floor_2*2m
+    3300064: WallMoldings_2m.010
+    3300066: WallMoldings_2m.011
+    3300068: Window_Big_Glass
+    3300070: Window_Big_Glass.001
     4300000: Wall_2m.001
     4300002: Window_Medium
     4300004: Wall_Window_Medium
@@ -167,6 +183,10 @@ ModelImporter:
     4300058: Floor_1*2m
     4300060: Floor_1*1m
     4300062: Floor_2*2m
+    4300064: WallMoldings_2m.011
+    4300066: WallMoldings_2m.010
+    4300068: Window_Big_Glass.001
+    4300070: Window_Big_Glass
   materials:
     importMaterials: 1
     materialName: 0
