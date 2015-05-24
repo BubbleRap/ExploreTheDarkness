@@ -2572,8 +2572,11 @@ GameObject:
   - 114: {fileID: 11426680}
   - 82: {fileID: 8225778}
   - 135: {fileID: 13526636}
-  m_Layer: 10
-  m_Name: Camera
+  - 54: {fileID: 5429094}
+  - 114: {fileID: 11457388}
+  - 114: {fileID: 11462624}
+  m_Layer: 9
+  m_Name: 3rd Person Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7962,6 +7965,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!54 &5429094
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100332}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -9645,6 +9663,53 @@ MonoBehaviour:
   shaderFXAAPreset3: {fileID: 4800000, guid: c182fa94a5a0a4c02870641efcd38cd5, type: 3}
   shaderFXAAII: {fileID: 4800000, guid: cd5b323dcc592457790ff18b528f5e67, type: 3}
   shaderFXAAIII: {fileID: 4800000, guid: c547503fff0e8482ea5793727057041c, type: 3}
+--- !u!114 &11457388
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100332}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cefcedbd0f2ff6479d6bf55abd84c69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  approachingSpeed: .0500000007
+  fallbackCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 2
+      outSlope: .00666503981
+      tangentMode: 17
+    - time: .498739898
+      value: .00332412124
+      inSlope: .00666503981
+      outSlope: 5.54285955
+      tangentMode: 5
+    - time: 1.00051868
+      value: 1.00127542
+      inSlope: 1.45661783
+      outSlope: 1.45661783
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  fallbackTime: 5
+--- !u!114 &11462624
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100332}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b06af255df742f48a3d0f4d254cd984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verticalSensetivity: 2
+  horizontalSensetivity: 2
+  iversedVertical: 0
 --- !u!114 &11467000
 MonoBehaviour:
   m_ObjectHideFlags: 1
