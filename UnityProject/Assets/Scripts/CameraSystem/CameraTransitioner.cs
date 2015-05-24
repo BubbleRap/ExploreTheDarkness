@@ -4,76 +4,80 @@ using UnityStandardAssets.ImageEffects;
 
 public class CameraTransitioner : MonoBehaviour {
 
+	//duration of the transition.
 	public float TransitionTime;
 
 	public enum CameraMode { Fpp,Tpp, Transitioning }
 	public CameraMode Mode { get; private set; }
 
+	//two objects which mark the transforms of the FPP and TPP camera
 	public Transform TPPCameraTransform, FPPCameraTransform;
 
-	//Those two components are referenced from prefabs and lerped by values
+	//Two prefabs holding the values of camera presets
 	public Camera TppCameraSetup, FppCameraSetup;
-	public VignetteAndChromaticAberration TppVignette, FppVignette;
 
+	[HideInInspector]
 	public List<Behaviour> 
 		//Those components are toggled in the beginning of transition
 		TppOnlyComponents,
 		FppOnlyComponents,
-		//Gameplay components are also disabled for the transition 
+		//Gameplay components are disabled for the transition 
 		TppOnlyGameplayComponents,
 		FppOnlyGameplayComponents; 
 
+	//those child objects are disabled/enabled in each mode
 	public List<GameObject>
 		TppTransformChildren,
 		FppTransformChildren;
 
+	//not to GetComponent all the time
 	private Camera ThisCamera;
-	private VignetteAndChromaticAberration ThisVignette;
 
 	void Awake (){
 
 		ThisCamera = GetComponent<Camera>();
-		ThisVignette = GetComponent<VignetteAndChromaticAberration>();
-
 		Mode = CameraMode.Tpp;
-
-		TppOnlyComponents.AddRange (new Behaviour[]{
-			GetComponent<SunShafts>()
-		});
 
 		TppOnlyGameplayComponents.AddRange (new Behaviour[]{
 			GetComponent<CameraFollow>(),
-			GetComponent<CameraInput>(),
-			GetComponent<CameraPhysics>(),
+				//TODO repair the CameraInput!
+			//GetComponent<CameraInput>(),
 			GetComponent<AudioSource>() 
 		});
 
 		FppOnlyComponents.AddRange (new Behaviour[]{
 			GetComponent<DepthOfField>(),
 			GetComponent<Antialiasing>(),
-			GetComponent<ScreenSpaceAmbientOcclusion>()
+			GetComponent<ScreenSpaceAmbientOcclusion>(),
+			GetComponent<VignetteAndChromaticAberration>()
 		});
 
 		FppOnlyGameplayComponents.AddRange (new Behaviour[]{
 			GetComponent<MouseLook>(),
 			GetComponent<CameraShaker>(),
-			GetComponent<Health>(),
+			GetComponent<Health>()
 		});
 	}
 
+	//THE transition function
 	public void Transition(){
 
 		if (Mode == CameraMode.Tpp){
 
+			//save the camera's position
+			TPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
+			TPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
+
+			//tween using the 'TransitionUpdate' function
 			iTween.ValueTo(gameObject, iTween.Hash(
 				"from", 0f,
 				"to", 1f,
 				"time", TransitionTime,
 				"easetype", iTween.EaseType.easeInOutSine,
 
-				"onstart", "TurnOffTpp",
-				"onupdate", "TransitionUpdate",
-				"oncomplete", "TurnOnFpp",
+				"onstart", "TurnOffTpp",			//callback on start of the tween
+				"onupdate", "TransitionUpdate",		//method called on each update
+				"oncomplete", "TurnOnFpp",			//callback on complete of the tween
 
 				"onstarttarget", gameObject,
 				"onupdatetarget", gameObject,
@@ -85,15 +89,20 @@ public class CameraTransitioner : MonoBehaviour {
 		}
 		else {
 
+			//save the camera's position
+			FPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
+			FPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
+
+			//tween using the 'TransitionUpdate' function
 			iTween.ValueTo(gameObject, iTween.Hash(
-				"from", 1f,
+				"from", 1f, //IN REVERSE
 				"to", 0f,
 				"time", TransitionTime,
 				"easetype", iTween.EaseType.easeInOutSine,
 				
-				"onstart", "TurnOffFpp",
-				"onupdate", "TransitionUpdate",
-				"oncomplete", "TurnOnTpp",
+				"onstart", "TurnOffFpp",			//callback on start of the tween
+				"onupdate", "TransitionUpdate",		//method called on each update
+				"oncomplete", "TurnOnTpp",			//callback on complete of the tween
 				
 				"onstarttarget", gameObject,
 				"onupdatetarget", gameObject,
@@ -107,15 +116,16 @@ public class CameraTransitioner : MonoBehaviour {
 
 	public void TransitionUpdate(float state){
 
+		//not to calculate it all the time
 		float negState = 1f-state;
 
-		transform.position = 
-			FPPCameraTransform.position * state + 
-			TPPCameraTransform.position * negState;
+		ThisCamera.transform.localPosition = 
+			FPPCameraTransform.localPosition * state + 
+			TPPCameraTransform.localPosition * negState;
 
-		transform.rotation = Quaternion.Euler(
-			FPPCameraTransform.rotation.eulerAngles * state + 
-			TPPCameraTransform.rotation.eulerAngles * negState);
+		ThisCamera.transform.localRotation = Quaternion.Euler(
+			FPPCameraTransform.localRotation.eulerAngles * state + 
+			TPPCameraTransform.localRotation.eulerAngles * negState);
 
 		ThisCamera.backgroundColor = 
 			FppCameraSetup.backgroundColor * state + 
@@ -128,23 +138,9 @@ public class CameraTransitioner : MonoBehaviour {
 		ThisCamera.depth = 
 			FppCameraSetup.depth * state + 
 			TppCameraSetup.depth * negState;
-
-		ThisVignette.intensity = 
-			FppVignette.intensity * state + 
-			TppVignette.intensity * negState;
-
-		ThisVignette.blur = 
-			FppVignette.blur * state + 
-			TppVignette.blur * negState;
-
-		ThisVignette.blurDistance = 
-			FppVignette.blurDistance * state + 
-			TppVignette.blurDistance * negState;
-
-		ThisVignette.chromaticAberration = 
-			FppVignette.chromaticAberration * state + 
-			TppVignette.chromaticAberration * negState;
 	}
+
+	//additional callback functions on the beginning and end of transitions - they turn on and off components.
 
 	public void TurnOffFpp(){
 
@@ -153,8 +149,7 @@ public class CameraTransitioner : MonoBehaviour {
 		foreach (GameObject g in FppTransformChildren){
 			g.SetActive(false);
 		}
-
-		GetComponent<MeshRenderer>().enabled = false;
+		
 		foreach(Behaviour c in FppOnlyGameplayComponents){
 			c.enabled = false;
 		}
@@ -183,6 +178,7 @@ public class CameraTransitioner : MonoBehaviour {
 
 		Destroy(GetComponent<Rigidbody>());
 		GetComponent<SphereCollider>().enabled = false;
+
 		foreach(Behaviour c in TppOnlyGameplayComponents){
 			c.enabled = false;
 		}
@@ -209,7 +205,6 @@ public class CameraTransitioner : MonoBehaviour {
 			g.SetActive(true);
 		}
 
-		GetComponent<MeshRenderer>().enabled = true;
 		foreach(Behaviour c in FppOnlyGameplayComponents){
 			c.enabled = true;
 		}
@@ -217,7 +212,7 @@ public class CameraTransitioner : MonoBehaviour {
 
 	public void TurnOnTpp(){
 		
-		Mode = CameraMode.Fpp;
+		Mode = CameraMode.Tpp;
 
 		gameObject.AddComponent<Rigidbody>();
 

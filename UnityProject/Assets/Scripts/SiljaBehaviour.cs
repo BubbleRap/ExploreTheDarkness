@@ -19,8 +19,7 @@ public class SiljaBehaviour : MonoBehaviour
 	private MouseLook mLook = null;
 	private CameraInput camInput = null;
 
-	public GameObject firstPersonCamera = null;
-	public GameObject thirdPersonCamera = null;
+	public GameObject thisCamera = null;
 
 	public GameObject lightProbeOnSilja;
 
@@ -134,13 +133,13 @@ public class SiljaBehaviour : MonoBehaviour
 		charMotor = GetComponent<CharacterMotor>();
 		moveCtrl = GetComponent<MovementController>();
 		fpsInputCtrl = GetComponent<FPSInputController>();
-		mLook = firstPersonCamera.GetComponent<MouseLook>();
+		mLook = thisCamera.GetComponent<MouseLook>();
 		camInput = GetComponentInChildren<CameraInput>();
 
 		dLightProbe = GetComponentInChildren<DynamicLightProbe> ();
 
-		firstPersonCameraShaker = firstPersonCamera.GetComponent<CameraShaker>();
-		cameraFollowCom = thirdPersonCamera.GetComponent<CameraFollow>();
+		firstPersonCameraShaker = thisCamera.GetComponent<CameraShaker>();
+		cameraFollowCom = thisCamera.GetComponent<CameraFollow>();
 
 		maxFlickerIntensity = mimimumIntensity * 2;
 		minFlickerIntensity = mimimumIntensity * 1.5f;
@@ -178,7 +177,7 @@ public class SiljaBehaviour : MonoBehaviour
 			Application.LoadLevelAsync(1);
 		}
 
-		if( Input.GetKeyUp( KeyCode.Q ) )
+		if( Input.GetKeyUp( KeyCode.Q ) && thisCamera.GetComponent<CameraTransitioner>().Mode != CameraTransitioner.CameraMode.Transitioning)
 		{
 			if( darkMode )
 				ShiftToStoryMode();
@@ -191,23 +190,22 @@ public class SiljaBehaviour : MonoBehaviour
 
 	public void ShiftToDarkMode()
 	{
-		StartCoroutine(SwitchCameras(thirdPersonCamera,firstPersonCamera));
+		moveCtrl.enabled = false;
+
+		thisCamera.GetComponent<CameraTransitioner>().Transition();
+
 		Invoke("EnableDarkMode",ShiftDuration);
 	}
 
 	public void EnableDarkMode() {
 
-//		StartCoroutine(BlinkingEffect());
-//		refreshAIReferences();
 		teddyLight.enabled = true;
 		lightProbeOnSilja.SetActive(false); 
 
-//		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
 		GlowLightBasic = teddyLight.color;
 	
 		charMotor.movement.maxForwardSpeed = 1.5f;
 		charMotor.movement.maxSidewaysSpeed = 1.5f;
-		moveCtrl.enabled = false;
 		
 		fpsInputCtrl.enabled = true;
 		mLook.enabled = true;
@@ -215,19 +213,16 @@ public class SiljaBehaviour : MonoBehaviour
 		oneHandJoint.gameObject.SetActive(false);
 		twoHandsJoint.gameObject.SetActive(true);
 
-		firstPersonCamera.SetActive (true);
-		thirdPersonCamera.SetActive (false);
-
-//		lilbroGlowMaterial.color = new Color(1f,1f,1f,1f);
-
-//		GetComponent<Animation>().Play("waking_up");
-
 		darkMode = true;
 	}
 
 	public void ShiftToStoryMode()
 	{
-		StartCoroutine(SwitchCameras(firstPersonCamera,thirdPersonCamera));
+		fpsInputCtrl.enabled = false;
+		mLook.enabled = false;
+	
+		thisCamera.GetComponent<CameraTransitioner>().Transition();
+
 		Invoke("EnableStoryMode",ShiftDuration);
 	}
 	
@@ -239,80 +234,11 @@ public class SiljaBehaviour : MonoBehaviour
 		charMotor.movement.maxForwardSpeed = 1.1f;
 		charMotor.movement.maxSidewaysSpeed = 0.9f;
 		moveCtrl.enabled = true;
-		
-		fpsInputCtrl.enabled = false;
-		mLook.enabled = false;
 
 		oneHandJoint.gameObject.SetActive(true);
 		twoHandsJoint.gameObject.SetActive(false);
 
-		firstPersonCamera.SetActive (false);
-		thirdPersonCamera.SetActive (true);
-
-//		lilbroGlowMaterial.color = new Color(1f,1f,1f,0f);
-
 		darkMode = false;
-	}
-
-	IEnumerator SwitchCameras (GameObject movingCamera, GameObject targetCamera)
-	{
-		Vector3 startPos = movingCamera.transform.position;
-		Vector3 startRot = movingCamera.transform.rotation.eulerAngles;
-
-		Vector3 endPos = targetCamera.transform.position;
-		Vector3 endRot = targetCamera.transform.rotation.eulerAngles;
-
-		targetCamera.transform.position = startPos;
-		targetCamera.transform.rotation = Quaternion.Euler(startRot);
-
-		iTween.MoveTo(movingCamera, iTween.Hash(
-			"position"    , endPos,
-			"islocal" , false,
-			"time"    , ShiftDuration,
-			"easeType", iTween.EaseType.easeOutSine,
-			"ignoretimescale", true
-			));
-
-		iTween.MoveTo(targetCamera, iTween.Hash(
-			"position"    , endPos,
-			"islocal" , false,
-			"time"    , ShiftDuration,
-			"easeType", iTween.EaseType.easeOutSine,
-			"ignoretimescale", true
-			));
-
-		iTween.RotateTo(movingCamera, iTween.Hash(
-			"rotation"    , endRot,
-			"islocal" , false,
-			"time"    , ShiftDuration,
-			"easeType", iTween.EaseType.easeOutSine,
-			"ignoretimescale", true
-			));
-
-		iTween.RotateTo(targetCamera, iTween.Hash(
-			"rotation"    , endRot,
-			"islocal" , false,
-			"time"    , ShiftDuration,
-			"easeType", iTween.EaseType.easeOutSine,
-			"ignoretimescale", true
-			));
-
-		/*StartCoroutine(
-			ScreenWipe.use.CrossFadePro(
-				movingCamera.GetComponent<Camera>(), 
-				targetCamera.GetComponent<Camera>(), 
-				ShiftDuration
-			)
-		);*/
-
-		yield return new WaitForSeconds(ShiftDuration);
-
-		targetCamera.transform.position = endPos;
-		targetCamera.transform.rotation = Quaternion.Euler(endRot);
-
-		movingCamera.transform.position = startPos;
-		movingCamera.transform.rotation = Quaternion.Euler(startRot);
-		
 	}
 	
 	public void RetriveLightProbeResult(float intensity)
@@ -592,6 +518,7 @@ public class SiljaBehaviour : MonoBehaviour
 		mLook.enabled = true;
 	}
 
+	//TODO rework the Look At Point thingies
 	public void LookAtPointFP(bool state, Transform lookAtObject, Transform lookFromPoint)
 	{
 //		firstPersonCamera.gameObject.SetActive(state);
@@ -603,6 +530,7 @@ public class SiljaBehaviour : MonoBehaviour
 		camInput.enabled = !state;
 	}
 
+	//TODO rework the Look At Point thingies
 	public void LookAtPoint(bool state, Transform lookAtObject, Transform lookFromPoint)
 	{
 		charMotor.enabled = !state;
@@ -614,7 +542,7 @@ public class SiljaBehaviour : MonoBehaviour
 				transform.position = new Vector3(lookFrom.x, transform.position.y, lookFrom.z);
 			//}
 			
-			firstPersonCamera.transform.LookAt(lookAtObject);
+			thisCamera.transform.LookAt(lookAtObject);
 		//}
 		transform.gameObject.GetComponent<MovementController>().canMove = !state;
 		camInput.enabled = !state;

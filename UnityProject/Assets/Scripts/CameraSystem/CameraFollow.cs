@@ -48,6 +48,11 @@ public class CameraFollow : MonoBehaviour
 		StartCoroutine (ShakeCamera	()); 
 	}
 
+	private void OnDisable()
+	{
+		StopAllCoroutines();
+	}
+
 	IEnumerator FollowPosition()
 	{
 		while (true) 

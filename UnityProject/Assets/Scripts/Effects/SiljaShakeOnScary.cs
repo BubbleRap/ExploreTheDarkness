@@ -21,7 +21,7 @@ public class SiljaShakeOnScary : MonoBehaviour
 
 	void Awake()
 	{
-		firstPersonCameraShaker = transform.FindChild("1st Person Camera").GetComponent<CameraShaker>();
+		firstPersonCameraShaker = transform.FindChild("Camera").GetComponent<CameraShaker>();
 //		blurComponent = firstPersonCameraShaker.GetComponent<CameraMotionBlur> ();
 //		motionBlurComponent = firstPersonCameraShaker.GetComponent<MotionBlur> ();
 	}
