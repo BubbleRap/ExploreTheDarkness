@@ -176,7 +176,8 @@ public class CameraTransitioner : MonoBehaviour {
 			g.SetActive(false);
 		}
 
-		Destroy(GetComponent<Rigidbody>());
+//		Destroy(GetComponent<Rigidbody>());
+		GetComponent<Rigidbody>().isKinematic = true;
 		GetComponent<SphereCollider>().enabled = false;
 
 		foreach(Behaviour c in TppOnlyGameplayComponents){
@@ -214,7 +215,8 @@ public class CameraTransitioner : MonoBehaviour {
 		
 		Mode = CameraMode.Tpp;
 
-		gameObject.AddComponent<Rigidbody>();
+//		gameObject.AddComponent<Rigidbody>();
+		GetComponent<Rigidbody>().isKinematic = false;
 
 		foreach (GameObject g in TppTransformChildren){
 			g.SetActive(true);
