@@ -5,14 +5,14 @@ LightmapParameters:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: New LightmapParameters
+  m_Name: ForTransparentObjects
   serializedVersion: 3
   resolution: .5
   clusterResolution: .5
   irradianceBudget: 256
   irradianceQuality: 8192
   backFaceTolerance: .899999976
-  isTransparent: 0
+  isTransparent: 1
   modellingTolerance: .00999999978
   systemTag: -1
   edgeStitching: 1
