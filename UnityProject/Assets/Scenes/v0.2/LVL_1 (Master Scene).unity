@@ -12424,6 +12424,8 @@ MonoBehaviour:
   FramesPerSecond: 18
   RunOnce: 0
   cycleComplete: 0
+  useNormalMap: 0
+  useDiffuseMap: 1
 --- !u!1 &654954738
 GameObject:
   m_ObjectHideFlags: 0
@@ -15206,8 +15208,7 @@ MonoBehaviour:
   collisionFixMaxHeight: .800000012
   focusDistance: .5
   focusAngleOffset: 45
-  isFocusing: 0
-  focusPoint: {fileID: 0}
+  focusPoint: {x: 0, y: 0, z: 0}
 --- !u!124 &769889494
 Behaviour:
   m_ObjectHideFlags: 0
@@ -34819,10 +34820,6 @@ Prefab:
       propertyPath: m_Name
       value: Wall_Window_Medium 2
       objectReference: {fileID: 0}
-    - target: {fileID: 115086, guid: a6520983f200a544a9f807922a4d2bc3, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6520983f200a544a9f807922a4d2bc3, type: 2}
   m_IsPrefabParent: 0
@@ -38599,10 +38596,6 @@ Prefab:
     - target: {fileID: 439296, guid: 5898ca2d0606e344eb975e374c9aa855, type: 2}
       propertyPath: m_RootOrder
       value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 174262, guid: 5898ca2d0606e344eb975e374c9aa855, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5898ca2d0606e344eb975e374c9aa855, type: 2}
