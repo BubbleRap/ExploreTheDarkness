@@ -8,6 +8,9 @@ public class TextureSheetAnimator : MonoBehaviour {
 	public float FramesPerSecond = 10f;
 	public bool RunOnce = true;
 	public bool cycleComplete = false;
+
+	public bool useNormalMap;
+	public bool useDiffuseMap;
 	
 	public float RunTimeInSeconds
 	{
@@ -26,7 +29,10 @@ public class TextureSheetAnimator : MonoBehaviour {
 		GetComponent<Renderer>().sharedMaterial = materialCopy;
 		
 		Vector2 size = new Vector2(1f / Columns, 1f / Rows);
+		if(useNormalMap)
 		GetComponent<Renderer>().sharedMaterial.SetTextureScale("_BumpMap", size);
+
+		if(useDiffuseMap)
 		GetComponent<Renderer>().sharedMaterial.SetTextureScale("_MainTex", size);
 	}
 	
@@ -54,7 +60,10 @@ public class TextureSheetAnimator : MonoBehaviour {
 					
 					offset.Set(x, y);
 					
+					if(useNormalMap)
 					GetComponent<Renderer>().sharedMaterial.SetTextureOffset("_BumpMap", offset);
+
+					if(useDiffuseMap)
 					GetComponent<Renderer>().sharedMaterial.SetTextureOffset("_MainTex", offset);
 
 					if( i == 1 && j == 1)
