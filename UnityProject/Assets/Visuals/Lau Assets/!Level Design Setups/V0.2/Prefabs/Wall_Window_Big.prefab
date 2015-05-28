@@ -50,7 +50,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &181518
 GameObject:
@@ -323,6 +323,8 @@ MonoBehaviour:
   FramesPerSecond: 18
   RunOnce: 0
   cycleComplete: 0
+  useNormalMap: 0
+  useDiffuseMap: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
