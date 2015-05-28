@@ -42,6 +42,12 @@ ModelImporter:
     100068: WallMoldings_2m.011
     100070: Window_Big_Glass
     100072: Window_Big_Glass.001
+    100074: RoofElement_2*2m
+    100076: RoofElement_4*4m
+    100078: Wall_OutsideCorner
+    100080: Roof_1*1m
+    100082: Roof_1*2m
+    100084: Roof_2*2m
     400000: Door_Indoors
     400002: Door_Outdoors
     400004: DoorFrame
@@ -79,6 +85,12 @@ ModelImporter:
     400068: WallMoldings_2m.011
     400070: Window_Big_Glass
     400072: Window_Big_Glass.001
+    400074: RoofElement_2*2m
+    400076: RoofElement_4*4m
+    400078: Wall_OutsideCorner
+    400080: Roof_1*1m
+    400082: Roof_1*2m
+    400084: Roof_2*2m
     2300000: Door_Indoors
     2300002: Door_Outdoors
     2300004: DoorFrame
@@ -115,6 +127,12 @@ ModelImporter:
     2300066: WallMoldings_2m.011
     2300068: Window_Big_Glass
     2300070: Window_Big_Glass.001
+    2300072: RoofElement_2*2m
+    2300074: RoofElement_4*4m
+    2300076: Wall_OutsideCorner
+    2300078: Roof_1*1m
+    2300080: Roof_1*2m
+    2300082: Roof_2*2m
     3300000: Door_Indoors
     3300002: Door_Outdoors
     3300004: DoorFrame
@@ -151,6 +169,12 @@ ModelImporter:
     3300066: WallMoldings_2m.011
     3300068: Window_Big_Glass
     3300070: Window_Big_Glass.001
+    3300072: RoofElement_2*2m
+    3300074: RoofElement_4*4m
+    3300076: Wall_OutsideCorner
+    3300078: Roof_1*1m
+    3300080: Roof_1*2m
+    3300082: Roof_2*2m
     4300000: Wall_2m.001
     4300002: Window_Medium
     4300004: Wall_Window_Medium
@@ -187,6 +211,12 @@ ModelImporter:
     4300066: WallMoldings_2m.010
     4300068: Window_Big_Glass.001
     4300070: Window_Big_Glass
+    4300072: RoofElement_4*4m
+    4300074: RoofElement_2*2m
+    4300076: Wall_OutsideCorner
+    4300078: Roof_1*1m
+    4300080: Roof_1*2m
+    4300082: Roof_2*2m
   materials:
     importMaterials: 1
     materialName: 0
@@ -216,9 +246,9 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    secondaryUVAngleDistortion: 4
-    secondaryUVAreaDistortion: 12
-    secondaryUVHardAngle: 88
+    secondaryUVAngleDistortion: 1
+    secondaryUVAreaDistortion: 1
+    secondaryUVHardAngle: 60
     secondaryUVPackMargin: 15
     useFileScale: 1
   tangentSpace:
