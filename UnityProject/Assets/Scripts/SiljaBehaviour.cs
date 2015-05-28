@@ -521,12 +521,16 @@ public class SiljaBehaviour : MonoBehaviour
 	//TODO rework the Look At Point thingies
 	public void LookAtPointFP(bool state, Transform lookAtObject, Transform lookFromPoint)
 	{
-//		firstPersonCamera.gameObject.SetActive(state);
-//		LookAtPoint(state, lookAtObject, lookFromPoint);
+		LookAtPointFP(state, lookAtObject.position, lookFromPoint.position);
+	}
 
-		cameraFollowCom.isFocusing = state;
+	public void LookAtPointFP(bool state, Vector3 lookAtObject, Vector3 lookFromPoint)
+	{
+		cameraFollowCom.CamControlType = state ? CameraFollow.CameraControlType.CCT_LookingAtObject : 
+													CameraFollow.CameraControlType.CCT_Default;
+
 		cameraFollowCom.focusPoint = lookAtObject;
-
+		
 		camInput.enabled = !state;
 	}
 

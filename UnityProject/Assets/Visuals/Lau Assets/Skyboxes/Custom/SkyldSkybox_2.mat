@@ -127,7 +127,7 @@ Material:
       data:
         first:
           name: _Exposure
-        second: 1
+        second: .349999994
       data:
         first:
           name: _SrcBlend
@@ -196,4 +196,4 @@ Material:
       data:
         first:
           name: _Tint
-        second: {r: .867647052, g: .586057723, b: .459342569, a: .501960814}
+        second: {r: .933823526, g: .75027889, b: .583639681, a: .501960814}
