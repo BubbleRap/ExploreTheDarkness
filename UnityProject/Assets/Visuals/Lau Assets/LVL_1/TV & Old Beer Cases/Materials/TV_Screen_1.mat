@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: TV_Screen_1
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 10, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -81,7 +81,7 @@ Material:
         first:
           name: _Illum
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: 07e0c61693dd7f245a7b57b4e6ef20ce, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -128,7 +128,7 @@ Material:
       data:
         first:
           name: _EmissionScaleUI
-        second: 3.5
+        second: 2
       data:
         first:
           name: _Mode
@@ -145,7 +145,7 @@ Material:
       data:
         first:
           name: _EmissionColor
-        second: {r: 2.15570927, g: 3.29411769, b: 3.24701142, a: 3.5}
+        second: {r: 1.80947375, g: 1.82352936, b: 1.5687716, a: 2}
       data:
         first:
           name: _Color
@@ -153,4 +153,4 @@ Material:
       data:
         first:
           name: _EmissionColorUI
-        second: {r: .615916967, g: .941176474, b: .927717566, a: 1}
+        second: {r: .904736876, g: .911764681, b: .7843858, a: 1}

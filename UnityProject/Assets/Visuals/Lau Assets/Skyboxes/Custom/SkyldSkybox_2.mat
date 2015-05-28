@@ -127,7 +127,7 @@ Material:
       data:
         first:
           name: _Exposure
-        second: 1
+        second: .349999994
       data:
         first:
           name: _SrcBlend
