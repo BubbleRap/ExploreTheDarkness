@@ -35,11 +35,21 @@ public class CameraFollow : MonoBehaviour
 	public float focusDistance = 0.5f;
 	[Range(0f, 45f)]
 	public float focusAngleOffset = 30f;
-	
+
+	public enum CameraControlType
+	{
+		CCT_Default,
+		CCT_LookingAtObject,
+		CCT_Overwritten
+	}
+	private CameraControlType m_camControlType = CameraControlType.CCT_Default;
+	public CameraControlType CamControlType
+	{
+		set{ m_camControlType = value; }
+	}
+
 	[HideInInspector]
-	public bool isFocusing = false;
-	[HideInInspector]
-	public Transform focusPoint = null;
+	public Vector3 focusPoint;
 
 	private void OnEnable()
 	{
@@ -52,12 +62,10 @@ public class CameraFollow : MonoBehaviour
 	{
 		while (true) 
 		{
-			if( isFocusing )
+			switch( m_camControlType )
 			{
-				transform.rotation = Quaternion.Slerp( transform.rotation, Quaternion.LookRotation( focusPoint.position - transform.position ), Time.deltaTime );
-			}
-			else
-			{
+			case CameraControlType.CCT_Default:
+
 				float distanceFactor = Mathf.Clamp01((cameraDistance - minDistance) / (maxDistance - minDistance));
 				float collisionFixHeight = Mathf.Lerp(collisionFixMinHeight, collisionFixMaxHeight, 1f - distanceFactor );
 				
@@ -70,9 +78,19 @@ public class CameraFollow : MonoBehaviour
 				
 				Vector3 camLocalDirection = new Vector3(-transform.localPosition.x, 0f, -transform.localPosition.z).normalized;
 				camLocalDirection = (Quaternion.Euler(0f, focusAngleOffset, 0f) * camLocalDirection) * focusDistance;
-							
+				
 				transform.localRotation = Quaternion.LookRotation( ((-transform.localPosition + Vector3.up * collisionFixHeight) + camLocalDirection).normalized );
-			}
+			
+				break;
+
+			case CameraControlType.CCT_LookingAtObject:
+
+				transform.rotation = Quaternion.Slerp( transform.rotation, Quaternion.LookRotation( focusPoint - transform.position ), Time.deltaTime );
+				break;
+
+			case CameraControlType.CCT_Overwritten:
+				break;
+		}
 
 			yield return null;
 		}
