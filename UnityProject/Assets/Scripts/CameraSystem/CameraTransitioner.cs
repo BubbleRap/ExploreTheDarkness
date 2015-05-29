@@ -40,7 +40,7 @@ public class CameraTransitioner : MonoBehaviour {
 
 		TppOnlyGameplayComponents.AddRange (new Behaviour[]{
 			GetComponent<CameraFollow>(),
-			GetComponent<CameraInput>(),
+//			GetComponent<CameraInput>(),
 			GetComponent<CameraPhysics>(),
 			GetComponent<AudioSource>() 
 		});
