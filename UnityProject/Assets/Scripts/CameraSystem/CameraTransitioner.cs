@@ -123,9 +123,14 @@ public class CameraTransitioner : MonoBehaviour {
 			FPPCameraTransform.localPosition * state + 
 			TPPCameraTransform.localPosition * negState;
 
-		ThisCamera.transform.localRotation = Quaternion.Euler(
-			FPPCameraTransform.localRotation.eulerAngles * state + 
-			TPPCameraTransform.localRotation.eulerAngles * negState);
+//		ThisCamera.transform.localRotation = Quaternion.Euler(
+//			FPPCameraTransform.localRotation.eulerAngles * state + 
+//			TPPCameraTransform.localRotation.eulerAngles * negState);
+
+		ThisCamera.transform.localRotation = Quaternion.Lerp(
+			FPPCameraTransform.localRotation, 
+			TPPCameraTransform.localRotation, negState);
+
 
 		ThisCamera.backgroundColor = 
 			FppCameraSetup.backgroundColor * state + 
