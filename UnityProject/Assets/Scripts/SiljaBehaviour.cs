@@ -191,7 +191,8 @@ public class SiljaBehaviour : MonoBehaviour
 	public void ShiftToDarkMode()
 	{
 		moveCtrl.enabled = false;
-
+		cameraFollowCom.CamControlType = CameraFollow.CameraControlType.CCT_Overwritten;
+	
 		thisCamera.GetComponent<CameraTransitioner>().Transition();
 
 		Invoke("EnableDarkMode",ShiftDuration);
@@ -237,6 +238,8 @@ public class SiljaBehaviour : MonoBehaviour
 
 		oneHandJoint.gameObject.SetActive(true);
 		twoHandsJoint.gameObject.SetActive(false);
+
+		cameraFollowCom.CamControlType = CameraFollow.CameraControlType.CCT_Default;
 
 		darkMode = false;
 	}

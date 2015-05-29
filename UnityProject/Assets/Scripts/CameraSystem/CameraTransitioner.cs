@@ -64,6 +64,7 @@ public class CameraTransitioner : MonoBehaviour {
 
 		if (Mode == CameraMode.Tpp){
 
+
 			//save the camera's position
 			TPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
 			TPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
@@ -121,13 +122,9 @@ public class CameraTransitioner : MonoBehaviour {
 
 		ThisCamera.transform.localPosition = 
 			FPPCameraTransform.localPosition * state + 
-			TPPCameraTransform.localPosition * negState;
+				TPPCameraTransform.localPosition * negState;
 
-//		ThisCamera.transform.localRotation = Quaternion.Euler(
-//			FPPCameraTransform.localRotation.eulerAngles * state + 
-//			TPPCameraTransform.localRotation.eulerAngles * negState);
-
-		ThisCamera.transform.localRotation = Quaternion.Lerp(
+		ThisCamera.transform.localRotation = Quaternion.Slerp(
 			FPPCameraTransform.localRotation, 
 			TPPCameraTransform.localRotation, negState);
 
@@ -140,9 +137,10 @@ public class CameraTransitioner : MonoBehaviour {
 			FppCameraSetup.fieldOfView * state + 
 			TppCameraSetup.fieldOfView * negState;
 
-		ThisCamera.depth = 
-			FppCameraSetup.depth * state + 
-			TppCameraSetup.depth * negState;
+		// no need in depth anymore
+//		ThisCamera.depth = 
+//			FppCameraSetup.depth * state + 
+//			TppCameraSetup.depth * negState;
 	}
 
 	//additional callback functions on the beginning and end of transitions - they turn on and off components.
@@ -182,7 +180,7 @@ public class CameraTransitioner : MonoBehaviour {
 		}
 
 //		Destroy(GetComponent<Rigidbody>());
-		GetComponent<Rigidbody>().isKinematic = true;
+//		GetComponent<Rigidbody>().isKinematic = true;
 		GetComponent<SphereCollider>().enabled = false;
 
 		foreach(Behaviour c in TppOnlyGameplayComponents){
@@ -221,7 +219,7 @@ public class CameraTransitioner : MonoBehaviour {
 		Mode = CameraMode.Tpp;
 
 //		gameObject.AddComponent<Rigidbody>();
-		GetComponent<Rigidbody>().isKinematic = false;
+//		GetComponent<Rigidbody>().isKinematic = false;
 
 		foreach (GameObject g in TppTransformChildren){
 			g.SetActive(true);

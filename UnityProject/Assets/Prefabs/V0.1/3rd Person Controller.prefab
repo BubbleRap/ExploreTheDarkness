@@ -2558,8 +2558,6 @@ GameObject:
   - 4: {fileID: 400332}
   - 20: {fileID: 2000014}
   - 124: {fileID: 12400002}
-  - 92: {fileID: 9200002}
-  - 23: {fileID: 2300020}
   - 114: {fileID: 11400060}
   - 114: {fileID: 11400056}
   - 114: {fileID: 11400054}
@@ -3854,7 +3852,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 485068}
   m_Layer: 10
-  m_Name: First Person Camera Position
+  m_Name: Third Person Camera Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3892,6 +3890,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &151528
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 495084}
+  m_Layer: 10
+  m_Name: First Person Camera Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &172724
 GameObject:
   m_ObjectHideFlags: 0
@@ -3903,21 +3916,6 @@ GameObject:
   - 82: {fileID: 8271900}
   m_Layer: 0
   m_Name: HeartBeatAudioSource
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &182814
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 458130}
-  m_Layer: 10
-  m_Name: Third Person Camera Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4207,7 +4205,7 @@ Transform:
   m_LocalPosition: {x: 19.6219997, y: 1.12, z: -21.8999996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 458130}
+  - {fileID: 495084}
   - {fileID: 485068}
   - {fileID: 400332}
   - {fileID: 400336}
@@ -7175,18 +7173,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400042}
   m_RootOrder: 5
---- !u!4 &458130
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 182814}
-  m_LocalRotation: {x: .000907182926, y: .978138328, z: -.00426796125, w: .207909644}
-  m_LocalPosition: {x: -.480470389, y: .34273684, z: 1.99470699}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400042}
-  m_RootOrder: 0
 --- !u!4 &484896
 Transform:
   m_ObjectHideFlags: 1
@@ -7211,6 +7197,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400042}
   m_RootOrder: 1
+--- !u!4 &495084
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 151528}
+  m_LocalRotation: {x: 0, y: 0, z: 1.16415322e-10, w: 1}
+  m_LocalPosition: {x: -0, y: .555386901, z: -.424358338}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400042}
+  m_RootOrder: 0
 --- !u!20 &2000000
 Camera:
   m_ObjectHideFlags: 1
@@ -7651,30 +7649,6 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!23 &2300020
-MeshRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100332}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
 --- !u!23 &2300022
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -7975,8 +7949,8 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -9049,13 +9023,6 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!92 &9200002
-Behaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100332}
-  m_Enabled: 1
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -9750,8 +9717,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TransitionTime: 1
-  TPPCameraTransform: {fileID: 458130}
-  FPPCameraTransform: {fileID: 485068}
+  FPPCameraTransform: {fileID: 495084}
+  TPPCameraTransform: {fileID: 485068}
   TppCameraSetup: {fileID: 2026450, guid: 7f0d68b009b90cf499c7cea589afa04e, type: 2}
   FppCameraSetup: {fileID: 2026450, guid: a22844c985195f842bbb45448173856f, type: 2}
   TppOnlyComponents: []
