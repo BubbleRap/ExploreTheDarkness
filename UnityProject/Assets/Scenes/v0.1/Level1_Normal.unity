@@ -3462,8 +3462,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TransitionTime: 1
-  FPPCameraTransform: {fileID: 928987152}
   TPPCameraTransform: {fileID: 1283460787}
+  FPPCameraTransform: {fileID: 928987152}
   TppCameraSetup: {fileID: 2026450, guid: 7f0d68b009b90cf499c7cea589afa04e, type: 2}
   FppCameraSetup: {fileID: 2026450, guid: a22844c985195f842bbb45448173856f, type: 2}
   TppOnlyComponents: []
@@ -3648,8 +3648,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axes: 0
-  sensitivityX: 10
-  sensitivityY: 5
+  sensitivityX: 3
+  sensitivityY: 3
   minimumX: -360
   maximumX: 360
   minimumY: -60
@@ -3674,8 +3674,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b06af255df742f48a3d0f4d254cd984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalSensetivity: 2
-  horizontalSensetivity: 2
+  verticalSensetivity: 3
+  horizontalSensetivity: 3
   iversedVertical: 0
 --- !u!114 &97428474
 MonoBehaviour:
