@@ -1,36 +1,22 @@
 fileFormatVersion: 2
-guid: 7a35974bf2f5ebf48a0ae2393d5d785f
+guid: d8f43bb22df670d45864301f4867d979
+timeCreated: 1432867595
+licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: ChairBlanket
-    100002: Couch_Fundament_1
-    100004: Couch_Pillows_v1
-    100006: SofaChair_Fundament_1
-    100008: SofaChair_Pillows_v1
-    100010: //RootNode
-    400000: ChairBlanket
-    400002: Couch_Fundament_1
-    400004: Couch_Pillows_v1
-    400006: SofaChair_Fundament_1
-    400008: SofaChair_Pillows_v1
-    400010: //RootNode
-    2300000: ChairBlanket
-    2300002: Couch_Fundament_1
-    2300004: Couch_Pillows_v1
-    2300006: SofaChair_Fundament_1
-    2300008: SofaChair_Pillows_v1
-    3300000: ChairBlanket
-    3300002: Couch_Fundament_1
-    3300004: Couch_Pillows_v1
-    3300006: SofaChair_Fundament_1
-    3300008: SofaChair_Pillows_v1
-    4300000: SofaChair_Fundament_1
-    4300002: SofaChair_Pillows_v1
-    4300004: ChairBlanket
-    4300006: Couch_Pillows_v1
-    4300008: Couch_Fundament_1
-    9500000: //RootNode
+    100000: Painting_SiljaDad_Zoo
+    100002: PaintingFrame_2
+    100004: //RootNode
+    400000: Painting_SiljaDad_Zoo
+    400002: PaintingFrame_2
+    400004: //RootNode
+    2300000: Painting_SiljaDad_Zoo
+    2300002: PaintingFrame_2
+    3300000: Painting_SiljaDad_Zoo
+    3300002: PaintingFrame_2
+    4300000: PaintingFrame_2
+    4300002: Painting_SiljaDad_Zoo
   materials:
     importMaterials: 1
     materialName: 0
@@ -53,7 +39,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importBlendShapes: 0
+    importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 1
     useFileUnits: 1
@@ -61,10 +47,10 @@ ModelImporter:
     keepQuads: 0
     weldVertices: 1
     secondaryUVAngleDistortion: 8
-    secondaryUVAreaDistortion: 15
+    secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
-    secondaryUVPackMargin: 10
-    useFileScale: 0
+    secondaryUVPackMargin: 4
+    useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
