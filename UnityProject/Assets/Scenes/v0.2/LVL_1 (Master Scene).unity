@@ -49,8 +49,8 @@ LightmapSettings:
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
-    m_IndirectOutputScale: 2
-    m_AlbedoBoost: 6
+    m_IndirectOutputScale: 3
+    m_AlbedoBoost: 8
     m_TemporalCoherenceThreshold: 1
     m_EnvironmentLightingMode: 0
     m_EnableBakedLightmaps: 0
@@ -4854,7 +4854,7 @@ Light:
   serializedVersion: 6
   m_Type: 1
   m_Color: {r: .933823526, g: .900012672, b: .789630175, a: 1}
-  m_Intensity: .150000006
+  m_Intensity: .25
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -24144,7 +24144,7 @@ Prefab:
     - target: {fileID: 2390194, guid: 317d34e4ca7cf1b4791311534929b1a2, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4849c47ff22aade49bda5ef34046a6df, type: 2}
+      objectReference: {fileID: 2100000, guid: ae863d65f32664a498a38d30757e0a19, type: 2}
     - target: {fileID: 2393948, guid: 317d34e4ca7cf1b4791311534929b1a2, type: 2}
       propertyPath: m_Enabled
       value: 1
