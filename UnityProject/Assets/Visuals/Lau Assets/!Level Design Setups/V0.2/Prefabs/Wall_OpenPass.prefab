@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &166478
 GameObject:
@@ -27,12 +27,13 @@ GameObject:
   - 4: {fileID: 407120}
   - 33: {fileID: 3367220}
   - 23: {fileID: 2302612}
+  - 64: {fileID: 6443058}
   m_Layer: 0
   m_Name: OpenPassFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &179144
 GameObject:
@@ -49,7 +50,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &191944
 GameObject:
@@ -61,12 +62,13 @@ GameObject:
   - 4: {fileID: 413718}
   - 33: {fileID: 3327300}
   - 23: {fileID: 2341952}
+  - 64: {fileID: 6466314}
   m_Layer: 0
   m_Name: Wall_OpenPass 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &194656
 GameObject:
@@ -78,12 +80,13 @@ GameObject:
   - 4: {fileID: 418272}
   - 33: {fileID: 3365520}
   - 23: {fileID: 2304344}
+  - 64: {fileID: 6406164}
   m_Layer: 0
   m_Name: Wall_OpenPass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &407120
 Transform:
@@ -304,6 +307,42 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 166478}
   m_Mesh: {fileID: 4300014, guid: 3eb76f33fa24cb74bb80b5a76347a0a3, type: 3}
+--- !u!64 &6406164
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194656}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300010, guid: 3eb76f33fa24cb74bb80b5a76347a0a3, type: 3}
+--- !u!64 &6443058
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 166478}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300014, guid: 3eb76f33fa24cb74bb80b5a76347a0a3, type: 3}
+--- !u!64 &6466314
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191944}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300010, guid: 3eb76f33fa24cb74bb80b5a76347a0a3, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
