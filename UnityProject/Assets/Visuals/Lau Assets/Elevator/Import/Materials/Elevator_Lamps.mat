@@ -128,7 +128,7 @@ Material:
       data:
         first:
           name: _EmissionScaleUI
-        second: 3.5
+        second: 2
       data:
         first:
           name: _Mode
@@ -145,7 +145,7 @@ Material:
       data:
         first:
           name: _EmissionColor
-        second: {r: 3.5, g: 3.5, b: 3.5, a: 3.5}
+        second: {r: 2, g: 2, b: 2, a: 2}
       data:
         first:
           name: _Color
