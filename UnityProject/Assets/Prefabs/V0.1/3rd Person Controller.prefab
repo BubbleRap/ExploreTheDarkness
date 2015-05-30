@@ -2033,6 +2033,8 @@ GameObject:
   - 81: {fileID: 8100000}
   - 114: {fileID: 11483220}
   - 114: {fileID: 11468678}
+  - 114: {fileID: 11489848}
+  - 114: {fileID: 11438266}
   m_Layer: 9
   m_Name: 3rd Person Camera
   m_TagString: MainCamera
@@ -4194,8 +4196,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100042}
-  m_LocalRotation: {x: 0, y: -.707106829, z: 0, w: .707106709}
-  m_LocalPosition: {x: 2.48000002, y: 2.41799998, z: 1.48000002}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 1.07288361e-06}
+  m_LocalPosition: {x: 1.79999995, y: 2.42000008, z: 8.85999966}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400332}
@@ -7740,7 +7742,7 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100410}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: e79a4b8d7375710449277414cd93905a, type: 2}
@@ -9605,8 +9607,7 @@ MonoBehaviour:
   collisionFixMaxHeight: .800000012
   focusDistance: .5
   focusAngleOffset: 45
-  isFocusing: 0
-  focusPoint: {fileID: 0}
+  focusPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &11400054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9785,6 +9786,18 @@ MonoBehaviour:
   dx11BokehTexture: {fileID: 2800000, guid: a4cdca73d61814d33ac1587f6c163bca, type: 3}
   dx11BokehScale: 1.20000005
   dx11BokehIntensity: 2.5
+--- !u!114 &11438266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d82ca5f6f7fe1c74b913a62ef0b029d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RectData: {x: 450, y: 0, z: 100, w: 35}
 --- !u!114 &11443754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9872,10 +9885,10 @@ MonoBehaviour:
   NoiseTexture: {fileID: 2800000, guid: 45ca7cd7d934d6245bb4539f780e4892, type: 3}
   Samples: 2
   Downsampling: 1
-  Radius: .150000006
-  Intensity: 4.5
-  Distance: 1.39999998
-  Bias: .150000006
+  Radius: .25
+  Intensity: 5
+  Distance: 2.20000005
+  Bias: .314999998
   LumContribution: .5
   OcclusionColor: {r: 0, g: 0, b: 0, a: 1}
   CutoffDistance: 150
@@ -9883,6 +9896,24 @@ MonoBehaviour:
   Blur: 1
   BlurDownsampling: 1
   DebugAO: 0
+--- !u!114 &11489848
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b5ec6153a1d55438228df10fe66844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceFog: 1
+  useRadialDistance: 1
+  heightFog: 0
+  height: 5
+  heightDensity: .0500000007
+  startDistance: 2
+  fogShader: {fileID: 4800000, guid: 70d8568987ac0499f952b54c7c13e265, type: 3}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
@@ -10534,14 +10565,15 @@ SkinnedMeshRenderer:
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_ImportantGI: 0
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
+  m_LightmapParameters: {fileID: 111300000, guid: 8d41e1b4a40e9a5459eaa03859a60a13,
+    type: 2}
   m_SortingLayerID: 0
   m_SortingOrder: 0
   serializedVersion: 2
