@@ -172,7 +172,7 @@ MeshRenderer:
   m_ImportantGI: 0
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 111300000, guid: 0a70c59a0438afa48998029c2125cecb,
+  m_LightmapParameters: {fileID: 111300000, guid: 8d41e1b4a40e9a5459eaa03859a60a13,
     type: 2}
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -197,7 +197,8 @@ MeshRenderer:
   m_ImportantGI: 0
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 120
-  m_LightmapParameters: {fileID: 15201, guid: 0000000000000000f000000000000000, type: 0}
+  m_LightmapParameters: {fileID: 111300000, guid: 8d41e1b4a40e9a5459eaa03859a60a13,
+    type: 2}
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!23 &2333634
@@ -246,7 +247,8 @@ MeshRenderer:
   m_ImportantGI: 0
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 120
-  m_LightmapParameters: {fileID: 15201, guid: 0000000000000000f000000000000000, type: 0}
+  m_LightmapParameters: {fileID: 111300000, guid: 8d41e1b4a40e9a5459eaa03859a60a13,
+    type: 2}
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!23 &2377430
@@ -270,7 +272,8 @@ MeshRenderer:
   m_ImportantGI: 0
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 120
-  m_LightmapParameters: {fileID: 15201, guid: 0000000000000000f000000000000000, type: 0}
+  m_LightmapParameters: {fileID: 111300000, guid: 8d41e1b4a40e9a5459eaa03859a60a13,
+    type: 2}
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!33 &3302924

@@ -112,7 +112,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 2.30967976e-06}
-  m_LocalPosition: {x: -4.3579998, y: 1.51499999, z: 1.42900002}
+  m_LocalPosition: {x: -3.30999994, y: .00300000003, z: 1.454}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -127,7 +127,7 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: cb37af5433145d545ab2be528fd411bb, type: 2}
@@ -141,7 +141,8 @@ MeshRenderer:
   m_ImportantGI: 0
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
+  m_LightmapParameters: {fileID: 111300000, guid: 8d41e1b4a40e9a5459eaa03859a60a13,
+    type: 2}
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!23 &2300002
@@ -151,7 +152,7 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: cb37af5433145d545ab2be528fd411bb, type: 2}
@@ -165,7 +166,8 @@ MeshRenderer:
   m_ImportantGI: 0
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
+  m_LightmapParameters: {fileID: 111300000, guid: 8d41e1b4a40e9a5459eaa03859a60a13,
+    type: 2}
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!23 &2300004
@@ -175,7 +177,7 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: cb37af5433145d545ab2be528fd411bb, type: 2}
@@ -189,7 +191,8 @@ MeshRenderer:
   m_ImportantGI: 0
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
+  m_LightmapParameters: {fileID: 111300000, guid: 8d41e1b4a40e9a5459eaa03859a60a13,
+    type: 2}
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!33 &3300000
