@@ -127,7 +127,7 @@ Material:
       data:
         first:
           name: _Exposure
-        second: .870000005
+        second: 1
       data:
         first:
           name: _SrcBlend
@@ -179,7 +179,7 @@ Material:
       data:
         first:
           name: _Rotation
-        second: 46
+        second: 122
     m_Colors:
       data:
         first:
@@ -196,4 +196,4 @@ Material:
       data:
         first:
           name: _Tint
-        second: {r: .476859868, g: .571041584, b: .617647052, a: .501960814}
+        second: {r: 1, g: .660851955, b: .441176474, a: 1}

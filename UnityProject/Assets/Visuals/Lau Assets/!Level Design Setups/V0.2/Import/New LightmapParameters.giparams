@@ -9,11 +9,11 @@ LightmapParameters:
   serializedVersion: 3
   resolution: .5
   clusterResolution: .5
-  irradianceBudget: 256
+  irradianceBudget: 512
   irradianceQuality: 8192
   backFaceTolerance: .899999976
   isTransparent: 0
-  modellingTolerance: .00999999978
+  modellingTolerance: .00100000005
   systemTag: -1
   edgeStitching: 1
   blurRadius: 2
