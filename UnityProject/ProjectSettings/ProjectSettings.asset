@@ -11,8 +11,8 @@ PlayerSettings:
   targetIOSGraphics: -1
   targetResolution: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: UnityProject
+  companyName: Bubblerap
+  productName: Skyld
   cloudProjectId: 
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -21,7 +21,7 @@ PlayerSettings:
   defaultScreenHeight: 768
   defaultScreenWidthWeb: 960
   defaultScreenHeightWeb: 600
-  m_RenderingPath: 2
+  m_RenderingPath: 3
   m_MobileRenderingPath: 1
   m_ActiveColorSpace: 0
   m_MTRendering: 1
@@ -137,7 +137,7 @@ PlayerSettings:
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 0}
+    - m_Icon: {fileID: 2800000, guid: 9efcf9d29fea9234dbf4e30026d87b1c, type: 3}
       m_Size: 128
   m_BuildTargetBatching:
   - m_BuildTarget: Standalone
