@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 2d5e9a8cfb7d17e488b35eee124afb48
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
     100002: Elevator
@@ -10,6 +10,8 @@ ModelImporter:
     100008: elevator_Doors_L
     100010: wall_elevatorElement
     100012: Elevator_Lamps
+    100014: ElevatorTopWall
+    100016: WallMoldings_2m
     400000: //RootNode
     400002: Elevator
     400004: elevator_buttons
@@ -17,24 +19,32 @@ ModelImporter:
     400008: elevator_Doors_L
     400010: wall_elevatorElement
     400012: Elevator_Lamps
+    400014: ElevatorTopWall
+    400016: WallMoldings_2m
     2300000: Elevator
     2300002: elevator_buttons
     2300004: elevator_Door_R
     2300006: elevator_Doors_L
     2300008: wall_elevatorElement
     2300010: Elevator_Lamps
+    2300012: ElevatorTopWall
+    2300014: WallMoldings_2m
     3300000: Elevator
     3300002: elevator_buttons
     3300004: elevator_Door_R
     3300006: elevator_Doors_L
     3300008: wall_elevatorElement
     3300010: Elevator_Lamps
+    3300012: ElevatorTopWall
+    3300014: WallMoldings_2m
     4300000: elevator_Door_R
     4300002: elevator_buttons
     4300004: elevator_Doors_L
     4300006: wall_elevatorElement
     4300008: Elevator
     4300010: Elevator_Lamps
+    4300012: ElevatorTopWall
+    4300014: WallMoldings_2m
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -44,6 +54,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
+    motionNodeName: 
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
@@ -62,11 +73,13 @@ ModelImporter:
     generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
+    keepQuads: 0
     weldVertices: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
@@ -87,4 +100,7 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
+  additionalBone: 0
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 
