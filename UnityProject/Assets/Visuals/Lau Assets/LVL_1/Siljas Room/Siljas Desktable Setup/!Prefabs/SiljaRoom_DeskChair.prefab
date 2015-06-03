@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
-  - 64: {fileID: 6400000}
+  - 65: {fileID: 6546828}
   m_Layer: 0
   m_Name: SiljaRoom_DeskChair
   m_TagString: Untagged
@@ -25,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: -.574671865, y: .412010074, z: .412010193, w: .574671745}
-  m_LocalPosition: {x: -1.52999997, y: 0, z: 5.60900021}
+  m_LocalPosition: {x: -1.27999997, y: 0, z: 5.92000008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -61,8 +61,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Mesh: {fileID: 4300000, guid: d398d29b6e9fdfe4d969ebd82b7f601b, type: 3}
---- !u!64 &6400000
-MeshCollider:
+--- !u!65 &6546828
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -71,8 +71,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 4300000, guid: d398d29b6e9fdfe4d969ebd82b7f601b, type: 3}
+  m_Size: {x: .551806092, y: .678862214, z: 1.14878714}
+  m_Center: {x: 4.62553302e-08, y: .0308149233, z: .574340463}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
