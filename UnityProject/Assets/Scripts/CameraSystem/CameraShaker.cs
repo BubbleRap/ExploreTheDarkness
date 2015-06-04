@@ -12,8 +12,6 @@ public class CameraShaker : MonoBehaviour
 	[HideInInspector]
 	public bool shaking = false;
 
-
-
 	void Start()
 	{
 		originalPosition = transform.localPosition;

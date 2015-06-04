@@ -32,8 +32,10 @@ public class CameraInput : MonoBehaviour
 		float pitchAngle = cameraFollow.pitch + deltaMousePosition.y * vertSensetivity ;
 		pitchAngle = Mathf.Clamp (pitchAngle, 30f, 110f);
 
-		cameraFollow.yaw = Mathf.Repeat(cameraFollow.yaw + deltaMousePosition.x * horizontalSensetivity, 359.999f);
+		if( GetComponent<CameraTransitioner>().Mode == CameraTransitioner.CameraMode.Transitioning )
+			return;
 
+		cameraFollow.yaw = Mathf.Repeat(cameraFollow.yaw + deltaMousePosition.x * horizontalSensetivity, 359.999f);
 		cameraFollow.pitch = pitchAngle;
 	}
 }
