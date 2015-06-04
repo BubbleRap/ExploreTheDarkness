@@ -54,7 +54,6 @@ public class CameraTransitioner : MonoBehaviour {
 
 		FppOnlyGameplayComponents.AddRange (new Behaviour[]{
 			GetComponent<MouseLook>(),
-			GetComponent<CameraShaker>(),
 			GetComponent<Health>()
 		});
 	}
@@ -128,7 +127,6 @@ public class CameraTransitioner : MonoBehaviour {
 			FPPCameraTransform.localRotation, 
 			TPPCameraTransform.localRotation, negState);
 
-
 		ThisCamera.backgroundColor = 
 			FppCameraSetup.backgroundColor * state + 
 			TppCameraSetup.backgroundColor * negState;
@@ -137,10 +135,12 @@ public class CameraTransitioner : MonoBehaviour {
 			FppCameraSetup.fieldOfView * state + 
 			TppCameraSetup.fieldOfView * negState;
 
-		// no need in depth anymore
-//		ThisCamera.depth = 
-//			FppCameraSetup.depth * state + 
-//			TppCameraSetup.depth * negState;
+		if (state > 0.75f){
+			ThisCamera.cullingMask = FppCameraSetup.cullingMask;
+		} else {
+			ThisCamera.cullingMask = TppCameraSetup.cullingMask;
+		}
+
 	}
 
 	//additional callback functions on the beginning and end of transitions - they turn on and off components.
@@ -194,11 +194,8 @@ public class CameraTransitioner : MonoBehaviour {
 		foreach(Behaviour c in FppOnlyComponents){
 			c.enabled = true;
 		}
+		
 
-		ThisCamera.clearFlags = FppCameraSetup.clearFlags;
-		ThisCamera.cullingMask = FppCameraSetup.cullingMask;
-		ThisCamera.useOcclusionCulling = FppCameraSetup.useOcclusionCulling;
-		ThisCamera.hdr = FppCameraSetup.hdr;
 	}
 
 	public void TurnOnFpp(){
@@ -212,6 +209,11 @@ public class CameraTransitioner : MonoBehaviour {
 		foreach(Behaviour c in FppOnlyGameplayComponents){
 			c.enabled = true;
 		}
+
+		ThisCamera.clearFlags = FppCameraSetup.clearFlags;
+		ThisCamera.cullingMask = FppCameraSetup.cullingMask;
+		ThisCamera.useOcclusionCulling = FppCameraSetup.useOcclusionCulling;
+		ThisCamera.hdr = FppCameraSetup.hdr;
 	}
 
 	public void TurnOnTpp(){
@@ -229,6 +231,8 @@ public class CameraTransitioner : MonoBehaviour {
 		foreach(Behaviour c in TppOnlyGameplayComponents){
 			c.enabled = true;
 		}
+
+
 	}
 
 
