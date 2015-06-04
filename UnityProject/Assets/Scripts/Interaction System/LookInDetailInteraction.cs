@@ -38,7 +38,8 @@ public class LookInDetailInteraction : IInteractableObject
 			_siljaBeh.IsFPSLookEnabled = false;
 			_siljaBeh.IsFPSMoveEnabled = false;
 
-			Transform fpCamTransform = _siljaBeh.firstPersonCamera.transform;
+			//TODO make separate camera for that!
+			Transform fpCamTransform = _siljaBeh.thisCamera.transform;
 			fpCamTransform.LookAt(transform.position);
 
 			transform.position = fpCamTransform.TransformPoint(Vector3.forward * 0.5f);
