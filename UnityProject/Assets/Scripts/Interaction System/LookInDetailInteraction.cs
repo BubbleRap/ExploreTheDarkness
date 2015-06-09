@@ -32,29 +32,55 @@ public class LookInDetailInteraction : IInteractableObject
 			_siljaBeh = siljaGO.GetComponent<SiljaBehaviour>();
 		}
 
+		CameraTransitioner transitioner = _siljaBeh.thisCamera.GetComponent<CameraTransitioner>();
+
 		if( interactionIsActive )
 		{
-			_siljaBeh.EnableDarkMode();
-			_siljaBeh.IsFPSLookEnabled = false;
-			_siljaBeh.IsFPSMoveEnabled = false;
+			transitioner.AddFPPCompleteAction( () =>
+			{
+				// setting up the object in front of the camera
 
-			//TODO make separate camera for that!
-			Transform fpCamTransform = _siljaBeh.thisCamera.transform;
-			fpCamTransform.LookAt(transform.position);
+				Transform fpCamTransform = transitioner.FPPCameraTransform;
+				fpCamTransform.LookAt(transform.position);
+				
+				transform.position = fpCamTransform.TransformPoint(Vector3.forward * 0.5f);
+				transform.rotation = fpCamTransform.rotation;
 
-			transform.position = fpCamTransform.TransformPoint(Vector3.forward * 0.5f);
-			transform.rotation = fpCamTransform.rotation;
 
-			_collider.enabled = false;
+				// setting up the character motion state
+
+				_siljaBeh.IsFPSLookEnabled = false;
+				_siljaBeh.IsFPSMoveEnabled = false;
+				_collider.enabled = false;
+
+				_siljaBeh.thisCamera.GetComponent<CameraInput>().enabled = false;
+
+//				_siljaBeh.gameObject.GetComponent<MovementController>().canMove = false;
+			});
+			
+			
+			_siljaBeh.ShiftToDarkMode();
 		}
 		else
 		{
-			_siljaBeh.EnableStoryMode();
+			transitioner.AddTPPCompleteAction( () =>
+			{	
+				// setting up the character motion state
 
+				_collider.enabled = true;
+
+				_siljaBeh.thisCamera.GetComponent<CameraInput>().enabled = true;
+
+//				_siljaBeh.gameObject.GetComponent<MovementController>().canMove = true;
+			});
+
+
+			// reversing the previous object's transform
 			transform.position = _originalPos;
 			transform.rotation = _originalRot;
-
-			_collider.enabled = true;
+			
+			
+			_siljaBeh.ShiftToStoryMode();
 		}
 	}
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityStandardAssets.ImageEffects;
+using UnityEngine.Events;
 
 public class CameraTransitioner : MonoBehaviour {
 
@@ -32,6 +33,29 @@ public class CameraTransitioner : MonoBehaviour {
 
 	//not to GetComponent all the time
 	private Camera ThisCamera;
+
+	private UnityEvent onFPPTransitionComplete = new UnityEvent();
+	private UnityEvent onTPPTransitionComplete = new UnityEvent();
+
+	public void AddFPPCompleteAction( UnityAction action )
+	{
+		onFPPTransitionComplete.AddListener( action );
+	}
+
+	public void AddTPPCompleteAction( UnityAction action )
+	{
+		onTPPTransitionComplete.AddListener( action );
+	}
+
+	public void CleanFPPCompleteActions()
+	{
+		onFPPTransitionComplete.RemoveAllListeners();
+	}
+
+	public void CleanTPPCompleteActions()
+	{
+		onTPPTransitionComplete.RemoveAllListeners();
+	}
 
 	void Awake (){
 
@@ -214,6 +238,9 @@ public class CameraTransitioner : MonoBehaviour {
 		ThisCamera.cullingMask = FppCameraSetup.cullingMask;
 		ThisCamera.useOcclusionCulling = FppCameraSetup.useOcclusionCulling;
 		ThisCamera.hdr = FppCameraSetup.hdr;
+
+		onFPPTransitionComplete.Invoke();
+		CleanFPPCompleteActions();
 	}
 
 	public void TurnOnTpp(){
@@ -232,7 +259,8 @@ public class CameraTransitioner : MonoBehaviour {
 			c.enabled = true;
 		}
 
-
+		onTPPTransitionComplete.Invoke();
+		CleanTPPCompleteActions();
 	}
 
 
