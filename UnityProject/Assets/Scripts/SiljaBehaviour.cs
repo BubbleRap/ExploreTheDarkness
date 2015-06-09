@@ -208,8 +208,8 @@ public class SiljaBehaviour : MonoBehaviour
 		charMotor.movement.maxForwardSpeed = 1.5f;
 		charMotor.movement.maxSidewaysSpeed = 1.5f;
 		
-		fpsInputCtrl.enabled = true;
-		mLook.enabled = true;
+//		fpsInputCtrl.enabled = true;
+//		mLook.enabled = true;
 
 		oneHandJoint.gameObject.SetActive(false);
 		twoHandsJoint.gameObject.SetActive(true);
@@ -219,8 +219,8 @@ public class SiljaBehaviour : MonoBehaviour
 
 	public void ShiftToStoryMode()
 	{
-		fpsInputCtrl.enabled = false;
-		mLook.enabled = false;
+//		fpsInputCtrl.enabled = false;
+//		mLook.enabled = false;
 	
 		thisCamera.GetComponent<CameraTransitioner>().Transition();
 
@@ -533,7 +533,8 @@ public class SiljaBehaviour : MonoBehaviour
 													CameraFollow.CameraControlType.CCT_Default;
 
 		cameraFollowCom.focusPoint = lookAtObject;
-		
+
+		transform.gameObject.GetComponent<MovementController>().canMove = !state;
 		camInput.enabled = !state;
 	}
 
