@@ -180,9 +180,19 @@ public class SiljaBehaviour : MonoBehaviour
 		if( Input.GetKeyUp( KeyCode.Q ) && thisCamera.GetComponent<CameraTransitioner>().Mode != CameraTransitioner.CameraMode.Transitioning)
 		{
 			if( darkMode )
+			{
 				ShiftToStoryMode();
+
+				fpsInputCtrl.enabled = false;
+				mLook.enabled = false;
+			}
 			else
+			{
 				ShiftToDarkMode();
+
+				fpsInputCtrl.enabled = true;
+				mLook.enabled = true;
+			}
 		}
 	}
 
