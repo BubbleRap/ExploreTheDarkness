@@ -42,20 +42,21 @@ public class LookInDetailInteraction : IInteractableObject
 
 				Transform fpCamTransform = transitioner.FPPCameraTransform;
 				fpCamTransform.LookAt(transform.position);
-				
-				transform.position = fpCamTransform.TransformPoint(Vector3.forward * 0.5f);
-				transform.rotation = fpCamTransform.rotation;
 
+							
+				transform.position = fpCamTransform.TransformPoint(Vector3.forward * 0.5f);
+//				transform.rotation = fpCamTransform.rotation;
+				transform.LookAt(fpCamTransform);
 
 				// setting up the character motion state
 
 				_siljaBeh.IsFPSLookEnabled = false;
 				_siljaBeh.IsFPSMoveEnabled = false;
-				_collider.enabled = false;
+
+				if( _collider != null )
+					_collider.enabled = false;
 
 				_siljaBeh.thisCamera.GetComponent<CameraInput>().enabled = false;
-
-//				_siljaBeh.gameObject.GetComponent<MovementController>().canMove = false;
 			});
 			
 			
@@ -67,11 +68,10 @@ public class LookInDetailInteraction : IInteractableObject
 			{	
 				// setting up the character motion state
 
-				_collider.enabled = true;
+				if( _collider != null )
+					_collider.enabled = true;
 
 				_siljaBeh.thisCamera.GetComponent<CameraInput>().enabled = true;
-
-//				_siljaBeh.gameObject.GetComponent<MovementController>().canMove = true;
 			});
 
 
@@ -93,7 +93,7 @@ public class LookInDetailInteraction : IInteractableObject
 		{
 			if( Input.GetMouseButton(0) )
 			{
-				transform.Rotate( mouseVelocity.y * _rotationSensetivity, mouseVelocity.x * _rotationSensetivity, 0f );
+				transform.Rotate( -mouseVelocity.y * _rotationSensetivity, -mouseVelocity.x * _rotationSensetivity, 0f );
 			}
 		}
 	}
