@@ -2574,6 +2574,7 @@ GameObject:
   - 114: {fileID: 11475066}
   - 114: {fileID: 11423028}
   - 114: {fileID: 11470834}
+  - 114: {fileID: 11412696}
   m_Layer: 9
   m_Name: 3rd Person Camera
   m_TagString: MainCamera
@@ -9600,6 +9601,32 @@ MonoBehaviour:
   separableBlurShader: {fileID: 4800000, guid: e97c14fbb5ea04c3a902cc533d7fc5d1, type: 3}
   chromAberrationShader: {fileID: 4800000, guid: 2b4f29398d9484ccfa9fd220449f5eee,
     type: 3}
+--- !u!114 &11412696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a970acddb8696a4792ca6e022840a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mode: 1
+  NoiseTexture: {fileID: 2800000, guid: 45ca7cd7d934d6245bb4539f780e4892, type: 3}
+  Samples: 2
+  Downsampling: 1
+  Radius: .125
+  Intensity: 2
+  Distance: 1
+  Bias: .100000001
+  LumContribution: .5
+  OcclusionColor: {r: 0, g: 0, b: 0, a: 1}
+  CutoffDistance: 150
+  CutoffFalloff: 50
+  Blur: 0
+  BlurDownsampling: 0
+  DebugAO: 0
 --- !u!114 &11423028
 MonoBehaviour:
   m_ObjectHideFlags: 1
