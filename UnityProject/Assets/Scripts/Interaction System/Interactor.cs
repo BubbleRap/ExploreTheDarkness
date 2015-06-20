@@ -10,6 +10,10 @@ public class Interactor : MonoBehaviour
 	{
 		if( !interactionObjects.Contains( interactionObject ) )
 			interactionObjects.Add( interactionObject );
+
+		PromtButtonInteractionObject promt = interactionObject.GetComponent<PromtButtonInteractionObject>();
+		promt.ActivatePromtButton(true);
+
 	}
 
 	public void OnInteractionExit( GameObject interactionObject)
@@ -17,11 +21,11 @@ public class Interactor : MonoBehaviour
 		if( interactionObjects.Contains( interactionObject ) )
 			interactionObjects.Remove( interactionObject );	
 
+		PromtButtonInteractionObject promt = interactionObject.GetComponent<PromtButtonInteractionObject>();
+		promt.ActivatePromtButton(false);
+
 		if( currentInteractionObject == interactionObject )
 		{
-			PromtButtonInteractionObject currentPromt = currentInteractionObject.GetComponent<PromtButtonInteractionObject>();
-			currentPromt.ActivatePromtButton(false);
-
 			currentInteractionObject = null;
 		}
 	}
@@ -41,7 +45,7 @@ public class Interactor : MonoBehaviour
 		for( int i = 0; i < interactionObjects.Count; i++ )
 		{
 			// check if object was destroyed
-			if( interactionObjects[i] == null )
+			if( interactionObjects[i] == null)
 			{
 				interactionObjects.RemoveAt( i );	
 				i--;
@@ -63,20 +67,7 @@ public class Interactor : MonoBehaviour
 		// switching to the new interactable object
 		if( currentInteractionObject != interactionObjects[closestIdx] )
 		{
-			PromtButtonInteractionObject currentPromt;
-
-			// disabling promt for the old object
-			if( currentInteractionObject != null )
-			{
-				currentPromt = currentInteractionObject.GetComponent<PromtButtonInteractionObject>();
-				currentPromt.ActivatePromtButton(false);
-			}
-
 			currentInteractionObject = interactionObjects[closestIdx];
-
-			// enabling promt for the new object
-			currentPromt = currentInteractionObject.GetComponent<PromtButtonInteractionObject>();
-			currentPromt.ActivatePromtButton(true);
 		}
 
 
