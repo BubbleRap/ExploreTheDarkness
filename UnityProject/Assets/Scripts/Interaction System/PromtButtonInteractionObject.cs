@@ -18,7 +18,12 @@ public class PromtButtonInteractionObject : IInteractableObject
 	
 	void Start()
 	{
+		if (TextToDisplay == "")
+			TextToDisplay = gameObject.name;
+
 		buttonPrompt = Instantiate(Resources.Load<GameObject>("buttonPrompt")) as GameObject;
+		buttonPrompt.GetComponent<ButtonPrompt> ().SetText (this.TextToDisplay);
+
 		buttonPrompt.SetActive(false);
 
 		GameObject siljaGO = GameObject.FindGameObjectWithTag("Player");
@@ -48,16 +53,6 @@ public class PromtButtonInteractionObject : IInteractableObject
 	public void ActivatePromtButton( bool state )
 	{
 		buttonPrompt.SetActive(state && (!interactionIsActive || !disableOnActive));
-
-//		if( objectIsClose == state )
-//			return;
-//
-//		if( state )
-//			interactor.OnInteractionEnter( gameObject );
-//		else
-//			interactor.OnInteractionExit( gameObject );
-//	
-//		objectIsClose = state;
 	}
 
 	public void OnInteractionClose( bool state )
