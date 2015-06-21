@@ -10,6 +10,7 @@ public class PromtButtonInteractionObject : IInteractableObject
 	private Interactor interactor;
 
 	private bool objectIsClose = false;
+	public float distance = 1f;
 	
 	public override void Activate()
 	{
@@ -42,7 +43,7 @@ public class PromtButtonInteractionObject : IInteractableObject
 
 	private void Update()
 	{
-		bool isClose = (transform.position - interactor.transform.position).magnitude < 3f;
+		bool isClose = (transform.position - interactor.transform.position).magnitude < distance;
 		bool isEligable = (interactionWorksInFP && SiljaBehaviour.darkMode) || !SiljaBehaviour.darkMode || interactionIsActive;
 		OnInteractionClose(isClose && isEligable);
 
