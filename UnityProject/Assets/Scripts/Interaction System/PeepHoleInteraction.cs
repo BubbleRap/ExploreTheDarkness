@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 using UnityStandardAssets.ImageEffects;
@@ -26,6 +26,7 @@ public class PeepHoleInteraction : IInteractableObject
 		}
 
 		CameraTransitioner transitioner = _siljaBeh.thisCamera.GetComponent<CameraTransitioner>();
+		CameraFollow camControl = _siljaBeh.thisCamera.GetComponent<CameraFollow>();
 
 		if( interactionIsActive )
 		{
@@ -39,10 +40,11 @@ public class PeepHoleInteraction : IInteractableObject
 			{
 				// setting up the character motion state
 
-				_siljaBeh.IsFPSLookEnabled = false;
-				_siljaBeh.IsFPSMoveEnabled = false;
+				camControl.CamControlType = CameraFollow.CameraControlType.CCT_Overwritten;
+//				_siljaBeh.IsFPSLookEnabled = false;
+				_siljaBeh.IsMoveEnabled = false;
 
-				_siljaBeh.thisCamera.GetComponent<CameraInput>().enabled = false;
+//				_siljaBeh.thisCamera.GetComponent<CameraInput>().enabled = false;
 				_siljaBeh.thisCamera.GetComponent<ScreenOverlay>().enabled = true;
 			});
 			
@@ -57,7 +59,9 @@ public class PeepHoleInteraction : IInteractableObject
 			{	
 				// setting up the character motion state
 
-				_siljaBeh.thisCamera.GetComponent<CameraInput>().enabled = true;
+//				_siljaBeh.thisCamera.GetComponent<CameraInput>().enabled = true;
+				camControl.CamControlType = CameraFollow.CameraControlType.CCT_Default;
+				_siljaBeh.IsMoveEnabled = true;
 
 				transitioner.FPPCameraTransform.position = _originalPos;
 				transitioner.FPPCameraTransform.rotation = _originalRot;

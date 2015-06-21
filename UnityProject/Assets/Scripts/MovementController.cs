@@ -11,8 +11,9 @@ public class MovementController : MonoBehaviour
 
 	public Transform cameraTransform = null;
 	private Vector3 moveDirection = Vector3.zero;
-	
-	private float moveSpeed = 0f;
+
+	[HideInInspector]
+	public float moveSpeed = 0f;
 	public float movingSpeed = 10f;
 
 	private Vector3 targetDirection = Vector3.zero;

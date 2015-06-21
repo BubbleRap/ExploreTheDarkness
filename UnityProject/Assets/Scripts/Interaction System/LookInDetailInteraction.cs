@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class LookInDetailInteraction : IInteractableObject 
@@ -32,56 +32,81 @@ public class LookInDetailInteraction : IInteractableObject
 			_siljaBeh = siljaGO.GetComponent<SiljaBehaviour>();
 		}
 
-		CameraTransitioner transitioner = _siljaBeh.thisCamera.GetComponent<CameraTransitioner>();
 
 		if( interactionIsActive )
 		{
-			transitioner.AddFPPCompleteAction( () =>
-			{
-				// setting up the object in front of the camera
-
-				Transform fpCamTransform = transitioner.FPPCameraTransform;
-				fpCamTransform.LookAt(transform.position);
-
-							
-				transform.position = fpCamTransform.TransformPoint(Vector3.forward * 0.5f);
-//				transform.rotation = fpCamTransform.rotation;
-				transform.LookAt(fpCamTransform);
-
-				// setting up the character motion state
-
-				_siljaBeh.IsFPSLookEnabled = false;
-				_siljaBeh.IsFPSMoveEnabled = false;
-
-				if( _collider != null )
-					_collider.enabled = false;
-
-				_siljaBeh.thisCamera.GetComponent<CameraInput>().enabled = false;
-			});
-			
-			
-			_siljaBeh.ShiftToDarkMode();
+			OnInvestigateEnabled();
 		}
 		else
 		{
-			transitioner.AddTPPCompleteAction( () =>
-			{	
-				// setting up the character motion state
-
-				if( _collider != null )
-					_collider.enabled = true;
-
-				_siljaBeh.thisCamera.GetComponent<CameraInput>().enabled = true;
-			});
-
-
-			// reversing the previous object's transform
-			transform.position = _originalPos;
-			transform.rotation = _originalRot;
-			
-			
-			_siljaBeh.ShiftToStoryMode();
+			OnInvestigateDisabled();
 		}
+	}
+
+	private void OnInvestigateEnabled()
+	{
+		CameraTransitioner transitioner = _siljaBeh.thisCamera.GetComponent<CameraTransitioner>();
+		CameraFollow camControl = _siljaBeh.thisCamera.GetComponent<CameraFollow>();
+
+
+		
+//		_siljaBeh.IsFPSLookEnabled = false;
+
+		
+		transitioner.AddFPPCompleteAction( () =>
+		                                  {
+			// setting up the object in front of the camera
+			
+			Transform fpCamTransform = transitioner.FPPCameraTransform;
+			fpCamTransform.LookAt(transform.position);
+			
+			transform.position = fpCamTransform.TransformPoint(Vector3.forward * 0.5f);
+			transform.LookAt(fpCamTransform);
+
+			// setting up the character motion state
+
+			camControl.CamControlType = CameraFollow.CameraControlType.CCT_Overwritten;
+			
+			_siljaBeh.IsMoveEnabled = false;
+			
+			if( _collider != null )
+				_collider.enabled = false;
+
+			
+//			_siljaBeh.thisCamera.GetComponent<CameraInput>().enabled = false;
+		});
+		
+		
+		_siljaBeh.ShiftToDarkMode();
+	}
+
+	private void OnInvestigateDisabled()
+	{
+		CameraTransitioner transitioner = _siljaBeh.thisCamera.GetComponent<CameraTransitioner>();
+		CameraFollow camControl = _siljaBeh.thisCamera.GetComponent<CameraFollow>();
+
+		transitioner.AddTPPCompleteAction( () =>
+		                                  {	
+			// setting up the character motion state
+			
+//			_siljaBeh.IsFPSLookEnabled = true;
+
+			_siljaBeh.IsMoveEnabled = true;
+			camControl.CamControlType = CameraFollow.CameraControlType.CCT_Default;
+			
+			if( _collider != null )
+				_collider.enabled = true;
+			
+//			_siljaBeh.thisCamera.GetComponent<CameraInput>().enabled = true;
+		});
+		
+		
+		// reversing the previous object's transform
+		transform.position = _originalPos;
+		transform.rotation = _originalRot;
+		
+		
+		_siljaBeh.ShiftToStoryMode();
 	}
 
 	private void Update()

@@ -21,6 +21,7 @@ public class CameraInput : MonoBehaviour
 	void Awake()
 	{
 		cameraFollow = GetComponent<CameraFollow>();
+		enabled = false;
 	}
 
 	void Update () 
