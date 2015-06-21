@@ -36,15 +36,15 @@ public class PeepHoleInteraction : IInteractableObject
 			transitioner.FPPCameraTransform.position = transform.position;
 			transitioner.FPPCameraTransform.rotation = transform.rotation;
 
+			_siljaBeh.IsMoveEnabled = false;
+
 			transitioner.AddFPPCompleteAction( () =>
 			{
 				// setting up the character motion state
 
 				camControl.CamControlType = CameraFollow.CameraControlType.CCT_Overwritten;
-//				_siljaBeh.IsFPSLookEnabled = false;
-				_siljaBeh.IsMoveEnabled = false;
 
-//				_siljaBeh.thisCamera.GetComponent<CameraInput>().enabled = false;
+
 				_siljaBeh.thisCamera.GetComponent<ScreenOverlay>().enabled = true;
 			});
 			

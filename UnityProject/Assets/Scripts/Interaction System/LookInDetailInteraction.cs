@@ -49,31 +49,21 @@ public class LookInDetailInteraction : IInteractableObject
 		CameraFollow camControl = _siljaBeh.thisCamera.GetComponent<CameraFollow>();
 
 
-		
-//		_siljaBeh.IsFPSLookEnabled = false;
-
-		
+		_siljaBeh.IsMoveEnabled = false;
+			
 		transitioner.AddFPPCompleteAction( () =>
-		                                  {
-			// setting up the object in front of the camera
-			
+		{
+			camControl.CamControlType = CameraFollow.CameraControlType.CCT_Overwritten;
+
 			Transform fpCamTransform = transitioner.FPPCameraTransform;
-			fpCamTransform.LookAt(transform.position);
-			
 			transform.position = fpCamTransform.TransformPoint(Vector3.forward * 0.5f);
+
+	//		fpCamTransform.LookAt(transform.position);
 			transform.LookAt(fpCamTransform);
 
-			// setting up the character motion state
-
-			camControl.CamControlType = CameraFollow.CameraControlType.CCT_Overwritten;
-			
-			_siljaBeh.IsMoveEnabled = false;
-			
 			if( _collider != null )
 				_collider.enabled = false;
 
-			
-//			_siljaBeh.thisCamera.GetComponent<CameraInput>().enabled = false;
 		});
 		
 		
