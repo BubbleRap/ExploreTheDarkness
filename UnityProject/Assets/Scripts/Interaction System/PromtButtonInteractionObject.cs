@@ -23,6 +23,7 @@ public class PromtButtonInteractionObject : IInteractableObject
 
 		buttonPrompt = Instantiate(Resources.Load<GameObject>("buttonPrompt")) as GameObject;
 		buttonPrompt.GetComponent<ButtonPrompt> ().SetText (this.TextToDisplay);
+		buttonPrompt.GetComponent<ButtonPrompt> ().SetConnectedTransform (this.transform);
 
 		buttonPrompt.SetActive(false);
 
@@ -53,6 +54,10 @@ public class PromtButtonInteractionObject : IInteractableObject
 	public void ActivatePromtButton( bool state )
 	{
 		buttonPrompt.SetActive(state && (!interactionIsActive || !disableOnActive));
+	}
+
+	public bool IsActivated(){
+		return buttonPrompt.activeSelf;
 	}
 
 	public void OnInteractionClose( bool state )
