@@ -63,7 +63,7 @@ public class CameraTransitioner : MonoBehaviour {
 		Mode = CameraMode.Tpp;
 
 		TppOnlyGameplayComponents.AddRange (new Behaviour[]{
-			GetComponent<CameraFollow>(),
+//			GetComponent<CameraFollow>(),
 //			GetComponent<CameraInput>(),
 			GetComponent<CameraPhysics>(),
 			GetComponent<AudioSource>() 
@@ -77,7 +77,7 @@ public class CameraTransitioner : MonoBehaviour {
 		});
 
 		FppOnlyGameplayComponents.AddRange (new Behaviour[]{
-			GetComponent<MouseLook>(),
+//			GetComponent<MouseLook>(),
 			GetComponent<Health>()
 		});
 	}

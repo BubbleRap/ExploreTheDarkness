@@ -15,7 +15,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 	private CharacterMotor charMotor = null;
 	private MovementController moveCtrl = null;
-	private FPSInputController fpsInputCtrl = null;
+//	private FPSInputController fpsInputCtrl = null;
 	private MouseLook mLook = null;
 	private CameraInput camInput = null;
 
@@ -118,13 +118,15 @@ public class SiljaBehaviour : MonoBehaviour
 		set { mLook.enabled = value; }
 	}
 
-	public bool IsFPSMoveEnabled 
+	public bool IsMoveEnabled 
 	{
-		get { return fpsInputCtrl.enabled; }
+		get { return moveCtrl.enabled; }//fpsInputCtrl.enabled; }
 		set 
 		{
-			charMotor.inputMoveDirection = Vector3.zero;
-			fpsInputCtrl.enabled = value; 
+//			charMotor.inputMoveDirection = Vector3.zero;
+//			fpsInputCtrl.enabled = value; 
+			moveCtrl.moveSpeed = 0f;
+			moveCtrl.enabled = value;
 		}
 	}
 
@@ -132,7 +134,7 @@ public class SiljaBehaviour : MonoBehaviour
 	{
 		charMotor = GetComponent<CharacterMotor>();
 		moveCtrl = GetComponent<MovementController>();
-		fpsInputCtrl = GetComponent<FPSInputController>();
+//		fpsInputCtrl = GetComponent<FPSInputController>();
 		mLook = thisCamera.GetComponent<MouseLook>();
 		camInput = GetComponentInChildren<CameraInput>();
 
@@ -183,14 +185,14 @@ public class SiljaBehaviour : MonoBehaviour
 			{
 				ShiftToStoryMode();
 
-				fpsInputCtrl.enabled = false;
+//				fpsInputCtrl.enabled = false;
 				mLook.enabled = false;
 			}
 			else
 			{
 				ShiftToDarkMode();
 
-				fpsInputCtrl.enabled = true;
+//				fpsInputCtrl.enabled = true;
 				mLook.enabled = true;
 			}
 		}
@@ -200,8 +202,8 @@ public class SiljaBehaviour : MonoBehaviour
 
 	public void ShiftToDarkMode()
 	{
-		moveCtrl.enabled = false;
-		cameraFollowCom.CamControlType = CameraFollow.CameraControlType.CCT_Overwritten;
+//		moveCtrl.enabled = false;
+		cameraFollowCom.CamControlType = CameraFollow.CameraControlType.CCT_FPSLook;
 	
 		thisCamera.GetComponent<CameraTransitioner>().Transition();
 
@@ -244,7 +246,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 		charMotor.movement.maxForwardSpeed = 1.1f;
 		charMotor.movement.maxSidewaysSpeed = 0.9f;
-		moveCtrl.enabled = true;
+//		moveCtrl.enabled = true;
 
 		oneHandJoint.gameObject.SetActive(true);
 		twoHandsJoint.gameObject.SetActive(false);
@@ -492,7 +494,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 	IEnumerator RipLimbDelayedAction(Transform entity, float ripLimbIn)
 	{
-		fpsInputCtrl.enabled = false;
+//		fpsInputCtrl.enabled = false;
 		mLook.enabled = false;
 
 
@@ -527,7 +529,7 @@ public class SiljaBehaviour : MonoBehaviour
 		limbs[index].SetActive(false);
 
 
-		fpsInputCtrl.enabled = true;
+//		fpsInputCtrl.enabled = true;
 		mLook.enabled = true;
 	}
 
