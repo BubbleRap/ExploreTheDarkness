@@ -13,7 +13,7 @@ LightmapParameters:
   irradianceQuality: 8192
   backFaceTolerance: .899999976
   isTransparent: 0
-  modellingTolerance: .00100000005
+  modellingTolerance: .00499999989
   systemTag: -1
   edgeStitching: 1
   blurRadius: 2
