@@ -345,7 +345,6 @@ GameObject:
   - 114: {fileID: 11400014}
   - 114: {fileID: 11400012}
   - 114: {fileID: 11400010}
-  - 114: {fileID: 11400008}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400004}
@@ -2558,10 +2557,8 @@ GameObject:
   - 4: {fileID: 400332}
   - 20: {fileID: 2000014}
   - 124: {fileID: 12400002}
-  - 114: {fileID: 11400060}
   - 114: {fileID: 11400056}
   - 114: {fileID: 11400054}
-  - 81: {fileID: 8100002}
   - 114: {fileID: 11410260}
   - 114: {fileID: 11458030}
   - 114: {fileID: 11484004}
@@ -2572,9 +2569,10 @@ GameObject:
   - 135: {fileID: 13534574}
   - 54: {fileID: 5434036}
   - 114: {fileID: 11475066}
-  - 114: {fileID: 11423028}
   - 114: {fileID: 11470834}
   - 114: {fileID: 11412696}
+  - 81: {fileID: 8110244}
+  - 114: {fileID: 11417116}
   m_Layer: 9
   m_Name: 3rd Person Camera
   m_TagString: MainCamera
@@ -4204,7 +4202,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100042}
   m_LocalRotation: {x: 0, y: -.996227384, z: 0, w: -.086781688}
-  m_LocalPosition: {x: 1.86800098, y: 1.11899996, z: 8.27043724}
+  m_LocalPosition: {x: -8.32999992, y: 1.11899996, z: 1.94000006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 447742}
@@ -7243,6 +7241,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!20 &2000002
 Camera:
   m_ObjectHideFlags: 1
@@ -7275,6 +7274,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!20 &2000004
 Camera:
   m_ObjectHideFlags: 1
@@ -7307,6 +7307,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!20 &2000006
 Camera:
   m_ObjectHideFlags: 1
@@ -7339,6 +7340,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!20 &2000008
 Camera:
   m_ObjectHideFlags: 1
@@ -7371,6 +7373,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!20 &2000014
 Camera:
   m_ObjectHideFlags: 1
@@ -7403,6 +7406,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!20 &2000016
 Camera:
   m_ObjectHideFlags: 1
@@ -7435,6 +7439,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!23 &2300000
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -8052,7 +8057,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .0199999996, y: .0199999996, z: .150000006}
   m_Center: {x: .0250000004, y: 0, z: -.0700000003}
---- !u!81 &8100002
+--- !u!81 &8110244
 AudioListener:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -9234,9 +9239,9 @@ MonoBehaviour:
   monsterChase: {fileID: 8300000, guid: ed5c6841f6ae0d141ab4d56060dd4dbf, type: 3}
   captureTimeTotal: 2
   monsterCatchSiljaSound:
-  - {fileID: 8300000, guid: 95796ebc16b75a44e886465618dfbf5a, type: 3}
-  - {fileID: 8300000, guid: 18e761787a2b3664d83de4891f2c91f1, type: 3}
-  - {fileID: 8300000, guid: 0af74280b1430f24b96d3998b3868420, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   blackscreenTime: 5
   spawnPoint: {fileID: 0}
   fadingOutSpeed: .000199999995
@@ -9284,24 +9289,13 @@ MonoBehaviour:
   characterAnimator: {fileID: 9500004}
   firstPersonAnimator: {fileID: 9500002}
   cameraTransform: {fileID: 400332}
+  moveSpeed: 0
   movingSpeed: 1
   rotationSpeed: 150
   moveAccel: 2.5
   canMove: 1
   v: 0
   h: 0
---- !u!114 &11400008
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100042}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60bca8f58a0b8478e946e6e86658cb29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firstpersonCam: {fileID: 400332}
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9396,12 +9390,12 @@ MonoBehaviour:
   - {fileID: 8200018}
   - {fileID: 8200004}
   stepSounds:
-  - {fileID: 8300000, guid: b8055a895a86775488cadb5001954040, type: 3}
-  - {fileID: 8300000, guid: 88e1837f4917a804280e9d8de399b3c9, type: 3}
-  - {fileID: 8300000, guid: 64a786337b71df041818069d5e647756, type: 3}
-  - {fileID: 8300000, guid: 2ea62b773a5947146a5a6100720bfd4d, type: 3}
-  - {fileID: 8300000, guid: aefe807baf28c46439e3083d31e1e754, type: 3}
-  - {fileID: 8300000, guid: 127138ee6a90cd242bbbb9f1b38f381a, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   volume: 1
 --- !u!114 &11400018
 MonoBehaviour:
@@ -9491,24 +9485,6 @@ MonoBehaviour:
   verticalShakeIntensity: .300000012
   shakeFrequency: .100000001
   shaking: 0
---- !u!114 &11400060
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100332}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68ec2fe99d1108b9d0006a298d76c639, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axes: 0
-  sensitivityX: 3
-  sensitivityY: 3
-  minimumX: -360
-  maximumX: 360
-  minimumY: -60
-  maximumY: 60
 --- !u!114 &11400062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9524,12 +9500,12 @@ MonoBehaviour:
   audioSources:
   - {fileID: 8200004}
   stepSounds:
-  - {fileID: 8300000, guid: b8055a895a86775488cadb5001954040, type: 3}
-  - {fileID: 8300000, guid: 88e1837f4917a804280e9d8de399b3c9, type: 3}
-  - {fileID: 8300000, guid: 64a786337b71df041818069d5e647756, type: 3}
-  - {fileID: 8300000, guid: 2ea62b773a5947146a5a6100720bfd4d, type: 3}
-  - {fileID: 8300000, guid: aefe807baf28c46439e3083d31e1e754, type: 3}
-  - {fileID: 8300000, guid: 127138ee6a90cd242bbbb9f1b38f381a, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   volume: 1
 --- !u!114 &11400064
 MonoBehaviour:
@@ -9571,12 +9547,12 @@ MonoBehaviour:
   - {fileID: 8200018}
   - {fileID: 8200004}
   stepSounds:
-  - {fileID: 8300000, guid: b8055a895a86775488cadb5001954040, type: 3}
-  - {fileID: 8300000, guid: 88e1837f4917a804280e9d8de399b3c9, type: 3}
-  - {fileID: 8300000, guid: 64a786337b71df041818069d5e647756, type: 3}
-  - {fileID: 8300000, guid: 2ea62b773a5947146a5a6100720bfd4d, type: 3}
-  - {fileID: 8300000, guid: aefe807baf28c46439e3083d31e1e754, type: 3}
-  - {fileID: 8300000, guid: 127138ee6a90cd242bbbb9f1b38f381a, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   volume: 1
 --- !u!114 &11410260
 MonoBehaviour:
@@ -9627,7 +9603,7 @@ MonoBehaviour:
   Blur: 0
   BlurDownsampling: 0
   DebugAO: 0
---- !u!114 &11423028
+--- !u!114 &11417116
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -9635,12 +9611,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100332}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b06af255df742f48a3d0f4d254cd984, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ac94f858f0fd46d18f1bee069cc86d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalSensetivity: 3
-  horizontalSensetivity: 3
-  iversedVertical: 0
+  m_raycastTag: AudioEffect
+  m_raycastFPSSkip: 0
+  m_modulateValueMultiplier: .400000006
 --- !u!114 &11439360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9687,6 +9663,10 @@ MonoBehaviour:
   collisionFixMaxHeight: .800000012
   focusDistance: .5
   focusAngleOffset: 45
+  minimumY: -60
+  maximumY: 60
+  verticalSensetivity: 1
+  horizontalSensetivity: 1
   focusPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &11458030
 MonoBehaviour:
