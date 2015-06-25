@@ -9269,6 +9269,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!1 &516345295 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 181766, guid: ffb44d417b675034c81036a8412368ab, type: 2}
@@ -14668,7 +14669,7 @@ GameObject:
   - 82: {fileID: 752324695}
   m_Layer: 0
   m_Name: TV white noise
-  m_TagString: Untagged
+  m_TagString: AudioEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16222,6 +16223,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!1001 &832001745
 Prefab:
   m_ObjectHideFlags: 0
@@ -20775,7 +20777,7 @@ GameObject:
   - 82: {fileID: 1012614657}
   m_Layer: 0
   m_Name: Clock
-  m_TagString: Untagged
+  m_TagString: AudioEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21005,6 +21007,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!1 &1021561662
 GameObject:
   m_ObjectHideFlags: 0
@@ -22919,7 +22922,7 @@ GameObject:
   - 82: {fileID: 1095303281}
   m_Layer: 0
   m_Name: Ceiling Fan
-  m_TagString: Untagged
+  m_TagString: AudioEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23236,7 +23239,6 @@ GameObject:
   - 4: {fileID: 1099068782}
   - 20: {fileID: 1099068799}
   - 124: {fileID: 1099068798}
-  - 114: {fileID: 1099068797}
   - 114: {fileID: 1099068796}
   - 114: {fileID: 1099068783}
   - 114: {fileID: 1099068794}
@@ -23249,10 +23251,10 @@ GameObject:
   - 135: {fileID: 1099068787}
   - 54: {fileID: 1099068786}
   - 114: {fileID: 1099068785}
-  - 114: {fileID: 1099068784}
   - 114: {fileID: 1099068800}
   - 114: {fileID: 1099068801}
   - 81: {fileID: 1099068795}
+  - 114: {fileID: 1099068802}
   m_Layer: 9
   m_Name: 3rd Person Camera
   m_TagString: MainCamera
@@ -23301,21 +23303,6 @@ MonoBehaviour:
   - {fileID: 638333881}
   - {fileID: 2087928992}
   - {fileID: 1709232711}
---- !u!114 &1099068784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11423028, guid: ecbc0b90a8620a84a8a6d3b562b95fbd,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1099068781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b06af255df742f48a3d0f4d254cd984, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  verticalSensetivity: 3
-  horizontalSensetivity: 3
-  iversedVertical: 0
 --- !u!114 &1099068785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23613,7 +23600,8 @@ MonoBehaviour:
 --- !u!81 &1099068795
 AudioListener:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 8110244, guid: ecbc0b90a8620a84a8a6d3b562b95fbd,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1099068781}
   m_Enabled: 1
@@ -23633,25 +23621,6 @@ MonoBehaviour:
   verticalShakeIntensity: .300000012
   shakeFrequency: .100000001
   shaking: 0
---- !u!114 &1099068797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400060, guid: ecbc0b90a8620a84a8a6d3b562b95fbd,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1099068781}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68ec2fe99d1108b9d0006a298d76c639, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axes: 0
-  sensitivityX: 3
-  sensitivityY: 3
-  minimumX: -360
-  maximumX: 360
-  minimumY: -60
-  maximumY: 60
 --- !u!124 &1099068798
 Behaviour:
   m_ObjectHideFlags: 0
@@ -23693,6 +23662,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!114 &1099068800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23736,6 +23706,21 @@ MonoBehaviour:
   Blur: 0
   BlurDownsampling: 0
   DebugAO: 0
+--- !u!114 &1099068802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11417116, guid: ecbc0b90a8620a84a8a6d3b562b95fbd,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1099068781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ac94f858f0fd46d18f1bee069cc86d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_raycastTag: AudioEffect
+  m_raycastFPSSkip: 0
+  m_modulateValueMultiplier: .600000024
 --- !u!4 &1101232091 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: f1e288dc06db5df4e9bfa9aa258e1151, type: 2}
@@ -24556,7 +24541,7 @@ GameObject:
   - 82: {fileID: 1138053346}
   m_Layer: 0
   m_Name: TV Tone
-  m_TagString: Untagged
+  m_TagString: AudioEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31161,6 +31146,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!1001 &1471063248
 Prefab:
   m_ObjectHideFlags: 0
@@ -33683,6 +33669,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!1 &1611180105 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 171960, guid: 4e252e273caba6d49af2b426618cda73, type: 2}
@@ -36316,7 +36303,6 @@ GameObject:
   - 114: {fileID: 1698327121}
   - 114: {fileID: 1698327120}
   - 114: {fileID: 1698327119}
-  - 114: {fileID: 1698327118}
   - 114: {fileID: 1698327117}
   - 114: {fileID: 1698327116}
   - 114: {fileID: 1698327115}
@@ -36576,19 +36562,6 @@ MonoBehaviour:
   canMove: 1
   v: 0
   h: 0
---- !u!114 &1698327118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400008, guid: ecbc0b90a8620a84a8a6d3b562b95fbd,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1698327108}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60bca8f58a0b8478e946e6e86658cb29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firstpersonCam: {fileID: 1099068782}
 --- !u!114 &1698327119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39978,6 +39951,10 @@ Prefab:
       value: 
       objectReference: {fileID: 111300000, guid: 8d41e1b4a40e9a5459eaa03859a60a13,
         type: 2}
+    - target: {fileID: 174686, guid: 6fd6f33badbc6df4e9ff154ba55bdcee, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fd6f33badbc6df4e9ff154ba55bdcee, type: 2}
   m_IsPrefabParent: 0
@@ -42967,6 +42944,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!1001 &2032860443
 Prefab:
   m_ObjectHideFlags: 0
