@@ -23720,7 +23720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_raycastTag: AudioEffect
   m_raycastFPSSkip: 0
-  m_modulateValueMultiplier: .600000024
+  m_modulateValueMultiplier: .300000012
 --- !u!4 &1101232091 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: f1e288dc06db5df4e9bfa9aa258e1151, type: 2}
