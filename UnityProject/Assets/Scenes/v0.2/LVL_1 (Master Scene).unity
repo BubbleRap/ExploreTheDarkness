@@ -23468,6 +23468,8 @@ MonoBehaviour:
   verticalSensetivity: 1
   horizontalSensetivity: 1
   focusPoint: {x: 0, y: 0, z: 0}
+  FPPTransform: {fileID: 928423835}
+  TPPTransform: {fileID: 915322284}
 --- !u!114 &1099068790
 MonoBehaviour:
   m_ObjectHideFlags: 0

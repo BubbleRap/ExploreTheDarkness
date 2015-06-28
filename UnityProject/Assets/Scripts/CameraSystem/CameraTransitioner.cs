@@ -87,7 +87,6 @@ public class CameraTransitioner : MonoBehaviour {
 
 		if (Mode == CameraMode.Tpp){
 
-
 			//save the camera's position
 			TPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
 			TPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
