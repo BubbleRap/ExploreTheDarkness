@@ -65,6 +65,8 @@ public class CameraFollow : MonoBehaviour
 	[HideInInspector]
 	public Vector3 focusPoint;
 
+	public Transform FPPTransform, TPPTransform;
+
 //	private void OnEnable()
 //	{
 //		StopAllCoroutines();
@@ -89,13 +91,15 @@ public class CameraFollow : MonoBehaviour
 		{
 		case CameraControlType.CCT_Default:
 
-			TPCameraBehaviour();
+			TPCameraBehaviour(this.transform);
+			FPCameraBehaviour(FPPTransform);
 
 			break;
 
 		case CameraControlType.CCT_FPSLook:
 
-			FPCameraBehaviour();
+			FPCameraBehaviour(this.transform);
+			TPCameraBehaviour(TPPTransform);
 
 			break;
 
@@ -129,43 +133,46 @@ public class CameraFollow : MonoBehaviour
 		return up * distFromObj;
 	}
 
-	private void TPCameraBehaviour()
+	private void TPCameraBehaviour(Transform t)
 	{
-		Vector3 deltaMousePosition = new Vector3 (Input.GetAxis ("Mouse X"), Input.GetAxis ("Mouse Y"), 0f);
+		UpdateTPPAngles ();
 
-		float pitchAngle = pitch + deltaMousePosition.y * verticalSensetivity ;
-		pitchAngle = Mathf.Clamp (pitchAngle, 30f, 110f);
-		
-		yaw = Mathf.Repeat(yaw + deltaMousePosition.x * horizontalSensetivity, 359.999f);
-		pitch = pitchAngle;
-		
 		float distanceFactor = Mathf.Clamp01((cameraDistance - minDistance) / (maxDistance - minDistance));
 		float collisionFixHeight = Mathf.Lerp(collisionFixMinHeight, collisionFixMaxHeight, 1f - distanceFactor );
 		
 		// offset the camera corresponding to the angles and the shaking offsets
 		Vector3 relativePosition = GetVectorFromAngle(pitch - shakeOffset.y, yaw - shakeOffset.x, cameraDistance) + cameraFocusTarget.position + Vector3.up * collisionFixHeight;
 		
-		// Set up the camera on the orbit around the camera, using PITCH and YAW angles taken from CameraInput
-		transform.position = Vector3.Slerp(transform.position, relativePosition, followingSpeed);
-		
-		
-		Vector3 camLocalDirection = new Vector3(-transform.localPosition.x, 0f, -transform.localPosition.z).normalized;
+		Vector3 camLocalDirection = new Vector3(-t.localPosition.x, 0f, -t.localPosition.z).normalized;
 		camLocalDirection = (Quaternion.Euler(0f, focusAngleOffset, 0f) * camLocalDirection) * focusDistance;
-		
-		transform.localRotation = Quaternion.LookRotation( ((-transform.localPosition + Vector3.up * collisionFixHeight) + camLocalDirection).normalized );
 
+		// Set up the camera on the orbit around the camera, using PITCH and YAW angles taken from CameraInput
+		t.position = Vector3.Slerp(t.position, relativePosition, followingSpeed);
+
+		t.localRotation = Quaternion.Slerp(t.localRotation, Quaternion.LookRotation( ((-t.localPosition + Vector3.up * collisionFixHeight) + camLocalDirection).normalized ), followingSpeed);
 	}
 
-	private void FPCameraBehaviour()
+	private void FPCameraBehaviour(Transform t)
 	{
+		UpdateTPPAngles ();
+
 		Vector3 deltaMousePosition = new Vector3 (Input.GetAxis ("Mouse X"), Input.GetAxis ("Mouse Y"), 0f);
 
-		float rotationX = transform.localEulerAngles.y + deltaMousePosition.x * horizontalSensetivity;
+		float rotationX = t.localEulerAngles.y + deltaMousePosition.x * horizontalSensetivity;
 		
 		rotationY += deltaMousePosition.y * verticalSensetivity;
 		rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 		
-		transform.localEulerAngles = new Vector3(-rotationY, 0, 0);
-		transform.parent.Rotate(0,rotationX, 0);
+		t.localEulerAngles = new Vector3(-rotationY, 0, 0);
+		t.parent.Rotate(0,rotationX, 0);
+	}
+
+	void UpdateTPPAngles ()
+	{
+		Vector3 deltaMousePosition = new Vector3 (Input.GetAxis ("Mouse X"), Input.GetAxis ("Mouse Y"), 0f);
+		float pitchAngle = pitch + deltaMousePosition.y * verticalSensetivity;
+		pitchAngle = Mathf.Clamp (pitchAngle, 30f, 110f);
+		yaw = Mathf.Repeat (yaw + deltaMousePosition.x * horizontalSensetivity, 359.999f);
+		pitch = pitchAngle;
 	}
 }
