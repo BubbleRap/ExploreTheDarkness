@@ -25,6 +25,7 @@ public class LookInDetailInteraction : IInteractableObject
 	public override void Activate()
 	{
 		interactionIsActive = !interactionIsActive;
+		IsCompleted = interactionIsActive;
 
 		if( _siljaBeh == null )
 		{
@@ -99,8 +100,10 @@ public class LookInDetailInteraction : IInteractableObject
 		_siljaBeh.ShiftToStoryMode();
 	}
 
-	private void Update()
+	private new void Update()
 	{
+		base.Update();
+
 		Vector3 mouseVelocity = Input.mousePosition - _prevMousePos;
 		_prevMousePos = Input.mousePosition;
 

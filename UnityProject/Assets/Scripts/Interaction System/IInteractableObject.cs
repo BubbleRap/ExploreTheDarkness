@@ -58,7 +58,7 @@ public class IInteractableObject : MonoBehaviour
 			TextToDisplay = gameObject.name;
 	}
 	
-	private void LateUpdate()
+	protected void Update()
 	{
 		if( interactor == null )
 		{
