@@ -15,7 +15,7 @@ public class CollectLillebrorUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		GameObject siljaGO = GameObject.FindGameObjectWithTag("Player");
-		Objectives siljaObjective = siljaGO.GetComponent<Objectives>();
+		ObjectivesManager siljaObjective = siljaGO.GetComponent<ObjectivesManager>();
 		Inventory siljaInventory = siljaGO.GetComponent<Inventory>();
 		
 		if(multipleTask)

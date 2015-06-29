@@ -1225,6 +1225,50 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 154894, guid: 02860e71b80c84240b41beb34f313ec7, type: 2}
   m_PrefabInternal: {fileID: 1499820233}
+--- !u!1 &67476615 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 130166, guid: 18ebd414ab3635c4cbba5185a8b80bb2, type: 2}
+  m_PrefabInternal: {fileID: 2036994158}
+--- !u!114 &67476616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 67476615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3abb940f106654e6eb7c591a98e38fd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableOnActive: 1
+  interactionWorksInFP: 0
+  distance: 1
+  TextToDisplay: Torch Body
+--- !u!114 &67476617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 67476615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778f6b982cfd9374aac21de76d291e88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableOnActive: 1
+  interactionWorksInFP: 0
+  distance: 1
+  TextToDisplay: 
 --- !u!1001 &69239589
 Prefab:
   m_ObjectHideFlags: 0
@@ -6897,7 +6941,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416d36e427aa97c49a8504253e1cd7b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextToDisplay: 
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableOnActive: 1
+  interactionWorksInFP: 0
+  distance: 1
+  TextToDisplay: some string
   _lightSource: {fileID: 278636608}
   _defaultState: 1
 --- !u!65 &355267679
@@ -7316,7 +7368,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416d36e427aa97c49a8504253e1cd7b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextToDisplay: 
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableOnActive: 1
+  interactionWorksInFP: 0
+  distance: 1
+  TextToDisplay: some string
   _lightSource: {fileID: 278636608}
   _defaultState: 1
 --- !u!65 &418693783
@@ -18527,6 +18587,50 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 899024126}
   m_Mesh: {fileID: 4300046, guid: 3eb76f33fa24cb74bb80b5a76347a0a3, type: 3}
+--- !u!1 &899182820 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: ea1325f3384b0a5458bc4db77a7568bd, type: 2}
+  m_PrefabInternal: {fileID: 193367196}
+--- !u!114 &899182821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 899182820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3abb940f106654e6eb7c591a98e38fd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableOnActive: 1
+  interactionWorksInFP: 0
+  distance: 1
+  TextToDisplay: Battery 2
+--- !u!114 &899182822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 899182820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778f6b982cfd9374aac21de76d291e88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableOnActive: 1
+  interactionWorksInFP: 0
+  distance: 1
+  TextToDisplay: 
 --- !u!1 &899182980
 GameObject:
   m_ObjectHideFlags: 0
@@ -19631,6 +19735,50 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!1 &963952722 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 126606, guid: 560f5327fa736f7409a49a0451c2590e, type: 2}
+  m_PrefabInternal: {fileID: 1906200164}
+--- !u!114 &963952723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 963952722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e8cd70b2c4c245dabd0dcbdfde230de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableOnActive: 1
+  interactionWorksInFP: 0
+  distance: 2
+  TextToDisplay: Sew Lilbro
+--- !u!114 &963952724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 963952722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778f6b982cfd9374aac21de76d291e88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableOnActive: 1
+  interactionWorksInFP: 0
+  distance: 2
+  TextToDisplay: 
 --- !u!1001 &964649177
 Prefab:
   m_ObjectHideFlags: 0
@@ -22597,7 +22745,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88fa3fcc9770a624da188f4bb81e98f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextToDisplay: Hole
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableOnActive: 1
+  interactionWorksInFP: 0
+  distance: 1
+  TextToDisplay: some string
 --- !u!114 &1078467951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22609,10 +22765,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778f6b982cfd9374aac21de76d291e88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextToDisplay: Hole
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   disableOnActive: 1
   interactionWorksInFP: 0
   distance: 1.5
+  TextToDisplay: Hole
 --- !u!1 &1080385344 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 182874, guid: a6520983f200a544a9f807922a4d2bc3, type: 2}
@@ -27130,7 +27291,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416d36e427aa97c49a8504253e1cd7b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextToDisplay: 
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableOnActive: 1
+  interactionWorksInFP: 0
+  distance: 1
+  TextToDisplay: some string
   _lightSource: {fileID: 278636608}
   _defaultState: 1
 --- !u!65 &1284127088
@@ -29936,10 +30105,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778f6b982cfd9374aac21de76d291e88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextToDisplay: Phone
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   disableOnActive: 1
   interactionWorksInFP: 0
   distance: 1.10000002
+  TextToDisplay: Phone
 --- !u!114 &1414019369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29951,7 +30125,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1443c404dbd5e1145b55bb1f7ead079c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextToDisplay: Phone
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableOnActive: 1
+  interactionWorksInFP: 0
+  distance: 1
+  TextToDisplay: some string
   soundClip: {fileID: 8300000, guid: 686038ffe1fcf32479744a9c9d1d8cfe, type: 3}
   volume: 1
   internalPlay: 0
@@ -29967,7 +30149,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9dc84d2a6350fe478beb7b29d778f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextToDisplay: Phone
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableOnActive: 1
+  interactionWorksInFP: 0
+  distance: 1
+  TextToDisplay: some string
   activated: 0
 --- !u!82 &1414019371
 AudioSource:
@@ -32569,7 +32759,7 @@ GameObject:
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 8064e5133647e994d9cb7b2ff888ceba, type: 2}
   m_PrefabInternal: {fileID: 194444402}
---- !u!114 &1564339935
+--- !u!114 &1564339932
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -32577,11 +32767,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1564339931}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01b85e45d5782524fae10921af2c9d7c, type: 3}
+  m_Script: {fileID: 11500000, guid: 3abb940f106654e6eb7c591a98e38fd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextToDisplay: aaa
-  _rotationSensetivity: .100000001
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableOnActive: 1
+  interactionWorksInFP: 0
+  distance: 1
+  TextToDisplay: Battery 1
 --- !u!114 &1564339936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32593,10 +32790,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778f6b982cfd9374aac21de76d291e88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextToDisplay: aa
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   disableOnActive: 1
   interactionWorksInFP: 0
   distance: 1
+  TextToDisplay: 
 --- !u!1 &1565693436
 GameObject:
   m_ObjectHideFlags: 0
@@ -33138,10 +33340,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778f6b982cfd9374aac21de76d291e88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextToDisplay: Box
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   disableOnActive: 1
   interactionWorksInFP: 0
   distance: 2
+  TextToDisplay: Box
 --- !u!114 &1580471891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33153,7 +33360,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9dc84d2a6350fe478beb7b29d778f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextToDisplay: Box
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableOnActive: 1
+  interactionWorksInFP: 0
+  distance: 1
+  TextToDisplay: some string
   activated: 0
 --- !u!1 &1585487713
 GameObject:
@@ -35563,10 +35778,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778f6b982cfd9374aac21de76d291e88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextToDisplay: Drawing
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   disableOnActive: 1
   interactionWorksInFP: 0
   distance: 1
+  TextToDisplay: Drawing
 --- !u!114 &1656638466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35578,7 +35798,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9dc84d2a6350fe478beb7b29d778f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextToDisplay: Drawing
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableOnActive: 1
+  interactionWorksInFP: 0
+  distance: 1
+  TextToDisplay: some string
   activated: 0
 --- !u!114 &1656638467
 MonoBehaviour:
@@ -35591,7 +35819,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b85e45d5782524fae10921af2c9d7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextToDisplay: Drawing
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableOnActive: 1
+  interactionWorksInFP: 0
+  distance: 1
+  TextToDisplay: some string
   _rotationSensetivity: .100000001
 --- !u!1001 &1668140603
 Prefab:
@@ -36004,7 +36240,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416d36e427aa97c49a8504253e1cd7b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextToDisplay: 
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableOnActive: 1
+  interactionWorksInFP: 0
+  distance: 1
+  TextToDisplay: some string
   _lightSource: {fileID: 278636608}
   _defaultState: 1
 --- !u!65 &1689376013
@@ -36329,6 +36573,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e7caaf814a0c43069bafc690db2e0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_objectives:
+  - name: Collect torch parts
+    m_interactions:
+    - {fileID: 1564339932}
+    - {fileID: 67476616}
+    - {fileID: 899182821}
+    m_onObjectiveComplete:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1698327111}
+          m_MethodName: TorchPartsCollected
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - name: Craft torch
+    m_interactions:
+    - {fileID: 963952723}
+    m_onObjectiveComplete:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1698327111}
+          m_MethodName: TorchIsCrafted
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
 --- !u!114 &1698327111
 MonoBehaviour:
   m_ObjectHideFlags: 0

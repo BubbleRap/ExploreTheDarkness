@@ -195,7 +195,7 @@ public class SiljaBehaviour : MonoBehaviour
 	public void EnableDarkMode() {
 
 		teddyLight.enabled = true;
-		lightProbeOnSilja.SetActive(false); 
+//		lightProbeOnSilja.SetActive(false); 
 
 		GlowLightBasic = teddyLight.color;
 	
