@@ -7,6 +7,7 @@ public class PickUpLillebrorPiece : IInteractableObject
 	public override void Activate()
 	{
 		interactionIsActive = !interactionIsActive;
+		IsCompleted = true;
 
 		GameObject siljaGO = GameObject.FindGameObjectWithTag("Player");
 		Inventory siljaInventory = siljaGO.GetComponent<Inventory>();
@@ -44,6 +45,7 @@ public class PickUpLillebrorPiece : IInteractableObject
 		}
 
 		siljaInventory.setLilleBrorPieces();
-		Destroy(transform.gameObject);
+//		Destroy(transform.gameObject);
+		gameObject.SetActive(false);
     }
 }

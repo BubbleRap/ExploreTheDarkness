@@ -6,12 +6,19 @@ public class SewLillebror :IInteractableObject
 
 	public override void Activate()
 	{
+		if( !m_isInitialized )
+		{
+			Debug.Log("Too soon.");
+			return;
+		}
+
 		interactionIsActive = !interactionIsActive;
+		IsCompleted = true;
 
 		GameObject siljaGO = GameObject.FindGameObjectWithTag("Player");
 		Inventory siljaInventory = siljaGO.GetComponent<Inventory>();
-		if(siljaGO.GetComponent<Inventory>().getLilleBrorPieces() > 4 && !siljaGO.GetComponent<Inventory>().lillebrorComplete)
-		{
+//		if(siljaGO.GetComponent<Inventory>().getLilleBrorPieces() > 4 && !siljaGO.GetComponent<Inventory>().lillebrorComplete)
+//		{
 			if(GameObject.Find("PuzzleTrigger") != null)
 			{
 				AudioClip audioClip = GameObject.Find("PuzzleTrigger").GetComponent<PuzzleLillebror>().sewingLillebrorSound;
@@ -28,6 +35,6 @@ public class SewLillebror :IInteractableObject
 			siljaGO.GetComponent<CollectLillebrorUI>().multipleTask = false;
 
 			siljaInventory.lillebrorComplete = true;
-		}
+//		}
     }
 }

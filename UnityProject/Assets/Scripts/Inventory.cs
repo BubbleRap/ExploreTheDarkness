@@ -47,4 +47,14 @@ public class Inventory : MonoBehaviour {
 			return false;
 		}
 	}
+
+	public void TorchIsCrafted()
+	{
+		Debug.Log("Torch is crafted");
+	}
+
+	public void TorchPartsCollected()
+	{
+		Debug.Log("Torch is collected");
+	}
 }

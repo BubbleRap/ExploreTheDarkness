@@ -11,7 +11,7 @@ public class Interactor : MonoBehaviour
 		if( !interactionObjects.Contains( interactionObject ) )
 			interactionObjects.Add( interactionObject );
 
-		PromtButtonInteractionObject promt = interactionObject.GetComponent<PromtButtonInteractionObject>();
+		IInteractableObject promt = interactionObject.GetComponent<IInteractableObject>();
 		promt.ActivatePromtButton(true);
 
 	}
@@ -21,7 +21,7 @@ public class Interactor : MonoBehaviour
 		if( interactionObjects.Contains( interactionObject ) )
 			interactionObjects.Remove( interactionObject );	
 
-		PromtButtonInteractionObject promt = interactionObject.GetComponent<PromtButtonInteractionObject>();
+		IInteractableObject promt = interactionObject.GetComponent<IInteractableObject>();
 		promt.ActivatePromtButton(false);
 
 		if( currentInteractionObject == interactionObject )
