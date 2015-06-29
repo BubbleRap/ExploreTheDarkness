@@ -1249,26 +1249,6 @@ MonoBehaviour:
   interactionWorksInFP: 0
   distance: 1
   TextToDisplay: Torch Body
---- !u!114 &67476617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 67476615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 778f6b982cfd9374aac21de76d291e88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_onInteractionComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  disableOnActive: 1
-  interactionWorksInFP: 0
-  distance: 1
-  TextToDisplay: 
 --- !u!1001 &69239589
 Prefab:
   m_ObjectHideFlags: 0
@@ -9329,6 +9309,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!1 &516345295 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 181766, guid: ffb44d417b675034c81036a8412368ab, type: 2}
@@ -16282,6 +16263,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!1001 &832001745
 Prefab:
   m_ObjectHideFlags: 0
@@ -18609,26 +18591,6 @@ MonoBehaviour:
   interactionWorksInFP: 0
   distance: 1
   TextToDisplay: Battery 2
---- !u!114 &899182822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 899182820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 778f6b982cfd9374aac21de76d291e88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_onInteractionComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  disableOnActive: 1
-  interactionWorksInFP: 0
-  distance: 1
-  TextToDisplay: 
 --- !u!1 &899182980
 GameObject:
   m_ObjectHideFlags: 0
@@ -19757,26 +19719,6 @@ MonoBehaviour:
   interactionWorksInFP: 0
   distance: 2
   TextToDisplay: Sew Lilbro
---- !u!114 &963952724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 963952722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 778f6b982cfd9374aac21de76d291e88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_onInteractionComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  disableOnActive: 1
-  interactionWorksInFP: 0
-  distance: 2
-  TextToDisplay: 
 --- !u!1001 &964649177
 Prefab:
   m_ObjectHideFlags: 0
@@ -21153,6 +21095,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!1 &1021561662
 GameObject:
   m_ObjectHideFlags: 0
@@ -22710,7 +22653,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1078467949}
-  - 114: {fileID: 1078467951}
   - 114: {fileID: 1078467950}
   m_Layer: 0
   m_Name: PeepHole
@@ -22751,26 +22693,6 @@ MonoBehaviour:
   interactionWorksInFP: 0
   distance: 1
   TextToDisplay: some string
---- !u!114 &1078467951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1078467948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 778f6b982cfd9374aac21de76d291e88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_onInteractionComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  disableOnActive: 1
-  interactionWorksInFP: 0
-  distance: 1.5
-  TextToDisplay: Hole
 --- !u!1 &1080385344 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 182874, guid: a6520983f200a544a9f807922a4d2bc3, type: 2}
@@ -23823,6 +23745,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!114 &1099068800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30292,26 +30215,6 @@ MeshFilter:
 GameObject:
   m_PrefabParentObject: {fileID: 197538, guid: 0b857b1f353e323469903d1198e29c11, type: 2}
   m_PrefabInternal: {fileID: 438022409}
---- !u!114 &1414019367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1414019364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 778f6b982cfd9374aac21de76d291e88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_onInteractionComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  disableOnActive: 1
-  interactionWorksInFP: 0
-  distance: 1.10000002
-  TextToDisplay: Phone
 --- !u!114 &1414019369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31508,6 +31411,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!1001 &1471063248
 Prefab:
   m_ObjectHideFlags: 0
@@ -32976,26 +32880,6 @@ MonoBehaviour:
   interactionWorksInFP: 0
   distance: 1
   TextToDisplay: Battery 1
---- !u!114 &1564339936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1564339931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 778f6b982cfd9374aac21de76d291e88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_onInteractionComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  disableOnActive: 1
-  interactionWorksInFP: 0
-  distance: 1
-  TextToDisplay: 
 --- !u!1 &1565693436
 GameObject:
   m_ObjectHideFlags: 0
@@ -33526,26 +33410,6 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: c83c1947d32ee4f41a4281b2a34c6c0c, type: 2}
   m_PrefabInternal: {fileID: 1580471887}
---- !u!114 &1580471890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1580471889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 778f6b982cfd9374aac21de76d291e88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_onInteractionComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  disableOnActive: 1
-  interactionWorksInFP: 0
-  distance: 2
-  TextToDisplay: Box
 --- !u!114 &1580471891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34055,6 +33919,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!1 &1611180105 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 171960, guid: 4e252e273caba6d49af2b426618cda73, type: 2}
@@ -35963,47 +35828,6 @@ GameObject:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: d359dbf5531dceb4d9cce32225aa953b, type: 2}
   m_PrefabInternal: {fileID: 1098720336}
---- !u!114 &1656638465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1656638461}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 778f6b982cfd9374aac21de76d291e88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_onInteractionComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  disableOnActive: 1
-  interactionWorksInFP: 0
-  distance: 1
-  TextToDisplay: Drawing
---- !u!114 &1656638466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1656638461}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9dc84d2a6350fe478beb7b29d778f29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_onInteractionComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  disableOnActive: 1
-  interactionWorksInFP: 0
-  distance: 1
-  TextToDisplay: some string
-  activated: 0
 --- !u!114 &1656638467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36023,7 +35847,7 @@ MonoBehaviour:
   disableOnActive: 1
   interactionWorksInFP: 0
   distance: 1
-  TextToDisplay: some string
+  TextToDisplay: Drawing
   _rotationSensetivity: .100000001
 --- !u!1001 &1668140603
 Prefab:
@@ -43399,6 +43223,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!1001 &2032860443
 Prefab:
   m_ObjectHideFlags: 0
