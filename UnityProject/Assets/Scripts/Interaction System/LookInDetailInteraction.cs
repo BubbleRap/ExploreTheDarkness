@@ -3,8 +3,8 @@ using System.Collections;
 
 public class LookInDetailInteraction : IInteractableObject 
 {
-	[Range(0.001f, 0.1f)]
-	public float _rotationSensetivity = 0.1f;
+	[Range(0.001f, 0.5f)]
+	public float _rotationSensetivity = 0.4f;
 
 	private SiljaBehaviour _siljaBeh;
 	private Vector3 _prevMousePos;
