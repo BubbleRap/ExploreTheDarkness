@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
   - 65: {fileID: 6500000}
+  - 114: {fileID: 11411986}
   m_Layer: 0
   m_Name: CigarreteBox_Open
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: -.69860357, y: .109330431, z: .109330468, w: .698603451}
-  m_LocalPosition: {x: -9.56999969, y: .753000021, z: 4.46400023}
+  m_LocalPosition: {x: -9.56999969, y: .708000004, z: 4.46400023}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -74,6 +75,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .0807600021, y: .12808603, z: .0295550078}
   m_Center: {x: 0, y: 0, z: .0148005038}
+--- !u!114 &11411986
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3abb940f106654e6eb7c591a98e38fd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_onInteractionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableOnActive: 1
+  interactionWorksInFP: 0
+  distance: 1
+  TextToDisplay: Battery 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
