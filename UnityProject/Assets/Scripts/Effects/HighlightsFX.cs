@@ -13,7 +13,7 @@ public class HighlightsFX : MonoBehaviour
 	}
 	public HighlightType m_selectionType;
 
-	public Color m_highlightColor;
+	public Color m_highlightColor = new Color(1f, 0f, 0f, 0.65f);
 
 	private Material m_highlightMaterial;
 	private Camera m_camera;
