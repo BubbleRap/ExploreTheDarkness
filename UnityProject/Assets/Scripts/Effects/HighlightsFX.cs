@@ -12,6 +12,7 @@ public class HighlightsFX : MonoBehaviour
 		Solid
 	}
 	public HighlightType m_selectionType;
+	public string m_occludersTag = "Occluder";
 
 	public Color m_highlightColor = new Color(1f, 0f, 0f, 0.65f);
 
@@ -27,8 +28,9 @@ public class HighlightsFX : MonoBehaviour
 
 		HighlightCamera highlightCtrl = m_camera.gameObject.AddComponent<HighlightCamera>();
 		highlightCtrl.SetSelectionColor(m_highlightColor);
+		highlightCtrl.SetOccluderObjectsTag(m_occludersTag);
 
-		m_camera.cullingMask = 1 << 30;
+		m_camera.cullingMask = 0;
 		m_camera.depth = mainCamera.depth + 1;
 		m_camera.clearFlags = CameraClearFlags.Color;
 		m_camera.backgroundColor = Color.clear;

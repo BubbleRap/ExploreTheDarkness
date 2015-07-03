@@ -9,6 +9,8 @@ TagManager:
   - playerModel
   - Trash
   - roof
+  - AudioEffect
+  - Occluder
   layers:
   - Default
   - TransparentFX

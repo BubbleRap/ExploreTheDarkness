@@ -48,8 +48,8 @@
 					half4 mCol = tex2D (_MainTex, IN.uv);
 					half4 oCol = tex2D (_OccludeMap, IN.uv);
 					
-					half solid = step (1f - _Color.a, length(oCol));
-					half4 c = mCol + solid * half4(_Color.rgb, 1);
+					half solid = step (1.0 - _Color.a, length(oCol));
+					half4 c = mCol + solid * half4(_Color.rgb, 1.0);
 					return c;
 				}
 			ENDCG
