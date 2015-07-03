@@ -41902,38 +41902,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 2374686, guid: 6fd6f33badbc6df4e9ff154ba55bdcee, type: 2}
-      propertyPath: m_CastShadows
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 427136, guid: 6fd6f33badbc6df4e9ff154ba55bdcee, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: .0140000004
-      objectReference: {fileID: 0}
-    - target: {fileID: 474684, guid: 6fd6f33badbc6df4e9ff154ba55bdcee, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 427136, guid: 6fd6f33badbc6df4e9ff154ba55bdcee, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 474684, guid: 6fd6f33badbc6df4e9ff154ba55bdcee, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2374690, guid: 6fd6f33badbc6df4e9ff154ba55bdcee, type: 2}
-      propertyPath: m_ReceiveShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2374690, guid: 6fd6f33badbc6df4e9ff154ba55bdcee, type: 2}
-      propertyPath: m_CastShadows
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2374688, guid: 6fd6f33badbc6df4e9ff154ba55bdcee, type: 2}
-      propertyPath: m_CastShadows
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fd6f33badbc6df4e9ff154ba55bdcee, type: 2}
   m_IsPrefabParent: 0
