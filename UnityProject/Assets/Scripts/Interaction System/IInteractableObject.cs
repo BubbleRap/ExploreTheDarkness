@@ -89,7 +89,7 @@ public class IInteractableObject : MonoBehaviour
 	}
 	
 	public bool IsActivated(){
-		return buttonPrompt.activeSelf;
+		return buttonPrompt != null && buttonPrompt.activeSelf;
 	}
 	
 	public void OnInteractionClose( bool state )
