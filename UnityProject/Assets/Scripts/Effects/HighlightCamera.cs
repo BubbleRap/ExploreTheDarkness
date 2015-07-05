@@ -6,17 +6,9 @@ using UnityEngine.Rendering;
 
 public class HighlightCamera : MonoBehaviour 
 {
-	public enum OcclusionType
-	{
-		Occludee,
-		Occluder
-	}
-
 	private Camera m_camera = null;
-	private Material m_highlightShader = null;
-	private BlurOptimized m_blur = null;
+	private Material m_highlightMaterial = null;
 
-	public RenderTexture m_highlightRT;
 	private IInteractableObject[] highlightObjects;
 
 	private Material m_drawMaterial;
@@ -29,23 +21,17 @@ public class HighlightCamera : MonoBehaviour
 	private void Awake()
 	{
 		m_camera = GetComponent<Camera>();
-		m_highlightShader = new Material( Shader.Find("Custom/Highlight") );
-
-		m_blur = gameObject.AddComponent<BlurOptimized>();
-		m_blur.enabled = false;
+		m_highlightMaterial = new Material( Shader.Find("Custom/Highlight") );
 
 		highlightObjects = FindObjectsOfType<IInteractableObject>();
-		m_highlightRT = new RenderTexture( Screen.width, Screen.height, 24);
 
 		m_drawMaterial = new Material( Shader.Find("Custom/SolidColor") );
 
-		m_camera.targetTexture = m_highlightRT;
-
 		m_renderBuffer = new CommandBuffer();
-		m_camera.AddCommandBuffer( CameraEvent.BeforeImageEffects, m_renderBuffer );
+		m_camera.AddCommandBuffer( CameraEvent.AfterEverything, m_renderBuffer );
 
 		m_occlusionBuffer = new CommandBuffer();
-		m_camera.AddCommandBuffer( CameraEvent.AfterImageEffects, m_occlusionBuffer );
+		m_camera.AddCommandBuffer( CameraEvent.AfterEverything, m_occlusionBuffer );
 	}
 
 	public void SetSelectionColor( Color col )
@@ -71,41 +57,59 @@ public class HighlightCamera : MonoBehaviour
 		m_occluders = occluders.ToArray();
 	}
 
-	private void Update()
+	public void ClearCommandBuffers()
 	{
 		m_renderBuffer.Clear();
 		m_occlusionBuffer.Clear();
 
-		// Drawing objects
-		foreach(IInteractableObject interaction in highlightObjects)
-		{
-			if( !interaction.IsActivated() )
-				continue;
+		RenderTexture.active = m_camera.targetTexture;
+		GL.Clear(true, true, Color.clear);
+		RenderTexture.active = null;
+	}
 
-			Renderer renderer = interaction.GetComponent<Renderer>();
+	public void RenderHighlights()
+	{
+		if( highlightObjects == null )
+			return;
+
+		for(int i = 0; i < highlightObjects.Length; i++)
+		{
+			if( highlightObjects[i] == null )
+				continue;
+			
+			if( !highlightObjects[i].IsInViewport || highlightObjects[i].IsInteracting)
+				continue;
+			
+			Renderer renderer = highlightObjects[i].GetComponent<Renderer>();
 			if( renderer == null )
 				continue;
-
-			m_renderBuffer.DrawRenderer( renderer, m_drawMaterial, 0, (int) OcclusionType.Occludee );
+			
+			m_renderBuffer.DrawRenderer( renderer, m_drawMaterial, 0, 1 );
 		}
 
-		// Occluding objects
+//		m_camera.Render();
+
+		RenderTexture.active = m_camera.targetTexture;
+		Graphics.ExecuteCommandBuffer(m_renderBuffer);
+		RenderTexture.active = null;
+	}
+
+	public void RenderOccluders()
+	{
+//		m_renderBuffer.Clear();
 
 		if( m_occluders == null )
 			return;
-
+		
 		foreach(Renderer renderer in m_occluders)
 		{	
-			m_occlusionBuffer.DrawRenderer( renderer, m_drawMaterial, 0, (int) OcclusionType.Occluder );
+			m_occlusionBuffer.DrawRenderer( renderer, m_drawMaterial, 0, 1 );
 		}
-	}
 
-	private void OnRenderImage (RenderTexture source, RenderTexture destination)
-	{
-		m_highlightShader.SetTexture("_OccludeMap", source);
-		
-		m_blur.OnRenderImage( source, destination );
-		
-		Graphics.Blit( destination, destination, m_highlightShader, 2 );
+//		m_camera.Render();
+
+		RenderTexture.active = m_camera.targetTexture;
+		Graphics.ExecuteCommandBuffer(m_occlusionBuffer);
+		RenderTexture.active = null;
 	}
 }
