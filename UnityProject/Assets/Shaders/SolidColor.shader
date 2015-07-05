@@ -18,7 +18,7 @@
             
             fixed4 _Color;
 
-            float4 vert(float4 v:POSITION) : SV_POSITION {
+            float4 vert(float4 v:POSITION) : POSITION {
                 return mul (UNITY_MATRIX_MVP, v);
             }
 
@@ -58,7 +58,7 @@
                 float4 projPos : TEXCOORD1;
             };
      
-            v2f vert( appdata_mine v ) : SV_POSITION {
+            v2f vert( appdata_mine v ) {
             
                 v2f o;
                 o.vertex = mul( UNITY_MATRIX_MVP, v.vertex );
