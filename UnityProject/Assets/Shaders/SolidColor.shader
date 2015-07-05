@@ -29,55 +29,37 @@
             ENDCG
         }	
     	
-        Pass {
-           	
+        Pass {        	
            	Tags {"Queue"="Transparent"}
-        	Cull Back
-            Lighting Off
-            ZWrite Off
-            ZTest LEqual
-            ColorMask RGBA
-            Blend OneMinusDstColor One
+            ZWrite On ZTest Always Blend OneMinusDstColor One
         
             CGPROGRAM
-
             #pragma vertex vert
             #pragma fragment frag
             #include "UnityCG.cginc"
             
             fixed4 _Color;
-            
             sampler2D _CameraDepthTexture;
-            
-            struct appdata_mine {
-                float4 vertex : POSITION;
-            };
             
             struct v2f {
                 float4 vertex : POSITION;
                 float4 projPos : TEXCOORD1;
             };
      
-            v2f vert( appdata_mine v ) {
-            
+            v2f vert( float4 v : POSITION ) {        
                 v2f o;
-                o.vertex = mul( UNITY_MATRIX_MVP, v.vertex );
-                o.projPos = ComputeScreenPos(o.vertex);
-                
+                o.vertex = mul( UNITY_MATRIX_MVP, v );
+                o.projPos = ComputeScreenPos(o.vertex);             
                 return o;
             }
 
-            fixed4 frag( v2f i ) : SV_Target {
-            
-                float sceneZ = LinearEyeDepth (tex2Dproj(_CameraDepthTexture, UNITY_PROJ_COORD(i.projPos)).r);
-                float partZ = i.projPos.z;
+            fixed4 frag( v2f i ) : SV_Target {          
+                float depthVal = LinearEyeDepth (tex2Dproj(_CameraDepthTexture, UNITY_PROJ_COORD(i.projPos)).r);
+                float zPos = i.projPos.z;
                 
-                float occlude = step( partZ, sceneZ );
-                
-                return fixed4(  occlude * 
-                				_Color.rgb * _Color.a, occlude);
+                float occlude = step( zPos, depthVal );         
+                return fixed4(  occlude * _Color.rgb * _Color.a, occlude);
             }
-
             ENDCG
         }
     }
