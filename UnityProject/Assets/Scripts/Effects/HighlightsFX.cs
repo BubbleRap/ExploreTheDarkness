@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 using UnityStandardAssets.ImageEffects;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(Camera))]
 public class HighlightsFX : MonoBehaviour 
@@ -17,57 +18,136 @@ public class HighlightsFX : MonoBehaviour
 	public Color m_highlightColor = new Color(1f, 0f, 0f, 0.65f);
 
 	private Material m_highlightMaterial;
-	private Camera m_camera;
-	private HighlightCamera m_highlightCtrl;
+
 
 	private BlurOptimized m_blur;
 	
 	private RenderTexture m_highlightRT;
 
+	private IInteractableObject[] highlightObjects;
+	
+	private Material m_drawMaterial;
+	
+	private CommandBuffer m_renderBuffer;
+	private CommandBuffer m_occlusionBuffer;
+	
+	private Renderer[] m_occluders = null;
+
+	private RenderTargetIdentifier m_rtID;
+
 	private void Awake()
 	{
 		m_highlightRT = new RenderTexture( Screen.width, Screen.height, 0);
+		m_rtID = new RenderTargetIdentifier( m_highlightRT );
 
-		Camera mainCamera = GetComponent<Camera>();
-		mainCamera.depthTextureMode = DepthTextureMode.Depth;
-
-
-		m_camera = (new GameObject("Highlight Camera")).AddComponent<Camera>();
-		m_camera.CopyFrom( mainCamera );
-
-		m_highlightCtrl = m_camera.gameObject.AddComponent<HighlightCamera>();
-		m_highlightCtrl.SetSelectionColor(m_highlightColor);
-		m_highlightCtrl.SetOccluderObjectsTag(m_occludersTag);
-
-		m_camera.cullingMask = 0;
-		m_camera.clearFlags = CameraClearFlags.Nothing;
-		m_camera.backgroundColor = Color.clear;
-		m_camera.depthTextureMode = DepthTextureMode.None;
-
-
-		m_camera.targetTexture = m_highlightRT;
-
-
-		m_blur = m_camera.gameObject.AddComponent<BlurOptimized>();
+		m_renderBuffer = new CommandBuffer();
+		m_occlusionBuffer = new CommandBuffer();
+		
+		m_blur = gameObject.AddComponent<BlurOptimized>();
 		m_blur.enabled = false;
 
-		m_camera.enabled = false;
-		m_highlightCtrl.enabled = false;
-
-		m_camera.transform.parent = mainCamera.transform;
-
+	
 		m_highlightMaterial = new Material( Shader.Find("Custom/Highlight") );
+
+
+		highlightObjects = FindObjectsOfType<IInteractableObject>();
+		
+		m_drawMaterial = new Material( Shader.Find("Custom/SolidColor") );
+
+		SetSelectionColor(m_highlightColor);
+		SetOccluderObjectsTag(m_occludersTag);
 	}
+
+
+	public void SetSelectionColor( Color col )
+	{
+		m_drawMaterial.SetColor( "_Color", col );
+	}
+	
+	public void SetOccluderObjectsTag( string tag )
+	{
+		if( string.IsNullOrEmpty(tag) )
+			return;
+		
+		GameObject[] occluderGOs = GameObject.FindGameObjectsWithTag(tag);
+		
+		List<Renderer> occluders = new List<Renderer>();
+		foreach( GameObject go in occluderGOs )
+		{
+			Renderer renderer = go.GetComponent<Renderer>();
+			if( renderer != null )
+				occluders.Add( renderer );
+		}
+		
+		m_occluders = occluders.ToArray();
+	}
+	
+	public void ClearCommandBuffers()
+	{
+		m_renderBuffer.Clear();
+		m_occlusionBuffer.Clear();
+		
+		RenderTexture.active = m_highlightRT;
+		GL.Clear(true, true, Color.clear);
+		RenderTexture.active = null;
+	}
+	
+	public void RenderHighlights()
+	{
+		if( highlightObjects == null )
+			return;
+
+
+		m_renderBuffer.SetRenderTarget( m_rtID );
+		
+		for(int i = 0; i < highlightObjects.Length; i++)
+		{
+			if( highlightObjects[i] == null )
+				continue;
+			
+			if( !highlightObjects[i].IsInViewport || highlightObjects[i].IsInteracting)
+				continue;
+			
+			Renderer renderer = highlightObjects[i].GetComponent<Renderer>();
+			if( renderer == null )
+				continue;
+			
+			m_renderBuffer.DrawRenderer( renderer, m_drawMaterial, 0, 1 );
+		}
+
+		RenderTexture.active = m_highlightRT;
+		Graphics.ExecuteCommandBuffer(m_renderBuffer);
+		RenderTexture.active = null;
+	}
+	
+	public void RenderOccluders()
+	{
+		if( m_occluders == null )
+			return;
+
+		m_occlusionBuffer.SetRenderTarget( m_rtID );
+		
+		foreach(Renderer renderer in m_occluders)
+		{	
+			m_occlusionBuffer.DrawRenderer( renderer, m_drawMaterial, 0, 1 );
+		}
+
+		RenderTexture.active = m_highlightRT;
+		Graphics.ExecuteCommandBuffer(m_occlusionBuffer);
+		RenderTexture.active = null;
+	}
+
+	
 
 	private void OnRenderImage( RenderTexture source, RenderTexture destination )
 	{
-		m_highlightCtrl.ClearCommandBuffers();
-		m_highlightCtrl.RenderHighlights();
+		ClearCommandBuffers();
+		RenderHighlights();
 
 		RenderTexture rt1 = RenderTexture.GetTemporary( Screen.width, Screen.height, 0 );
 		m_blur.OnRenderImage( m_highlightRT, rt1 );
 
-		m_highlightCtrl.RenderOccluders();
+		RenderOccluders();
 
 		m_highlightMaterial.SetTexture("_OccludeMap", m_highlightRT);
 		Graphics.Blit( rt1, rt1, m_highlightMaterial, 2 );
