@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 [RequireComponent(typeof(Camera))]
 public class HighlightsFX : MonoBehaviour 
 {
+	#region enums
 	public enum HighlightType
 	{
 		Glow,
@@ -17,67 +18,77 @@ public class HighlightsFX : MonoBehaviour
 		Overlay,
 		DepthFilter
 	}
+	#endregion
+
+	#region public vars
 
 	public HighlightType m_selectionType = HighlightType.Glow;
-	public SortingType m_sortingType = SortingType.DepthFilter;
-
+	public SortingType m_sortingType = SortingType.DepthFilter;	
 	public string m_occludersTag = "Occluder";
-
 	public Color m_highlightColor = new Color(1f, 0f, 0f, 0.65f);
 
-	private Material m_highlightMaterial;
+	#endregion
 
+	#region private field
 
 	private BlurOptimized m_blur;
-	
-	private RenderTexture m_highlightRT;
 
 	private IInteractableObject[] highlightObjects;
-	
-	private Material m_drawMaterial;
-	
-	private CommandBuffer m_renderBuffer;
-	private CommandBuffer m_occlusionBuffer;
-	
 	private Renderer[] m_occluders = null;
-
+	
+	private Material m_highlightMaterial, m_drawMaterial;
+	
+	private CommandBuffer m_renderBuffer, m_occlusionBuffer;
+	private RenderTexture m_highlightRT;
 	private RenderTargetIdentifier m_rtID;
+
+	#endregion
 
 	private void Awake()
 	{
-		m_highlightRT = new RenderTexture( Screen.width, Screen.height, 0);
-		m_rtID = new RenderTargetIdentifier( m_highlightRT );
-
-		m_renderBuffer = new CommandBuffer();
-		m_occlusionBuffer = new CommandBuffer();
+		CreateBuffers();
+		CreateMaterials();
+		SetOccluderObjects();
 		
 		m_blur = gameObject.AddComponent<BlurOptimized>();
 		m_blur.enabled = false;
 
+		highlightObjects = FindObjectsOfType<IInteractableObject>();
+	}
+
+	private void CreateBuffers()
+	{
+		m_highlightRT = new RenderTexture( Screen.width, Screen.height, 0);
+		m_rtID = new RenderTargetIdentifier( m_highlightRT );
+		
+		m_renderBuffer = new CommandBuffer();
+		m_occlusionBuffer = new CommandBuffer();
+	}
+
+	private void ClearCommandBuffers()
+	{
+		m_renderBuffer.Clear();
+		m_occlusionBuffer.Clear();
+		
+		RenderTexture.active = m_highlightRT;
+		GL.Clear(true, true, Color.clear);
+		RenderTexture.active = null;
+	}
 	
+	private void CreateMaterials()
+	{
 		m_highlightMaterial = new Material( Shader.Find("Custom/Highlight") );
 
-
-		highlightObjects = FindObjectsOfType<IInteractableObject>();
-		
 		m_drawMaterial = new Material( Shader.Find("Custom/SolidColor") );
-
-		SetSelectionColor(m_highlightColor);
-		SetOccluderObjectsTag(m_occludersTag);
+		m_drawMaterial.SetColor( "_Color", m_highlightColor );
 	}
 
-
-	public void SetSelectionColor( Color col )
+	private void SetOccluderObjects()
 	{
-		m_drawMaterial.SetColor( "_Color", col );
-	}
-	
-	public void SetOccluderObjectsTag( string tag )
-	{
-		if( string.IsNullOrEmpty(tag) )
+		if( string.IsNullOrEmpty(m_occludersTag) )
 			return;
 		
-		GameObject[] occluderGOs = GameObject.FindGameObjectsWithTag(tag);
+		GameObject[] occluderGOs = GameObject.FindGameObjectsWithTag(m_occludersTag);
 		
 		List<Renderer> occluders = new List<Renderer>();
 		foreach( GameObject go in occluderGOs )
@@ -90,21 +101,10 @@ public class HighlightsFX : MonoBehaviour
 		m_occluders = occluders.ToArray();
 	}
 	
-	public void ClearCommandBuffers()
-	{
-		m_renderBuffer.Clear();
-		m_occlusionBuffer.Clear();
-		
-		RenderTexture.active = m_highlightRT;
-		GL.Clear(true, true, Color.clear);
-		RenderTexture.active = null;
-	}
-	
-	public void RenderHighlights()
+	private void RenderHighlights()
 	{
 		if( highlightObjects == null )
 			return;
-
 
 		m_renderBuffer.SetRenderTarget( m_rtID );
 		
@@ -128,7 +128,7 @@ public class HighlightsFX : MonoBehaviour
 		RenderTexture.active = null;
 	}
 	
-	public void RenderOccluders()
+	private void RenderOccluders()
 	{
 		if( m_occluders == null )
 			return;
@@ -145,11 +145,17 @@ public class HighlightsFX : MonoBehaviour
 		RenderTexture.active = null;
 	}
 
-	
 
+	/// Final image composing.
+	/// 1. Renders all the highlight objects either with Overlay shader or DepthFilter
+	/// 2. Downsamples and blurs the result image using standard BlurOptimized image effect
+	/// 3. Renders occluders to the same render texture
+	/// 4. Substracts the occlusion map from the blurred image, leaving the highlight area
+	/// 5. Renders the result image over the main camera's G-Buffer
 	private void OnRenderImage( RenderTexture source, RenderTexture destination )
 	{
 		ClearCommandBuffers();
+
 		RenderHighlights();
 
 		RenderTexture rt1 = RenderTexture.GetTemporary( Screen.width, Screen.height, 0 );
