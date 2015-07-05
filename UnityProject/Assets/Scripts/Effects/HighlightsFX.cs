@@ -18,8 +18,8 @@ public class HighlightsFX : MonoBehaviour
 		DepthFilter
 	}
 
-	public HighlightType m_selectionType;
-	public SortingType m_sortingType;
+	public HighlightType m_selectionType = HighlightType.Glow;
+	public SortingType m_sortingType = SortingType.DepthFilter;
 
 	public string m_occludersTag = "Occluder";
 

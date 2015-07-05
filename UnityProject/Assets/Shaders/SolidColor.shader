@@ -72,8 +72,10 @@
                 float sceneZ = LinearEyeDepth (tex2Dproj(_CameraDepthTexture, UNITY_PROJ_COORD(i.projPos)).r);
                 float partZ = i.projPos.z;
                 
-                return fixed4( step( partZ, sceneZ ) * 
-                				_Color.rgb * _Color.a, 1.0);
+                float occlude = step( partZ, sceneZ );
+                
+                return fixed4(  occlude * 
+                				_Color.rgb * _Color.a, occlude);
             }
 
             ENDCG
