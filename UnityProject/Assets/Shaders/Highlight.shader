@@ -59,7 +59,7 @@
 		// OCCLUSION
 		
 		Pass {
-			CGPROGRAM
+				CGPROGRAM
 				#pragma vertex vert_img
 				#pragma fragment frag
 				#pragma fragmentoption ARB_precision_hint_fastest

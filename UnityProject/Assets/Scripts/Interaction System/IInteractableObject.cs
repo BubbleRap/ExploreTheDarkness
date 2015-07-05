@@ -91,6 +91,25 @@ public class IInteractableObject : MonoBehaviour
 	public bool IsActivated(){
 		return buttonPrompt != null && buttonPrompt.activeSelf;
 	}
+
+	public bool IsInteracting
+	{
+		get { return interactionIsActive;}
+	}
+
+	public bool IsInViewport
+	{
+		get 
+		{
+			Vector3 cameraRelativePosition = Camera.main.transform.InverseTransformPoint(transform.position);
+
+			bool inViewPort =
+				cameraRelativePosition.x < 0.8f * cameraRelativePosition.z && cameraRelativePosition.x > -0.8f * cameraRelativePosition.z
+				&& cameraRelativePosition.z < 5f;
+
+			return inViewPort;
+		}
+	}
 	
 	public void OnInteractionClose( bool state )
 	{
