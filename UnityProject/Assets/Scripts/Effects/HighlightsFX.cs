@@ -12,7 +12,15 @@ public class HighlightsFX : MonoBehaviour
 		Glow,
 		Solid
 	}
+	public enum SortingType
+	{
+		Overlay,
+		DepthFilter
+	}
+
 	public HighlightType m_selectionType;
+	public SortingType m_sortingType;
+
 	public string m_occludersTag = "Occluder";
 
 	public Color m_highlightColor = new Color(1f, 0f, 0f, 0.65f);
@@ -112,7 +120,7 @@ public class HighlightsFX : MonoBehaviour
 			if( renderer == null )
 				continue;
 			
-			m_renderBuffer.DrawRenderer( renderer, m_drawMaterial, 0, 1 );
+			m_renderBuffer.DrawRenderer( renderer, m_drawMaterial, 0, (int) m_sortingType );
 		}
 
 		RenderTexture.active = m_highlightRT;
@@ -129,7 +137,7 @@ public class HighlightsFX : MonoBehaviour
 		
 		foreach(Renderer renderer in m_occluders)
 		{	
-			m_occlusionBuffer.DrawRenderer( renderer, m_drawMaterial, 0, 1 );
+			m_occlusionBuffer.DrawRenderer( renderer, m_drawMaterial, 0, (int) m_sortingType );
 		}
 
 		RenderTexture.active = m_highlightRT;
