@@ -38,7 +38,7 @@ public class HighlightsFX : MonoBehaviour
 	
 	private Material m_highlightMaterial, m_drawMaterial;
 	
-	private CommandBuffer m_renderBuffer;
+	private CommandBuffer m_renderBuffer, m_occlusionBuffer;
 	private RenderTexture m_highlightRT;
 	private RenderTargetIdentifier m_rtID;
 
@@ -62,11 +62,13 @@ public class HighlightsFX : MonoBehaviour
 		m_rtID = new RenderTargetIdentifier( m_highlightRT );
 		
 		m_renderBuffer = new CommandBuffer();
+		m_occlusionBuffer = new CommandBuffer();
 	}
 
 	private void ClearCommandBuffers()
 	{
 		m_renderBuffer.Clear();
+		m_occlusionBuffer.Clear();
 		
 		RenderTexture.active = m_highlightRT;
 		GL.Clear(true, true, Color.clear);
@@ -131,15 +133,15 @@ public class HighlightsFX : MonoBehaviour
 		if( m_occluders == null )
 			return;
 
-		m_renderBuffer.SetRenderTarget( m_rtID );
+		m_occlusionBuffer.SetRenderTarget( m_rtID );
 		
 		foreach(Renderer renderer in m_occluders)
 		{	
-			m_renderBuffer.DrawRenderer( renderer, m_drawMaterial, 0, (int) m_sortingType );
+			m_occlusionBuffer.DrawRenderer( renderer, m_drawMaterial, 0, (int) m_sortingType );
 		}
 
 		RenderTexture.active = m_highlightRT;
-		Graphics.ExecuteCommandBuffer(m_renderBuffer);
+		Graphics.ExecuteCommandBuffer(m_occlusionBuffer);
 		RenderTexture.active = null;
 	}
 
@@ -161,7 +163,6 @@ public class HighlightsFX : MonoBehaviour
 
 		RenderOccluders();
 
-		// Excluding the original image from the blurred image, leaving out the areal alone
 		m_highlightMaterial.SetTexture("_OccludeMap", m_highlightRT);
 		Graphics.Blit( rt1, rt1, m_highlightMaterial, 2 );
 
