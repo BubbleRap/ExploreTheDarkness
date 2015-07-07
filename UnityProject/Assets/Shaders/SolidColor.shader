@@ -22,7 +22,7 @@
                 return mul (UNITY_MATRIX_MVP, v);
             }
 
-            fixed4 frag() : SV_Target {
+            fixed4 frag() : COLOR {
                 return fixed4(_Color.rgb * _Color.a, 1.0);
             }
 
@@ -53,7 +53,7 @@
                 return o;
             }
 
-            fixed4 frag( v2f i ) : SV_Target {          
+            fixed4 frag( v2f i ) : COLOR {          
                 float depthVal = LinearEyeDepth (tex2Dproj(_CameraDepthTexture, UNITY_PROJ_COORD(i.projPos)).r);
                 float zPos = i.projPos.z;
                 
