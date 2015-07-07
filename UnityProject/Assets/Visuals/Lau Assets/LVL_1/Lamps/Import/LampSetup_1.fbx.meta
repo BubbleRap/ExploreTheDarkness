@@ -1,37 +1,57 @@
 fileFormatVersion: 2
-guid: 395d5256b9ca6624fb7e749f02bd366a
-timeCreated: 1434996256
+guid: 85aa8c61c89898f4ab85d30bfb903dd2
+timeCreated: 1436283565
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: DeskTableLamp_1
-    100002: FloorLamp_1
-    100004: Kitchen_CeilingLamp
-    100006: Kitchen_CeilingLamp_bulb
-    100008: //RootNode
-    100010: TableLamp_1
+    100002: DesktableLamp_1_bulb
+    100004: FloorLamp_1
+    100006: FloorLamp_1_bulb_1
+    100008: FloorLamp_1_bulb_2
+    100010: Kitchen_CeilingLamp
+    100012: Kitchen_CeilingLamp_bulb
+    100014: //RootNode
+    100016: TableLamp_1
+    100018: TableLamp_1_bulb
     400000: DeskTableLamp_1
-    400002: FloorLamp_1
-    400004: Kitchen_CeilingLamp
-    400006: Kitchen_CeilingLamp_bulb
-    400008: //RootNode
-    400010: TableLamp_1
+    400002: DesktableLamp_1_bulb
+    400004: FloorLamp_1
+    400006: FloorLamp_1_bulb_1
+    400008: FloorLamp_1_bulb_2
+    400010: Kitchen_CeilingLamp
+    400012: Kitchen_CeilingLamp_bulb
+    400014: //RootNode
+    400016: TableLamp_1
+    400018: TableLamp_1_bulb
     2300000: DeskTableLamp_1
-    2300002: FloorLamp_1
-    2300004: Kitchen_CeilingLamp
-    2300006: Kitchen_CeilingLamp_bulb
-    2300008: TableLamp_1
+    2300002: DesktableLamp_1_bulb
+    2300004: FloorLamp_1
+    2300006: FloorLamp_1_bulb_1
+    2300008: FloorLamp_1_bulb_2
+    2300010: Kitchen_CeilingLamp
+    2300012: Kitchen_CeilingLamp_bulb
+    2300014: TableLamp_1
+    2300016: TableLamp_1_bulb
     3300000: DeskTableLamp_1
-    3300002: FloorLamp_1
-    3300004: Kitchen_CeilingLamp
-    3300006: Kitchen_CeilingLamp_bulb
-    3300008: TableLamp_1
+    3300002: DesktableLamp_1_bulb
+    3300004: FloorLamp_1
+    3300006: FloorLamp_1_bulb_1
+    3300008: FloorLamp_1_bulb_2
+    3300010: Kitchen_CeilingLamp
+    3300012: Kitchen_CeilingLamp_bulb
+    3300014: TableLamp_1
+    3300016: TableLamp_1_bulb
     4300000: TableLamp_1
-    4300002: DeskTableLamp_1
-    4300004: Kitchen_CeilingLamp
-    4300006: Kitchen_CeilingLamp_bulb
-    4300008: FloorLamp_1
+    4300002: TableLamp_1_bulb
+    4300004: DeskTableLamp_1
+    4300006: DesktableLamp_1_bulb
+    4300008: Kitchen_CeilingLamp
+    4300010: Kitchen_CeilingLamp_bulb
+    4300012: FloorLamp_1
+    4300014: FloorLamp_1_bulb_2
+    4300016: FloorLamp_1_bulb_1
   materials:
     importMaterials: 1
     materialName: 0
@@ -41,6 +61,10 @@ ModelImporter:
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
@@ -61,10 +85,10 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    secondaryUVAngleDistortion: 1
-    secondaryUVAreaDistortion: 1
-    secondaryUVHardAngle: 180
-    secondaryUVPackMargin: 15
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 8
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
