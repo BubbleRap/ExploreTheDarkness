@@ -31,7 +31,13 @@
     	
         Pass {        	
            	Tags {"Queue"="Transparent"}
-            ZWrite On ZTest Always Blend OneMinusDstColor One
+            Cull Back
+            Lighting Off
+            ZWrite Off
+            ZTest LEqual
+            ColorMask RGBA
+            Blend OneMinusDstColor One
+
         
             CGPROGRAM
             #pragma vertex vert
