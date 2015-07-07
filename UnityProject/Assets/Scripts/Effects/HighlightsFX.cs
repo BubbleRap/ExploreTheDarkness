@@ -18,12 +18,26 @@ public class HighlightsFX : MonoBehaviour
 		Overlay,
 		DepthFilter
 	}
+	public enum FillType
+	{
+		Fill,
+		Outline
+	}
+	public enum RTResolution
+	{
+		Quarter = 4,
+		Half = 2,
+		Full = 1
+	}
 	#endregion
 
 	#region public vars
 
 	public HighlightType m_selectionType = HighlightType.Glow;
 	public SortingType m_sortingType = SortingType.DepthFilter;	
+	public FillType m_fillType = FillType.Outline;
+	public RTResolution m_resolution = RTResolution.Full;
+
 	public string m_occludersTag = "Occluder";
 	public Color m_highlightColor = new Color(1f, 0f, 0f, 0.65f);
 
@@ -38,9 +52,10 @@ public class HighlightsFX : MonoBehaviour
 	
 	private Material m_highlightMaterial, m_drawMaterial;
 	
-	private CommandBuffer m_renderBuffer, m_occlusionBuffer;
-	private RenderTexture m_highlightRT;
-	private RenderTargetIdentifier m_rtID;
+	private CommandBuffer m_renderBuffer;
+
+	private int m_RTWidth = 512;
+	private int m_RTHeight = 512;
 
 	#endregion
 
@@ -54,25 +69,19 @@ public class HighlightsFX : MonoBehaviour
 		m_blur.enabled = false;
 
 		highlightObjects = FindObjectsOfType<IInteractableObject>();
+
+		m_RTWidth = (int) (Screen.width / (float) m_resolution);
+		m_RTHeight = (int) (Screen.height / (float) m_resolution);
 	}
 
 	private void CreateBuffers()
 	{
-		m_highlightRT = new RenderTexture( Screen.width, Screen.height, 0);
-		m_rtID = new RenderTargetIdentifier( m_highlightRT );
-		
 		m_renderBuffer = new CommandBuffer();
-		m_occlusionBuffer = new CommandBuffer();
 	}
 
 	private void ClearCommandBuffers()
 	{
 		m_renderBuffer.Clear();
-		m_occlusionBuffer.Clear();
-		
-		RenderTexture.active = m_highlightRT;
-		GL.Clear(true, true, Color.clear);
-		RenderTexture.active = null;
 	}
 	
 	private void CreateMaterials()
@@ -101,12 +110,13 @@ public class HighlightsFX : MonoBehaviour
 		m_occluders = occluders.ToArray();
 	}
 	
-	private void RenderHighlights()
+	private void RenderHighlights( RenderTexture rt)
 	{
 		if( highlightObjects == null )
 			return;
 
-		m_renderBuffer.SetRenderTarget( m_rtID );
+		RenderTargetIdentifier rtid = new RenderTargetIdentifier(rt);
+		m_renderBuffer.SetRenderTarget( rtid );
 		
 		for(int i = 0; i < highlightObjects.Length; i++)
 		{
@@ -123,25 +133,28 @@ public class HighlightsFX : MonoBehaviour
 			m_renderBuffer.DrawRenderer( renderer, m_drawMaterial, 0, (int) m_sortingType );
 		}
 
-		RenderTexture.active = m_highlightRT;
+		RenderTexture.active = rt;
 		Graphics.ExecuteCommandBuffer(m_renderBuffer);
 		RenderTexture.active = null;
 	}
 	
-	private void RenderOccluders()
+	private void RenderOccluders( RenderTexture rt)
 	{
 		if( m_occluders == null )
 			return;
 
-		m_occlusionBuffer.SetRenderTarget( m_rtID );
+		RenderTargetIdentifier rtid = new RenderTargetIdentifier(rt);
+		m_renderBuffer.SetRenderTarget( rtid );
+
+		m_renderBuffer.Clear();
 		
 		foreach(Renderer renderer in m_occluders)
 		{	
-			m_occlusionBuffer.DrawRenderer( renderer, m_drawMaterial, 0, (int) m_sortingType );
+			m_renderBuffer.DrawRenderer( renderer, m_drawMaterial, 0, (int) m_sortingType );
 		}
 
-		RenderTexture.active = m_highlightRT;
-		Graphics.ExecuteCommandBuffer(m_occlusionBuffer);
+		RenderTexture.active = rt;
+		Graphics.ExecuteCommandBuffer(m_renderBuffer);
 		RenderTexture.active = null;
 	}
 
@@ -154,23 +167,47 @@ public class HighlightsFX : MonoBehaviour
 	/// 5. Renders the result image over the main camera's G-Buffer
 	private void OnRenderImage( RenderTexture source, RenderTexture destination )
 	{
+		RenderTexture highlightRT;
+
+		RenderTexture.active = highlightRT = RenderTexture.GetTemporary(m_RTWidth, m_RTHeight, 0 );
+		GL.Clear(true, true, Color.clear);
+		RenderTexture.active = null;
+
 		ClearCommandBuffers();
 
-		RenderHighlights();
+		RenderHighlights(highlightRT);
 
-		RenderTexture rt1 = RenderTexture.GetTemporary( Screen.width, Screen.height, 0 );
-		m_blur.OnRenderImage( m_highlightRT, rt1 );
-
-		RenderOccluders();
-
-		m_highlightMaterial.SetTexture("_OccludeMap", m_highlightRT);
-		Graphics.Blit( rt1, rt1, m_highlightMaterial, 2 );
+		RenderTexture blurred = RenderTexture.GetTemporary( m_RTWidth, m_RTHeight, 0 );
 
 
-		m_highlightMaterial.SetTexture("_OccludeMap", rt1);
+		m_blur.OnRenderImage( highlightRT, blurred );
+
+	
+		RenderOccluders(highlightRT);
+
+		if( m_fillType == FillType.Outline )
+		{
+			RenderTexture occluded = RenderTexture.GetTemporary( m_RTWidth, m_RTHeight, 0 );
+
+			// Excluding the original image from the blurred image, leaving out the areal alone
+			m_highlightMaterial.SetTexture("_OccludeMap", highlightRT);
+			Graphics.Blit( blurred, occluded, m_highlightMaterial, 2 );
+
+			m_highlightMaterial.SetTexture("_OccludeMap", occluded);
+
+			RenderTexture.ReleaseTemporary(occluded);
+
+		}
+		else
+		{
+			m_highlightMaterial.SetTexture("_OccludeMap", blurred);
+		}
+
 		m_highlightMaterial.SetColor("_Color", m_highlightColor);
 		Graphics.Blit (source, destination, m_highlightMaterial, (int) m_selectionType);
 
-		RenderTexture.ReleaseTemporary(rt1);
+
+		RenderTexture.ReleaseTemporary(blurred);
+		RenderTexture.ReleaseTemporary(highlightRT);
 	}
 }
