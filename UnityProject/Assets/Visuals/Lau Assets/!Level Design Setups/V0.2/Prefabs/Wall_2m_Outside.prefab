@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 425774}
   - 33: {fileID: 3333172}
   - 23: {fileID: 2312710}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Wall_2m_Outside
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 156824}

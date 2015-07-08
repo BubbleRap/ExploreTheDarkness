@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3321000}
   - 23: {fileID: 2377998}
   - 65: {fileID: 6545660}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Door_Outdoors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ GameObject:
   - 33: {fileID: 3342666}
   - 23: {fileID: 2360176}
   - 64: {fileID: 6417394}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Wall_DoorFrame _Outdoors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - 4: {fileID: 425488}
   - 33: {fileID: 3319778}
   - 23: {fileID: 2359288}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: WallMoldings_2m.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ GameObject:
   - 4: {fileID: 426720}
   - 33: {fileID: 3332602}
   - 23: {fileID: 2360682}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: WallMoldings_2m.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   - 33: {fileID: 3342892}
   - 23: {fileID: 2348140}
   - 64: {fileID: 6445890}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Wall_DoorFrame _Outdoors 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - 33: {fileID: 3357878}
   - 23: {fileID: 2323060}
   - 64: {fileID: 6435614}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: DoorFrame 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,7 +429,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 135808}
