@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 417514}
   - 33: {fileID: 3360018}
   - 23: {fileID: 2393948}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: WallMoldings_2m.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ GameObject:
   - 33: {fileID: 3325764}
   - 23: {fileID: 2390194}
   - 64: {fileID: 6401242}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: WallCorner_Inner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 154202}

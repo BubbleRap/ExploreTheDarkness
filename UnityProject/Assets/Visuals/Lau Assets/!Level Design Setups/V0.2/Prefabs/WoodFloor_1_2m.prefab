@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 406196}
   - 33: {fileID: 3348536}
   - 23: {fileID: 2372436}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: WoodFloor_1_2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ GameObject:
   - 4: {fileID: 415618}
   - 33: {fileID: 3376614}
   - 23: {fileID: 2339292}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: WoodFloor_1*2m_Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 125498}
