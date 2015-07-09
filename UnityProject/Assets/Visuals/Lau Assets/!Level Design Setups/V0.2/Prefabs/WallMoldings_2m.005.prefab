@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 497700}
   - 33: {fileID: 3376180}
   - 23: {fileID: 2368008}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: WallMoldings_2m.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_Layer
-      value: 16
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

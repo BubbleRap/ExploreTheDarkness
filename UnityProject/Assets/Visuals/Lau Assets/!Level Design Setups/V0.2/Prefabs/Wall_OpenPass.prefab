@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 431230}
   - 33: {fileID: 3344296}
   - 23: {fileID: 2347070}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: WallMoldings_2m.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ GameObject:
   - 33: {fileID: 3367220}
   - 23: {fileID: 2302612}
   - 64: {fileID: 6443058}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: OpenPassFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - 4: {fileID: 415256}
   - 33: {fileID: 3326246}
   - 23: {fileID: 2357400}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: WallMoldings_2m.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ GameObject:
   - 33: {fileID: 3327300}
   - 23: {fileID: 2341952}
   - 64: {fileID: 6466314}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: Wall_OpenPass 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   - 33: {fileID: 3365520}
   - 23: {fileID: 2304344}
   - 64: {fileID: 6406164}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: Wall_OpenPass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357,7 +357,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_Layer
-      value: 16
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

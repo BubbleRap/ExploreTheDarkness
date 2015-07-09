@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 403482}
   - 33: {fileID: 3319282}
   - 23: {fileID: 2300012}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: Roof_1*2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ GameObject:
   - 4: {fileID: 461636}
   - 33: {fileID: 3302836}
   - 23: {fileID: 2329226}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: Floor_1_2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_Layer
-      value: 16
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

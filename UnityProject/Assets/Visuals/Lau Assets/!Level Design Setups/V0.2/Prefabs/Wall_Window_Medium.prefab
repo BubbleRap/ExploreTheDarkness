@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3394186}
   - 23: {fileID: 2392114}
   - 114: {fileID: 11434734}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: Window_Big_Glass.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ GameObject:
   - 4: {fileID: 406042}
   - 33: {fileID: 3306326}
   - 23: {fileID: 2363228}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: WindowFrame_Medium
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - 4: {fileID: 462146}
   - 33: {fileID: 3341848}
   - 23: {fileID: 2379392}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: Window_Medium
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - 4: {fileID: 465516}
   - 33: {fileID: 3350296}
   - 23: {fileID: 2304476}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: 'WallMoldings_2m '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ GameObject:
   - 33: {fileID: 3333066}
   - 23: {fileID: 2379838}
   - 65: {fileID: 6565240}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: Wall_Window_Medium
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_Layer
-      value: 16
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
