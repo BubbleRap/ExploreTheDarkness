@@ -136,7 +136,7 @@ Material:
       data:
         first:
           name: _Exposure
-        second: 2
+        second: 1
       data:
         first:
           name: _SunSize
@@ -213,4 +213,4 @@ Material:
       data:
         first:
           name: _Tint
-        second: {r: .992647052, g: .780023277, b: .642301023, a: 1}
+        second: {r: .404411793, g: .356997997, b: .202205896, a: 1}
