@@ -122,8 +122,9 @@ public class HighlightsFX : MonoBehaviour
 		{
 			if( highlightObjects[i] == null )
 				continue;
-			
-			if( !highlightObjects[i].IsInViewport || highlightObjects[i].IsInteracting)
+
+			bool isInCloseFrame = highlightObjects[i].IsVisibleWithin(30f);
+			if( !isInCloseFrame || highlightObjects[i].IsInteracting)
 				continue;
 			
 			Renderer renderer = highlightObjects[i].GetComponent<Renderer>();

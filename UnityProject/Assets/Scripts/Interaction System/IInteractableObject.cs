@@ -35,12 +35,11 @@ public class IInteractableObject : MonoBehaviour
 
 	protected bool interactionIsActive = false;
 	protected bool m_isInitialized = false;
+	private bool m_isVisible = false;
 
 	public virtual void Initialize() { m_isInitialized = !m_isInitialized; }
 	public virtual void Activate() { interactionIsActive = !interactionIsActive; }
-
-	#region old Promt Button behaviour
-
+	
 	public bool disableOnActive = true;
 	public bool interactionWorksInFP = false;
 	
@@ -52,6 +51,8 @@ public class IInteractableObject : MonoBehaviour
 	
 	public string TextToDisplay = "some string";
 
+	private Vector3 m_cameraRelativePosition;
+
 	void Start()
 	{
 		if (TextToDisplay == "")
@@ -61,13 +62,16 @@ public class IInteractableObject : MonoBehaviour
 	protected void Update()
 	{
 		if( interactor == null )
-		{
 			interactor = FindObjectOfType(typeof(Interactor)) as Interactor;
-		}
+
+		m_cameraRelativePosition = Camera.main.transform.InverseTransformPoint(transform.position);
 
 		bool isClose = (transform.position - interactor.transform.position).magnitude < distance;
 		bool isEligable = (interactionWorksInFP && SiljaBehaviour.darkMode) || !SiljaBehaviour.darkMode || interactionIsActive;
-		OnInteractionClose(isClose && isEligable);
+
+		OnInteractionClose(isClose
+		                && IsVisibleWithin(15f) 
+		                && isEligable);
 
 		if( buttonPrompt == null )
 		{
@@ -97,18 +101,15 @@ public class IInteractableObject : MonoBehaviour
 		get { return interactionIsActive;}
 	}
 
-	public bool IsInViewport
+	public bool IsVisibleWithin(float angle)
 	{
-		get 
-		{
-			Vector3 cameraRelativePosition = Camera.main.transform.InverseTransformPoint(transform.position);
+		// normalized angle view, where 1 is the field of view angle
+		float angleFraction = angle / Camera.main.fieldOfView * Camera.main.aspect / 1.78f;
 
-			bool inViewPort =
-				cameraRelativePosition.x < 0.8f * cameraRelativePosition.z && cameraRelativePosition.x > -0.8f * cameraRelativePosition.z
-				&& cameraRelativePosition.z < 5f;
-
-			return inViewPort;
-		}
+		return m_cameraRelativePosition.x < angleFraction * m_cameraRelativePosition.z 
+			&& m_cameraRelativePosition.x > -angleFraction * m_cameraRelativePosition.z
+			&& m_isVisible;
+			//&& m_cameraRelativePosition.z < 5f;
 	}
 	
 	public void OnInteractionClose( bool state )
@@ -135,5 +136,13 @@ public class IInteractableObject : MonoBehaviour
 		Resources.UnloadUnusedAssets();
 	}
 
-	#endregion
+	private void OnBecameVisible()
+	{
+		m_isVisible = true;
+	}
+
+	private void OnBecameInvisible()
+	{
+		m_isVisible = false;
+	}
 }
