@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3365722}
   - 23: {fileID: 2316458}
   - 65: {fileID: 6559602}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: Wall_1m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ GameObject:
   - 4: {fileID: 485248}
   - 33: {fileID: 3370044}
   - 23: {fileID: 2353894}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: WallMoldings_2m.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_Layer
-      value: 16
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
