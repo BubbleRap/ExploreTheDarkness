@@ -35,7 +35,7 @@ public class IInteractableObject : MonoBehaviour
 
 	protected bool interactionIsActive = false;
 	protected bool m_isInitialized = false;
-	private bool m_isVisible = false;
+	private Renderer m_renderer;
 
 	public virtual void Initialize() { m_isInitialized = !m_isInitialized; }
 	public virtual void Activate() { interactionIsActive = !interactionIsActive; }
@@ -63,15 +63,18 @@ public class IInteractableObject : MonoBehaviour
 	{
 		if( interactor == null )
 			interactor = FindObjectOfType(typeof(Interactor)) as Interactor;
+		if( m_renderer == null )
+			m_renderer = GetComponent<Renderer>();
 
 		m_cameraRelativePosition = Camera.main.transform.InverseTransformPoint(transform.position);
 
 		bool isClose = (transform.position - interactor.transform.position).magnitude < distance;
 		bool isEligable = (interactionWorksInFP && SiljaBehaviour.darkMode) || !SiljaBehaviour.darkMode || interactionIsActive;
 
-		OnInteractionClose(isClose
+		OnInteractionClose( interactionIsActive
+						|| (isClose
 		                && IsVisibleWithin(15f) 
-		                && isEligable);
+		                && isEligable));
 
 		if( buttonPrompt == null )
 		{
@@ -106,10 +109,16 @@ public class IInteractableObject : MonoBehaviour
 		// normalized angle view, where 1 is the field of view angle
 		float angleFraction = angle / Camera.main.fieldOfView * Camera.main.aspect / 1.78f;
 
+		bool isVisible = m_renderer == null || m_renderer.isVisible;
 		return m_cameraRelativePosition.x < angleFraction * m_cameraRelativePosition.z 
 			&& m_cameraRelativePosition.x > -angleFraction * m_cameraRelativePosition.z
-			&& m_isVisible;
+			&& isVisible;
 			//&& m_cameraRelativePosition.z < 5f;
+	}
+
+	public bool IsCamCloserThan( float dist )
+	{
+		return m_cameraRelativePosition.magnitude < dist;
 	}
 	
 	public void OnInteractionClose( bool state )
@@ -134,15 +143,5 @@ public class IInteractableObject : MonoBehaviour
 		Destroy(buttonPrompt);
 		buttonPrompt = null;
 		Resources.UnloadUnusedAssets();
-	}
-
-	private void OnBecameVisible()
-	{
-		m_isVisible = true;
-	}
-
-	private void OnBecameInvisible()
-	{
-		m_isVisible = false;
 	}
 }

@@ -14,12 +14,12 @@ public class GenericInteraction : IInteractableObject
 		if( interactionIsActive )
 		{
 			m_onInteractionActivate.Invoke();
-			IsCompleted = true;
 		}
 		else
 		{
 			m_onInteractionDisactivate.Invoke();
-			IsCompleted = true;
 		}
+
+		IsCompleted = interactionIsActive;
 	}
 }
