@@ -2572,6 +2572,9 @@ GameObject:
   - 114: {fileID: 11412696}
   - 81: {fileID: 8110244}
   - 114: {fileID: 11417116}
+  - 114: {fileID: 11476534}
+  - 114: {fileID: 11449446}
+  - 114: {fileID: 11469574}
   m_Layer: 9
   m_Name: 3rd Person Camera
   m_TagString: MainCamera
@@ -4185,8 +4188,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100042}
-  m_LocalRotation: {x: -6.87565773e-08, y: -.7620399, z: 5.9894063e-09, w: -.647530138}
-  m_LocalPosition: {x: 1.36000001, y: 1.12, z: 3.00999999}
+  m_LocalRotation: {x: -5.62397986e-08, y: -.999999702, z: -4.00053146e-08, w: .000844777678}
+  m_LocalPosition: {x: 1.87, y: 1.12, z: 8.97999954}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 447742}
@@ -9078,7 +9081,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294963967
+    m_Bits: 4294967295
   m_Lightmapping: 1
   m_BounceIntensity: 1
   m_ShadowRadius: 0
@@ -9110,7 +9113,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294963967
+    m_Bits: 4294967039
   m_Lightmapping: 1
   m_BounceIntensity: 1
   m_ShadowRadius: 0
@@ -9612,7 +9615,7 @@ MonoBehaviour:
   OcclusionColor: {r: 0, g: 0, b: 0, a: 1}
   CutoffDistance: 150
   CutoffFalloff: 50
-  Blur: 0
+  Blur: 2
   BlurDownsampling: 0
   DebugAO: 0
 --- !u!114 &11417116
@@ -9662,6 +9665,19 @@ MonoBehaviour:
   focusPoint: {x: 0, y: 0, z: 0}
   FPPTransform: {fileID: 447742}
   TPPTransform: {fileID: 424636}
+--- !u!114 &11449446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100332}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c645d348bf2e54d448004994ff620416, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 0}
+  gamma: 1
 --- !u!114 &11458030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9717,6 +9733,18 @@ MonoBehaviour:
   - {fileID: 100162}
   - {fileID: 100234}
   - {fileID: 100194}
+--- !u!114 &11469574
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d82ca5f6f7fe1c74b913a62ef0b029d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RectData: {x: 150, y: 0, z: 100, w: 35}
 --- !u!114 &11470834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9765,6 +9793,23 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
   fallbackTime: 5
+--- !u!114 &11476534
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 296a1de81b60e451a9b96e4407e7c413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_selectionType: 0
+  m_sortingType: 1
+  m_fillType: 1
+  m_resolution: 1
+  m_occludersTag: Occluder
+  m_highlightColor: {r: 1, g: 0, b: 0, a: .649999976}
 --- !u!114 &11484004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9776,7 +9821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646b5bc27a658f447b1d929fd5ffbd70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mode: 6
+  mode: 0
   showGeneratedNormals: 0
   offsetScale: .200000003
   blurRadius: 18
