@@ -9609,7 +9609,7 @@ MonoBehaviour:
   Downsampling: 1
   Radius: .125
   Intensity: 2
-  Distance: 1
+  Distance: 2.25
   Bias: .100000001
   LumContribution: .5
   OcclusionColor: {r: 0, g: 0, b: 0, a: 1}
@@ -9739,7 +9739,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100332}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d82ca5f6f7fe1c74b913a62ef0b029d2, type: 3}
   m_Name: 
