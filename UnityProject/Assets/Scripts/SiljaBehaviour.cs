@@ -19,6 +19,8 @@ public class SiljaBehaviour : MonoBehaviour
 
 	[HideInInspector]
 	public CameraTransitioner	camTransitioner;
+	[HideInInspector]
+	public CameraFollow 		cameraFollow;
 
 	public GameObject 			thisCamera;
 
@@ -103,7 +105,6 @@ public class SiljaBehaviour : MonoBehaviour
 //	private SkinnedMeshRenderer siljaRenderer = null;
 
 	private CameraShaker firstPersonCameraShaker;
-	private CameraFollow cameraFollowCom = null;
 
 	private bool lightWasGivenLastFrame = false;
 
@@ -134,7 +135,7 @@ public class SiljaBehaviour : MonoBehaviour
 		dLightProbe = GetComponentInChildren<DynamicLightProbe> ();
 
 		firstPersonCameraShaker = thisCamera.GetComponent<CameraShaker>();
-		cameraFollowCom = thisCamera.GetComponent<CameraFollow>();
+		cameraFollow = thisCamera.GetComponent<CameraFollow>();
 
 		maxFlickerIntensity = mimimumIntensity * 2;
 		minFlickerIntensity = mimimumIntensity * 1.5f;
@@ -177,10 +178,12 @@ public class SiljaBehaviour : MonoBehaviour
 		{
 			if( isLookingInFP )
 			{
+				isLookingInFP = false;
 				ShiftToThirdPerson();
 			}
 			else
 			{
+				isLookingInFP = true;
 				ShiftToFirstPerson();
 			}
 		}
@@ -195,7 +198,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 	public void ShiftToFirstPerson()
 	{
-		cameraFollowCom.CamControlType = CameraFollow.CameraControlType.CCT_FPSLook;	
+		cameraFollow.CamControlType = CameraFollow.CameraControlType.CCT_FPSLook;	
 		camTransitioner.TransitionTPPtoFPP();
 		Invoke("EnableFirstPerson",ShiftDuration);
 	}
@@ -209,7 +212,7 @@ public class SiljaBehaviour : MonoBehaviour
 		charMotor.movement.maxForwardSpeed = 1.5f;
 		charMotor.movement.maxSidewaysSpeed = 1.5f;
 
-		isLookingInFP = true;
+//		isLookingInFP = true;
 	}
 
 	public void ShiftToThirdPerson()
@@ -226,9 +229,9 @@ public class SiljaBehaviour : MonoBehaviour
 		charMotor.movement.maxForwardSpeed = 1.1f;
 		charMotor.movement.maxSidewaysSpeed = 0.9f;
 
-		cameraFollowCom.CamControlType = CameraFollow.CameraControlType.CCT_Default;
+		cameraFollow.CamControlType = CameraFollow.CameraControlType.CCT_Default;
 
-		isLookingInFP = false;
+//		isLookingInFP = false;
 	}
 
 	public void EnableFlashlight(bool state)
@@ -513,10 +516,10 @@ public class SiljaBehaviour : MonoBehaviour
 
 	public void LookAtPointFP(bool state, Vector3 lookAtObject, Vector3 lookFromPoint)
 	{
-		cameraFollowCom.CamControlType = state ? CameraFollow.CameraControlType.CCT_LookingAtObject : 
+		cameraFollow.CamControlType = state ? CameraFollow.CameraControlType.CCT_LookingAtObject : 
 													CameraFollow.CameraControlType.CCT_Default;
 
-		cameraFollowCom.focusPoint = lookAtObject;
+		cameraFollow.focusPoint = lookAtObject;
 
 		transform.gameObject.GetComponent<MovementController>().canMove = !state;
 		camInput.enabled = !state;

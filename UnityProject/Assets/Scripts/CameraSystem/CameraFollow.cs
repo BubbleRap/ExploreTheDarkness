@@ -92,14 +92,14 @@ public class CameraFollow : MonoBehaviour
 		case CameraControlType.CCT_Default:
 
 			TPCameraBehaviour(this.transform);
-			FPCameraBehaviour(FPPTransform);
+//			FPCameraBehaviour(FPPTransform);
 
 			break;
 
 		case CameraControlType.CCT_FPSLook:
 
 			FPCameraBehaviour(this.transform);
-			TPCameraBehaviour(TPPTransform);
+//			TPCameraBehaviour(TPPTransform);
 
 			break;
 
