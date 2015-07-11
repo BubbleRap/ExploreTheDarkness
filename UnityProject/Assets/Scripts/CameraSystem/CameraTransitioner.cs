@@ -9,7 +9,8 @@ public class CameraTransitioner : MonoBehaviour {
 	public float TransitionTime;
 
 	public enum CameraMode { Fpp,Tpp, Transitioning }
-	public CameraMode Mode { get; private set; }
+	[HideInInspector]
+	public CameraMode Mode;
 
 	//two objects which mark the transforms of the FPP and TPP camera
 	public Transform TPPCameraTransform, FPPCameraTransform;
@@ -66,8 +67,6 @@ public class CameraTransitioner : MonoBehaviour {
 		Mode = CameraMode.Tpp;
 
 		TppOnlyGameplayComponents.AddRange (new Behaviour[]{
-//			GetComponent<CameraFollow>(),
-//			GetComponent<CameraInput>(),
 			GetComponent<CameraPhysics>(),
 			GetComponent<AudioSource>() 
 		});
@@ -80,7 +79,6 @@ public class CameraTransitioner : MonoBehaviour {
 		});
 
 		FppOnlyGameplayComponents.AddRange (new Behaviour[]{
-//			GetComponent<MouseLook>(),
 			GetComponent<Health>()
 		});
 
@@ -92,7 +90,9 @@ public class CameraTransitioner : MonoBehaviour {
 		TPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
 		TPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
 
-		Transition( TPPCameraTransform, FPPCameraTransform, "TurnOffTpp", "TurnOnFpp", 0f, 1f );
+		Transition( TPPCameraTransform, FPPCameraTransform, 
+		           "TurnOffTpp", "TurnOnFpp", 
+		           gameObject, gameObject );
 	}
 
 	public void TransitionFPPtoTPP()
@@ -100,13 +100,15 @@ public class CameraTransitioner : MonoBehaviour {
 		FPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
 		FPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
 
-		Transition( FPPCameraTransform, TPPCameraTransform, "TurnOffFpp", "TurnOnTpp", 0f, 1f );
+		Transition( FPPCameraTransform, TPPCameraTransform, 
+		           "TurnOffFpp", "TurnOnTpp", 
+		           gameObject, gameObject );
 	}
 
 	//THE transition function
-	public void Transition(Transform toTransform, Transform fromTransform,
+	public void Transition(Transform fromTransform, Transform toTransform,
 	                       string onStart, string onComplete,
-	                       float timeFrom, float timeTo)
+	                       GameObject onStartTarget, GameObject onCompleteTarget)
 	{
 		toPosition = toTransform.localPosition;
 		toRotation = toTransform.localRotation;
@@ -115,8 +117,8 @@ public class CameraTransitioner : MonoBehaviour {
 		fromRotation = fromTransform.localRotation;
 
 		iTween.ValueTo(gameObject, iTween.Hash(
-			"from", timeFrom,
-			"to", timeTo,
+			"from", 0f,
+			"to", 1f,
 			"time", TransitionTime,
 			"easetype", iTween.EaseType.easeInOutSine,
 			
@@ -124,26 +126,25 @@ public class CameraTransitioner : MonoBehaviour {
 			"onupdate", "TransitionUpdate",		//method called on each update
 			"oncomplete", onComplete,			//callback on complete of the tween
 			
-			"onstarttarget", gameObject,
+			"onstarttarget", onStartTarget,
 			"onupdatetarget", gameObject,
-			"oncompletetarget", gameObject,
+			"oncompletetarget", onCompleteTarget,
 			
 			"ignoreTimeScale", true
 			));
 	}
 
-	public void TransitionUpdate(float state){
+	public void TransitionUpdate(float state)
+	{
 
-		//not to calculate it all the time
-		float negState = 1f - state;
+		ThisCamera.transform.localPosition = Vector3.Lerp(
+			fromPosition, toPosition, state );
 
-		ThisCamera.transform.localPosition = 
-			fromPosition * state + 
-				toPosition * negState;
-
-		ThisCamera.transform.localRotation = Quaternion.Slerp(
+		ThisCamera.transform.localRotation = Quaternion.Lerp(
 			fromRotation, 
-			toRotation, negState);
+			toRotation, state);
+
+	
 
 //		if (state > 0.75f){
 //			ThisCamera.cullingMask = FppCameraSetup.cullingMask;

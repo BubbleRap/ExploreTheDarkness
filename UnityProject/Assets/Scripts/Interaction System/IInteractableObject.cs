@@ -11,6 +11,15 @@ using UnityEngine.Events;
 //[RequireComponent(typeof(PromtButtonInteractionObject))]
 public class IInteractableObject : MonoBehaviour 
 {
+	public enum WorkState
+	{
+		WorksAlways,
+		FirstPersonOnly,
+		ThirdPersonOnly
+	}
+
+	public WorkState perspectiveMode;
+
 	[HideInInspector]
 	public UnityEvent m_onInteractionComplete = new UnityEvent();
 
@@ -41,7 +50,7 @@ public class IInteractableObject : MonoBehaviour
 	public virtual bool Activate() { return (interactionIsActive = !interactionIsActive); }
 	
 	public bool disableOnActive = true;
-	public bool interactionWorksInFP = false;
+//	public bool interactionWorksInFP = false;
 	
 	private GameObject buttonPrompt;
 	private Interactor interactor;
@@ -69,7 +78,14 @@ public class IInteractableObject : MonoBehaviour
 		m_cameraRelativePosition = Camera.main.transform.InverseTransformPoint(transform.position);
 
 		bool isClose = (transform.position - interactor.transform.position).magnitude < distance;
-		bool isEligable = (interactionWorksInFP && SiljaBehaviour.isLookingInFP) || !SiljaBehaviour.isLookingInFP || interactionIsActive;
+		bool isEligable = interactionIsActive || perspectiveMode == WorkState.WorksAlways;
+
+		if( perspectiveMode != WorkState.WorksAlways )
+		{
+			isEligable = isEligable   && (  (perspectiveMode == WorkState.FirstPersonOnly && SiljaBehaviour.isLookingInFP) 
+			                            		||(perspectiveMode == WorkState.ThirdPersonOnly && !SiljaBehaviour.isLookingInFP));
+		}
+		                            
 
 		OnInteractionClose( interactionIsActive
 						|| (isClose
