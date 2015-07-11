@@ -66,22 +66,7 @@ public class CameraFollow : MonoBehaviour
 	public Vector3 focusPoint;
 
 	public Transform FPPTransform, TPPTransform;
-
-//	private void OnEnable()
-//	{
-//		StopAllCoroutines();
-//		StartCoroutine (FollowPosition ());
-//		StartCoroutine (ShakeCamera	()); 
-//	}
-//
-//	private void OnDisable()
-//	{
-//		StopAllCoroutines();
-//	}
-//
-//	IEnumerator FollowPosition()
-//		while (true) 
-//		{
+	
 	void LateUpdate()
 	{
 		if( GetComponent<CameraTransitioner>().Mode == CameraTransitioner.CameraMode.Transitioning )
@@ -100,6 +85,7 @@ public class CameraFollow : MonoBehaviour
 
 			FPCameraBehaviour(this.transform);
 //			TPCameraBehaviour(TPPTransform);
+			UpdateTPPAngles ();
 
 			break;
 
@@ -111,20 +97,17 @@ public class CameraFollow : MonoBehaviour
 		case CameraControlType.CCT_Overwritten:
 			break;
 		}
+	}
 
-//			yield return null;
+//	IEnumerator ShakeCamera()
+//	{
+//		while (true) 
+//		{
+//			shakeOffset = new Vector3( Random.Range(-horizontalShakeIntensity * 10, horizontalShakeIntensity * 10), 
+//			              Random.Range(-verticalShakeIntensity * 10, verticalShakeIntensity * 10), 0f);
+//			yield return new WaitForSeconds(shakeFrequency);
 //		}
-	}
-
-	IEnumerator ShakeCamera()
-	{
-		while (true) 
-		{
-			shakeOffset = new Vector3( Random.Range(-horizontalShakeIntensity * 10, horizontalShakeIntensity * 10), 
-			              Random.Range(-verticalShakeIntensity * 10, verticalShakeIntensity * 10), 0f);
-			yield return new WaitForSeconds(shakeFrequency);
-		}
-	}
+//	}
 
 	Vector3 GetVectorFromAngle (float x, float y, float distFromObj, Vector3 relativePosition = default(Vector3)) 
 	{
@@ -141,8 +124,8 @@ public class CameraFollow : MonoBehaviour
 		float collisionFixHeight = Mathf.Lerp(collisionFixMinHeight, collisionFixMaxHeight, 1f - distanceFactor );
 		
 		// offset the camera corresponding to the angles and the shaking offsets
-		Vector3 relativePosition = GetVectorFromAngle(pitch - shakeOffset.y, yaw - shakeOffset.x, cameraDistance) + cameraFocusTarget.position + Vector3.up * collisionFixHeight;
-		
+		Vector3 relativePosition = GetVectorFromAngle(pitch/* - shakeOffset.y*/, yaw/* - shakeOffset.x*/, cameraDistance) + cameraFocusTarget.position + Vector3.up * collisionFixHeight;
+
 		Vector3 camLocalDirection = new Vector3(-t.localPosition.x, 0f, -t.localPosition.z).normalized;
 		camLocalDirection = (Quaternion.Euler(0f, focusAngleOffset, 0f) * camLocalDirection) * focusDistance;
 
@@ -154,7 +137,7 @@ public class CameraFollow : MonoBehaviour
 
 	private void FPCameraBehaviour(Transform t)
 	{
-		UpdateTPPAngles ();
+//		UpdateTPPAngles ();
 
 		Vector3 deltaMousePosition = new Vector3 (Input.GetAxis ("Mouse X"), Input.GetAxis ("Mouse Y"), 0f);
 
