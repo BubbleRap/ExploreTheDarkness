@@ -73,8 +73,7 @@ public class CameraTransitioner : MonoBehaviour {
 
 		FppOnlyComponents.AddRange (new Behaviour[]{
 			GetComponent<DepthOfField>(),
-			GetComponent<Antialiasing>(),
-			GetComponent<ScreenSpaceAmbientOcclusion>(),
+//			GetComponent<Antialiasing>(),
 			GetComponent<VignetteAndChromaticAberration>()
 		});
 
