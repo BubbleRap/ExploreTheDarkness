@@ -24,7 +24,7 @@ public class AudioInteractionObject : IInteractableObject
 	}
 
 	// called by Interactor.cs
-	public override void Activate()
+	public override bool Activate()
 	{
 		interactionIsActive = !interactionIsActive;
 
@@ -55,6 +55,8 @@ public class AudioInteractionObject : IInteractableObject
 			soundSource.Stop();
 			StopAllCoroutines();
 		}
+
+		return false;
 	}
 
 	private void PlayOneShot(AudioClip clip, float volume)

@@ -11,7 +11,7 @@ public class PeepHoleInteraction : IInteractableObject
 	private Quaternion _originalRot;
 
 
-	public override void Activate()
+	public override bool Activate()
 	{
 		interactionIsActive = !interactionIsActive;
 
@@ -21,51 +21,49 @@ public class PeepHoleInteraction : IInteractableObject
 			_siljaBeh = siljaGO.GetComponent<SiljaBehaviour>();
 		}
 
-		CameraTransitioner transitioner = _siljaBeh.thisCamera.GetComponent<CameraTransitioner>();
 		CameraFollow camControl = _siljaBeh.thisCamera.GetComponent<CameraFollow>();
 
 		if( interactionIsActive )
 		{
-			_originalPos = transitioner.FPPCameraTransform.position;
-			_originalRot = transitioner.FPPCameraTransform.rotation;
+			_originalPos = _siljaBeh.camTransitioner.FPPCameraTransform.position;
+			_originalRot = _siljaBeh.camTransitioner.FPPCameraTransform.rotation;
 
-			transitioner.FPPCameraTransform.position = transform.position;
-			transitioner.FPPCameraTransform.rotation = transform.rotation;
+			_siljaBeh.camTransitioner.FPPCameraTransform.position = transform.position;
+			_siljaBeh.camTransitioner.FPPCameraTransform.rotation = transform.rotation;
 
 			_siljaBeh.IsMoveEnabled = false;
 
-			transitioner.AddFPPCompleteAction( () =>
+			_siljaBeh.camTransitioner.AddFPPCompleteAction( () =>
 			{
 				// setting up the character motion state
 
 				camControl.CamControlType = CameraFollow.CameraControlType.CCT_Overwritten;
-
-
 				_siljaBeh.thisCamera.GetComponent<ScreenOverlay>().enabled = true;
 			});
 			
-			
-			_siljaBeh.ShiftToDarkMode();
+
+			_siljaBeh.ShiftToFirstPerson();
 		}
 		else
 		{
 			_siljaBeh.thisCamera.GetComponent<ScreenOverlay>().enabled = false;
 
-			transitioner.AddTPPCompleteAction( () =>
+			_siljaBeh.camTransitioner.AddTPPCompleteAction( () =>
 			{	
 				// setting up the character motion state
 
-//				_siljaBeh.thisCamera.GetComponent<CameraInput>().enabled = true;
 				camControl.CamControlType = CameraFollow.CameraControlType.CCT_Default;
 				_siljaBeh.IsMoveEnabled = true;
 
-				transitioner.FPPCameraTransform.position = _originalPos;
-				transitioner.FPPCameraTransform.rotation = _originalRot;
+				_siljaBeh.camTransitioner.FPPCameraTransform.position = _originalPos;
+				_siljaBeh.camTransitioner.FPPCameraTransform.rotation = _originalRot;
 			});
 
-			_siljaBeh.ShiftToStoryMode();
+			_siljaBeh.ShiftToThirdPerson();
 		}
 
+
 		IsCompleted = interactionIsActive;
+		return interactionIsActive;
 	}
 }

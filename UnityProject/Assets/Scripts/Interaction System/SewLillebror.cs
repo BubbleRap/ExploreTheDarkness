@@ -4,12 +4,12 @@ using System.Collections;
 public class SewLillebror :IInteractableObject 
 {
 
-	public override void Activate()
+	public override bool Activate()
 	{
 		if( !m_isInitialized )
 		{
 			Debug.Log("Too soon.");
-			return;
+			return false;
 		}
 
 		interactionIsActive = !interactionIsActive;
@@ -36,5 +36,7 @@ public class SewLillebror :IInteractableObject
 
 			siljaInventory.lillebrorComplete = true;
 //		}
+
+		return false;
     }
 }

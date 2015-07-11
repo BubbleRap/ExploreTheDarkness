@@ -16,9 +16,9 @@ public class LightSwitchInteraction : IInteractableObject
 		_collider.enabled = _lightSource.enabled = interactionIsActive = _defaultState;
 	}
 
-	public override void Activate()
+	public override bool Activate()
 	{
-		_collider.enabled = _lightSource.enabled = interactionIsActive = !interactionIsActive;
+		return _collider.enabled = _lightSource.enabled = interactionIsActive = !interactionIsActive;
 	}
 
 	private void Update()

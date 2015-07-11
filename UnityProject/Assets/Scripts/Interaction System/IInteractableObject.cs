@@ -38,7 +38,7 @@ public class IInteractableObject : MonoBehaviour
 	private Renderer m_renderer;
 
 	public virtual void Initialize() { m_isInitialized = !m_isInitialized; }
-	public virtual void Activate() { interactionIsActive = !interactionIsActive; }
+	public virtual bool Activate() { return (interactionIsActive = !interactionIsActive); }
 	
 	public bool disableOnActive = true;
 	public bool interactionWorksInFP = false;
@@ -69,7 +69,7 @@ public class IInteractableObject : MonoBehaviour
 		m_cameraRelativePosition = Camera.main.transform.InverseTransformPoint(transform.position);
 
 		bool isClose = (transform.position - interactor.transform.position).magnitude < distance;
-		bool isEligable = (interactionWorksInFP && SiljaBehaviour.darkMode) || !SiljaBehaviour.darkMode || interactionIsActive;
+		bool isEligable = (interactionWorksInFP && SiljaBehaviour.isLookingInFP) || !SiljaBehaviour.isLookingInFP || interactionIsActive;
 
 		OnInteractionClose( interactionIsActive
 						|| (isClose

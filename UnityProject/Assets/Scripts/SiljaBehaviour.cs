@@ -4,29 +4,32 @@ using System.Collections.Generic;
 
 public class SiljaBehaviour : MonoBehaviour 
 {
-	public Health healthController;
-	public Transform oneHandJoint;
-	public Transform twoHandsJoint;
+	public Health 				healthController;
+	public Transform 			twoHandsJoint;
 
-	public Animator siljaAnimation;
-	public Animator firstPersonAnimator;
-	public GameObject[] limbs;
-	public GameObject[] limbPrefabs;
+	public Animator 			siljaAnimation;
+	public Animator 			firstPersonAnimator;
+	public GameObject[] 		limbs;
+	public GameObject[] 		limbPrefabs;
 
-	private CharacterMotor charMotor = null;
-	private MovementController moveCtrl = null;
-	private CameraInput camInput = null;
+	private CharacterMotor 		charMotor;
+	private MovementController 	moveCtrl;
+	private CameraInput 		camInput;
+	private Interactor 			interactor;
 
-	public GameObject thisCamera = null;
+	[HideInInspector]
+	public CameraTransitioner	camTransitioner;
 
-	public GameObject lightProbeOnSilja;
+	public GameObject 			thisCamera;
 
-	private float ambientGlow = 0.0f;
+	public GameObject 			lightProbeOnSilja;
 
-	public Light teddyLight = null;
-	public Light teddyLightFlash = null;
-	public Light teddyLightFlash2 = null;
-	private DynamicLightProbe dLightProbe = null;
+	private float 				ambientGlow = 0.0f;
+
+	public Light 				teddyLight = null;
+	public Light 				teddyLightFlash = null;
+	public Light 				teddyLightFlash2 = null;
+	private DynamicLightProbe 	dLightProbe = null;
 
 	private bool inDarkness = false;
 	private bool thirdPersonInDark = false;
@@ -56,9 +59,9 @@ public class SiljaBehaviour : MonoBehaviour
 	public AudioClip[] monsterCatchSiljaSound;
 	public float blackscreenTime = 5.0f;
 	public Transform spawnPoint;
-
-	[HideInInspector]
-	static public bool darkMode = false;
+	
+	static public bool isLookingInFP = false;
+	static public bool isFlashlightEnabled = false;
 
 //	public Material lilbroGlowMaterial = null;
 
@@ -125,6 +128,8 @@ public class SiljaBehaviour : MonoBehaviour
 		charMotor = GetComponent<CharacterMotor>();
 		moveCtrl = GetComponent<MovementController>();
 		camInput = GetComponentInChildren<CameraInput>();
+		interactor = GetComponent<Interactor>();
+		camTransitioner = thisCamera.GetComponent<CameraTransitioner>();
 
 		dLightProbe = GetComponentInChildren<DynamicLightProbe> ();
 
@@ -133,15 +138,14 @@ public class SiljaBehaviour : MonoBehaviour
 
 		maxFlickerIntensity = mimimumIntensity * 2;
 		minFlickerIntensity = mimimumIntensity * 1.5f;
-	}
 
-	public void refreshAIReferences(){
-//		aiEntities = FindObjectsOfType<AIBehaviour>();
+		EnableFlashlight( isFlashlightEnabled );
 	}
+	
 
 	void Start()
 	{
-		EnableStoryMode();
+		EnableThirdPerson();
 		DarknessApproachingTimer = LillebrorLightLifetime + TimeInDarknessTotal;
 	}
 	
@@ -167,69 +171,69 @@ public class SiljaBehaviour : MonoBehaviour
 			Application.LoadLevelAsync(1);
 		}
 
-		if( Input.GetKeyUp( KeyCode.Q ) && thisCamera.GetComponent<CameraTransitioner>().Mode != CameraTransitioner.CameraMode.Transitioning)
+		if(		Input.GetKeyUp( KeyCode.Q ) 
+		   && 	camTransitioner.Mode != CameraTransitioner.CameraMode.Transitioning
+		   &&	!interactor.isInteracting)
 		{
-			if( darkMode )
+			if( isLookingInFP )
 			{
-				ShiftToStoryMode();
+				ShiftToThirdPerson();
 			}
 			else
 			{
-				ShiftToDarkMode();
+				ShiftToFirstPerson();
 			}
+		}
+
+		if( Input.GetKeyUp( KeyCode.F ) )
+		{
+			EnableFlashlight( isFlashlightEnabled = !isFlashlightEnabled);
 		}
 	}
 
 	public float ShiftDuration = 1f;
 
-	public void ShiftToDarkMode()
+	public void ShiftToFirstPerson()
 	{
-//		moveCtrl.enabled = false;
-		cameraFollowCom.CamControlType = CameraFollow.CameraControlType.CCT_FPSLook;
-	
-		thisCamera.GetComponent<CameraTransitioner>().Transition();
-
-		Invoke("EnableDarkMode",ShiftDuration);
+		cameraFollowCom.CamControlType = CameraFollow.CameraControlType.CCT_FPSLook;	
+		camTransitioner.TransitionTPPtoFPP();
+		Invoke("EnableFirstPerson",ShiftDuration);
 	}
 
-	public void EnableDarkMode() {
+	public void EnableFirstPerson() {
 
 		teddyLight.enabled = true;
-//		lightProbeOnSilja.SetActive(false); 
 
 		GlowLightBasic = teddyLight.color;
 	
 		charMotor.movement.maxForwardSpeed = 1.5f;
 		charMotor.movement.maxSidewaysSpeed = 1.5f;
 
-		oneHandJoint.gameObject.SetActive(false);
-		twoHandsJoint.gameObject.SetActive(true);
-
-		darkMode = true;
+		isLookingInFP = true;
 	}
 
-	public void ShiftToStoryMode()
+	public void ShiftToThirdPerson()
 	{
-		thisCamera.GetComponent<CameraTransitioner>().Transition();
+		camTransitioner.TransitionFPPtoTPP();
 
-		Invoke("EnableStoryMode",ShiftDuration);
+		Invoke("EnableThirdPerson",ShiftDuration);
 	}
 	
-	public void EnableStoryMode() {
+	public void EnableThirdPerson() {
 
 		teddyLight.enabled = false;
-		lightProbeOnSilja.SetActive(false); 
 
 		charMotor.movement.maxForwardSpeed = 1.1f;
 		charMotor.movement.maxSidewaysSpeed = 0.9f;
-//		moveCtrl.enabled = true;
-
-		oneHandJoint.gameObject.SetActive(true);
-		twoHandsJoint.gameObject.SetActive(false);
 
 		cameraFollowCom.CamControlType = CameraFollow.CameraControlType.CCT_Default;
 
-		darkMode = false;
+		isLookingInFP = false;
+	}
+
+	public void EnableFlashlight(bool state)
+	{
+		twoHandsJoint.gameObject.SetActive(state);
 	}
 	
 	public void RetriveLightProbeResult(float intensity)
@@ -253,7 +257,7 @@ public class SiljaBehaviour : MonoBehaviour
 			_lightIntensity -= fadingOutSpeed;
 			SetLightIntensity();
 
-			if(DarknessApproachingTimer >= TimeInDarknessTotal && !darkMode)
+			if(DarknessApproachingTimer >= TimeInDarknessTotal && !isLookingInFP)
 			{
 				DarknessApproachingTimer -= Time.deltaTime * darknessIntensifier;
 				thirdPersonInDark = true;
@@ -442,7 +446,7 @@ public class SiljaBehaviour : MonoBehaviour
 			teddyLightFlash.intensity = 2.0f;
 			teddyLightFlash2.intensity = 2.0f;
 			
-			EnableDarkMode();
+			EnableFirstPerson();
 			StartCoroutine(BlinkingEffect());
 			GetComponent<Animation>().Play("waking_up");
 			isCaught = false;
