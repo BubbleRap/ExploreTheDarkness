@@ -31,29 +31,29 @@ public class LampController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(Input.GetButtonDown("Fire2"))
-		{
-			thisRenderer.material.SetColor("_EmissionColor", emitColor);
-			DynamicGI.SetEmissive(thisRenderer, emitColor);
-
-			foreach(GameObject _obj in childrenLightSources)
-			{
-				_obj.SetActive(false);
-			}
-
-		}
-
-		if(Input.GetButtonDown("Fire1"))
-		{
-			thisRenderer.material.SetColor("_EmissionColor", emitColorOn);
-			DynamicGI.SetEmissive(thisRenderer, emitColorOn * Mathf.LinearToGammaSpace(emissionIntensity));
-
-			foreach(GameObject _obj in childrenLightSources)
-			{
-				_obj.SetActive(true);
-			}
-
-		}
+//		if(Input.GetButtonDown("Fire2"))
+//		{
+//			thisRenderer.material.SetColor("_EmissionColor", emitColor);
+//			DynamicGI.SetEmissive(thisRenderer, emitColor);
+//
+//			foreach(GameObject _obj in childrenLightSources)
+//			{
+//				_obj.SetActive(false);
+//			}
+//
+//		}
+//
+//		if(Input.GetButtonDown("Fire1"))
+//		{
+//			thisRenderer.material.SetColor("_EmissionColor", emitColorOn);
+//			DynamicGI.SetEmissive(thisRenderer, emitColorOn * Mathf.LinearToGammaSpace(emissionIntensity));
+//
+//			foreach(GameObject _obj in childrenLightSources)
+//			{
+//				_obj.SetActive(true);
+//			}
+//
+//		}
 	
 	}
 }
