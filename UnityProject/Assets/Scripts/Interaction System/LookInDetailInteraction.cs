@@ -3,6 +3,13 @@ using System.Collections;
 
 public class LookInDetailInteraction : IInteractableObject 
 {
+	public enum ObjectOrientation
+	{
+		Y_up,
+		Z_up
+	}
+
+	public ObjectOrientation orientation = ObjectOrientation.Y_up;
 	[Range(0.001f, 0.5f)]
 	public float _rotationSensetivity = 0.4f;
 
@@ -22,7 +29,7 @@ public class LookInDetailInteraction : IInteractableObject
 		_collider = GetComponent<Collider>();
 	}
 
-	public override void Activate()
+	public override bool Activate()
 	{
 		interactionIsActive = !interactionIsActive;
 		IsCompleted = interactionIsActive;
@@ -42,6 +49,8 @@ public class LookInDetailInteraction : IInteractableObject
 		{
 			OnInvestigateDisabled();
 		}
+
+		return interactionIsActive;
 	}
 
 	private void OnInvestigateEnabled()
@@ -59,8 +68,10 @@ public class LookInDetailInteraction : IInteractableObject
 			Transform fpCamTransform = transitioner.FPPCameraTransform;
 			transform.position = fpCamTransform.TransformPoint(Vector3.forward * 0.5f);
 
-	//		fpCamTransform.LookAt(transform.position);
 			transform.LookAt(fpCamTransform);
+
+			if( orientation == ObjectOrientation.Z_up )
+				transform.Rotate(new Vector3(90f, 0f, 0f));
 
 			if( _collider != null )
 				_collider.enabled = false;
@@ -68,7 +79,7 @@ public class LookInDetailInteraction : IInteractableObject
 		});
 		
 		
-		_siljaBeh.ShiftToDarkMode();
+		_siljaBeh.ShiftToFirstPerson();
 	}
 
 	private void OnInvestigateDisabled()
@@ -79,16 +90,12 @@ public class LookInDetailInteraction : IInteractableObject
 		transitioner.AddTPPCompleteAction( () =>
 		                                  {	
 			// setting up the character motion state
-			
-//			_siljaBeh.IsFPSLookEnabled = true;
 
 			_siljaBeh.IsMoveEnabled = true;
 			camControl.CamControlType = CameraFollow.CameraControlType.CCT_Default;
 			
 			if( _collider != null )
 				_collider.enabled = true;
-			
-//			_siljaBeh.thisCamera.GetComponent<CameraInput>().enabled = true;
 		});
 		
 		
@@ -97,7 +104,7 @@ public class LookInDetailInteraction : IInteractableObject
 		transform.rotation = _originalRot;
 		
 		
-		_siljaBeh.ShiftToStoryMode();
+		_siljaBeh.ShiftToThirdPerson();
 	}
 
 	private new void Update()

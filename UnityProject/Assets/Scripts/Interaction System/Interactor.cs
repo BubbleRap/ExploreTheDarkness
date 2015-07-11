@@ -6,6 +6,9 @@ public class Interactor : MonoBehaviour
 	private GameObject currentInteractionObject = null;
 	private List<GameObject> interactionObjects = new List<GameObject>();
 
+	[HideInInspector]
+	public bool isInteracting = false;
+
 	public void OnInteractionEnter( GameObject interactionObject )
 	{
 		if( !interactionObjects.Contains( interactionObject ) )
@@ -71,33 +74,10 @@ public class Interactor : MonoBehaviour
 		}
 
 
-		if( Input.GetKeyDown(KeyCode.E) /* || Input.GetMouseButtonDown(0) */)
+		if( Input.GetKeyDown(KeyCode.E) )
 		{
-			foreach( MonoBehaviour behaviour in currentInteractionObject.GetComponents<MonoBehaviour>() )
-			{
-				IInteractableObject interactableInterface = behaviour as IInteractableObject;
-
-				// Toggling all the scripts on the object, that implement the "interface"
-				if( interactableInterface != null )
-				{
-
-					// So here, I am thinkering having a check, if an Activate returns false, the whole sequence returns false
-					// but now, it is time for hacks
-
-
-					// >>>da hack
-					// check, if there is a glow component, which will tell us
-					// whether player is looking at the object
-
-//					GlowInteractionObject glowCom = interactableInterface as GlowInteractionObject;
-//					if( glowCom != null )
-//						if( !glowCom.activated )
-//							return;
-
-
-					interactableInterface.Activate();
-				}
-			}
+			IInteractableObject interactableInterface = currentInteractionObject.GetComponent<IInteractableObject>();
+			isInteracting = interactableInterface.Activate();
 		}
 	}
 

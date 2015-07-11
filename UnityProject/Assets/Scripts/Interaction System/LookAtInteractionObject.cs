@@ -9,7 +9,7 @@ public class LookAtInteractionObject : IInteractableObject
 	private SiljaBehaviour _siljaBeh = null;
 
 	// called by Interactor.cs
-	public override void Activate()
+	public override bool Activate()
 	{
 		if( _siljaBeh == null )
 		{
@@ -19,5 +19,7 @@ public class LookAtInteractionObject : IInteractableObject
 
 		interactionIsActive = !interactionIsActive;
 		_siljaBeh.LookAtPointFP( interactionIsActive, transform, lookFromPoint );
+
+		return false;
     }
 }

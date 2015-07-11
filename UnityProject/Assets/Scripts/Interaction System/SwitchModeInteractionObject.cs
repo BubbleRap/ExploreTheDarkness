@@ -9,7 +9,7 @@ public class SwitchModeInteractionObject : IInteractableObject
 	public bool transitionToDarkness = false;
 
 	// called from Interactor.cs
-	public override void Activate()
+	public override bool Activate()
 	{
 		if(nextLevel)
 		{
@@ -20,6 +20,8 @@ public class SwitchModeInteractionObject : IInteractableObject
 		if (transitionToDarkness){
 			Invoke("TriggerDarkness",darknessDelay);
 		}
+
+		return false;
 	}
 
 	public void TriggerDarkness(){

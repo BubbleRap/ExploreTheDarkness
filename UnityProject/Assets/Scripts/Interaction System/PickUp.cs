@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PickUp :IInteractableObject 
 {
-	public override void Activate()
+	public override bool Activate()
 	{
 		interactionIsActive = !interactionIsActive;
 		
@@ -13,5 +13,7 @@ public class PickUp :IInteractableObject
 		siljaInventory.putInInventory(this.transform.name);
 
 		Destroy(this.transform.gameObject);
+
+		return false;
 	}
 }

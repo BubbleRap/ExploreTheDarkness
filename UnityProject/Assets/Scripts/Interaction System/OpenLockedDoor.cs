@@ -5,7 +5,7 @@ public class OpenLockedDoor :IInteractableObject
 {
 	public DoorOpen doorController;
 	
-	public override void Activate()
+	public override bool Activate()
 	{
 		interactionIsActive = !interactionIsActive;
 
@@ -17,5 +17,7 @@ public class OpenLockedDoor :IInteractableObject
 		{
 			doorController.openDoor(!doorController.doorIsOpen);
 		}
+
+		return false;
 	}
 }

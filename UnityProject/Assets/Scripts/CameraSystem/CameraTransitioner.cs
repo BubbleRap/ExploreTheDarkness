@@ -14,6 +14,9 @@ public class CameraTransitioner : MonoBehaviour {
 	//two objects which mark the transforms of the FPP and TPP camera
 	public Transform TPPCameraTransform, FPPCameraTransform;
 
+	private Vector3 fromPosition, toPosition;
+	private Quaternion fromRotation, toRotation;
+
 	//Two prefabs holding the values of camera presets
 	public Camera TppCameraSetup, FppCameraSetup;
 
@@ -80,89 +83,73 @@ public class CameraTransitioner : MonoBehaviour {
 //			GetComponent<MouseLook>(),
 			GetComponent<Health>()
 		});
+
+		iTween.Init( gameObject );
+	}
+
+	public void TransitionTPPtoFPP()
+	{
+		TPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
+		TPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
+
+		Transition( TPPCameraTransform, FPPCameraTransform, "TurnOffTpp", "TurnOnFpp", 0f, 1f );
+	}
+
+	public void TransitionFPPtoTPP()
+	{
+		FPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
+		FPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
+
+		Transition( FPPCameraTransform, TPPCameraTransform, "TurnOffFpp", "TurnOnTpp", 0f, 1f );
 	}
 
 	//THE transition function
-	public void Transition(){
+	public void Transition(Transform toTransform, Transform fromTransform,
+	                       string onStart, string onComplete,
+	                       float timeFrom, float timeTo)
+	{
+		toPosition = toTransform.localPosition;
+		toRotation = toTransform.localRotation;
 
-		if (Mode == CameraMode.Tpp){
+		fromPosition = fromTransform.localPosition;
+		fromRotation = fromTransform.localRotation;
 
-			//save the camera's position
-			TPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
-			TPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
-
-			//tween using the 'TransitionUpdate' function
-			iTween.ValueTo(gameObject, iTween.Hash(
-				"from", 0f,
-				"to", 1f,
-				"time", TransitionTime,
-				"easetype", iTween.EaseType.easeInOutSine,
-
-				"onstart", "TurnOffTpp",			//callback on start of the tween
-				"onupdate", "TransitionUpdate",		//method called on each update
-				"oncomplete", "TurnOnFpp",			//callback on complete of the tween
-
-				"onstarttarget", gameObject,
-				"onupdatetarget", gameObject,
-				"oncompletetarget", gameObject,
-
-				"ignoreTimeScale", true
+		iTween.ValueTo(gameObject, iTween.Hash(
+			"from", timeFrom,
+			"to", timeTo,
+			"time", TransitionTime,
+			"easetype", iTween.EaseType.easeInOutSine,
+			
+			"onstart", onStart,			//callback on start of the tween
+			"onupdate", "TransitionUpdate",		//method called on each update
+			"oncomplete", onComplete,			//callback on complete of the tween
+			
+			"onstarttarget", gameObject,
+			"onupdatetarget", gameObject,
+			"oncompletetarget", gameObject,
+			
+			"ignoreTimeScale", true
 			));
-
-		}
-		else {
-
-			//save the camera's position
-			FPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
-			FPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
-
-			//tween using the 'TransitionUpdate' function
-			iTween.ValueTo(gameObject, iTween.Hash(
-				"from", 1f, //IN REVERSE
-				"to", 0f,
-				"time", TransitionTime,
-				"easetype", iTween.EaseType.easeInOutSine,
-				
-				"onstart", "TurnOffFpp",			//callback on start of the tween
-				"onupdate", "TransitionUpdate",		//method called on each update
-				"oncomplete", "TurnOnTpp",			//callback on complete of the tween
-				
-				"onstarttarget", gameObject,
-				"onupdatetarget", gameObject,
-				"oncompletetarget", gameObject,
-				
-				"ignoreTimeScale", true
-			));
-
-		}
 	}
 
 	public void TransitionUpdate(float state){
 
 		//not to calculate it all the time
-		float negState = 1f-state;
+		float negState = 1f - state;
 
 		ThisCamera.transform.localPosition = 
-			FPPCameraTransform.localPosition * state + 
-				TPPCameraTransform.localPosition * negState;
+			fromPosition * state + 
+				toPosition * negState;
 
 		ThisCamera.transform.localRotation = Quaternion.Slerp(
-			FPPCameraTransform.localRotation, 
-			TPPCameraTransform.localRotation, negState);
+			fromRotation, 
+			toRotation, negState);
 
-		ThisCamera.backgroundColor = 
-			FppCameraSetup.backgroundColor * state + 
-			TppCameraSetup.backgroundColor * negState;
-
-		ThisCamera.fieldOfView = 
-			FppCameraSetup.fieldOfView * state + 
-			TppCameraSetup.fieldOfView * negState;
-
-		if (state > 0.75f){
-			ThisCamera.cullingMask = FppCameraSetup.cullingMask;
-		} else {
-			ThisCamera.cullingMask = TppCameraSetup.cullingMask;
-		}
+//		if (state > 0.75f){
+//			ThisCamera.cullingMask = FppCameraSetup.cullingMask;
+//		} else {
+//			ThisCamera.cullingMask = TppCameraSetup.cullingMask;
+//		}
 
 	}
 
@@ -188,10 +175,10 @@ public class CameraTransitioner : MonoBehaviour {
 			c.enabled = true;
 		}
 
-		ThisCamera.clearFlags = TppCameraSetup.clearFlags;
-		ThisCamera.cullingMask = TppCameraSetup.cullingMask;
-		ThisCamera.useOcclusionCulling = TppCameraSetup.useOcclusionCulling;
-		ThisCamera.hdr = TppCameraSetup.hdr;
+//		ThisCamera.clearFlags = TppCameraSetup.clearFlags;
+//		ThisCamera.cullingMask = TppCameraSetup.cullingMask;
+//		ThisCamera.useOcclusionCulling = TppCameraSetup.useOcclusionCulling;
+//		ThisCamera.hdr = TppCameraSetup.hdr;
 	}
 
 	public void TurnOffTpp(){
@@ -202,8 +189,6 @@ public class CameraTransitioner : MonoBehaviour {
 			g.SetActive(false);
 		}
 
-//		Destroy(GetComponent<Rigidbody>());
-//		GetComponent<Rigidbody>().isKinematic = true;
 		GetComponent<SphereCollider>().enabled = false;
 
 		foreach(Behaviour c in TppOnlyGameplayComponents){
@@ -233,10 +218,10 @@ public class CameraTransitioner : MonoBehaviour {
 			c.enabled = true;
 		}
 
-		ThisCamera.clearFlags = FppCameraSetup.clearFlags;
-		ThisCamera.cullingMask = FppCameraSetup.cullingMask;
-		ThisCamera.useOcclusionCulling = FppCameraSetup.useOcclusionCulling;
-		ThisCamera.hdr = FppCameraSetup.hdr;
+//		ThisCamera.clearFlags = FppCameraSetup.clearFlags;
+//		ThisCamera.cullingMask = FppCameraSetup.cullingMask;
+//		ThisCamera.useOcclusionCulling = FppCameraSetup.useOcclusionCulling;
+//		ThisCamera.hdr = FppCameraSetup.hdr;
 
 		onFPPTransitionComplete.Invoke();
 		CleanFPPCompleteActions();
@@ -245,9 +230,6 @@ public class CameraTransitioner : MonoBehaviour {
 	public void TurnOnTpp(){
 		
 		Mode = CameraMode.Tpp;
-
-//		gameObject.AddComponent<Rigidbody>();
-//		GetComponent<Rigidbody>().isKinematic = false;
 
 		foreach (GameObject g in TppTransformChildren){
 			g.SetActive(true);

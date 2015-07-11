@@ -4,7 +4,7 @@ using System.Collections;
 public class PickUpLillebrorPiece : IInteractableObject 
 {
 
-	public override void Activate()
+	public override bool Activate()
 	{
 		interactionIsActive = !interactionIsActive;
 		IsCompleted = true;
@@ -47,5 +47,7 @@ public class PickUpLillebrorPiece : IInteractableObject
 		siljaInventory.setLilleBrorPieces();
 //		Destroy(transform.gameObject);
 		gameObject.SetActive(false);
+
+		return false;
     }
 }
