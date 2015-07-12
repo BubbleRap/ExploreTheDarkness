@@ -40,7 +40,7 @@ public class LampFlickering : MonoBehaviour {
 		{
 			float noise = Mathf.PerlinNoise(randomValue, Time.time*flickerSpeed);
 
-			thisRenderer.material.SetColor("_EmissionColor", emitColorOn*noise);
+			thisRenderer.material.SetColor("_EmissionColor", emitColorOn*noise*2f);
 
 			foreach(GameObject _obj in childrenLightSources)
 			{
