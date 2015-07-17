@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
+using UnityStandardAssets.ImageEffects;
+
 public class LookInDetailInteraction : IInteractableObject 
 {
 	public enum ObjectOrientation
@@ -12,6 +14,7 @@ public class LookInDetailInteraction : IInteractableObject
 	public ObjectOrientation orientation = ObjectOrientation.Y_up;
 	[Range(0.001f, 0.5f)]
 	public float _rotationSensetivity = 0.4f;
+	public float _faceDistance = 0.25f;
 
 	private SiljaBehaviour _siljaBeh;
 	private Vector3 _prevMousePos;
@@ -66,7 +69,10 @@ public class LookInDetailInteraction : IInteractableObject
 			camControl.CamControlType = CameraFollow.CameraControlType.CCT_Overwritten;
 
 			Transform fpCamTransform = transitioner.FPPCameraTransform;
-			transform.position = fpCamTransform.TransformPoint(Vector3.forward * 0.5f);
+			transform.position = fpCamTransform.TransformPoint(Vector3.forward * _faceDistance);
+
+			Camera.main.GetComponent<DepthOfField>().focalLength = _faceDistance;
+			Camera.main.GetComponent<DepthOfField>().aperture = 50f;
 
 			transform.LookAt(fpCamTransform);
 
