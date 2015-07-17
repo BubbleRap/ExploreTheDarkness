@@ -64,7 +64,7 @@
                 float zPos = i.projPos.z;
                 
                 float occlude = step( zPos, depthVal );         
-                return fixed4(  occlude * _Color.rgb * _Color.a, occlude);
+                return fixed4(  occlude * _Color.rgb, occlude );
             }
             ENDCG
         }
