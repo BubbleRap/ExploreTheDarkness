@@ -10,13 +10,13 @@ public class HighlightsFX : MonoBehaviour
 	#region enums
 	public enum HighlightType
 	{
-		Glow,
-		Solid
+		Glow = 0,
+		Solid = 1
 	}
 	public enum SortingType
 	{
-		Overlay,
-		DepthFilter
+		Overlay = 3,
+		DepthFilter = 4
 	}
 	public enum FillType
 	{
@@ -50,7 +50,7 @@ public class HighlightsFX : MonoBehaviour
 	private IInteractableObject[] highlightObjects;
 	private Renderer[] m_occluders = null;
 	
-	private Material m_highlightMaterial, m_drawMaterial;
+	private Material m_highlightMaterial;
 	
 	private CommandBuffer m_renderBuffer;
 
@@ -87,9 +87,6 @@ public class HighlightsFX : MonoBehaviour
 	private void CreateMaterials()
 	{
 		m_highlightMaterial = new Material( Shader.Find("Custom/Highlight") );
-
-		m_drawMaterial = new Material( Shader.Find("Custom/SolidColor") );
-		m_drawMaterial.SetColor( "_Color", m_highlightColor );
 	}
 
 	private void SetOccluderObjects()
@@ -131,7 +128,7 @@ public class HighlightsFX : MonoBehaviour
 			if( renderer == null )
 				continue;
 			
-			m_renderBuffer.DrawRenderer( renderer, m_drawMaterial, 0, (int) m_sortingType );
+			m_renderBuffer.DrawRenderer( renderer, m_highlightMaterial, 0, (int) m_sortingType );
 		}
 
 		RenderTexture.active = rt;
@@ -151,7 +148,7 @@ public class HighlightsFX : MonoBehaviour
 		
 		foreach(Renderer renderer in m_occluders)
 		{	
-			m_renderBuffer.DrawRenderer( renderer, m_drawMaterial, 0, (int) m_sortingType );
+			m_renderBuffer.DrawRenderer( renderer, m_highlightMaterial, 0, (int) m_sortingType );
 		}
 
 		RenderTexture.active = rt;
@@ -170,7 +167,7 @@ public class HighlightsFX : MonoBehaviour
 	{
 		RenderTexture highlightRT;
 
-		RenderTexture.active = highlightRT = RenderTexture.GetTemporary(m_RTWidth, m_RTHeight, 0 );
+		RenderTexture.active = highlightRT = RenderTexture.GetTemporary(m_RTWidth, m_RTHeight, 0, RenderTextureFormat.R8 );
 		GL.Clear(true, true, Color.clear);
 		RenderTexture.active = null;
 
@@ -178,7 +175,7 @@ public class HighlightsFX : MonoBehaviour
 
 		RenderHighlights(highlightRT);
 
-		RenderTexture blurred = RenderTexture.GetTemporary( m_RTWidth, m_RTHeight, 0 );
+		RenderTexture blurred = RenderTexture.GetTemporary( m_RTWidth, m_RTHeight, 0, RenderTextureFormat.R8 );
 
 
 		m_blur.OnRenderImage( highlightRT, blurred );
@@ -188,7 +185,7 @@ public class HighlightsFX : MonoBehaviour
 
 		if( m_fillType == FillType.Outline )
 		{
-			RenderTexture occluded = RenderTexture.GetTemporary( m_RTWidth, m_RTHeight, 0 );
+			RenderTexture occluded = RenderTexture.GetTemporary( m_RTWidth, m_RTHeight, 0, RenderTextureFormat.R8);
 
 			// Excluding the original image from the blurred image, leaving out the areal alone
 			m_highlightMaterial.SetTexture("_OccludeMap", highlightRT);
