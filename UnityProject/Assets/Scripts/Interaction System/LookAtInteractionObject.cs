@@ -3,9 +3,6 @@ using System.Collections;
 
 public class LookAtInteractionObject : IInteractableObject 
 {
-	// The point to look at object from
-	public Transform lookFromPoint = null;
-
 	private SiljaBehaviour _siljaBeh = null;
 
 	// called by Interactor.cs
@@ -18,7 +15,14 @@ public class LookAtInteractionObject : IInteractableObject
 		}
 
 		interactionIsActive = !interactionIsActive;
-		_siljaBeh.LookAtPointFP( interactionIsActive, transform, lookFromPoint );
+		IsCompleted = true;
+
+		_siljaBeh.cameraFollow.CamControlType = interactionIsActive ? CameraFollow.CameraControlType.CCT_LookingAtObject : 
+			CameraFollow.CameraControlType.CCT_Default;
+		
+		_siljaBeh.cameraFollow.focusPoint = transform.position;
+		
+		_siljaBeh.IsMoveEnabled = !interactionIsActive;
 
 		return false;
     }

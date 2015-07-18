@@ -32,7 +32,7 @@ public class SwitchModeInteractionObject : IInteractableObject
 		Transitioner transitionContoller = Component.FindObjectOfType(typeof(Transitioner)) as Transitioner;
 		transitionContoller.doTransition(true);
 
-		siljaBeh.LookAtPointFP(false, null, null);
+//		siljaBeh.LookAtPointFP(false, null);
 
 		// COMMENTED AS I THINK THERE IS SOME DIFFERENCE
 
