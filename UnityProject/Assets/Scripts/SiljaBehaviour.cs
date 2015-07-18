@@ -14,7 +14,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 	private CharacterMotor 		charMotor;
 	private MovementController 	moveCtrl;
-	private CameraInput 		camInput;
+
 	private Interactor 			interactor;
 
 	[HideInInspector]
@@ -128,7 +128,6 @@ public class SiljaBehaviour : MonoBehaviour
 	{
 		charMotor = GetComponent<CharacterMotor>();
 		moveCtrl = GetComponent<MovementController>();
-		camInput = GetComponentInChildren<CameraInput>();
 		interactor = GetComponent<Interactor>();
 		camTransitioner = thisCamera.GetComponent<CameraTransitioner>();
 
@@ -508,40 +507,6 @@ public class SiljaBehaviour : MonoBehaviour
 		limbs[index].SetActive(false);
 	}
 
-	//TODO rework the Look At Point thingies
-	public void LookAtPointFP(bool state, Transform lookAtObject, Transform lookFromPoint)
-	{
-		LookAtPointFP(state, lookAtObject.position, lookFromPoint.position);
-	}
-
-	public void LookAtPointFP(bool state, Vector3 lookAtObject, Vector3 lookFromPoint)
-	{
-		cameraFollow.CamControlType = state ? CameraFollow.CameraControlType.CCT_LookingAtObject : 
-													CameraFollow.CameraControlType.CCT_Default;
-
-		cameraFollow.focusPoint = lookAtObject;
-
-		transform.gameObject.GetComponent<MovementController>().canMove = !state;
-		camInput.enabled = !state;
-	}
-
-	//TODO rework the Look At Point thingies
-	public void LookAtPoint(bool state, Transform lookAtObject, Transform lookFromPoint)
-	{
-		charMotor.enabled = !state;
-		//if( state )
-		//{
-			//if( lookFromPoint != null )
-			//{
-				Vector3 lookFrom = lookFromPoint.position;
-				transform.position = new Vector3(lookFrom.x, transform.position.y, lookFrom.z);
-			//}
-			
-			thisCamera.transform.LookAt(lookAtObject);
-		//}
-		transform.gameObject.GetComponent<MovementController>().canMove = !state;
-		camInput.enabled = !state;
-	}
 
 	public void isDarknessApproaching(bool boolean)
 	{
