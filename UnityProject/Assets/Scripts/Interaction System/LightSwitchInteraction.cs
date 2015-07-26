@@ -4,7 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(Collider))]
 public class LightSwitchInteraction : IInteractableObject 
 {
-	public Light _lightSource;
+	public Light[] _lightSource;
 	public bool _defaultState = false;
 
 	private Collider _collider;
@@ -12,17 +12,30 @@ public class LightSwitchInteraction : IInteractableObject
 
 	private void Awake()
 	{
-		_collider = GetComponent<Collider>();
-		_collider.enabled = _lightSource.enabled = interactionIsActive = _defaultState;
+		foreach( Collider col in GetComponents<Collider>() )
+			if( col.isTrigger )
+			{
+				_collider = col;
+				break;
+			}
+		_collider.enabled = interactionIsActive = _defaultState;
+
+		foreach( Light light in _lightSource )
+			light.enabled = interactionIsActive;
 	}
 
 	public override bool Activate()
 	{
-		return _collider.enabled = _lightSource.enabled = interactionIsActive = !interactionIsActive;
+		foreach( Light light in _lightSource )
+			light.enabled = !interactionIsActive;
+
+		return _collider.enabled = interactionIsActive = !interactionIsActive;
 	}
 
 	private void Update()
 	{
+		base.Update();
+
 		if( !interactionIsActive )
 			return;
 
