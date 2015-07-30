@@ -35,7 +35,6 @@ public class LookInDetailInteraction : IInteractableObject
 	public override bool Activate()
 	{
 		interactionIsActive = !interactionIsActive;
-		IsCompleted = interactionIsActive;
 
 		if( _siljaBeh == null )
 		{
@@ -47,6 +46,7 @@ public class LookInDetailInteraction : IInteractableObject
 		if( interactionIsActive )
 		{
 			OnInvestigateEnabled();
+			IsCompleted = true;
 		}
 		else
 		{
