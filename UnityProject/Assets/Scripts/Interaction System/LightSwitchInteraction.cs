@@ -5,10 +5,19 @@ using System.Collections;
 public class LightSwitchInteraction : IInteractableObject 
 {
 	public Light[] _lightSource;
+
 	public bool _defaultState = false;
 
 	private Collider _collider;
 	private SiljaBehaviour _cachedBeh;
+
+
+	#region Lau-san stuff
+	public Renderer[] _emissiveSurfaces;
+
+	float emissionIntensity = 1.0f;
+	Color[] emitColorOn;
+	#endregion
 
 	private void Awake()
 	{
@@ -22,6 +31,15 @@ public class LightSwitchInteraction : IInteractableObject
 
 		foreach( Light light in _lightSource )
 			light.enabled = interactionIsActive;
+
+
+		emitColorOn = new Color[_emissiveSurfaces.Length];
+		for( int i = 0; i < _emissiveSurfaces.Length; i++ )
+		{
+			emitColorOn[i] = _emissiveSurfaces[i].material.GetColor("_EmissionColor");
+			_emissiveSurfaces[i].material.SetColor("_EmissionColor", Color.black);
+			DynamicGI.SetEmissive(_emissiveSurfaces[i], Color.black);
+		}
 	}
 
 	public override bool Activate()
@@ -33,6 +51,23 @@ public class LightSwitchInteraction : IInteractableObject
 			light.enabled = !interactionIsActive;
 
 		_collider.enabled = interactionIsActive = !interactionIsActive;
+
+		if( interactionIsActive )
+		{
+			for( int i = 0; i < _emissiveSurfaces.Length; i++ )
+			{
+				_emissiveSurfaces[i].material.SetColor("_EmissionColor", emitColorOn[i]);
+				DynamicGI.SetEmissive(_emissiveSurfaces[i], emitColorOn[i] * Mathf.LinearToGammaSpace(emissionIntensity));
+			}
+		}
+		else
+		{
+			for( int i = 0; i < _emissiveSurfaces.Length; i++ )
+			{
+				_emissiveSurfaces[i].material.SetColor("_EmissionColor", Color.black);
+				DynamicGI.SetEmissive(_emissiveSurfaces[i], Color.black);
+			}
+		}
 
 		ObjectivesManager.Instance.OnInteractionComplete( this, interactionIsActive );
 

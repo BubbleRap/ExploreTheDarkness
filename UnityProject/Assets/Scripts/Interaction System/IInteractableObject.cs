@@ -15,7 +15,8 @@ public class IInteractableObject : MonoBehaviour
 	{
 		WorksAlways,
 		FirstPersonOnly,
-		ThirdPersonOnly
+		ThirdPersonOnly,
+		Never
 	}
 
 	public WorkState perspectiveMode;
@@ -93,8 +94,15 @@ public class IInteractableObject : MonoBehaviour
 
 		if( perspectiveMode != WorkState.WorksAlways )
 		{
-			isEligable = isEligable   && (  (perspectiveMode == WorkState.FirstPersonOnly && SiljaBehaviour.isLookingInFP) 
+			if( perspectiveMode == WorkState.Never )
+			{
+				isEligable = false;
+			}
+			else
+			{
+				isEligable = isEligable   && (  (perspectiveMode == WorkState.FirstPersonOnly && SiljaBehaviour.isLookingInFP) 
 			                            		||(perspectiveMode == WorkState.ThirdPersonOnly && !SiljaBehaviour.isLookingInFP));
+			}
 		}
 
 		OnInteractionClose( (interactor.isInteracting  && interactionIsActive)
