@@ -7,7 +7,7 @@ public class GenericInteraction : IInteractableObject
 	public UnityEvent m_onInteractionActivate;
 	public UnityEvent m_onInteractionDisactivate;
 
-	public void Activate()
+	public override bool Activate()
 	{
 		interactionIsActive = !interactionIsActive;
 
@@ -21,5 +21,6 @@ public class GenericInteraction : IInteractableObject
 		}
 
 		IsCompleted = interactionIsActive;
+		return true;
 	}
 }
