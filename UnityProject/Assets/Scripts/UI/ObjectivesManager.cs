@@ -93,6 +93,13 @@ public class Objective
 		get{ return m_state; }
 	}
 
+	public enum ObjectiveType
+	{
+		Selective,
+		Sequentive
+	}
+	public ObjectiveType m_type;
+
 	public IInteractableObject[] m_interactions;
 	
 	public bool IsCompleted
