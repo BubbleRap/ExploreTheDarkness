@@ -64,6 +64,13 @@ public class SiljaBehaviour : MonoBehaviour
 	
 	static public bool isLookingInFP = false;
 	static public bool isFlashlightEnabled = false;
+	
+	private bool isFlashLightCollected = false;
+	public bool FlashLightCollected
+	{
+		get{ return isFlashLightCollected; }
+		set{ isFlashLightCollected = value; }
+	}
 
 //	public Material lilbroGlowMaterial = null;
 
@@ -139,7 +146,7 @@ public class SiljaBehaviour : MonoBehaviour
 		maxFlickerIntensity = mimimumIntensity * 2;
 		minFlickerIntensity = mimimumIntensity * 1.5f;
 
-		EnableFlashlight( isFlashlightEnabled );
+		twoHandsJoint.gameObject.SetActive(false);
 	}
 	
 
@@ -187,9 +194,9 @@ public class SiljaBehaviour : MonoBehaviour
 			}
 		}
 
-		if( Input.GetKeyUp( KeyCode.F ) )
+		if( Input.GetKeyUp( KeyCode.F ) && isLookingInFP )
 		{
-			EnableFlashlight( isFlashlightEnabled = !isFlashlightEnabled);
+			EnableFlashlight( !isFlashlightEnabled );
 		}
 	}
 
@@ -212,6 +219,7 @@ public class SiljaBehaviour : MonoBehaviour
 		charMotor.movement.maxSidewaysSpeed = 1.5f;
 
 //		isLookingInFP = true;
+		EnableFlashlight ( true );
 	}
 
 	public void ShiftToThirdPerson()
@@ -230,11 +238,15 @@ public class SiljaBehaviour : MonoBehaviour
 
 		cameraFollow.CamControlType = CameraFollow.CameraControlType.CCT_Default;
 
-//		isLookingInFP = false;
+		EnableFlashlight( false );
 	}
 
 	public void EnableFlashlight(bool state)
 	{
+		if( !isFlashLightCollected )
+			return;
+
+		isFlashlightEnabled = state;
 		twoHandsJoint.gameObject.SetActive(state);
 	}
 	
