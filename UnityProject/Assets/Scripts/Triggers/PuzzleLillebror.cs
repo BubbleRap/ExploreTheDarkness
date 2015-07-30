@@ -28,16 +28,6 @@ public class PuzzleLillebror : MonoBehaviour {
 			}
 			else
 			{
-				if(other.transform.GetComponent<CollectLillebrorUI>() == null)
-				{
-					if(other.transform.gameObject.GetComponent<CollectLillebrorUI>() == null)
-					{
-						CollectLillebrorUI objectiveController = other.transform.gameObject.AddComponent<CollectLillebrorUI>();
-						objectiveController.lillebrorMessage = "Find Lillebror";
-						objectiveController.multipleTask = false;
-					}
-				}
-
 				if(needLillebrorSound.Length > 0)
 				{
 					soundSource.clip = needLillebrorSound[Random.Range(0, needLillebrorSound.Length)];

@@ -26,10 +26,17 @@ public class LightSwitchInteraction : IInteractableObject
 
 	public override bool Activate()
 	{
+		if( !ObjectivesManager.Instance.IsInteractionEligable( this ) )
+			return false;
+
 		foreach( Light light in _lightSource )
 			light.enabled = !interactionIsActive;
 
-		return _collider.enabled = interactionIsActive = !interactionIsActive;
+		_collider.enabled = interactionIsActive = !interactionIsActive;
+
+		ObjectivesManager.Instance.OnInteractionComplete( this, interactionIsActive );
+
+		return false;
 	}
 
 	private void Update()

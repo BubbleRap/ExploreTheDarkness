@@ -20,33 +20,44 @@ public class IInteractableObject : MonoBehaviour
 
 	public WorkState perspectiveMode;
 
-	[HideInInspector]
-	public UnityEvent m_onInteractionComplete = new UnityEvent();
+//	[HideInInspector]
+//	public UnityEvent m_onInteractionComplete = new UnityEvent();
 
-	protected bool m_isCompleted = false;
-	public bool IsCompleted
-	{
-		get 
-		{ 
-			return m_isCompleted; 
-		}
-		set 
-		{
-			bool prevValue = m_isCompleted;
-			m_isCompleted = value;
 
-			// so if a job was'nt complete before, but it is complete now,
-			// then invoke the function
-			if( m_isCompleted && !prevValue )
-				m_onInteractionComplete.Invoke();
-		}
-	}
+//	public delegate void CompletionCallback( bool state );
+//	public event CompletionCallback m_onInteractionComplete;
+//
+//	public void CallbackCompletion(bool state)
+//	{
+//		if( m_onInteractionComplete != null )
+//			m_onInteractionComplete.Invoke( state );
+//	}
+
+
+//	protected bool m_isCompleted = false;
+//	public bool IsCompleted
+//	{
+//		get 
+//		{ 
+//			return m_isCompleted; 
+//		}
+//		set 
+//		{
+//			bool prevValue = m_isCompleted;
+//			m_isCompleted = value;
+//
+//			// so if a job was'nt complete before, but it is complete now,
+//			// then invoke the function
+//			if( m_isCompleted && !prevValue )
+//				m_onInteractionComplete.Invoke();
+//		}
+//	}
 
 	protected bool interactionIsActive = false;
-	protected bool m_isInitialized = false;
+//	protected bool m_isInitialized = false;
 	private Renderer m_renderer;
 
-	public virtual void Initialize() { m_isInitialized = !m_isInitialized; }
+//	public virtual void Initialize() { m_isInitialized = !m_isInitialized; }
 	public virtual bool Activate() { return (interactionIsActive = !interactionIsActive); }
 	
 	public bool disableOnActive = true;
@@ -159,5 +170,11 @@ public class IInteractableObject : MonoBehaviour
 		Destroy(buttonPrompt);
 		buttonPrompt = null;
 		Resources.UnloadUnusedAssets();
+	}
+
+	// Exposed for inspector purposes
+	public void ActivateInteraction()
+	{
+		Activate();
 	}
 }

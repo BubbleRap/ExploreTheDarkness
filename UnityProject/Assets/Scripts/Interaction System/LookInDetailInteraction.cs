@@ -34,19 +34,23 @@ public class LookInDetailInteraction : IInteractableObject
 
 	public override bool Activate()
 	{
-		interactionIsActive = !interactionIsActive;
-
 		if( _siljaBeh == null )
 		{
 			GameObject siljaGO = GameObject.FindGameObjectWithTag("Player");
 			_siljaBeh = siljaGO.GetComponent<SiljaBehaviour>();
 		}
 
+		if( !ObjectivesManager.Instance.IsInteractionEligable( this ) )
+			return false;
+
+		interactionIsActive = !interactionIsActive;
+
 
 		if( interactionIsActive )
 		{
 			OnInvestigateEnabled();
-			IsCompleted = true;
+
+			ObjectivesManager.Instance.OnInteractionComplete( this, true );
 		}
 		else
 		{

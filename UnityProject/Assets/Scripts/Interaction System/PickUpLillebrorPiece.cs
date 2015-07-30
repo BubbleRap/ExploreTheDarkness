@@ -6,24 +6,17 @@ public class PickUpLillebrorPiece : IInteractableObject
 
 	public override bool Activate()
 	{
+
+		if( !ObjectivesManager.Instance.IsInteractionEligable( this ) )
+			return false;
+
 		interactionIsActive = !interactionIsActive;
-		IsCompleted = true;
+
+		ObjectivesManager.Instance.OnInteractionComplete( this, true );
 
 		GameObject siljaGO = GameObject.FindGameObjectWithTag("Player");
 		Inventory siljaInventory = siljaGO.GetComponent<Inventory>();
 
-		if(siljaGO.GetComponent<CollectLillebrorUI>() == null)
-		{
-			CollectLillebrorUI objectiveController = siljaGO.AddComponent<CollectLillebrorUI>();
-		}
-		siljaGO.GetComponent<CollectLillebrorUI>().lillebrorMessage = "Collect the pieces";
-		siljaGO.GetComponent<CollectLillebrorUI>().multipleTask = true;
-
-		if(siljaGO.GetComponent<Inventory>().getLilleBrorPieces() == 4)
-		{
-			siljaGO.GetComponent<CollectLillebrorUI>().lillebrorMessage = "Sew Lillebror together";
-			siljaGO.GetComponent<CollectLillebrorUI>().multipleTask = false;
-		}
 
 		if(GameObject.Find("PuzzleTrigger") != null)
 		{
