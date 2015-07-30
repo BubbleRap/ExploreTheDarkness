@@ -16,9 +16,6 @@ public class PeepHoleInteraction : IInteractableObject
 
 	public override bool Activate()
 	{
-
-		interactionIsActive = !interactionIsActive;
-
 		if( _siljaBeh == null )
 		{
 			GameObject siljaGO = GameObject.FindGameObjectWithTag("Player");
@@ -27,6 +24,14 @@ public class PeepHoleInteraction : IInteractableObject
 			_camTransitioner = _siljaBeh.camTransitioner;
 			_overlay = _siljaBeh.thisCamera.GetComponent<ScreenOverlay>();
 		}
+
+
+		if( !ObjectivesManager.Instance.IsInteractionEligable( this ) )
+			return false;
+
+
+		interactionIsActive = !interactionIsActive;
+
 
 		if( interactionIsActive )
 		{
@@ -44,7 +49,7 @@ public class PeepHoleInteraction : IInteractableObject
 		}
 
 
-		IsCompleted = interactionIsActive;
+		ObjectivesManager.Instance.OnInteractionComplete( this, interactionIsActive );
 		return interactionIsActive;
 	}
 

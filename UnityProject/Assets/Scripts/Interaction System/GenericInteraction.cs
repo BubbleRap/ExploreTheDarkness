@@ -9,6 +9,9 @@ public class GenericInteraction : IInteractableObject
 
 	public override bool Activate()
 	{
+		if( !ObjectivesManager.Instance.IsInteractionEligable( this ) )
+			return false;
+
 		interactionIsActive = !interactionIsActive;
 
 		if( interactionIsActive )
@@ -20,7 +23,7 @@ public class GenericInteraction : IInteractableObject
 			m_onInteractionDisactivate.Invoke();
 		}
 
-		IsCompleted = interactionIsActive;
-		return true;
+		ObjectivesManager.Instance.OnInteractionComplete( this, interactionIsActive );
+		return false;
 	}
 }

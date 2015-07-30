@@ -6,14 +6,12 @@ public class SewLillebror :IInteractableObject
 
 	public override bool Activate()
 	{
-		if( !m_isInitialized )
-		{
-			Debug.Log("Too soon.");
+		if( !ObjectivesManager.Instance.IsInteractionEligable( this ) )
 			return false;
-		}
 
 		interactionIsActive = !interactionIsActive;
-		IsCompleted = true;
+
+		ObjectivesManager.Instance.OnInteractionComplete( this, true );
 
 		GameObject siljaGO = GameObject.FindGameObjectWithTag("Player");
 		Inventory siljaInventory = siljaGO.GetComponent<Inventory>();
@@ -26,13 +24,6 @@ public class SewLillebror :IInteractableObject
 				soundSource.clip = audioClip;
 				soundSource.Play();
 			}
-
-			if(siljaGO.GetComponent<CollectLillebrorUI>() == null)
-			{
-				CollectLillebrorUI objectiveController = siljaGO.AddComponent<CollectLillebrorUI>();
-			}
-			siljaGO.GetComponent<CollectLillebrorUI>().lillebrorMessage = "";
-			siljaGO.GetComponent<CollectLillebrorUI>().multipleTask = false;
 
 			siljaInventory.lillebrorComplete = true;
 //		}

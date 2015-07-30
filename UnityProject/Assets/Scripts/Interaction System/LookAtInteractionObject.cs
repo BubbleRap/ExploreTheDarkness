@@ -14,8 +14,11 @@ public class LookAtInteractionObject : IInteractableObject
 			_siljaBeh = siljaGO.GetComponent<SiljaBehaviour>();
 		}
 
+		if( !ObjectivesManager.Instance.IsInteractionEligable( this ) )
+			return false;
+
 		interactionIsActive = !interactionIsActive;
-		IsCompleted = true;
+
 
 		_siljaBeh.cameraFollow.CamControlType = interactionIsActive ? CameraFollow.CameraControlType.CCT_LookingAtObject : 
 			CameraFollow.CameraControlType.CCT_Default;
@@ -24,6 +27,8 @@ public class LookAtInteractionObject : IInteractableObject
 		
 		_siljaBeh.IsMoveEnabled = !interactionIsActive;
 
+
+		ObjectivesManager.Instance.OnInteractionComplete( this, true );
 		return false;
     }
 }
