@@ -96,9 +96,8 @@ public class IInteractableObject : MonoBehaviour
 			isEligable = isEligable   && (  (perspectiveMode == WorkState.FirstPersonOnly && SiljaBehaviour.isLookingInFP) 
 			                            		||(perspectiveMode == WorkState.ThirdPersonOnly && !SiljaBehaviour.isLookingInFP));
 		}
-		                            
 
-		OnInteractionClose( interactionIsActive
+		OnInteractionClose( (interactor.isInteracting  && interactionIsActive)
 						|| (isClose
 		                && IsVisibleWithin(15f) 
 		                && isEligable));

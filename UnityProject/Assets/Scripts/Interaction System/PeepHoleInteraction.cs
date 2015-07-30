@@ -110,7 +110,6 @@ public class PeepHoleInteraction : IInteractableObject
 
 	private void DisablePeepHoleTPP()
 	{
-		Debug.Log("DisablePeepHoleTPP");
 		_overlay.enabled = false;
 		
 		_camTransitioner.AddTPPCompleteAction( () =>
