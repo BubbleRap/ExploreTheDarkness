@@ -37,8 +37,17 @@ public class LightSwitchInteraction : IInteractableObject
 		for( int i = 0; i < _emissiveSurfaces.Length; i++ )
 		{
 			emitColorOn[i] = _emissiveSurfaces[i].material.GetColor("_EmissionColor");
-			_emissiveSurfaces[i].material.SetColor("_EmissionColor", Color.black);
-			DynamicGI.SetEmissive(_emissiveSurfaces[i], Color.black);
+
+			if( _defaultState )
+			{
+				_emissiveSurfaces[i].material.SetColor("_EmissionColor", emitColorOn[i]);
+				DynamicGI.SetEmissive(_emissiveSurfaces[i], emitColorOn[i] * Mathf.LinearToGammaSpace(emissionIntensity));
+			}
+			else
+			{
+				_emissiveSurfaces[i].material.SetColor("_EmissionColor", Color.black);
+				DynamicGI.SetEmissive(_emissiveSurfaces[i], Color.black);
+			}
 		}
 	}
 
