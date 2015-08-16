@@ -9,15 +9,10 @@ public class SiljaShakeOnScary : MonoBehaviour
 
 //	private CameraMotionBlur blurComponent;
 //	private MotionBlur motionBlurComponent;
-
-	private bool isScared = false;
+	
 	private float scaryAmount = 0f;
 
-	public bool IsScared
-	{
-		get{ return isScared; }
-		set{ isScared = value; }
-	}
+	public bool IsScared { get; set; }
 
 	void Awake()
 	{
@@ -29,7 +24,7 @@ public class SiljaShakeOnScary : MonoBehaviour
 	void Update()
 	{
 		// there are objects in sight
-		if (isScared) 
+		if (IsScared) 
 		{
 			// §if it is enabled, increase shaking
 			if( firstPersonCameraShaker.shaking )
