@@ -10,12 +10,14 @@ public class AudioMixerControls : MonoBehaviour
 	public float m_time = 1f;
 
 	public AudioMixer m_audioMixer;
-
+	public AudioSource m_audioSource;
 
 	void Awake()
 	{
 		if( m_audioMixer == null )
 			Debug.LogError( gameObject.name + " AudioMixer is not assigned" );
+		if( m_audioSource == null )
+			Debug.LogError( gameObject.name + " AudioSource is not assigned" );
 	}
 
 	public void FadeInAudio()
@@ -32,6 +34,7 @@ public class AudioMixerControls : MonoBehaviour
 
 	private IEnumerator FadeIn( )
 	{
+		m_audioSource.enabled = true;
 		m_audioMixer.SetFloat(m_paramName, m_minValue);
 		float timer = 0f;
 
@@ -58,5 +61,6 @@ public class AudioMixerControls : MonoBehaviour
 		}
 
 		m_audioMixer.SetFloat(m_paramName, m_minValue);
+		m_audioSource.enabled = false;
 	}
 }
