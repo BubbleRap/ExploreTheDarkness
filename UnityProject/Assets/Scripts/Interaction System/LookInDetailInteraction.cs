@@ -128,7 +128,10 @@ public class LookInDetailInteraction : IInteractableObject
 		{
 			if( Input.GetMouseButton(0) )
 			{
-				transform.Rotate( -mouseVelocity.y * _rotationSensetivity, -mouseVelocity.x * _rotationSensetivity, 0f );
+				Vector3 dir = 	mouseVelocity.y * _rotationSensetivity * Camera.main.transform.right +
+								-mouseVelocity.x * _rotationSensetivity * Camera.main.transform.up;
+
+				transform.Rotate( dir , Space.World );
 			}
 		}
 	}
