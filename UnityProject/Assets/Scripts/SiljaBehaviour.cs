@@ -309,8 +309,8 @@ public class SiljaBehaviour : MonoBehaviour
 
 	private void OnGUI()
 	{
-		GUILayout.Label("Light intensity: " + _lightIntensity.ToString("0.0"));
-		GUILayout.Label("Time left: " + DarknessApproachingTimer.ToString("0"));
+//		GUILayout.Label("Light intensity: " + _lightIntensity.ToString("0.0"));
+//		GUILayout.Label("Time left: " + DarknessApproachingTimer.ToString("0"));
 	}
 
 	public void SetLightIntensity()
