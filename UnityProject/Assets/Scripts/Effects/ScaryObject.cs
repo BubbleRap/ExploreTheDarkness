@@ -3,12 +3,14 @@ using System.Collections;
 
 public class ScaryObject : MonoBehaviour
 {
+	private SiljaBehaviour siljaBehComp = null;
 	private SiljaShakeOnScary siljaScaryComp = null;
 
 	void Start()
 	{
 		GameObject silja = GameObject.FindGameObjectWithTag ("Player");
 		siljaScaryComp = silja.GetComponent<SiljaShakeOnScary> ();
+		siljaBehComp = silja.GetComponent<SiljaBehaviour>();
 	}
 
 	void Update()
@@ -36,6 +38,6 @@ public class ScaryObject : MonoBehaviour
 			}
 		}
 
-		siljaScaryComp.IsScared = inDirectSight && isInView;
+		siljaBehComp.IsScared = inDirectSight && isInView;
 	}
 }

@@ -12,11 +12,12 @@ public class SiljaShakeOnScary : MonoBehaviour
 	
 	private float scaryAmount = 0f;
 
-	public bool IsScared { get; set; }
+	private SiljaBehaviour siljaBeh;
 
 	void Awake()
 	{
 		firstPersonCameraShaker = transform.FindChild("3rd Person Camera").GetComponent<CameraShaker>();
+		siljaBeh = GetComponent<SiljaBehaviour>();
 //		blurComponent = firstPersonCameraShaker.GetComponent<CameraMotionBlur> ();
 //		motionBlurComponent = firstPersonCameraShaker.GetComponent<MotionBlur> ();
 	}
@@ -24,7 +25,7 @@ public class SiljaShakeOnScary : MonoBehaviour
 	void Update()
 	{
 		// there are objects in sight
-		if (IsScared) 
+		if (siljaBeh.IsScared) 
 		{
 			// §if it is enabled, increase shaking
 			if( firstPersonCameraShaker.shaking )
