@@ -120,7 +120,7 @@ public class SiljaBehaviour : MonoBehaviour
 	private float _looseConditionTimer = 0f;
 
 	private int lastCheckPoint = 0;
-	
+	public bool IsScared { get; set; }
 
 	public bool IsMoveEnabled 
 	{
@@ -279,7 +279,7 @@ public class SiljaBehaviour : MonoBehaviour
 			_lightIntensity -= fadingOutSpeed;
 			SetLightIntensity();
 
-			if(DarknessApproachingTimer >= TimeInDarknessTotal && !isLookingInFP)
+			if(DarknessApproachingTimer >= TimeInDarknessTotal && (!isLookingInFP || IsScared))
 			{
 				DarknessApproachingTimer -= Time.deltaTime * darknessIntensifier;
 				thirdPersonInDark = true;
