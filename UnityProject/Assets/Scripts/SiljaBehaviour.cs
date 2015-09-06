@@ -118,6 +118,8 @@ public class SiljaBehaviour : MonoBehaviour
 	private float availableTimeInDark = 20f;
 	private float _lightIntensity = 0f;
 	private float _looseConditionTimer = 0f;
+
+	private int lastCheckPoint = 0;
 	
 
 	public bool IsMoveEnabled 
@@ -154,6 +156,12 @@ public class SiljaBehaviour : MonoBehaviour
 	{
 		EnableThirdPerson();
 		DarknessApproachingTimer = LillebrorLightLifetime + TimeInDarknessTotal;
+	}
+
+	public void SetLastCheckpointIndex( int idx )
+	{
+		if( idx > lastCheckPoint )
+			lastCheckPoint = idx;
 	}
 	
 	public float getTeddyLight()
@@ -309,8 +317,8 @@ public class SiljaBehaviour : MonoBehaviour
 
 	private void OnGUI()
 	{
-//		GUILayout.Label("Light intensity: " + _lightIntensity.ToString("0.0"));
-//		GUILayout.Label("Time left: " + DarknessApproachingTimer.ToString("0"));
+		GUILayout.Label("Light intensity: " + _lightIntensity.ToString("0.0"));
+		GUILayout.Label("Time left: " + DarknessApproachingTimer.ToString("0"));
 	}
 
 	public void SetLightIntensity()
@@ -454,7 +462,8 @@ public class SiljaBehaviour : MonoBehaviour
 			moveCtrl.canMove = true;
 			
 			DarknessApproachingTimer = LillebrorLightLifetime + TimeInDarknessTotal;
-			transform.position = spawnPoint.position;
+//			transform.position = spawnPoint.position;
+			ObjectsTranslator.MoveObjectTo( lastCheckPoint );
 
 			teddyLight.intensity = 1.0f;
 			teddyLightFlash.intensity = 2.0f;
