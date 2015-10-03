@@ -71,11 +71,11 @@ public class CameraTransitioner : MonoBehaviour {
 			GetComponent<AudioSource>() 
 		});
 
-		FppOnlyComponents.AddRange (new Behaviour[]{
-			GetComponent<DepthOfField>(),
+//		FppOnlyComponents.AddRange (new Behaviour[]{
+//			GetComponent<DepthOfField>(),
 //			GetComponent<Antialiasing>(),
-			GetComponent<VignetteAndChromaticAberration>()
-		});
+//			GetComponent<VignetteAndChromaticAberration>()
+//		});
 
 		FppOnlyGameplayComponents.AddRange (new Behaviour[]{
 			GetComponent<Health>()

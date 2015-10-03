@@ -24,12 +24,16 @@ public class LookInDetailInteraction : IInteractableObject
 
 	private Collider _collider;
 
+	private DepthOfField _dof;
+
 	void Awake()
 	{
 		_originalPos = transform.position;
 		_originalRot = transform.rotation;
 
 		_collider = GetComponent<Collider>();
+
+		_dof = Camera.main.GetComponent<DepthOfField>();
 	}
 
 	public override bool Activate()
@@ -67,6 +71,8 @@ public class LookInDetailInteraction : IInteractableObject
 
 
 		_siljaBeh.IsMoveEnabled = false;
+
+		_dof.enabled = true;
 			
 		transitioner.AddFPPCompleteAction( () =>
 		{
@@ -75,8 +81,8 @@ public class LookInDetailInteraction : IInteractableObject
 			Transform fpCamTransform = transitioner.FPPCameraTransform;
 			transform.position = fpCamTransform.TransformPoint(Vector3.forward * _faceDistance);
 
-			Camera.main.GetComponent<DepthOfField>().focalLength = _faceDistance;
-			Camera.main.GetComponent<DepthOfField>().aperture = 50f;
+			_dof.focalLength = _faceDistance;
+			_dof.aperture = 50f;
 
 			transform.LookAt(fpCamTransform);
 
@@ -96,6 +102,8 @@ public class LookInDetailInteraction : IInteractableObject
 	{
 		CameraTransitioner transitioner = _siljaBeh.thisCamera.GetComponent<CameraTransitioner>();
 		CameraFollow camControl = _siljaBeh.thisCamera.GetComponent<CameraFollow>();
+
+		_dof.enabled = false;
 
 		transitioner.AddTPPCompleteAction( () =>
 		                                  {	
