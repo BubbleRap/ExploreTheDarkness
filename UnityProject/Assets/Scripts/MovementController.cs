@@ -81,7 +81,8 @@ public class MovementController : MonoBehaviour
 		
 		moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, curSmooth);
 
-		characterAnimator.SetFloat ("speed", moveSpeed);
+		if( characterAnimator.gameObject.activeInHierarchy )
+			characterAnimator.SetFloat ("speed", moveSpeed);
 
 		if( firstPersonAnimator.gameObject.activeInHierarchy )
 			firstPersonAnimator.SetFloat ("speed", moveSpeed);
