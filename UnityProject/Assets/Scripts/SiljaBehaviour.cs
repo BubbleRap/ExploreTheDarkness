@@ -188,8 +188,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 		if(		Input.GetKeyUp( KeyCode.Q ) 
 		   && 	camTransitioner.Mode != CameraTransitioner.CameraMode.Transitioning
-		   &&	!interactor.isInteracting 
-		   &&  	GetComponent<Inventory>().lillebrorComplete)
+		   &&	!interactor.isInteracting)
 		{
 			if( isLookingInFP )
 			{
