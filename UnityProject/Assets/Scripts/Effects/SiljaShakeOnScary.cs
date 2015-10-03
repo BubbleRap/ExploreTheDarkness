@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+using UnityStandardAssets.ImageEffects;
+
 public class SiljaShakeOnScary : MonoBehaviour 
 {
 	[HideInInspector]
 	public CameraShaker firstPersonCameraShaker;
 	private List<GameObject> scaryObjectsInSight = new List<GameObject> ();
-
-//	private CameraMotionBlur blurComponent;
-//	private MotionBlur motionBlurComponent;
+	
+	private MotionBlur motionBlurComponent;
 	
 	private float scaryAmount = 0f;
 
@@ -16,10 +17,10 @@ public class SiljaShakeOnScary : MonoBehaviour
 
 	void Awake()
 	{
-		firstPersonCameraShaker = transform.FindChild("3rd Person Camera").GetComponent<CameraShaker>();
+		firstPersonCameraShaker = GetComponentInChildren<CameraShaker>();
 		siljaBeh = GetComponent<SiljaBehaviour>();
-//		blurComponent = firstPersonCameraShaker.GetComponent<CameraMotionBlur> ();
-//		motionBlurComponent = firstPersonCameraShaker.GetComponent<MotionBlur> ();
+
+		motionBlurComponent = firstPersonCameraShaker.GetComponent<MotionBlur> ();
 	}
 
 	void Update()
@@ -34,18 +35,17 @@ public class SiljaShakeOnScary : MonoBehaviour
 
 				firstPersonCameraShaker.horizontalShakeIntensity = scaryAmount;
 				firstPersonCameraShaker.verticalShakeIntensity = scaryAmount;
-//				motionBlurComponent.blurAmount = scaryAmount;
+
+				motionBlurComponent.blurAmount = scaryAmount;
 			}
 			else
 			{
 				scaryAmount = 0f;
 				
-				firstPersonCameraShaker.shakeFrequency = 0.05f;
-				
+				firstPersonCameraShaker.shakeFrequency = 0.05f;	
 				firstPersonCameraShaker.EnableShake ();
-//				blurComponent.enabled = true;
-				
-//				motionBlurComponent.enabled = true;
+							
+				motionBlurComponent.enabled = true;
 			
 			}
 		} 
@@ -59,14 +59,15 @@ public class SiljaShakeOnScary : MonoBehaviour
 				
 				firstPersonCameraShaker.horizontalShakeIntensity = scaryAmount;
 				firstPersonCameraShaker.verticalShakeIntensity = scaryAmount;
-//				motionBlurComponent.blurAmount = scaryAmount;
+
+				motionBlurComponent.blurAmount = scaryAmount;
 
 				// disable, where shake amount is 0
 				if( scaryAmount <= 0 )
 				{
 					firstPersonCameraShaker.DisableShake ();
-//					blurComponent.enabled = false;
-//					motionBlurComponent.enabled = false;
+
+					motionBlurComponent.enabled = false;
 				}
 			}
 		}

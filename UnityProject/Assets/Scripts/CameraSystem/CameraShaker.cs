@@ -14,7 +14,7 @@ public class CameraShaker : MonoBehaviour
 
 	void Start()
 	{
-		originalPosition = transform.localPosition;
+//		originalPosition = transform.localPosition;
 	}
 
 	public void StartShake (float time) 
@@ -25,7 +25,8 @@ public class CameraShaker : MonoBehaviour
 
 	void Update()
 	{
-		transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition + shakeOffset, Time.deltaTime);
+		if(shaking)
+			transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition + shakeOffset, Time.deltaTime);
 	}
 	
 	IEnumerator ShakeCamera()
@@ -48,12 +49,16 @@ public class CameraShaker : MonoBehaviour
 
 	public void EnableShake()
 	{
+		originalPosition = transform.localPosition;
+
 		shaking = true;
 		StartCoroutine(ShakeCamera());
 	}
 
 	public void DisableShake()
 	{
+		transform.localPosition = originalPosition;
+
 		shaking = false;
 		shakeOffset = Vector3.zero;
 	}
