@@ -30,9 +30,9 @@ public class ScaryObject : MonoBehaviour
 		// cast Default layer only
 		LayerMask mask = 1 << 0;
 		
-		if( Physics.Linecast(siljaScaryComp.firstPersonCameraShaker.transform.position, transform.position, out hitOut, mask ) )
+		if( !Physics.Linecast(siljaScaryComp.firstPersonCameraShaker.transform.position, transform.position, out hitOut, mask ) )
 		{
-			if( hitOut.collider == GetComponent<Collider>() )
+			//if( hitOut.collider == GetComponent<Collider>() )
 			{
 				inDirectSight = true;
 			}
