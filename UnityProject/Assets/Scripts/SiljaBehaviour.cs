@@ -136,7 +136,7 @@ public class SiljaBehaviour : MonoBehaviour
 		} 
 		set
 		{
-			if( value && !siljaOnScaredAudio.isPlaying )
+			if( siljaOnScaredAudio != null && value && !siljaOnScaredAudio.isPlaying )
 			{
 				siljaOnScaredAudio.Play();
 			}
@@ -361,7 +361,7 @@ public class SiljaBehaviour : MonoBehaviour
 		//teddyLight.intensity = _lightIntensity;
 		
 		//Sounds of darkness & fear
-		if(!heartBeatAudioSource.isPlaying)
+		if(heartBeatAudioSource != null && !heartBeatAudioSource.isPlaying)
 		{
 			heartBeatAudioSource.Play();
 		}
