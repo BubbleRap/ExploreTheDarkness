@@ -367,17 +367,20 @@ public class SiljaBehaviour : MonoBehaviour
 		}
 		
 		volume = 2.0f - (DarknessApproachingTimer*2 / (LillebrorLightLifetime + TimeInDarknessTotal));
-		heartBeatAudioSource.volume = volume;
+
+		if( heartBeatAudioSource != null )
+			heartBeatAudioSource.volume = volume;
 		
-		if(!breathingAudioSource.isPlaying)
+		if(breathingAudioSource != null && !breathingAudioSource.isPlaying)
 		{
 			breathingAudioSource.Play();
 		}
 		
 		volume2 = 1.0f - Mathf.Pow(DarknessApproachingTimer / (LillebrorLightLifetime + TimeInDarknessTotal),0.4f);
-		breathingAudioSource.volume = volume2;
+		if( breathingAudioSource != null )
+			breathingAudioSource.volume = volume2;
 		
-		if(!monsterAudioSource.isPlaying)
+		if(monsterAudioSource != null && !monsterAudioSource.isPlaying)
 		{
 			monsterAudioSource.Play();
 		}
@@ -390,8 +393,9 @@ public class SiljaBehaviour : MonoBehaviour
 		{
 			volume3 -= Time.deltaTime;
 		}
-		
-		monsterAudioSource.volume = volume3;
+
+		if( monsterAudioSource != null )
+			monsterAudioSource.volume = volume3;
 		
 		//Lights charge & flicker
 		if(inDarkness)
@@ -448,13 +452,16 @@ public class SiljaBehaviour : MonoBehaviour
 			teddyLightFlash2.intensity = 0.0f;
 		}
 
-		if(DarknessApproachingTimer <= TimeInDarknessTotal - (TimeInDarknessTotal / 1.3f) && moveCtrl.isMoving())
+		if( monsterAudioSource != null )
 		{
-			monsterAudioSource.clip = monsterChase;
-		}
-		else
-		{
-			monsterAudioSource.clip = monsterSearching;
+			if(DarknessApproachingTimer <= TimeInDarknessTotal - (TimeInDarknessTotal / 1.3f) && moveCtrl.isMoving())
+			{
+				monsterAudioSource.clip = monsterChase;
+			}
+			else
+			{
+				monsterAudioSource.clip = monsterSearching;
+			}
 		}
 		
 		if(DarknessApproachingTimer <= 0)
