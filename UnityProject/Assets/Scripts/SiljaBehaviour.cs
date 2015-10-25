@@ -65,7 +65,7 @@ public class SiljaBehaviour : MonoBehaviour
 	static public bool isLookingInFP = false;
 	static public bool isFlashlightEnabled = false;
 	
-	private bool isFlashLightCollected = false;
+	public bool isFlashLightCollected = false;
 	public bool FlashLightCollected
 	{
 		get{ return isFlashLightCollected; }
@@ -317,8 +317,10 @@ public class SiljaBehaviour : MonoBehaviour
 
 	private void OnGUI()
 	{
+		/*
 		GUILayout.Label("Light intensity: " + _lightIntensity.ToString("0.0"));
 		GUILayout.Label("Time left: " + DarknessApproachingTimer.ToString("0"));
+		*/
 	}
 
 	public void SetLightIntensity()
