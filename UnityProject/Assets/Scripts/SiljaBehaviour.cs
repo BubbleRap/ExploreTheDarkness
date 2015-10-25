@@ -42,6 +42,8 @@ public class SiljaBehaviour : MonoBehaviour
 	public float TimeInDarknessTotal = 10.0f;
 	public float darknessIntensifier = 10.0f;
 	public float rechargeSpeed = 5.0f;
+
+
 	public AudioSource heartBeatAudioSource;
 	public AudioClip heartBeatClip;
 	public AudioSource breathingAudioSource;
@@ -49,6 +51,10 @@ public class SiljaBehaviour : MonoBehaviour
 	public AudioSource monsterAudioSource;
 	public AudioClip monsterSearching;
 	public AudioClip monsterChase;
+
+	public AudioSource siljaOnScaredAudio;
+
+
 	private float volume = 1.0f;
 	private float volume2 = 1.0f;
 	private float volume3 = 1.0f;
@@ -120,7 +126,24 @@ public class SiljaBehaviour : MonoBehaviour
 	private float _looseConditionTimer = 0f;
 
 	private int lastCheckPoint = 0;
-	public bool IsScared { get; set; }
+
+	private bool m_isScared = false;
+	public bool IsScared 
+	{ 
+		get
+		{
+			return m_isScared;
+		} 
+		set
+		{
+			if( value && !siljaOnScaredAudio.isPlaying )
+			{
+				siljaOnScaredAudio.Play();
+			}
+
+			m_isScared = value;
+		}
+	}
 
 	public bool IsMoveEnabled 
 	{
