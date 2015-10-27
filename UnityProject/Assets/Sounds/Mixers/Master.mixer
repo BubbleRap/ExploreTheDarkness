@@ -18,6 +18,12 @@ AudioMixerController:
     name: MyExposedParam 1
   - guid: 24712a1e7e33d8b4ab8345e35d47484d
     name: MyExposedParam
+  - guid: 38192d0b8eadbaf4bbc8b35e00b4a3f4
+    name: VolumeMonster
+  - guid: 4b29e4e9d6c11c549808cfc9139685c8
+    name: VolumeNeighbour
+  - guid: 7f465eeb9797a31449961334d886792c
+    name: VolumeViolins
   m_AudioMixerGroupViews:
   - guids:
     - 388f930e19d2a5c4f89a7009a0eb4223
@@ -31,6 +37,9 @@ AudioMixerController:
     - 23a3f9db824c4d949bbd6455e8090c26
     - 913d27538346fe1409b74559544114cd
     - 2ba482f9af8d571449f6ecc74ef16693
+    - cef91f31a9f6e9e489b3d854b3e6aeb4
+    - 084a8116f5efd2e4386119a6b0a84aea
+    - cc1011fffc405b54da6a32435170d5ff
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500003}
@@ -166,6 +175,23 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!243 &24334018
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Neighbour
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: cef91f31a9f6e9e489b3d854b3e6aeb4
+  m_Children: []
+  m_Volume: 4b29e4e9d6c11c549808cfc9139685c8
+  m_Pitch: f9140c3cae09fce4e8d87010df94a049
+  m_Effects:
+  - {fileID: 24450242}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!243 &24336156
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -211,10 +237,45 @@ AudioMixerGroupController:
   m_Children:
   - {fileID: 24329342}
   - {fileID: 24303390}
+  - {fileID: 24334018}
   m_Volume: fa3e35f84647881448e0df87eb0b1126
   m_Pitch: a381018c80914e94d8ec10903d969118
   m_Effects:
   - {fileID: 24480416}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &24385180
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Monster
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: cc1011fffc405b54da6a32435170d5ff
+  m_Children: []
+  m_Volume: 38192d0b8eadbaf4bbc8b35e00b4a3f4
+  m_Pitch: a3c2935a69ca3144fb4412af87f89d6c
+  m_Effects:
+  - {fileID: 24472694}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &24390018
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Violins
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 084a8116f5efd2e4386119a6b0a84aea
+  m_Children: []
+  m_Volume: 7f465eeb9797a31449961334d886792c
+  m_Pitch: bec7b4ac836a8914d94d0c789c045a61
+  m_Effects:
+  - {fileID: 24433624}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -229,6 +290,8 @@ AudioMixerGroupController:
   m_GroupID: b4ca64327a0065d46b019884fc882ef5
   m_Children:
   - {fileID: 24336156}
+  - {fileID: 24390018}
+  - {fileID: 24385180}
   m_Volume: 5e94db657400ee34fadf677bc2ce6e61
   m_Pitch: a6e5eef0ac8cc9c4791b05d952dd463e
   m_Effects:
@@ -262,6 +325,19 @@ AudioMixerEffectController:
   m_MixLevel: 24d2ed28341615048bd22438187adf9a
   m_Parameters: []
   m_SendTarget: {fileID: 24482406}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &24433624
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: d9cfae0e4d3889a45ae280352dd97f02
+  m_EffectName: Attenuation
+  m_MixLevel: 2532c9b03dfa44742b5ae56fc81d6dc2
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
 --- !u!244 &24434006
@@ -313,6 +389,19 @@ AudioMixerEffectController:
   m_EffectID: 95657ad41f6b3d144816d3e5f131fe49
   m_EffectName: Attenuation
   m_MixLevel: 369789f38e385584ea7fdafcd2515f97
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &24450242
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 0245a6cfa2d3b274194f0116f0275504
+  m_EffectName: Attenuation
+  m_MixLevel: e24eeac1f93d4ef4ba6633ed991275f9
   m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
@@ -436,6 +525,19 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &24472694
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: cff8da541d02baf48bba10ee4775cdc4
+  m_EffectName: Attenuation
+  m_MixLevel: ef847a35db661f14d952218de24cc998
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &24475658
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -548,9 +650,10 @@ AudioMixerSnapshotController:
     304178e17c32a6b4692ab2a97eb53aac: 6.22518539
     5751d7035780dba49a4041332c780003: -31.3999996
     884669c354e678b45824ac7d53ecbda7: .985000014
-    5e94db657400ee34fadf677bc2ce6e61: 16.7411518
+    5e94db657400ee34fadf677bc2ce6e61: .135525838
     fc10ab95173bdf64fa9023b78d5ee10b: -2.20000005
     baa72406aa7ad654d9c6d560b279dbba: -11.6000004
+    0ee67046c8fcbb746b13d64607c93154: -.037667945
     3f889a5623d8f244ba99b1dee74e5fad: 0
     02124b76e2012334a82fddfbb3f565d1: 0
     cc84f3a6fe7acde46ac646add191f735: -60.5999985
@@ -560,20 +663,24 @@ AudioMixerSnapshotController:
     70a96f47919add349b466737fba2da26: -5389
     e68012a71a53e9d4ca053c573e2ccf3d: .44600001
     0fda54d7520d2fa4e999b6fb733b265d: -2906
-    444215e7eb4f49a4fb667ea61867ab42: 4.370502
+    444215e7eb4f49a4fb667ea61867ab42: .0255785119
     24d2ed28341615048bd22438187adf9a: 0
     b7055a7885d156f4790bdcdd5cdca74b: .899999976
     11543b780262a9d4e882b8c9a4ad585d: -44.4000015
-    fa3e35f84647881448e0df87eb0b1126: .0255785137
+    fa3e35f84647881448e0df87eb0b1126: .0255785119
     03d7d3393c7321e4d914cd34ccc5e6bf: 1
+    73f3d6694ee57bb4ebb502fb8e5025f2: 1
     ae6354c912d92624189c7ccc480766c6: 48.2999992
+    4b29e4e9d6c11c549808cfc9139685c8: -.037667945
     ee8b99fa0282da54d9c51987036bbe2b: 1170
+    7f465eeb9797a31449961334d886792c: -39.7035332
     6ca2f00c8979669409f80acfb77e33c7: -5517
     0c2436ec0bac2e74489b0b9f9270bbcf: .865999997
     26a147bd0e1e6c842baad1daa6f09189: 171
     3c5ce0fd5eb21df46b4e6658d5875d00: 3683
     a7393efd23f1e9b4fbb1fa6c03e94ebc: -52.7000008
     caa4f20ebbc60474e947fdc7b56e07ea: 8.89999962
+    24712a1e7e33d8b4ab8345e35d47484d: -39.9287834
     f39da74ed83bea048a8bcd19b070f853: .10800299
     980d997eaf6d7994aafd65c8fecd57fe: 5.54300022
     90e2aa4f36f15b0408f4ff46c094eb82: 21.7000008
