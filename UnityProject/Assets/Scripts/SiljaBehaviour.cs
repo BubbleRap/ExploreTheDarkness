@@ -54,6 +54,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 	public AudioSource siljaOnScaredAudio;
 	public AudioSource audioRunTension;
+	public AudioSource flashlightTurnAudio;
 
 	private float volume = 1.0f;
 	private float volume2 = 1.0f;
@@ -302,6 +303,11 @@ public class SiljaBehaviour : MonoBehaviour
 	{
 		if( !isFlashLightCollected )
 			return;
+
+		if( siljaOnScaredAudio != null  )
+			flashlightTurnAudio.Play();
+		else
+			Debug.LogError("No flash light audio source found");
 
 		isFlashlightEnabled = state;
 		twoHandsJoint.gameObject.SetActive(state);
