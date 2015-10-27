@@ -244,11 +244,13 @@ public class SiljaBehaviour : MonoBehaviour
 			{
 				isLookingInFP = false;
 				ShiftToThirdPerson();
+				EnableFlashlight ( false );
 			}
 			else
 			{
 				isLookingInFP = true;
 				ShiftToFirstPerson();
+				EnableFlashlight ( true );
 			}
 		}
 
@@ -277,7 +279,7 @@ public class SiljaBehaviour : MonoBehaviour
 		charMotor.movement.maxSidewaysSpeed = 1.5f;
 
 //		isLookingInFP = true;
-		EnableFlashlight ( true );
+
 	}
 
 	public void ShiftToThirdPerson()
@@ -295,8 +297,6 @@ public class SiljaBehaviour : MonoBehaviour
 		charMotor.movement.maxSidewaysSpeed = 0.9f;
 
 		cameraFollow.CamControlType = CameraFollow.CameraControlType.CCT_Default;
-
-		EnableFlashlight( false );
 	}
 
 	public void EnableFlashlight(bool state)
