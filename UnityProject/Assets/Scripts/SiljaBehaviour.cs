@@ -304,7 +304,7 @@ public class SiljaBehaviour : MonoBehaviour
 		if( !isFlashLightCollected )
 			return;
 
-		if( siljaOnScaredAudio != null  )
+		if( flashlightTurnAudio != null  )
 			flashlightTurnAudio.Play();
 		else
 			Debug.LogError("No flash light audio source found");
