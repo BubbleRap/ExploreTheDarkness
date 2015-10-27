@@ -17,6 +17,7 @@ public class PickUpLillebrorPiece : IInteractableObject
 		GameObject siljaGO = GameObject.FindGameObjectWithTag("Player");
 		Inventory siljaInventory = siljaGO.GetComponent<Inventory>();
 
+		m_onInteractionActivated.Invoke();
 
 		if(GameObject.Find("PuzzleTrigger") != null)
 		{
