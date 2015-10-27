@@ -53,7 +53,7 @@ public class SiljaBehaviour : MonoBehaviour
 	public AudioClip monsterChase;
 
 	public AudioSource siljaOnScaredAudio;
-
+	public AudioSource audioRunTension;
 
 	private float volume = 1.0f;
 	private float volume2 = 1.0f;
@@ -127,6 +127,7 @@ public class SiljaBehaviour : MonoBehaviour
 
 	private int lastCheckPoint = 0;
 
+	private bool m_haveSeenRecently = false;
 	private bool m_isScared = false;
 	public bool IsScared 
 	{ 
@@ -136,13 +137,38 @@ public class SiljaBehaviour : MonoBehaviour
 		} 
 		set
 		{
-			if( siljaOnScaredAudio != null && value && !siljaOnScaredAudio.isPlaying )
+
+
+			if( siljaOnScaredAudio != null  )
 			{
-				siljaOnScaredAudio.Play();
+				if(value && !m_haveSeenRecently)
+				{
+					siljaOnScaredAudio.Play();
+				}
+			}
+			
+			
+			if( audioRunTension != null )
+			{
+				if(value && !m_haveSeenRecently)
+				{
+					audioRunTension.Play();
+				}
+			}
+
+			if( value && !m_haveSeenRecently)
+			{
+				m_haveSeenRecently = true;
+				Invoke("CleanSeenRecentlyFlag", 10f);
 			}
 
 			m_isScared = value;
 		}
+	}
+
+	public void CleanSeenRecentlyFlag()
+	{
+		m_haveSeenRecently = false;
 	}
 
 	public bool IsMoveEnabled 
