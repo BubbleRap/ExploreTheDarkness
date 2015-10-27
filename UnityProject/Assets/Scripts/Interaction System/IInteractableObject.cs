@@ -2,13 +2,7 @@
 using System.Collections;
 
 using UnityEngine.Events;
-/// <summary>
-/// TODO: Add states, for uncomplete, complete etc;
-/// Integrate Promt script
-/// Render text concerning what objecting is being completed
-/// </summary>
 
-//[RequireComponent(typeof(PromtButtonInteractionObject))]
 public class IInteractableObject : MonoBehaviour 
 {
 	public enum WorkState
@@ -20,49 +14,14 @@ public class IInteractableObject : MonoBehaviour
 	}
 
 	public WorkState perspectiveMode;
-
-//	[HideInInspector]
-//	public UnityEvent m_onInteractionComplete = new UnityEvent();
-
-
-//	public delegate void CompletionCallback( bool state );
-//	public event CompletionCallback m_onInteractionComplete;
-//
-//	public void CallbackCompletion(bool state)
-//	{
-//		if( m_onInteractionComplete != null )
-//			m_onInteractionComplete.Invoke( state );
-//	}
-
-
-//	protected bool m_isCompleted = false;
-//	public bool IsCompleted
-//	{
-//		get 
-//		{ 
-//			return m_isCompleted; 
-//		}
-//		set 
-//		{
-//			bool prevValue = m_isCompleted;
-//			m_isCompleted = value;
-//
-//			// so if a job was'nt complete before, but it is complete now,
-//			// then invoke the function
-//			if( m_isCompleted && !prevValue )
-//				m_onInteractionComplete.Invoke();
-//		}
-//	}
+	
 
 	protected bool interactionIsActive = false;
-//	protected bool m_isInitialized = false;
 	private Renderer m_renderer;
-
-//	public virtual void Initialize() { m_isInitialized = !m_isInitialized; }
+	
 	public virtual bool Activate() { return (interactionIsActive = !interactionIsActive); }
 	
 	public bool disableOnActive = true;
-//	public bool interactionWorksInFP = false;
 	
 	private GameObject buttonPrompt;
 	private Interactor interactor;
@@ -73,6 +32,8 @@ public class IInteractableObject : MonoBehaviour
 	public string TextToDisplay = "some string";
 
 	private Vector3 m_cameraRelativePosition;
+
+	public UnityEvent m_onInteractionActivated = new UnityEvent();
 
 	void Start()
 	{

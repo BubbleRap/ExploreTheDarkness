@@ -39,6 +39,8 @@ public class PeepHoleInteraction : IInteractableObject
 				EnablePeepHoleFPP();
 			else
 				EnablePeepHoleTPP();
+
+			m_onInteractionActivated.Invoke();
 		}
 		else
 		{

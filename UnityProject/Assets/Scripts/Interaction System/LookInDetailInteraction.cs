@@ -55,6 +55,8 @@ public class LookInDetailInteraction : IInteractableObject
 			OnInvestigateEnabled();
 
 			ObjectivesManager.Instance.OnInteractionComplete( this, true );
+
+			m_onInteractionActivated.Invoke();
 		}
 		else
 		{
