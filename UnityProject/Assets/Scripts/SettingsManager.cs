@@ -6,6 +6,6 @@ public class SettingsManager : MonoBehaviour
 	void Awake()
 	{
 		Cursor.visible = false;
-		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.lockState = CursorLockMode.Confined;
 	}
 }
