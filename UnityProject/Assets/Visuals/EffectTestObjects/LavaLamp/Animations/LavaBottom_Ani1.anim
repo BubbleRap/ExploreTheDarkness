@@ -1,0 +1,1957 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!74 &7400000
+AnimationClip:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: LavaBottom_Ani1
+  serializedVersion: 6
+  m_Legacy: 0
+  m_Compressed: 0
+  m_UseHighQualityCurve: 1
+  m_RotationCurves: []
+  m_CompressedRotationCurves: []
+  m_PositionCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: -.00680000009, y: .25909999, z: -.000199999995}
+        inSlope: {x: .000717391318, y: .0236739162, z: 0}
+        outSlope: {x: .000717391318, y: .0236739162, z: 0}
+        tangentMode: 0
+      - time: 3.0666666
+        value: {x: -.0046000001, y: .331699997, z: -.000199999995}
+        inSlope: {x: .000358695659, y: .0241226628, z: 0}
+        outSlope: {x: .000358695659, y: .0241226628, z: 0}
+        tangentMode: 0
+      - time: 3.41666675
+        value: {x: -.0046000001, y: .340299994, z: -.000199999995}
+        inSlope: {x: .00812953431, y: .025482595, z: 0}
+        outSlope: {x: .00812953431, y: .025482595, z: 0}
+        tangentMode: 0
+      - time: 6.63333321
+        value: {x: .0476999991, y: .425199986, z: -.000199999995}
+        inSlope: {x: -.00347162224, y: .0371275321, z: 0}
+        outSlope: {x: -.00347162224, y: .0371275321, z: 0}
+        tangentMode: 0
+      - time: 9.51666641
+        value: {x: -.0192000009, y: .563199997, z: -.000199999995}
+        inSlope: {x: -.0232023131, y: .0478612781, z: 0}
+        outSlope: {x: -.0232023131, y: .0478612781, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: LavaLamp_LavaBall_1
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: .0182000007, y: .252000004, z: .0141545339}
+        inSlope: {x: .00150967739, y: .00189677172, z: 0}
+        outSlope: {x: .00150967739, y: .00189677172, z: 0}
+        tangentMode: 0
+      - time: 5.16666651
+        value: {x: .0260000005, y: .261799991, z: .0141545339}
+        inSlope: {x: .000439049065, y: .0275141802, z: .00621531392}
+        outSlope: {x: .000439049065, y: .0275141802, z: .00621531392}
+        tangentMode: 0
+      - time: 6.4333334
+        value: {x: .0252, y: .329100013, z: .0298999995}
+        inSlope: {x: -.000315789628, y: .0284991097, z: .00621531392}
+        outSlope: {x: -.000315789628, y: .0284991097, z: .00621531392}
+        tangentMode: 0
+      - time: 7.1833334
+        value: {x: .0252, y: .331999987, z: .0298999995}
+        inSlope: {x: 0, y: .0393984318, z: 0}
+        outSlope: {x: 0, y: .0393984318, z: 0}
+        tangentMode: 0
+      - time: 7.9000001
+        value: {x: .0252, y: .385699987, z: .0298999995}
+        inSlope: {x: -.00110071932, y: .0580010824, z: -.00324820122}
+        outSlope: {x: -.00110071932, y: .0580010824, z: -.00324820122}
+        tangentMode: 0
+      - time: 12.5333338
+        value: {x: .0149999997, y: .575999975, z: -.000199999995}
+        inSlope: {x: -.00220143865, y: .0410719365, z: -.00649640244}
+        outSlope: {x: -.00220143865, y: .0410719365, z: -.00649640244}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: LavaLamp_LavaBall_2
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: -.00899999961, y: .236000001, z: -.0359999985}
+        inSlope: {x: 0, y: .000916030665, z: 0}
+        outSlope: {x: 0, y: .000916030665, z: 0}
+        tangentMode: 0
+      - time: 8.73333359
+        value: {x: -.00899999961, y: .244000003, z: -.0359999985}
+        inSlope: {x: .00350649469, y: .0351333544, z: .00662337895}
+        outSlope: {x: .00350649469, y: .0351333544, z: .00662337895}
+        tangentMode: 0
+      - time: 10.0166664
+        value: {x: 0, y: .333000004, z: -.0189999994}
+        inSlope: {x: .00350649469, y: .0441039056, z: .00662337895}
+        outSlope: {x: .00350649469, y: .0441039056, z: .00662337895}
+        tangentMode: 0
+      - time: 10.6000004
+        value: {x: 0, y: .344000012, z: -.0189999994}
+        inSlope: {x: 0, y: .0694285706, z: -.00330508593}
+        outSlope: {x: 0, y: .0694285706, z: -.00330508593}
+        tangentMode: 0
+      - time: 12.5666666
+        value: {x: 0, y: .579999983, z: -.0320000015}
+        inSlope: {x: 0, y: .120000012, z: -.00661017187}
+        outSlope: {x: 0, y: .120000012, z: -.00661017187}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: LavaLamp_LavaBall_3
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: .0192000009, y: .558600008, z: -.00510000018}
+        inSlope: {x: .00570934266, y: -.0214463677, z: 0}
+        outSlope: {x: .00570934266, y: -.0214463677, z: 0}
+        tangentMode: 0
+      - time: 4.8166666
+        value: {x: .0467000008, y: .455300003, z: -.00510000018}
+        inSlope: {x: -.00627690647, y: -.0150521323, z: 0}
+        outSlope: {x: -.00627690647, y: -.0150521323, z: 0}
+        tangentMode: 0
+      - time: 8.61666679
+        value: {x: -.0227000006, y: .422399998, z: -.00510000018}
+        inSlope: {x: -.00544736721, y: .0176184233, z: 0}
+        outSlope: {x: -.00544736721, y: .0176184233, z: 0}
+        tangentMode: 0
+      - time: 12.416667
+        value: {x: .00529999984, y: .58920002, z: -.00510000018}
+        inSlope: {x: .00736842072, y: .0438947417, z: 0}
+        outSlope: {x: .00736842072, y: .0438947417, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: LavaLamp_LavaBall_4
+  m_ScaleCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: 1, y: 1, z: 1}
+        inSlope: {x: .0244564991, y: .339135081, z: 0}
+        outSlope: {x: .0244564991, y: .339135081, z: 0}
+        tangentMode: 0
+      - time: 3.0666666
+        value: {x: 1.07499993, y: 2.04001427, z: 1}
+        inSlope: {x: -.0147666829, y: .454045415, z: 0}
+        outSlope: {x: -.0147666829, y: .454045415, z: 0}
+        tangentMode: 0
+      - time: 3.41666675
+        value: {x: 1.05610347, y: 2.23914886, z: 1}
+        inSlope: {x: -.0701514557, y: -.312944323, z: 0}
+        outSlope: {x: -.0701514557, y: -.312944323, z: 0}
+        tangentMode: 0
+      - time: 4.0666666
+        value: {x: 1, y: 1.46250021, z: 1}
+        inSlope: {x: -.0863130465, y: -1.19484437, z: 0}
+        outSlope: {x: -.0863130465, y: -1.19484437, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: LavaLamp_LavaBall_1
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: 1, y: .906249404, z: 1}
+        inSlope: {x: 0, y: .00221069762, z: 0}
+        outSlope: {x: 0, y: .00221069762, z: 0}
+        tangentMode: 0
+      - time: 5.13333321
+        value: {x: 1, y: .917597651, z: 1}
+        inSlope: {x: 0, y: .420956671, z: 0}
+        outSlope: {x: 0, y: .420956671, z: 0}
+        tangentMode: 0
+      - time: 6.4333334
+        value: {x: 1, y: 2.0092113, z: 1}
+        inSlope: {x: 0, y: .73829937, z: 0}
+        outSlope: {x: 0, y: .73829937, z: 0}
+        tangentMode: 0
+      - time: 7.1833334
+        value: {x: 1, y: 2.4868834, z: 1}
+        inSlope: {x: 0, y: -.549948871, z: 0}
+        outSlope: {x: 0, y: -.549948871, z: 0}
+        tangentMode: 0
+      - time: 7.9000001
+        value: {x: 1, y: 1.24218106, z: 1}
+        inSlope: {x: 0, y: -1.73679388, z: 0}
+        outSlope: {x: 0, y: -1.73679388, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: LavaLamp_LavaBall_2
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: 1, y: 1.44999969, z: 1}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - time: 8.69999981
+        value: {x: 1, y: 1.44999969, z: 1}
+        inSlope: {x: 0, y: .360146135, z: 0}
+        outSlope: {x: 0, y: .360146135, z: 0}
+        tangentMode: 0
+      - time: 9.98333359
+        value: {x: 1, y: 2.3743751, z: 1}
+        inSlope: {x: 0, y: -.145212084, z: 0}
+        outSlope: {x: 0, y: -.145212084, z: 0}
+        tangentMode: 0
+      - time: 10.6000004
+        value: {x: 1, y: 1.75109982, z: 1}
+        inSlope: {x: 0, y: -.739085615, z: 0}
+        outSlope: {x: 0, y: -.739085615, z: 0}
+        tangentMode: 0
+      - time: 12.5666666
+        value: {x: 1, y: .831772327, z: 1}
+        inSlope: {x: 0, y: -.467454761, z: 0}
+        outSlope: {x: 0, y: -.467454761, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: LavaLamp_LavaBall_3
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: 1, y: 1, z: 1}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: LavaLamp_LavaBall_4
+  m_FloatCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 40
+        outSlope: 40
+        tangentMode: 10
+      - time: 2.5
+        value: 100
+        inSlope: -13.3333321
+        outSlope: -13.3333321
+        tangentMode: 10
+      - time: 4
+        value: 0
+        inSlope: -9.89583015
+        outSlope: -9.89583015
+        tangentMode: 10
+      - time: 5.5999999
+        value: 75
+        inSlope: 11.595396
+        outSlope: 11.595396
+        tangentMode: 10
+      - time: 8.76666641
+        value: 0
+        inSlope: -23.6842117
+        outSlope: -23.6842117
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.1
+    path: LavaLamp_LavaBall_Bottom
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 34.99617
+        outSlope: 34.99617
+        tangentMode: 10
+      - time: 1.88333333
+        value: 65.9094543
+        inSlope: 30.8644409
+        outSlope: 30.8644409
+        tangentMode: 10
+      - time: 3.13333344
+        value: 99.3253479
+        inSlope: -13.7795162
+        outSlope: -13.7795162
+        tangentMode: 10
+      - time: 3.8166666
+        value: 62.2259979
+        inSlope: -38.5329895
+        outSlope: -38.5329895
+        tangentMode: 10
+      - time: 6.2166667
+        value: 7.56782532
+        inSlope: -8.67775536
+        outSlope: -8.67775536
+        tangentMode: 10
+      - time: 9.14999962
+        value: 23.462759
+        inSlope: 33.0253754
+        outSlope: 33.0253754
+        tangentMode: 10
+      - time: 10
+        value: 75
+        inSlope: 1.46986008
+        outSlope: 1.46986008
+        tangentMode: 10
+      - time: 11.3000002
+        value: 0
+        inSlope: -57.6922989
+        outSlope: -57.6922989
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.4
+    path: LavaLamp_LavaBall_Bottom
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 1.51666665
+        value: 0
+        inSlope: 20.1342278
+        outSlope: 20.1342278
+        tangentMode: 10
+      - time: 4
+        value: 100
+        inSlope: 14.997242
+        outSlope: 14.997242
+        tangentMode: 10
+      - time: 11.3000002
+        value: 25
+        inSlope: -10.2739725
+        outSlope: -10.2739725
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.3
+    path: LavaLamp_LavaBall_Bottom
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 4
+        value: 0
+        inSlope: 12.8446989
+        outSlope: 12.8446989
+        tangentMode: 10
+      - time: 5.86666679
+        value: 47.9535446
+        inSlope: 53.9340134
+        outSlope: 53.9340134
+        tangentMode: 10
+      - time: 6.5
+        value: 100
+        inSlope: 11.5282612
+        outSlope: 11.5282612
+        tangentMode: 10
+      - time: 7.80000019
+        value: 23.1412506
+        inSlope: -36.5034294
+        outSlope: -36.5034294
+        tangentMode: 10
+      - time: 9.46666622
+        value: 0
+        inSlope: -13.8847561
+        outSlope: -13.8847561
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.5
+    path: LavaLamp_LavaBall_Bottom
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 4.80000019
+        value: 0
+        inSlope: 9.61538506
+        outSlope: 9.61538506
+        tangentMode: 10
+      - time: 10
+        value: 100
+        inSlope: -16.1076908
+        outSlope: -16.1076908
+        tangentMode: 10
+      - time: 11.3000002
+        value: 33.1199989
+        inSlope: -51.4461517
+        outSlope: -51.4461517
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.2
+    path: LavaLamp_LavaBall_Bottom
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 4.82539654
+        outSlope: 4.82539654
+        tangentMode: 10
+      - time: 3.1500001
+        value: 15.1999998
+        inSlope: .0672430992
+        outSlope: .0672430992
+        tangentMode: 10
+      - time: 4.0666666
+        value: 10.8999996
+        inSlope: 7.74522305
+        outSlope: 7.74522305
+        tangentMode: 10
+      - time: 6.0333333
+        value: 50.5900002
+        inSlope: 3.7404685
+        outSlope: 3.7404685
+        tangentMode: 10
+      - time: 10.0166664
+        value: 0
+        inSlope: -12.7004194
+        outSlope: -12.7004194
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.scale
+    path: LavaLamp_LavaBall_1
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 11.1873016
+        outSlope: 11.1873016
+        tangentMode: 10
+      - time: 3.1500001
+        value: 35.2400017
+        inSlope: 10.309185
+        outSlope: 10.309185
+        tangentMode: 10
+      - time: 10.0166664
+        value: 100
+        inSlope: 9.43106747
+        outSlope: 9.43106747
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.Displace
+    path: LavaLamp_LavaBall_1
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 9.98336124
+        outSlope: 9.98336124
+        tangentMode: 10
+      - time: 10.0166664
+        value: 100
+        inSlope: 9.98336124
+        outSlope: 9.98336124
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.Displace.002
+    path: LavaLamp_LavaBall_1
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 62.8199997
+        inSlope: -6.27154732
+        outSlope: -6.27154732
+        tangentMode: 10
+      - time: 10.0166664
+        value: 0
+        inSlope: -6.27154732
+        outSlope: -6.27154732
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.Displace.001
+    path: LavaLamp_LavaBall_1
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 6.92999983
+        inSlope: -1.35000002
+        outSlope: -1.35000002
+        tangentMode: 10
+      - time: 5.13333321
+        value: 0
+        inSlope: 3.75993943
+        outSlope: 3.75993943
+        tangentMode: 10
+      - time: 7.9000001
+        value: 24.5400009
+        inSlope: 1.78673816
+        outSlope: 1.78673816
+        tangentMode: 10
+      - time: 12.5333338
+        value: 0
+        inSlope: -5.29640245
+        outSlope: -5.29640245
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.scale
+    path: LavaLamp_LavaBall_2
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 31.6499996
+        inSlope: -1.3248322
+        outSlope: -1.3248322
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.scale
+    path: LavaLamp_LavaBall_4
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 508.600006
+        inSlope: -102.402687
+        outSlope: -102.402687
+        tangentMode: 10
+      - time: 4.9666667
+        value: 0
+        inSlope: -41.9800339
+        outSlope: -41.9800339
+        tangentMode: 10
+      - time: 9.03333378
+        value: 75
+        inSlope: -1.70102215
+        outSlope: -1.70102215
+        tangentMode: 10
+      - time: 12.4666662
+        value: 0
+        inSlope: -21.8446655
+        outSlope: -21.8446655
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.Displace
+    path: LavaLamp_LavaBall_4
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 62.8199997
+        inSlope: -12.6483221
+        outSlope: -12.6483221
+        tangentMode: 10
+      - time: 4.9666667
+        value: 0
+        inSlope: -3.25039077
+        outSlope: -3.25039077
+        tangentMode: 10
+      - time: 9.03333378
+        value: 25
+        inSlope: 13.9961033
+        outSlope: 13.9961033
+        tangentMode: 10
+      - time: 12.4666662
+        value: 100
+        inSlope: 21.8446655
+        outSlope: 21.8446655
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.Displace.001
+    path: LavaLamp_LavaBall_4
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 48.4099998
+        inSlope: -9.74697971
+        outSlope: -9.74697971
+        tangentMode: 10
+      - time: 4.9666667
+        value: 0
+        inSlope: 7.42159128
+        outSlope: 7.42159128
+        tangentMode: 10
+      - time: 9.03333378
+        value: 100
+        inSlope: 1.37274837
+        outSlope: 1.37274837
+        tangentMode: 10
+      - time: 12.4666662
+        value: 25
+        inSlope: -21.8446655
+        outSlope: -21.8446655
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.Displace.002
+    path: LavaLamp_LavaBall_4
+    classID: 137
+    script: {fileID: 0}
+  m_PPtrCurves: []
+  m_SampleRate: 60
+  m_WrapMode: 4
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_ClipBindingConstant:
+    genericBindings:
+    - path: 26534727
+      attribute: 1
+      script: {fileID: 0}
+      classID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - path: 2560471805
+      attribute: 1
+      script: {fileID: 0}
+      classID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - path: 4019880555
+      attribute: 1
+      script: {fileID: 0}
+      classID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - path: 1912477640
+      attribute: 1
+      script: {fileID: 0}
+      classID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - path: 26534727
+      attribute: 3
+      script: {fileID: 0}
+      classID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - path: 2560471805
+      attribute: 3
+      script: {fileID: 0}
+      classID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - path: 4019880555
+      attribute: 3
+      script: {fileID: 0}
+      classID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - path: 4214079174
+      attribute: 2212294583
+      script: {fileID: 0}
+      classID: 137
+      customType: 20
+      isPPtrCurve: 0
+    - path: 4214079174
+      attribute: 4088798008
+      script: {fileID: 0}
+      classID: 137
+      customType: 20
+      isPPtrCurve: 0
+    - path: 4214079174
+      attribute: 1842515611
+      script: {fileID: 0}
+      classID: 137
+      customType: 20
+      isPPtrCurve: 0
+    - path: 4214079174
+      attribute: 2226203566
+      script: {fileID: 0}
+      classID: 137
+      customType: 20
+      isPPtrCurve: 0
+    - path: 4214079174
+      attribute: 450215437
+      script: {fileID: 0}
+      classID: 137
+      customType: 20
+      isPPtrCurve: 0
+    - path: 26534727
+      attribute: 3964020100
+      script: {fileID: 0}
+      classID: 137
+      customType: 20
+      isPPtrCurve: 0
+    - path: 26534727
+      attribute: 3914514935
+      script: {fileID: 0}
+      classID: 137
+      customType: 20
+      isPPtrCurve: 0
+    - path: 26534727
+      attribute: 2295607953
+      script: {fileID: 0}
+      classID: 137
+      customType: 20
+      isPPtrCurve: 0
+    - path: 26534727
+      attribute: 299721515
+      script: {fileID: 0}
+      classID: 137
+      customType: 20
+      isPPtrCurve: 0
+    - path: 2560471805
+      attribute: 3964020100
+      script: {fileID: 0}
+      classID: 137
+      customType: 20
+      isPPtrCurve: 0
+    - path: 1912477640
+      attribute: 3964020100
+      script: {fileID: 0}
+      classID: 137
+      customType: 20
+      isPPtrCurve: 0
+    - path: 1912477640
+      attribute: 3914514935
+      script: {fileID: 0}
+      classID: 137
+      customType: 20
+      isPPtrCurve: 0
+    - path: 1912477640
+      attribute: 299721515
+      script: {fileID: 0}
+      classID: 137
+      customType: 20
+      isPPtrCurve: 0
+    - path: 1912477640
+      attribute: 2295607953
+      script: {fileID: 0}
+      classID: 137
+      customType: 20
+      isPPtrCurve: 0
+    - path: 1912477640
+      attribute: 3
+      script: {fileID: 0}
+      classID: 4
+      customType: 0
+      isPPtrCurve: 0
+    pptrCurveMapping: []
+  m_AnimationClipSettings:
+    serializedVersion: 2
+    m_StartTime: 0
+    m_StopTime: 12.5666666
+    m_OrientationOffsetY: 0
+    m_Level: 0
+    m_CycleOffset: 0
+    m_LoopTime: 0
+    m_LoopBlend: 0
+    m_LoopBlendOrientation: 0
+    m_LoopBlendPositionY: 0
+    m_LoopBlendPositionXZ: 0
+    m_KeepOriginalOrientation: 0
+    m_KeepOriginalPositionY: 1
+    m_KeepOriginalPositionXZ: 0
+    m_HeightFromFeet: 0
+    m_Mirror: 0
+  m_EditorCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 40
+        outSlope: 40
+        tangentMode: 10
+      - time: 2.5
+        value: 100
+        inSlope: -13.3333321
+        outSlope: -13.3333321
+        tangentMode: 10
+      - time: 4
+        value: 0
+        inSlope: -9.89583015
+        outSlope: -9.89583015
+        tangentMode: 10
+      - time: 5.5999999
+        value: 75
+        inSlope: 11.595396
+        outSlope: 11.595396
+        tangentMode: 10
+      - time: 8.76666641
+        value: 0
+        inSlope: -23.6842117
+        outSlope: -23.6842117
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.1
+    path: LavaLamp_LavaBall_Bottom
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 34.99617
+        outSlope: 34.99617
+        tangentMode: 10
+      - time: 1.88333333
+        value: 65.9094543
+        inSlope: 30.8644409
+        outSlope: 30.8644409
+        tangentMode: 10
+      - time: 3.13333344
+        value: 99.3253479
+        inSlope: -13.7795162
+        outSlope: -13.7795162
+        tangentMode: 10
+      - time: 3.8166666
+        value: 62.2259979
+        inSlope: -38.5329895
+        outSlope: -38.5329895
+        tangentMode: 10
+      - time: 6.2166667
+        value: 7.56782532
+        inSlope: -8.67775536
+        outSlope: -8.67775536
+        tangentMode: 10
+      - time: 9.14999962
+        value: 23.462759
+        inSlope: 33.0253754
+        outSlope: 33.0253754
+        tangentMode: 10
+      - time: 10
+        value: 75
+        inSlope: 1.46986008
+        outSlope: 1.46986008
+        tangentMode: 10
+      - time: 11.3000002
+        value: 0
+        inSlope: -57.6922989
+        outSlope: -57.6922989
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.4
+    path: LavaLamp_LavaBall_Bottom
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 1.51666665
+        value: 0
+        inSlope: 20.1342278
+        outSlope: 20.1342278
+        tangentMode: 10
+      - time: 4
+        value: 100
+        inSlope: 14.997242
+        outSlope: 14.997242
+        tangentMode: 10
+      - time: 11.3000002
+        value: 25
+        inSlope: -10.2739725
+        outSlope: -10.2739725
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.3
+    path: LavaLamp_LavaBall_Bottom
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 4
+        value: 0
+        inSlope: 12.8446989
+        outSlope: 12.8446989
+        tangentMode: 10
+      - time: 5.86666679
+        value: 47.9535446
+        inSlope: 53.9340134
+        outSlope: 53.9340134
+        tangentMode: 10
+      - time: 6.5
+        value: 100
+        inSlope: 11.5282612
+        outSlope: 11.5282612
+        tangentMode: 10
+      - time: 7.80000019
+        value: 23.1412506
+        inSlope: -36.5034294
+        outSlope: -36.5034294
+        tangentMode: 10
+      - time: 9.46666622
+        value: 0
+        inSlope: -13.8847561
+        outSlope: -13.8847561
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.5
+    path: LavaLamp_LavaBall_Bottom
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 4.80000019
+        value: 0
+        inSlope: 9.61538506
+        outSlope: 9.61538506
+        tangentMode: 10
+      - time: 10
+        value: 100
+        inSlope: -16.1076908
+        outSlope: -16.1076908
+        tangentMode: 10
+      - time: 11.3000002
+        value: 33.1199989
+        inSlope: -51.4461517
+        outSlope: -51.4461517
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.2
+    path: LavaLamp_LavaBall_Bottom
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -.00680000009
+        inSlope: .000717391318
+        outSlope: .000717391318
+        tangentMode: 10
+      - time: 3.0666666
+        value: -.0046000001
+        inSlope: .000358695659
+        outSlope: .000358695659
+        tangentMode: 10
+      - time: 3.41666675
+        value: -.0046000001
+        inSlope: .00812953431
+        outSlope: .00812953431
+        tangentMode: 10
+      - time: 6.63333321
+        value: .0476999991
+        inSlope: -.00347162224
+        outSlope: -.00347162224
+        tangentMode: 10
+      - time: 9.51666641
+        value: -.0192000009
+        inSlope: -.0232023131
+        outSlope: -.0232023131
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.x
+    path: LavaLamp_LavaBall_1
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .25909999
+        inSlope: .0236739162
+        outSlope: .0236739162
+        tangentMode: 10
+      - time: 3.0666666
+        value: .331699997
+        inSlope: .0241226628
+        outSlope: .0241226628
+        tangentMode: 10
+      - time: 3.41666675
+        value: .340299994
+        inSlope: .025482595
+        outSlope: .025482595
+        tangentMode: 10
+      - time: 6.63333321
+        value: .425199986
+        inSlope: .0371275321
+        outSlope: .0371275321
+        tangentMode: 10
+      - time: 9.51666641
+        value: .563199997
+        inSlope: .0478612781
+        outSlope: .0478612781
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.y
+    path: LavaLamp_LavaBall_1
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -.000199999995
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 3.0666666
+        value: -.000199999995
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 3.41666675
+        value: -.000199999995
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 6.63333321
+        value: -.000199999995
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 9.51666641
+        value: -.000199999995
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.z
+    path: LavaLamp_LavaBall_1
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 4.82539654
+        outSlope: 4.82539654
+        tangentMode: 10
+      - time: 3.1500001
+        value: 15.1999998
+        inSlope: .0672430992
+        outSlope: .0672430992
+        tangentMode: 10
+      - time: 4.0666666
+        value: 10.8999996
+        inSlope: 7.74522305
+        outSlope: 7.74522305
+        tangentMode: 10
+      - time: 6.0333333
+        value: 50.5900002
+        inSlope: 3.7404685
+        outSlope: 3.7404685
+        tangentMode: 10
+      - time: 10.0166664
+        value: 0
+        inSlope: -12.7004194
+        outSlope: -12.7004194
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.scale
+    path: LavaLamp_LavaBall_1
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 11.1873016
+        outSlope: 11.1873016
+        tangentMode: 10
+      - time: 3.1500001
+        value: 35.2400017
+        inSlope: 10.309185
+        outSlope: 10.309185
+        tangentMode: 10
+      - time: 10.0166664
+        value: 100
+        inSlope: 9.43106747
+        outSlope: 9.43106747
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.Displace
+    path: LavaLamp_LavaBall_1
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: .0244564991
+        outSlope: .0244564991
+        tangentMode: 10
+      - time: 3.0666666
+        value: 1.07499993
+        inSlope: -.0147666829
+        outSlope: -.0147666829
+        tangentMode: 10
+      - time: 3.41666675
+        value: 1.05610347
+        inSlope: -.0701514557
+        outSlope: -.0701514557
+        tangentMode: 10
+      - time: 4.0666666
+        value: 1
+        inSlope: -.0863130465
+        outSlope: -.0863130465
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.x
+    path: LavaLamp_LavaBall_1
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: .339135081
+        outSlope: .339135081
+        tangentMode: 10
+      - time: 3.0666666
+        value: 2.04001427
+        inSlope: .454045415
+        outSlope: .454045415
+        tangentMode: 10
+      - time: 3.41666675
+        value: 2.23914886
+        inSlope: -.312944323
+        outSlope: -.312944323
+        tangentMode: 10
+      - time: 4.0666666
+        value: 1.46250021
+        inSlope: -1.19484437
+        outSlope: -1.19484437
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.y
+    path: LavaLamp_LavaBall_1
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 3.0666666
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 3.41666675
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 4.0666666
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.z
+    path: LavaLamp_LavaBall_1
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 9.98336124
+        outSlope: 9.98336124
+        tangentMode: 10
+      - time: 10.0166664
+        value: 100
+        inSlope: 9.98336124
+        outSlope: 9.98336124
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.Displace.002
+    path: LavaLamp_LavaBall_1
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 62.8199997
+        inSlope: -6.27154732
+        outSlope: -6.27154732
+        tangentMode: 10
+      - time: 10.0166664
+        value: 0
+        inSlope: -6.27154732
+        outSlope: -6.27154732
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.Displace.001
+    path: LavaLamp_LavaBall_1
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .0182000007
+        inSlope: .00150967739
+        outSlope: .00150967739
+        tangentMode: 10
+      - time: 5.16666651
+        value: .0260000005
+        inSlope: .000439049065
+        outSlope: .000439049065
+        tangentMode: 10
+      - time: 6.4333334
+        value: .0252
+        inSlope: -.000315789628
+        outSlope: -.000315789628
+        tangentMode: 10
+      - time: 7.1833334
+        value: .0252
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 7.9000001
+        value: .0252
+        inSlope: -.00110071932
+        outSlope: -.00110071932
+        tangentMode: 10
+      - time: 12.5333338
+        value: .0149999997
+        inSlope: -.00220143865
+        outSlope: -.00220143865
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.x
+    path: LavaLamp_LavaBall_2
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .252000004
+        inSlope: .00189677172
+        outSlope: .00189677172
+        tangentMode: 10
+      - time: 5.16666651
+        value: .261799991
+        inSlope: .0275141802
+        outSlope: .0275141802
+        tangentMode: 10
+      - time: 6.4333334
+        value: .329100013
+        inSlope: .0284991097
+        outSlope: .0284991097
+        tangentMode: 10
+      - time: 7.1833334
+        value: .331999987
+        inSlope: .0393984318
+        outSlope: .0393984318
+        tangentMode: 10
+      - time: 7.9000001
+        value: .385699987
+        inSlope: .0580010824
+        outSlope: .0580010824
+        tangentMode: 10
+      - time: 12.5333338
+        value: .575999975
+        inSlope: .0410719365
+        outSlope: .0410719365
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.y
+    path: LavaLamp_LavaBall_2
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .0141545339
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 5.16666651
+        value: .0141545339
+        inSlope: .00621531392
+        outSlope: .00621531392
+        tangentMode: 10
+      - time: 6.4333334
+        value: .0298999995
+        inSlope: .00621531392
+        outSlope: .00621531392
+        tangentMode: 10
+      - time: 7.1833334
+        value: .0298999995
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 7.9000001
+        value: .0298999995
+        inSlope: -.00324820122
+        outSlope: -.00324820122
+        tangentMode: 10
+      - time: 12.5333338
+        value: -.000199999995
+        inSlope: -.00649640244
+        outSlope: -.00649640244
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.z
+    path: LavaLamp_LavaBall_2
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 6.92999983
+        inSlope: -1.35000002
+        outSlope: -1.35000002
+        tangentMode: 10
+      - time: 5.13333321
+        value: 0
+        inSlope: 3.75993943
+        outSlope: 3.75993943
+        tangentMode: 10
+      - time: 7.9000001
+        value: 24.5400009
+        inSlope: 1.78673816
+        outSlope: 1.78673816
+        tangentMode: 10
+      - time: 12.5333338
+        value: 0
+        inSlope: -5.29640245
+        outSlope: -5.29640245
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.scale
+    path: LavaLamp_LavaBall_2
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 5.13333321
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 6.4333334
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 7.1833334
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 7.9000001
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.x
+    path: LavaLamp_LavaBall_2
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .906249404
+        inSlope: .00221069762
+        outSlope: .00221069762
+        tangentMode: 10
+      - time: 5.13333321
+        value: .917597651
+        inSlope: .420956671
+        outSlope: .420956671
+        tangentMode: 10
+      - time: 6.4333334
+        value: 2.0092113
+        inSlope: .73829937
+        outSlope: .73829937
+        tangentMode: 10
+      - time: 7.1833334
+        value: 2.4868834
+        inSlope: -.549948871
+        outSlope: -.549948871
+        tangentMode: 10
+      - time: 7.9000001
+        value: 1.24218106
+        inSlope: -1.73679388
+        outSlope: -1.73679388
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.y
+    path: LavaLamp_LavaBall_2
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 5.13333321
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 6.4333334
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 7.1833334
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 7.9000001
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.z
+    path: LavaLamp_LavaBall_2
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -.00899999961
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 8.73333359
+        value: -.00899999961
+        inSlope: .00350649469
+        outSlope: .00350649469
+        tangentMode: 10
+      - time: 10.0166664
+        value: 0
+        inSlope: .00350649469
+        outSlope: .00350649469
+        tangentMode: 10
+      - time: 10.6000004
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 12.5666666
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.x
+    path: LavaLamp_LavaBall_3
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .236000001
+        inSlope: .000916030665
+        outSlope: .000916030665
+        tangentMode: 10
+      - time: 8.73333359
+        value: .244000003
+        inSlope: .0351333544
+        outSlope: .0351333544
+        tangentMode: 10
+      - time: 10.0166664
+        value: .333000004
+        inSlope: .0441039056
+        outSlope: .0441039056
+        tangentMode: 10
+      - time: 10.6000004
+        value: .344000012
+        inSlope: .0694285706
+        outSlope: .0694285706
+        tangentMode: 10
+      - time: 12.5666666
+        value: .579999983
+        inSlope: .120000012
+        outSlope: .120000012
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.y
+    path: LavaLamp_LavaBall_3
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -.0359999985
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 8.73333359
+        value: -.0359999985
+        inSlope: .00662337895
+        outSlope: .00662337895
+        tangentMode: 10
+      - time: 10.0166664
+        value: -.0189999994
+        inSlope: .00662337895
+        outSlope: .00662337895
+        tangentMode: 10
+      - time: 10.6000004
+        value: -.0189999994
+        inSlope: -.00330508593
+        outSlope: -.00330508593
+        tangentMode: 10
+      - time: 12.5666666
+        value: -.0320000015
+        inSlope: -.00661017187
+        outSlope: -.00661017187
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.z
+    path: LavaLamp_LavaBall_3
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 8.69999981
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 9.98333359
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 10.6000004
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 12.5666666
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.x
+    path: LavaLamp_LavaBall_3
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1.44999969
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 8.69999981
+        value: 1.44999969
+        inSlope: .360146135
+        outSlope: .360146135
+        tangentMode: 10
+      - time: 9.98333359
+        value: 2.3743751
+        inSlope: -.145212084
+        outSlope: -.145212084
+        tangentMode: 10
+      - time: 10.6000004
+        value: 1.75109982
+        inSlope: -.739085615
+        outSlope: -.739085615
+        tangentMode: 10
+      - time: 12.5666666
+        value: .831772327
+        inSlope: -.467454761
+        outSlope: -.467454761
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.y
+    path: LavaLamp_LavaBall_3
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 8.69999981
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 9.98333359
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 10.6000004
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 12.5666666
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.z
+    path: LavaLamp_LavaBall_3
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.x
+    path: LavaLamp_LavaBall_4
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.y
+    path: LavaLamp_LavaBall_4
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.z
+    path: LavaLamp_LavaBall_4
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .0192000009
+        inSlope: .00570934266
+        outSlope: .00570934266
+        tangentMode: 10
+      - time: 4.8166666
+        value: .0467000008
+        inSlope: -.00627690647
+        outSlope: -.00627690647
+        tangentMode: 10
+      - time: 8.61666679
+        value: -.0227000006
+        inSlope: -.00544736721
+        outSlope: -.00544736721
+        tangentMode: 10
+      - time: 12.416667
+        value: .00529999984
+        inSlope: .00736842072
+        outSlope: .00736842072
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.x
+    path: LavaLamp_LavaBall_4
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .558600008
+        inSlope: -.0214463677
+        outSlope: -.0214463677
+        tangentMode: 10
+      - time: 4.8166666
+        value: .455300003
+        inSlope: -.0150521323
+        outSlope: -.0150521323
+        tangentMode: 10
+      - time: 8.61666679
+        value: .422399998
+        inSlope: .0176184233
+        outSlope: .0176184233
+        tangentMode: 10
+      - time: 12.416667
+        value: .58920002
+        inSlope: .0438947417
+        outSlope: .0438947417
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.y
+    path: LavaLamp_LavaBall_4
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -.00510000018
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 4.8166666
+        value: -.00510000018
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 8.61666679
+        value: -.00510000018
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 12.416667
+        value: -.00510000018
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.z
+    path: LavaLamp_LavaBall_4
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 31.6499996
+        inSlope: -1.3248322
+        outSlope: -1.3248322
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.scale
+    path: LavaLamp_LavaBall_4
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 508.600006
+        inSlope: -102.402687
+        outSlope: -102.402687
+        tangentMode: 10
+      - time: 4.9666667
+        value: 0
+        inSlope: -41.9800339
+        outSlope: -41.9800339
+        tangentMode: 10
+      - time: 9.03333378
+        value: 75
+        inSlope: -1.70102215
+        outSlope: -1.70102215
+        tangentMode: 10
+      - time: 12.4666662
+        value: 0
+        inSlope: -21.8446655
+        outSlope: -21.8446655
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.Displace
+    path: LavaLamp_LavaBall_4
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 62.8199997
+        inSlope: -12.6483221
+        outSlope: -12.6483221
+        tangentMode: 10
+      - time: 4.9666667
+        value: 0
+        inSlope: -3.25039077
+        outSlope: -3.25039077
+        tangentMode: 10
+      - time: 9.03333378
+        value: 25
+        inSlope: 13.9961033
+        outSlope: 13.9961033
+        tangentMode: 10
+      - time: 12.4666662
+        value: 100
+        inSlope: 21.8446655
+        outSlope: 21.8446655
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.Displace.001
+    path: LavaLamp_LavaBall_4
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 48.4099998
+        inSlope: -9.74697971
+        outSlope: -9.74697971
+        tangentMode: 10
+      - time: 4.9666667
+        value: 0
+        inSlope: 7.42159128
+        outSlope: 7.42159128
+        tangentMode: 10
+      - time: 9.03333378
+        value: 100
+        inSlope: 1.37274837
+        outSlope: 1.37274837
+        tangentMode: 10
+      - time: 12.4666662
+        value: 25
+        inSlope: -21.8446655
+        outSlope: -21.8446655
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blendShape.Displace.002
+    path: LavaLamp_LavaBall_4
+    classID: 137
+    script: {fileID: 0}
+  m_EulerEditorCurves: []
+  m_HasGenericRootTransform: 0
+  m_HasMotionFloatCurves: 0
+  m_GenerateMotionCurves: 0
+  m_Events: []
