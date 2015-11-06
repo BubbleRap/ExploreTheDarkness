@@ -4,13 +4,17 @@ using System.Collections;
 public class LavaGlassTexScroll : MonoBehaviour 
 {
 
-	public float scrollSpeed = 0.5F;
+	public float scrollSpeedY = -0.1F;
+	public float scrollSpeedX = 0.1F;
+
 	public Renderer rend;
+
 	void Start() {
 		rend = GetComponent<Renderer>();
 	}
 	void Update() {
-		float offset = Time.time * scrollSpeed;
-		rend.material.SetTextureOffset("_MainTex", new Vector2(0,offset));
+		float offsetY = Time.time * scrollSpeedY;
+		float offsetX = Time.time * scrollSpeedX;
+		rend.material.SetTextureOffset("_MainTex", new Vector2(offsetX,offsetY));
 	}
 }
