@@ -3,7 +3,7 @@ guid: 4720374c67444da40a5e234a0538cbbd
 timeCreated: 1435256684
 licenseType: Free
 ModelImporter:
-  serializedVersion: 18
+  serializedVersion: 19
   fileIDToRecycleName:
     100000: chest
     100002: f_index.01.L
@@ -125,8 +125,8 @@ ModelImporter:
     400114: toe.R
     400116: upper_arm.L
     400118: upper_arm.R
-    7400000: '!Silja_DeformRig|!Silja_BasicWalk_1'
-    7400002: '!Silja_DeformRig|!Silja_LowPolyAction'
+    7400000: Silja_BasicWalk_1
+    7400002: Silja_LowPolyAction
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -135,21 +135,22 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
+    resampleRotations: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
-    animationRotationError: .5
-    animationPositionError: .5
-    animationScaleError: .5
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: '!Silja_DeformRig|!Silja_BasicWalk_1'
+      name: Silja_BasicWalk_1
       takeName: '!Silja_DeformRig|!Silja_BasicWalk_1'
       firstFrame: 0
       lastFrame: 25
@@ -158,6 +159,7 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
+      hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
@@ -294,8 +296,9 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: '!Silja_DeformRig|!Silja_LowPolyAction'
+      name: Silja_LowPolyAction
       takeName: '!Silja_DeformRig|!Silja_LowPolyAction'
       firstFrame: 0
       lastFrame: 8
@@ -304,6 +307,7 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
+      hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
@@ -440,6 +444,7 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -460,25 +465,26 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
-    splitTangentsAcrossUV: 1
     normalImportMode: 0
-    tangentImportMode: 1
+    tangentImportMode: 4
   importAnimation: 1
   copyAvatar: 1
   humanDescription:
     human: []
     skeleton: []
-    armTwist: .5
-    foreArmTwist: .5
-    upperLegTwist: .5
-    legTwist: .5
-    armStretch: .0500000007
-    legStretch: .0500000007
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: hips
+    hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 8eff8f194b8c7974c99dfbc283e61377,
     type: 3}
   animationType: 2
+  humanoidOversampling: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

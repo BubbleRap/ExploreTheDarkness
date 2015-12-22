@@ -13,7 +13,7 @@ public class MovementController : MonoBehaviour
 	private Vector3 moveDirection = Vector3.zero;
 
 	[HideInInspector]
-	public float moveSpeed = 0f;
+    public Vector2 moveSpeed;
 	public float movingSpeed = 10f;
 
 	private Vector3 targetDirection = Vector3.zero;
@@ -70,30 +70,40 @@ public class MovementController : MonoBehaviour
 		if( targetDirection.magnitude > 0f )
 		{
 			moveDirection = Vector3.RotateTowards(transform.forward, forward, rotationSpeed * Mathf.Deg2Rad * Time.deltaTime, 300f);
-			moveDirection = moveDirection.normalized;
+            moveDirection.Normalize();
+
+            float turning = Vector3.Dot(forward, transform.forward);
+
+            if( characterAnimator.gameObject.activeInHierarchy )
+                characterAnimator.SetFloat ("turningspeed", 1f - turning );
 
 			transform.rotation = Quaternion.LookRotation(moveDirection);
 		}
 
 
 		float curSmooth = moveAccel * Time.deltaTime;
-		float targetSpeed = targetDirection.magnitude * movingSpeed;
 		
-		moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, curSmooth);
+        moveSpeed = Vector2.Lerp(moveSpeed, new Vector2(h,v) * movingSpeed, curSmooth);
 
 		if( characterAnimator.gameObject.activeInHierarchy )
-			characterAnimator.SetFloat ("speed", moveSpeed);
+            characterAnimator.SetFloat ("speed", moveSpeed.y);
 
-		if( firstPersonAnimator.gameObject.activeInHierarchy )
-			firstPersonAnimator.SetFloat ("speed", moveSpeed);
+        if( characterAnimator.gameObject.activeInHierarchy )
+            characterAnimator.SetFloat ("sidespeed", moveSpeed.x);
+
+        if( firstPersonAnimator.gameObject.activeInHierarchy )
+            firstPersonAnimator.SetFloat ("speed", v * moveSpeed.y);
+
+     
 
 		if( targetDirection.magnitude > 0f )
 			motorMovement = targetDirection.normalized;
 
 
-		charMotor.inputMoveDirection = motorMovement * moveSpeed;
-		if( moveSpeed < 0.175f )
-			charMotor.inputMoveDirection = Vector3.zero;
+        charMotor.inputMoveDirection = motorMovement * moveSpeed.magnitude;
+
+        //if( moveSpeed.y < 0.175f ||  moveSpeed.x < 0.175f )
+         //   charMotor.inputMoveDirection = Vector3.zero;
 
 		// reseting values used by animator
 		v = 0f; h = 0f;
