@@ -11,6 +11,7 @@ TagManager:
   - roof
   - AudioEffect
   - Occluder
+  - Occludee
   layers:
   - Default
   - TransparentFX

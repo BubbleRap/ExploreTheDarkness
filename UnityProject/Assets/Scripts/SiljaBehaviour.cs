@@ -178,7 +178,7 @@ public class SiljaBehaviour : MonoBehaviour
 		set 
 		{
 			charMotor.inputMoveDirection = Vector3.zero;
-			moveCtrl.moveSpeed = 0f;
+            moveCtrl.moveSpeed = Vector2.zero;
 			moveCtrl.canMove = value;
 		}
 	}
