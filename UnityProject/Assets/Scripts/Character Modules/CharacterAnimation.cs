@@ -3,11 +3,13 @@ using System.Collections;
 
 public class CharacterAnimation : MonoBehaviour
 {
-    public string forwardSpeedKey = "speed";
-    public string sidewaysSpeedKey = "sidespeed";
-    public string turningSpeedKey = "turningspeed";
+    public string m_forwardSpeedKey = "speed";
+    public string m_sidewaysSpeedKey = "sidespeed";
+    public string m_turningSpeedKey = "turningspeed";
 
     private Animator m_animator;
+    private Vector3 m_lookDirection;
+    private float m_lookWeight;
 
     private void Awake()
     {
@@ -16,25 +18,33 @@ public class CharacterAnimation : MonoBehaviour
 
     private void OnAnimatorIK(int layerIndex)
     {
-  //      m_animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, leftFootPositionWeight);
-    //    m_animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, leftFootRotationWeight);
+        Transform m_headBone = m_animator.GetBoneTransform(HumanBodyBones.Hips);
 
-      //  m_animator.SetIKPosition(AvatarIKGoal.LeftFoot, leftFootObj.position);
-        //m_animator.SetIKRotation(AvatarIKGoal.LeftFoot, leftFootObj.rotation);
+        if (m_headBone != null)
+        {
+            m_animator.SetLookAtPosition(m_headBone.position + m_lookDirection);
+            m_animator.SetLookAtWeight(m_lookWeight);
+        }
     }
 
     public void SetForwardSpeed(float speed)
     {
-        m_animator.SetFloat(forwardSpeedKey, speed);
+        m_animator.SetFloat(m_forwardSpeedKey, speed);
     }
 
     public void SetSidewaysSpeed(float speed)
     {
-        m_animator.SetFloat(sidewaysSpeedKey, speed);
+        m_animator.SetFloat(m_sidewaysSpeedKey, speed);
     }
 
     public void SetTurningSpeed(float speed)
     {
-        m_animator.SetFloat(turningSpeedKey, speed);
+        m_animator.SetFloat(m_turningSpeedKey, speed);
+    }
+
+    public void SetLookingPoint(Vector3 dir, float weight = 1f)
+    {
+        m_lookDirection = dir;
+        m_lookWeight = weight;
     }
 }

@@ -164,17 +164,20 @@ public class SiljaBehaviour : MonoBehaviour
 
 	void Awake()
 	{
-        CharacterAnimation charAnimation = siljaAnimation.gameObject.AddComponent<CharacterAnimation>();
+        CharacterAnimation charAnimation = siljaAnimation.gameObject.GetComponent<CharacterAnimation>();
 
         moveCtrl = gameObject.AddComponent<MovementController>();
         moveCtrl.Initialize(thisCamera.transform, charAnimation);
 
         interactor = gameObject.AddComponent<Interactor>();
+        gameObject.AddComponent<SiljaShakeOnScary>();
+
 		camTransitioner = thisCamera.GetComponent<CameraTransitioner>();
 
 		cameraFollow = thisCamera.GetComponent<CameraFollow>();
+        cameraFollow.Initialize(charAnimation);
 
-		maxFlickerIntensity = mimimumIntensity * 2;
+        maxFlickerIntensity = mimimumIntensity * 2;
 		minFlickerIntensity = mimimumIntensity * 1.5f;
 
 		firstPersonRig.gameObject.SetActive(false);
