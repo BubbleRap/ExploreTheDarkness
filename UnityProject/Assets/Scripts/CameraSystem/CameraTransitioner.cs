@@ -77,9 +77,6 @@ public class CameraTransitioner : MonoBehaviour {
 //			GetComponent<VignetteAndChromaticAberration>()
 //		});
 
-		FppOnlyGameplayComponents.AddRange (new Behaviour[]{
-			GetComponent<Health>()
-		});
 
 		iTween.Init( gameObject );
 	}
