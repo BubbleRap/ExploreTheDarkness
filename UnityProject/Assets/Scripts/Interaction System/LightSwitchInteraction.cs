@@ -90,9 +90,10 @@ public class LightSwitchInteraction : IInteractableObject
 		if( !interactionIsActive )
 			return;
 
-		if( _cachedBeh != null )
-			_cachedBeh.RetriveLightProbeResult(1f);
-	}
+        if (_cachedBeh != null)
+            _cachedBeh.flshCtrl.ChargeFlashlight();
+
+    }
 
 	private void OnTriggerEnter(Collider other)
 	{

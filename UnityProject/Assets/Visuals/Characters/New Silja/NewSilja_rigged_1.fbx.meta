@@ -435,7 +435,7 @@ ModelImporter:
     4300002: '!Silja_LowPoly'
     7400000: '!Silja_AnimationRig|!Silja_AnimationRigAction'
     7400002: '!Silja_AnimationRig|!Silja_LowPolyAction'
-    7400004: '!Silja_DeformRig|!Silja_AnimationRigAction'
+    7400004: Silja_AnimationRigAction
     7400006: '!Silja_DeformRig|!Silja_LowPolyAction'
     7400008: '!Silja_LowPoly|!Silja_LowPolyAction'
     7400010: '!Silja_Hair|!Silja_LowPolyAction'
@@ -463,7 +463,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: '!Silja_DeformRig|!Silja_AnimationRigAction'
+      name: Silja_AnimationRigAction
       takeName: '!Silja_DeformRig|!Silja_AnimationRigAction'
       firstFrame: 0
       lastFrame: 24
