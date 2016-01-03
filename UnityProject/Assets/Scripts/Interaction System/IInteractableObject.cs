@@ -24,6 +24,8 @@ public class IInteractableObject : MonoBehaviour
 	public bool disableOnActive = true;
 	
 	private GameObject buttonPrompt;
+
+    private SiljaBehaviour m_character;
 	private Interactor interactor;
 	
 	private bool objectIsClose = false;
@@ -39,7 +41,10 @@ public class IInteractableObject : MonoBehaviour
 	{
 		if (TextToDisplay == "")
 			TextToDisplay = gameObject.name;
-	}
+
+  //      interactor = DarknessManager.Instance.m_mainCharacter.interactor;
+        m_character = DarknessManager.Instance.m_mainCharacter;
+    }
 	
 	protected void Update()
 	{
@@ -61,8 +66,8 @@ public class IInteractableObject : MonoBehaviour
 			}
 			else
 			{
-				isEligable = isEligable   && (  (perspectiveMode == WorkState.FirstPersonOnly && SiljaBehaviour.isLookingInFP) 
-			                            		||(perspectiveMode == WorkState.ThirdPersonOnly && !SiljaBehaviour.isLookingInFP));
+				isEligable = isEligable   && (  (perspectiveMode == WorkState.FirstPersonOnly && m_character.IsFirstPerson) 
+			                            		||(perspectiveMode == WorkState.ThirdPersonOnly && !m_character.IsFirstPerson));
 			}
 		}
 

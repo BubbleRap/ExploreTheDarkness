@@ -14,18 +14,17 @@ public class PeepHoleInteraction : IInteractableObject
 	private CameraTransitioner 	_camTransitioner;
 	private ScreenOverlay		_overlay;
 
+    private void Awake()
+    {
+        _siljaBeh = DarknessManager.Instance.m_mainCharacter;
+
+        _camFollow = _siljaBeh.cameraFollow;
+        _camTransitioner = _siljaBeh.camTransitioner;
+        _overlay = _siljaBeh.thisCamera.GetComponent<ScreenOverlay>();
+    }
+
 	public override bool Activate()
 	{
-		if( _siljaBeh == null )
-		{
-			GameObject siljaGO = GameObject.FindGameObjectWithTag("Player");
-			_siljaBeh = siljaGO.GetComponent<SiljaBehaviour>();
-			_camFollow = _siljaBeh.cameraFollow; 
-			_camTransitioner = _siljaBeh.camTransitioner;
-			_overlay = _siljaBeh.thisCamera.GetComponent<ScreenOverlay>();
-		}
-
-
 		if( !ObjectivesManager.Instance.IsInteractionEligable( this ) )
 			return false;
 
@@ -35,7 +34,7 @@ public class PeepHoleInteraction : IInteractableObject
 
 		if( interactionIsActive )
 		{
-			if( SiljaBehaviour.isLookingInFP )
+			if(_siljaBeh.IsFirstPerson)
 				EnablePeepHoleFPP();
 			else
 				EnablePeepHoleTPP();
@@ -44,7 +43,7 @@ public class PeepHoleInteraction : IInteractableObject
 		}
 		else
 		{
-			if( SiljaBehaviour.isLookingInFP )
+			if(_siljaBeh.IsFirstPerson)
 				DisablePeepHoleFPP();
 			else
 				DisablePeepHoleTPP();

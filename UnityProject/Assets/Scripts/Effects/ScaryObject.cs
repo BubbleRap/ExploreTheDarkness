@@ -38,6 +38,6 @@ public class ScaryObject : MonoBehaviour
 			}
 		}
 
-		siljaBehComp.IsScared = inDirectSight && isInView;
+		siljaBehComp.SetScaredState( inDirectSight && isInView );
 	}
 }
