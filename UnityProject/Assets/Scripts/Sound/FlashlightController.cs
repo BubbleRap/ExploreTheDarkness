@@ -152,6 +152,7 @@ public class FlashlightController : MonoBehaviour
     private void ChargingControl()
     {
         m_isDischarging = !m_hasRecievedChargeNow;
+				m_isDischared = m_chargeLeft <= 0f;
 
         if (!m_hasRecievedChargeNow)
         {
@@ -186,7 +187,7 @@ public class FlashlightController : MonoBehaviour
 
                 if (lightFlickerInterval < 0.2f)
                 {
-                    SetFlashlightValues(0.3f, 1f, 1f); ;
+                    SetFlashlightValues(0.3f, 1f, 1f);
                 }
                 else if (lightFlickerInterval >= 0.2f && lightFlickerInterval < 0.29f)
                 {
@@ -206,7 +207,7 @@ public class FlashlightController : MonoBehaviour
                 SetSmallSpotlightIntensity(lightIntensity);
             }
             else
-            if( m_chargeLeft == 0f )
+            if( m_chargeLeft <= 0f )
             {
                 SetFlashlightValues(0.3f, 0f, 0f);
             }

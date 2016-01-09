@@ -34,6 +34,7 @@ public class AudioMixerControls : MonoBehaviour
 
 	private IEnumerator FadeIn( )
 	{
+				if( m_audioSource != null )
 		m_audioSource.enabled = true;
 		m_audioMixer.SetFloat(m_paramName, m_minValue);
 		float timer = 0f;
@@ -61,6 +62,7 @@ public class AudioMixerControls : MonoBehaviour
 		}
 
 		m_audioMixer.SetFloat(m_paramName, m_minValue);
+				if( m_audioSource != null )
 		m_audioSource.enabled = false;
 	}
 }
