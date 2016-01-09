@@ -107,12 +107,16 @@ public class SiljaBehaviour : MonoBehaviour
 		EnableThirdPerson();
 	}
 
+		void OnGUI()
+		{
+				GUILayout.Label(flshCtrl.ChargeLeft.ToString("0.0"));
+		}
+
 	void Update () 
 	{
         UpdateInput();
         UpdateFlashlight();
         UpdateAudio();
-
     }
 
     private void UpdateInput()
