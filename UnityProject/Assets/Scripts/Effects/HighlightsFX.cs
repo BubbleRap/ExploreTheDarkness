@@ -120,7 +120,9 @@ public class HighlightsFX : MonoBehaviour
 			if( highlightObjects[i] == null )
 				continue;
 
-			bool isInCloseFrame = highlightObjects[i].IsVisibleWithin(30f) && highlightObjects[i].IsCamCloserThan(5f);
+			/*bool isInCloseFrame = highlightObjects[i].IsVisibleWithin(30f) && highlightObjects[i].IsCamCloserThan(5f);*/
+			bool isInCloseFrame = highlightObjects[i].isObjectClose();
+				
 			if( !isInCloseFrame || highlightObjects[i].IsInteracting)
 				continue;
 			
