@@ -79,7 +79,7 @@ public class IInteractableObject : MonoBehaviour
 
 		OnInteractionClose( (interactor.isInteracting  && interactionIsActive)
 						|| (isClose
-		                && IsVisibleWithin(15f) 
+				&& IsVisibleWithin(3f * m_cameraRelativePosition.magnitude)
 		                && isEligable));
 
 		OnInteractionFar(IsVisibleWithin(90f) && IsCamCloserThan(5f) && !isObjectClose());
@@ -158,11 +158,17 @@ public class IInteractableObject : MonoBehaviour
 	
 	public void OnInteractionClose( bool state )
 	{
-		if( objectIsClose == state )
+		if( objectIsClose == state)
 			return;
 		
 		if( state )
 		{
+			if(interactor.interactionObjects.Count > 0)
+			{
+				objectIsClose = !state;
+				return;
+			}
+					
 			interactor.OnInteractionEnter( gameObject );
 		}
 		else
