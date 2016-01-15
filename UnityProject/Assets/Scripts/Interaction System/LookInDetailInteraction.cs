@@ -74,7 +74,7 @@ public class LookInDetailInteraction : IInteractableObject
 
 		_siljaBeh.IsMoveEnabled = false;
 
-		_dof.enabled = true;
+		//_dof.enabled = true;
 			
 		transitioner.AddFPPCompleteAction( () =>
 		{
@@ -105,7 +105,7 @@ public class LookInDetailInteraction : IInteractableObject
 		CameraTransitioner transitioner = _siljaBeh.thisCamera.GetComponent<CameraTransitioner>();
 		CameraFollow camControl = _siljaBeh.thisCamera.GetComponent<CameraFollow>();
 
-		_dof.enabled = false;
+		//_dof.enabled = false;
 
 		transitioner.AddTPPCompleteAction( () =>
 		                                  {	
