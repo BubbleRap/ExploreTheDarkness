@@ -5,6 +5,7 @@ public class Interactor : MonoBehaviour
 {	
 	private GameObject currentInteractionObject = null;
 	private List<GameObject> interactionObjectsFar = new List<GameObject>();
+	[HideInInspector] 
 	public List<GameObject> interactionObjects = new List<GameObject>();
 
 	[HideInInspector]
