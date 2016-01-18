@@ -87,7 +87,7 @@ public class SiljaBehaviour : MonoBehaviour
         moveCtrl = gameObject.AddComponent<MovementController>();
         moveCtrl.Initialize(thisCamera.transform, charAnimation);
 
-        interactor = gameObject.AddComponent<Interactor>();
+        interactor = gameObject.GetComponent<Interactor>();
         gameObject.AddComponent<SiljaShakeOnScary>();
         charAudio = siljaAnimation.gameObject.GetComponent<CharacterAudio>();
 
