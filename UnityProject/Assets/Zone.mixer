@@ -28,7 +28,6 @@ AudioMixerController:
     - 3a6cff2a70601d54f8d0f696f73f9c47
     - bcd8f5ee37695454aaa6dbd8405dae22
     - d0c69154d13b935489d84c6f1eaef15f
-    - 9d560765f38c60048afceec2bdd6b56a
     - d1ca92e7f810dda418794695f05a9b56
     - 941d34fa29b8e334ba35d61442891f72
     - 6d647c0595936a24fa3a3aeb8dba916e
@@ -42,9 +41,10 @@ AudioMixerController:
     - 5bba1c6eae76646419d94345c4763fca
     - cf575b1c0e34874499aa0ecd3164586f
     - 0ca469de9b74fe34dbe21088a58f270a
+    - 6ca3df6867f7d5e40aef97294032185c
     name: View
   m_CurrentViewIndex: 0
-  m_TargetSnapshot: {fileID: 24500003}
+  m_TargetSnapshot: {fileID: 24502480}
 --- !u!243 &24300001
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -90,6 +90,7 @@ AudioMixerGroupController:
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: affffbb8c0ae5e943beed773fa82fb0f
   m_Children:
+  - {fileID: 24384020}
   - {fileID: 24371966}
   - {fileID: 24329834}
   - {fileID: 24337428}
@@ -133,7 +134,6 @@ AudioMixerGroupController:
   - {fileID: 24331710}
   - {fileID: 24342400}
   - {fileID: 24314184}
-  - {fileID: 24335362}
   - {fileID: 24365232}
   - {fileID: 24301732}
   - {fileID: 24333844}
@@ -211,23 +211,6 @@ AudioMixerGroupController:
   - {fileID: 24417886}
   - {fileID: 24448378}
   - {fileID: 24416438}
-  m_UserColorIndex: 0
-  m_Mute: 0
-  m_Solo: 0
-  m_BypassEffects: 0
---- !u!243 &24335362
-AudioMixerGroupController:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: AmbienceRoom
-  m_AudioMixer: {fileID: 24100000}
-  m_GroupID: 9d560765f38c60048afceec2bdd6b56a
-  m_Children: []
-  m_Volume: 00d8d30a1cb73ff40a608f4652076d07
-  m_Pitch: fc84d031c9d3a9b40b5ca1c43b8dbe6a
-  m_Effects:
-  - {fileID: 24450498}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -371,6 +354,23 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!243 &24384020
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: AmbienceRoom
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 6ca3df6867f7d5e40aef97294032185c
+  m_Children: []
+  m_Volume: 160898e12c8f0464eae2560483fa0d91
+  m_Pitch: 19ce7ba5fde5b8043ab32870039292f8
+  m_Effects:
+  - {fileID: 24476660}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!244 &24400002
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -505,19 +505,6 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
---- !u!244 &24450498
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_EffectID: 46655e1e264a2444086a68d3317a8566
-  m_EffectName: Attenuation
-  m_MixLevel: c28c18a8c09f87e44842135e1396a721
-  m_Parameters: []
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
 --- !u!244 &24455988
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -566,6 +553,19 @@ AudioMixerEffectController:
   m_EffectID: 92157ee62a52b014cb8d0664b3564c69
   m_EffectName: Attenuation
   m_MixLevel: c76ad68df0d78d744a5fbe65a1d6c467
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &24476660
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 7698aeccfcb2eef4e8bd836e43cbf35d
+  m_EffectName: Attenuation
+  m_MixLevel: 3621ca4b2d5cf4b4098ead0865772b9c
   m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
@@ -689,6 +689,7 @@ AudioMixerSnapshotController:
     b0ea92616f18e2f49b9f282b395a75b1: -80
     0ef055616729ab64d802be7fa4105dcb: -9.833286
     66bb5f71f3a5b2247b69f09659dfe988: 0
+    160898e12c8f0464eae2560483fa0d91: 3.5924087
     e343e162e2d6cdb4db9ee0800d9de9e8: 144
     a2a9a683906ddad40aafa34ca2e63db3: -80
     7cff1d644fa84d6438b0e57eb787441a: 75
@@ -766,7 +767,7 @@ AudioMixerSnapshotController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Living room
+  m_Name: LivingRoom
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 2034ce2aca5a94f45a4b7e9a0faaff36
   m_FloatValues:
@@ -806,6 +807,7 @@ AudioMixerSnapshotController:
   m_FloatValues:
     403d26109b130b74fba31956ae34223b: 1
     06e366106102c664382989e1b726ae16: -80
+    0ef055616729ab64d802be7fa4105dcb: -4.9356413
     66bb5f71f3a5b2247b69f09659dfe988: 0
     e343e162e2d6cdb4db9ee0800d9de9e8: 144
     7cff1d644fa84d6438b0e57eb787441a: 75
