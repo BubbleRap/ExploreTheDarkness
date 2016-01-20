@@ -44,6 +44,11 @@ public class SiljaBehaviour : MonoBehaviour
 		get { return m_isScared; } 
 	}
 
+	public bool IsSeenRecently 
+	{ 
+		get { return m_haveSeenRecently; } 
+	}
+
     public bool IsFirstPerson
     {
         get {  return m_isLookingInFP; }
