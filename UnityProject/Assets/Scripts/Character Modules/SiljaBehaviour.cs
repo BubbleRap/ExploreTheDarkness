@@ -44,6 +44,11 @@ public class SiljaBehaviour : MonoBehaviour
 		get { return m_isScared; } 
 	}
 
+	public bool IsSeenRecently 
+	{ 
+		get { return m_haveSeenRecently; } 
+	}
+
     public bool IsFirstPerson
     {
         get {  return m_isLookingInFP; }
@@ -87,7 +92,7 @@ public class SiljaBehaviour : MonoBehaviour
         moveCtrl = gameObject.AddComponent<MovementController>();
         moveCtrl.Initialize(thisCamera.transform, charAnimation);
 
-        interactor = gameObject.AddComponent<Interactor>();
+        interactor = gameObject.GetComponent<Interactor>();
         gameObject.AddComponent<SiljaShakeOnScary>();
         charAudio = siljaAnimation.gameObject.GetComponent<CharacterAudio>();
 

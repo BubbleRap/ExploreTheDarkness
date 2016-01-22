@@ -49,7 +49,8 @@ public class IInteractableObject : MonoBehaviour
 			ActionsToDisplay = gameObject.name;
 
   //      interactor = DarknessManager.Instance.m_mainCharacter.interactor;
-        m_character = DarknessManager.Instance.m_mainCharacter;
+        
+
     }
 	
 	protected void Update()
@@ -72,7 +73,8 @@ public class IInteractableObject : MonoBehaviour
 			}
 			else
 			{
-				isEligable = isEligable   && (  (perspectiveMode == WorkState.FirstPersonOnly && m_character.IsFirstPerson) 
+				m_character = DarknessManager.Instance.m_mainCharacter;
+				isEligable = true   && (  (perspectiveMode == WorkState.FirstPersonOnly && m_character.IsFirstPerson) 
 			                            		||(perspectiveMode == WorkState.ThirdPersonOnly && !m_character.IsFirstPerson));
 			}
 		}
@@ -82,7 +84,7 @@ public class IInteractableObject : MonoBehaviour
 				&& IsVisibleWithin(3f * m_cameraRelativePosition.magnitude)
 		                && isEligable));
 
-		OnInteractionFar(IsVisibleWithin(90f) && IsCamCloserThan(5f) && !isObjectClose());
+		OnInteractionFar(IsVisibleWithin(90f) && IsCamCloserThan(5f) && !isObjectClose() && isEligable);
 
 		if( label == null )
 		{
