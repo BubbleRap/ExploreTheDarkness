@@ -123,6 +123,7 @@ public class AudioMixerControls : MonoBehaviour
 
         yield return new WaitForSeconds(m_audioSource.clip.length);
 
+        m_audioSource.Stop();
         if( m_audioSource != null )
             m_audioSource.enabled = false;
     }
