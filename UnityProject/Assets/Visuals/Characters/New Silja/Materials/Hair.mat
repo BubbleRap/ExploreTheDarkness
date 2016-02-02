@@ -83,7 +83,21 @@ Material:
         first:
           name: _SpecGlossMap
         second:
-          m_Texture: {fileID: 2800000, guid: 8e3ec6a0f4a6dc34b84cdab10fac1562, type: 3}
+          m_Texture: {fileID: 2800000, guid: 629093befe2ef9f4295fca7d9bb98dfc, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _NoiseTex
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ToonShade
+        second:
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -98,11 +112,15 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: 0.154
+        second: 0.255
       data:
         first:
           name: _Shininess
-        second: 0.056
+        second: 1
+      data:
+        first:
+          name: _Smoothness
+        second: 0.5
       data:
         first:
           name: _Parallax
@@ -114,7 +132,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: 0
+        second: 1
       data:
         first:
           name: _BumpScale
@@ -143,6 +161,26 @@ Material:
         first:
           name: _EmissionScaleUI
         second: 0
+      data:
+        first:
+          name: _InvFade
+        second: 3
+      data:
+        first:
+          name: _EdgeLength
+        second: 10
+      data:
+        first:
+          name: _RimPower
+        second: 4
+      data:
+        first:
+          name: _Strength
+        second: 0.2
+      data:
+        first:
+          name: _Transparency
+        second: 0.05
     m_Colors:
       data:
         first:
@@ -151,7 +189,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 0.82931036, b: 0.27205884, a: 1}
+        second: {r: 1, g: 0.79918873, b: 0.27205884, a: 1}
       data:
         first:
           name: _SpecColor
@@ -160,3 +198,11 @@ Material:
         first:
           name: _EmissionColorUI
         second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _TintColor
+        second: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      data:
+        first:
+          name: _RimColor
+        second: {r: 1, g: 1, b: 1, a: 0}
