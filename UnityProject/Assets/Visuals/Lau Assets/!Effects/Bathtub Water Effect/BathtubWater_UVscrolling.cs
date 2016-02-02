@@ -17,5 +17,7 @@ public class BathtubWater_UVscrolling : MonoBehaviour {
 	{
 		float offset = Time.time * animSpeed;
 		myRenderer.material.mainTextureOffset = new Vector2(offset, 0);
+
+		myRenderer.material.SetTextureOffset("_BumpMap", new Vector2(offset, 0));
 	}
 }
