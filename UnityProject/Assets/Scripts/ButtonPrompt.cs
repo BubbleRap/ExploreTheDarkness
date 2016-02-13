@@ -37,7 +37,7 @@ public class ButtonPrompt : MonoBehaviour {
 
 		float size = (hudCamera.gameObject.transform.position - transform.position).magnitude ;
 		transform.localScale = new Vector3(size,size,size);
-	
+
 		foreach (TextMesh m in this.GetComponentsInChildren<TextMesh> ())
 			m.color = new Color (
 				1f, 1f, 1f, Mathf.Lerp(m.color.a, GetAlpha (),0.1f));
@@ -59,9 +59,18 @@ public class ButtonPrompt : MonoBehaviour {
 				objToCamera.magnitude,
 				LayerMask.NameToLayer("Default")))
 				return 0f;
+
+			RaycastHit hit;
+
+			if(Physics.Raycast(Camera.main.transform.position,-objToCamera, out hit, 10F,LayerMask.NameToLayer("Trigger"))){
+				if(hit.transform.gameObject != connectedObject.gameObject)
+				{
+					return 0f;
+				}
+			}
 		}
 
-
+		/*
 		Vector2 screenpos = Camera.main.WorldToScreenPoint (transform.position);
 		screenpos.x /= Screen.width;
 		screenpos.y /= Screen.height;
@@ -70,15 +79,16 @@ public class ButtonPrompt : MonoBehaviour {
 		screenpos.y = Mathf.Abs(0.5f - screenpos.y);
 		float distFromCenter = Mathf.Max (screenpos.x, screenpos.y);
 		distFromCenter *= 4;
+		*/
 
 		float distFromSilja = Vector3.Distance (connectedObject.position, interactor.transform.position);
 
 		distFromSilja /= 4f;
 
-		float dist = Mathf.Max (distFromCenter, distFromSilja);
+		//float dist = Mathf.Max (distFromCenter, distFromSilja);
+		float dist = distFromSilja;
 
 		return 1f - (dist*dist);
-
 
 	}
 }

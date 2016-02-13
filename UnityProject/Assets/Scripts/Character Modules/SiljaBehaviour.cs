@@ -28,7 +28,7 @@ public class SiljaBehaviour : MonoBehaviour
     public float m_normalDischargeSpeed = 1f;
     public float m_scaredDischargeSpeed = 6f;
 	
-	private bool isFlashLightCollected = true;
+	public bool isFlashLightCollected = false;
 	public bool FlashLightCollected
 	{
 		get{ return isFlashLightCollected; }
@@ -42,6 +42,11 @@ public class SiljaBehaviour : MonoBehaviour
 	public bool IsScared 
 	{ 
 		get { return m_isScared; } 
+	}
+
+	public bool IsSeenRecently 
+	{ 
+		get { return m_haveSeenRecently; } 
 	}
 
     public bool IsFirstPerson
@@ -87,7 +92,7 @@ public class SiljaBehaviour : MonoBehaviour
         moveCtrl = gameObject.AddComponent<MovementController>();
         moveCtrl.Initialize(thisCamera.transform, charAnimation);
 
-        interactor = gameObject.AddComponent<Interactor>();
+        interactor = gameObject.GetComponent<Interactor>();
         gameObject.AddComponent<SiljaShakeOnScary>();
         charAudio = siljaAnimation.gameObject.GetComponent<CharacterAudio>();
 
@@ -107,12 +112,16 @@ public class SiljaBehaviour : MonoBehaviour
 		EnableThirdPerson();
 	}
 
+		void OnGUI()
+		{
+				GUILayout.Label(flshCtrl.ChargeLeft.ToString("0.0"));
+		}
+
 	void Update () 
 	{
         UpdateInput();
         UpdateFlashlight();
         UpdateAudio();
-
     }
 
     private void UpdateInput()

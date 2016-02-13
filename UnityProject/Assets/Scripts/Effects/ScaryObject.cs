@@ -5,12 +5,15 @@ public class ScaryObject : MonoBehaviour
 {
 	private SiljaBehaviour siljaBehComp = null;
 	private SiljaShakeOnScary siljaScaryComp = null;
+	private ObjectsSpawner monsterSpawner = null;
+	private bool hasBeenSeen = false;
 
 	void Start()
 	{
 		GameObject silja = GameObject.FindGameObjectWithTag ("Player");
 		siljaScaryComp = silja.GetComponent<SiljaShakeOnScary> ();
 		siljaBehComp = silja.GetComponent<SiljaBehaviour>();
+		monsterSpawner = GameObject.Find("MonsterSpawner").GetComponent<ObjectsSpawner>();
 	}
 
 	void Update()
@@ -38,6 +41,18 @@ public class ScaryObject : MonoBehaviour
 			}
 		}
 
+		if(inDirectSight && isInView && !hasBeenSeen)
+		{
+			hasBeenSeen = true;
+		}
+
 		siljaBehComp.SetScaredState( inDirectSight && isInView );
+
+		if(hasBeenSeen && !inDirectSight && !isInView)
+		{
+			monsterSpawner.RemoveSpawnedObject();
+			monsterSpawner.SpawnObject(Random.Range(0,monsterSpawner.m_spawnPositions.Length));
+			hasBeenSeen = false;
+		}
 	}
 }

@@ -4,7 +4,9 @@ using System.Collections.Generic;
 public class Interactor : MonoBehaviour 
 {	
 	private GameObject currentInteractionObject = null;
-	private List<GameObject> interactionObjects = new List<GameObject>();
+	private List<GameObject> interactionObjectsFar = new List<GameObject>();
+	[HideInInspector] 
+	public List<GameObject> interactionObjects = new List<GameObject>();
 
 	[HideInInspector]
 	public bool isInteracting = false;
@@ -31,6 +33,25 @@ public class Interactor : MonoBehaviour
 		{
 			currentInteractionObject = null;
 		}
+	}
+
+	public void OnHighlightEnter( GameObject interactionObject )
+	{
+		if( !interactionObjectsFar.Contains( interactionObject ) )
+			interactionObjectsFar.Add( interactionObject );
+
+		IInteractableObject label = interactionObject.GetComponent<IInteractableObject>();
+		label.ActivateLabel(true);
+
+	}
+
+	public void OnHighlightExit( GameObject interactionObject)
+	{
+		if( interactionObjectsFar.Contains( interactionObject ) )
+			interactionObjectsFar.Remove( interactionObject );	
+
+		IInteractableObject label = interactionObject.GetComponent<IInteractableObject>();
+		label.ActivateLabel(false);
 	}
 
 	void Update () 
