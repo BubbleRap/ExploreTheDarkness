@@ -140,7 +140,16 @@ public class CharacterAudio : MonoBehaviour
 
     public void PlaySiljaCaughtRandomSound()
     {
-        PlaySiljaCaughtSound(monsterCatchSiljaSound[Random.Range(0, monsterCatchSiljaSound.Length)]);
+				AudioClip sound = null;
+
+				if( monsterCatchSiljaSound.Length > 0 )
+						sound = monsterCatchSiljaSound[Random.Range(0, monsterCatchSiljaSound.Length - 1)];
+						
+				
+				if( sound != null )
+        PlaySiljaCaughtSound(sound);
+						else
+								Debug.LogError("No monster caught silja sounds assigned.");
     }
 
     public void PlaySiljaCaughtSound(AudioClip clip)

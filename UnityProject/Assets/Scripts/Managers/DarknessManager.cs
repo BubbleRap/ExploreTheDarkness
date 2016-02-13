@@ -25,6 +25,7 @@ public class DarknessManager : MonoBehaviour
     private bool m_characterIsCaught = false;
 
     private float m_availableTimeInDark = 10f;
+		private float m_timeSpentInDark = 0f;
 
     public float blackscreenTime = 5.0f;
 
@@ -43,7 +44,8 @@ public class DarknessManager : MonoBehaviour
     private void Update()
     {
         UpdateCharacterAudio();
-        UpdateMonsterMechanics();
+     //   UpdateMonsterMechanics();
+				UpdateDarknessCountdown();
     }
 
     //Sounds of darkness & fear
@@ -81,7 +83,7 @@ public class DarknessManager : MonoBehaviour
         if (m_mainCharacter.flshCtrl.IsDischarged)
         {
             if (!m_characterIsCaught)
-            {
+            {								
                 m_characterIsCaught = true;
                 StartCoroutine("CharacterCaughtSequence");
             }
@@ -90,6 +92,27 @@ public class DarknessManager : MonoBehaviour
             StopCoroutine("CharacterCaughtSequence");
     }
 
+		public void UpdateDarknessCountdown()
+		{
+				if( m_characterIsCaught )
+						return;
+				
+				if (m_mainCharacter.flshCtrl.IsDischarged)
+				{
+						m_timeSpentInDark += Time.deltaTime;
+
+						if( m_timeSpentInDark > m_availableTimeInDark )
+						{
+								m_characterIsCaught = true;
+								StartCoroutine(CharacterCaughtSequence());
+						}
+				}
+				else
+				{
+						m_timeSpentInDark = 0f;
+				}
+		}
+
     public void isDarknessApproaching(bool boolean)
     {
         m_mainCharacter.flshCtrl.IsDischargeEnabled = boolean;
@@ -97,8 +120,6 @@ public class DarknessManager : MonoBehaviour
 
     private IEnumerator CharacterCaughtSequence()
     {
-        yield return new WaitForSeconds(m_availableTimeInDark);
-
         m_mainCharacter.moveCtrl.EnableMoving(false);
         m_mainCharacter.charAudio.PlaySiljaCaughtRandomSound();
 
@@ -110,7 +131,10 @@ public class DarknessManager : MonoBehaviour
         yield return new WaitForSeconds(blackscreenTime);
 
         m_mainCharacter.ResetCharacter();
+
         m_characterIsCaught = false;
+				m_timeSpentInDark = 0f;
+
         ObjectsTranslator.MoveObjectTo(lastCheckPoint);
     }
 }
