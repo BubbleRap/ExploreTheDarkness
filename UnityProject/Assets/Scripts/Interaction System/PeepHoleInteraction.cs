@@ -104,10 +104,13 @@ public class PeepHoleInteraction : IInteractableObject
 			_camFollow.CamControlType = CameraFollow.CameraControlType.CCT_Overwritten;
 			_overlay.enabled = true;
 		});
-		
-		
-		_siljaBeh.ShiftToFirstPerson();
-	}
+
+
+        if (LightStatesMachine.Instance.IsLightOn())
+            _siljaBeh.ShiftToThirdPerson();
+        else
+            _siljaBeh.ShiftToFirstPerson();
+    }
 
 	private void DisablePeepHoleTPP()
 	{
