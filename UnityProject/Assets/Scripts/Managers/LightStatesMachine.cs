@@ -40,7 +40,7 @@ public class LightStatesMachine : MonoBehaviour {
         return State == stateOn;
     }
 
-    private void ChangeState(AbstractLightState state)
+    public void ChangeState(AbstractLightState state)
     {
         if (State != null)
             State.OnExit();
