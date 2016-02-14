@@ -28,16 +28,14 @@ public class PeepHoleInteraction : IInteractableObject
 		if( !ObjectivesManager.Instance.IsInteractionEligable( this ) )
 			return false;
 
-
 		interactionIsActive = !interactionIsActive;
-
 
 		if( interactionIsActive )
 		{
-			if(_siljaBeh.IsFirstPerson)
-				EnablePeepHoleFPP();
-			else
+			if(LightStatesMachine.Instance.IsLightOn())
 				EnablePeepHoleTPP();
+			else
+				EnablePeepHoleFPP();
 
 			m_onInteractionActivated.Invoke();
 		}
