@@ -25,7 +25,7 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
     public float m_normalDischargeSpeed = 1f;
     public float m_scaredDischargeSpeed = 6f;
 	
-	private bool isFlashLightCollected = true;
+	public bool isFlashLightCollected = false;
 	public bool FlashLightCollected
 	{
 		get{ return isFlashLightCollected; }
