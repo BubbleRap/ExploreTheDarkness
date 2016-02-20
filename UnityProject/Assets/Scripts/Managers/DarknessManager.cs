@@ -120,12 +120,12 @@ public class DarknessManager : MonoBehaviour
 
     private IEnumerator CharacterCaughtSequence()
     {
-        m_mainCharacter.moveCtrl.EnableMoving(false);
-        m_mainCharacter.charAudio.PlaySiljaCaughtRandomSound();
+        m_mainCharacter.IsMoveEnabled = false;
+        m_mainCharacter.PlaySiljaCaughtRandomSound();
 
         yield return new WaitForSeconds(captureTimeTotal - 0.1f);
 
-        m_mainCharacter.charAudio.SetHeartbeatVolume(0.0f);
+        m_mainCharacter.SetHeartbeatVolume(0.0f);
         Fader.Instance.FadeScreen(true, 1.0f);
 
         yield return new WaitForSeconds(blackscreenTime);

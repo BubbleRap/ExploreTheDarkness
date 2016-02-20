@@ -52,8 +52,8 @@ public class FadeIn : MonoBehaviour {
 	void Start(){
 		StartCoroutine("PlaySubtitles");
 
-		siljaCharacter = GameObject.FindGameObjectWithTag("Player");
-		siljaCharacter.GetComponent<MovementController>().canMove = false;
+        SiljaBehaviour siljaCharacter = GameObject.FindGameObjectWithTag("Player").GetComponent<SiljaBehaviour>();
+        siljaCharacter.IsMoveEnabled = false;
 	}
 
 	private IEnumerator PlaySubtitles(){

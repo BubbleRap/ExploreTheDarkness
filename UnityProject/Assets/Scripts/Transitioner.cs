@@ -14,12 +14,6 @@ public class Transitioner : MonoBehaviour {
 	public Transform darkRoom;
 
 	public float transitionTime = 17f;
-	private GameObject siljaCharacter = null;
-
-	void Awake()
-	{
-		siljaCharacter = GameObject.FindGameObjectWithTag("Player");
-	}
 
 	void Start () {
         exposedLights = GameObject.FindGameObjectsWithTag("ExposedLight");
@@ -58,16 +52,15 @@ public class Transitioner : MonoBehaviour {
 			{
 				if(!darkRoom.gameObject.activeInHierarchy)
 				{
-					siljaCharacter = GameObject.FindGameObjectWithTag("Player");
+                    SiljaBehaviour siljaCharacter = GameObject.FindGameObjectWithTag("Player").GetComponent<SiljaBehaviour>();
 
-					MovementController moveCtrl = siljaCharacter.GetComponent<MovementController>();
-					moveCtrl.canMove = false;
+                    siljaCharacter.IsMoveEnabled = false;
 
 					Camera.main.gameObject.GetComponent<CameraFollow>().horizontalShakeIntensity = 0.1f;
 					Camera.main.gameObject.GetComponent<CameraFollow>().verticalShakeIntensity = 0.1f;
 			        yield return new WaitForSeconds(waitTime);
 
-					moveCtrl.canMove = true;
+                    siljaCharacter.IsMoveEnabled = true;
 
 			        darkRoom.gameObject.SetActive(true);
 					lightRoom.gameObject.SetActive(false);
@@ -86,7 +79,7 @@ public class Transitioner : MonoBehaviour {
 			{
 				if(darkRoom.gameObject.activeInHierarchy)
 				{
-					siljaCharacter = GameObject.FindGameObjectWithTag("Player");
+                    SiljaBehaviour siljaCharacter = GameObject.FindGameObjectWithTag("Player").GetComponent<SiljaBehaviour>();
 
 					Camera.main.gameObject.GetComponent<CameraFollow>().horizontalShakeIntensity = 0.0f;
 					Camera.main.gameObject.GetComponent<CameraFollow>().verticalShakeIntensity = 0.0f;
