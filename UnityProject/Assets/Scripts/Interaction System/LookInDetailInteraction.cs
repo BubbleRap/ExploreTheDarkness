@@ -123,9 +123,11 @@ public class LookInDetailInteraction : IInteractableObject
 		transform.position = _originalPos;
 		transform.rotation = _originalRot;
 		
-		
-		_siljaBeh.ShiftToThirdPerson();
-	}
+		if (LightStatesMachine.Instance.IsLightOn())
+		    _siljaBeh.ShiftToThirdPerson();
+        else
+            _siljaBeh.ShiftToFirstPerson();
+    }
 
 	private new void Update()
 	{

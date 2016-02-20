@@ -28,16 +28,14 @@ public class PeepHoleInteraction : IInteractableObject
 		if( !ObjectivesManager.Instance.IsInteractionEligable( this ) )
 			return false;
 
-
 		interactionIsActive = !interactionIsActive;
-
 
 		if( interactionIsActive )
 		{
-			if(_siljaBeh.IsFirstPerson)
-				EnablePeepHoleFPP();
-			else
+			if(LightStatesMachine.Instance.IsLightOn())
 				EnablePeepHoleTPP();
+			else
+				EnablePeepHoleFPP();
 
 			m_onInteractionActivated.Invoke();
 		}
@@ -104,10 +102,13 @@ public class PeepHoleInteraction : IInteractableObject
 			_camFollow.CamControlType = CameraFollow.CameraControlType.CCT_Overwritten;
 			_overlay.enabled = true;
 		});
-		
-		
-		_siljaBeh.ShiftToFirstPerson();
-	}
+
+
+        if (LightStatesMachine.Instance.IsLightOn())
+            _siljaBeh.ShiftToThirdPerson();
+        else
+            _siljaBeh.ShiftToFirstPerson();
+    }
 
 	private void DisablePeepHoleTPP()
 	{

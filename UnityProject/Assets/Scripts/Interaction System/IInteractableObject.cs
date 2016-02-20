@@ -8,14 +8,13 @@ public class IInteractableObject : MonoBehaviour
 	public enum WorkState
 	{
 		WorksAlways,
-		FirstPersonOnly,
-		ThirdPersonOnly,
+		DarkModeOnly,
+		LightModeOnly,
 		Never
 	}
 
-	public WorkState perspectiveMode;
+	public WorkState ActiveWhen;
 	
-
 	protected bool interactionIsActive = false;
 	private Renderer m_renderer;
 	
@@ -63,19 +62,19 @@ public class IInteractableObject : MonoBehaviour
 		m_cameraRelativePosition = Camera.main.transform.InverseTransformPoint(transform.position);
 
 		bool isClose = (transform.position - interactor.transform.position).magnitude < distance;
-		bool isEligable = interactionIsActive || perspectiveMode == WorkState.WorksAlways;
+		bool isEligable = interactionIsActive || ActiveWhen == WorkState.WorksAlways;
 
-		if( perspectiveMode != WorkState.WorksAlways )
+		if( ActiveWhen != WorkState.WorksAlways )
 		{
-			if( perspectiveMode == WorkState.Never )
+			if( ActiveWhen == WorkState.Never )
 			{
 				isEligable = false;
 			}
 			else
 			{
 				m_character = DarknessManager.Instance.m_mainCharacter;
-				isEligable = true   && (  (perspectiveMode == WorkState.FirstPersonOnly && m_character.IsFirstPerson) 
-			                            		||(perspectiveMode == WorkState.ThirdPersonOnly && !m_character.IsFirstPerson));
+				isEligable = true   && (  (ActiveWhen == WorkState.DarkModeOnly && !LightStatesMachine.Instance.IsLightOn()) 
+			                            		||(ActiveWhen == WorkState.LightModeOnly && !LightStatesMachine.Instance.IsLightOn()));
 			}
 		}
 

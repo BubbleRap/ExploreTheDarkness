@@ -50,7 +50,6 @@ public class ScaryObject : MonoBehaviour
 
 		if(hasBeenSeen && !inDirectSight && !isInView)
 		{
-			Debug.Log("HEY");
 			monsterSpawner.RemoveSpawnedObject();
 			monsterSpawner.SpawnObject(Random.Range(0,monsterSpawner.m_spawnPositions.Length));
 			hasBeenSeen = false;

@@ -12,6 +12,7 @@ TagManager:
   - AudioEffect
   - Occluder
   - Occludee
+  - Pickable
   layers:
   - Default
   - TransparentFX
