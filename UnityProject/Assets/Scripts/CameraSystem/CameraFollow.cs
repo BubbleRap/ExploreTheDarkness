@@ -48,8 +48,6 @@ public class CameraFollow : MonoBehaviour
 	[Range(0f, 10f)]
 	public float horizontalSensetivity = 1f;
 
-    private CharacterAnimation charAnimation;
-	
 	public enum CameraControlType
 	{
 		CCT_Default,
@@ -67,11 +65,6 @@ public class CameraFollow : MonoBehaviour
 	[HideInInspector]
 	public Vector3 focusPoint;
 
-    public void Initialize( CharacterAnimation charAnim )
-    {
-        charAnimation = charAnim;
-    }
-
 	void LateUpdate()
 	{
 		if( GetComponent<CameraTransitioner>().Mode == CameraTransitioner.CameraMode.Transitioning )
@@ -83,9 +76,6 @@ public class CameraFollow : MonoBehaviour
 
 			UpdateTPPAngles ();
 			TPCameraBehaviour();
-
-            charAnimation.SetLookingPoint(transform.forward);
-
 
             break;
 			

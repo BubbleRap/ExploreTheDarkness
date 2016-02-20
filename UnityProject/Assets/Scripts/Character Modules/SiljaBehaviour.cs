@@ -2,18 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SiljaBehaviour : MonoBehaviour 
+public class SiljaBehaviour : CharacterBehaviour, IInput
 {
 	public Transform 			firstPersonRig;
 	public Animator 			siljaAnimation;
     public GameObject           thisCamera;
 
-    [HideInInspector]
-    public MovementController 	moveCtrl;
+   
     [HideInInspector]
     public Interactor 			interactor;
-    [HideInInspector]
-    public CharacterAudio      charAudio;
     [HideInInspector]
     public FlashlightController flshCtrl;
 
@@ -34,8 +31,7 @@ public class SiljaBehaviour : MonoBehaviour
 		get{ return isFlashLightCollected; }
 		set{ isFlashLightCollected = value; }
 	}
-
-	
+        
 
     private bool m_haveSeenRecently = false;
 	private bool m_isScared = false;
@@ -57,10 +53,10 @@ public class SiljaBehaviour : MonoBehaviour
     public void SetScaredState(bool state)
     {
         if (state && !m_haveSeenRecently)
-            charAudio.PlayScaredLoop();
+            m_characterAudio.PlayScaredLoop();
 
         if (state && !m_haveSeenRecently)
-            charAudio.PlayTensionLoop();
+            m_characterAudio.PlayTensionLoop();
 
         if (state && !m_haveSeenRecently)
         {
@@ -78,29 +74,23 @@ public class SiljaBehaviour : MonoBehaviour
 
 	public bool IsMoveEnabled 
 	{
-		get { return moveCtrl.enabled; }
-		set 
-		{
-            moveCtrl.EnableMoving(value);
-		}
+        get { return m_movementController.CanMove; }
+		set { m_movementController.EnableMoving(value); }
 	}
 
 	void Awake()
 	{
-        CharacterAnimation charAnimation = siljaAnimation.gameObject.GetComponent<CharacterAnimation>();
+        base.Awake();
 
-        moveCtrl = gameObject.AddComponent<MovementController>();
-        moveCtrl.Initialize(thisCamera.transform, charAnimation);
+        m_movementController.InitializeCharacterController(45f, 0.3f, 0.01f, 0.25f, 1.76f);
+        m_movementController.InitializeCharacterMotor(false, 1f, 1f, 1f, false, false, false);
+
 
         interactor = gameObject.GetComponent<Interactor>();
         gameObject.AddComponent<SiljaShakeOnScary>();
-        charAudio = siljaAnimation.gameObject.GetComponent<CharacterAudio>();
 
         camTransitioner = thisCamera.GetComponent<CameraTransitioner>();
-
 		cameraFollow = thisCamera.GetComponent<CameraFollow>();
-        cameraFollow.Initialize(charAnimation);
-
         flshCtrl = gameObject.GetComponent<FlashlightController>();
 
 		firstPersonRig.gameObject.SetActive(false);
@@ -111,12 +101,7 @@ public class SiljaBehaviour : MonoBehaviour
 	{
 		EnableThirdPerson();
 	}
-
-		void OnGUI()
-		{
-				GUILayout.Label(flshCtrl.ChargeLeft.ToString("0.0"));
-		}
-
+        
 	void Update () 
 	{
         UpdateInput();
@@ -126,6 +111,9 @@ public class SiljaBehaviour : MonoBehaviour
 
     private void UpdateInput()
     {
+        UpdateMovementInput();
+
+
         if (Input.GetKeyUp(KeyCode.Q)
         && camTransitioner.Mode != CameraTransitioner.CameraMode.Transitioning
         && !interactor.isInteracting)
@@ -148,6 +136,7 @@ public class SiljaBehaviour : MonoBehaviour
         {
             EnableFlashlight(!flshCtrl.IsEnabled);
         }
+         
     }
 
     private void UpdateFlashlight()
@@ -158,11 +147,11 @@ public class SiljaBehaviour : MonoBehaviour
 
     private void UpdateAudio()
     {
-        charAudio.PlayHeartbeatLoop();
-        charAudio.SetHeartbeatVolume(2.0f - (flshCtrl.ChargeLeft * 2 / flshCtrl.m_batteryLife));
+        m_characterAudio.PlayHeartbeatLoop();
+        m_characterAudio.SetHeartbeatVolume(2.0f - (flshCtrl.ChargeLeft * 2 / flshCtrl.m_batteryLife));
 
-        charAudio.PlayBreathingLoop();
-        charAudio.SetBreathingVolume(1.0f - Mathf.Pow(flshCtrl.ChargeLeft / flshCtrl.m_batteryLife, 0.4f));
+        m_characterAudio.PlayBreathingLoop();
+        m_characterAudio.SetBreathingVolume(1.0f - Mathf.Pow(flshCtrl.ChargeLeft / flshCtrl.m_batteryLife, 0.4f));
     }
 
 
@@ -175,10 +164,9 @@ public class SiljaBehaviour : MonoBehaviour
 
 	public void EnableFirstPerson() {
 
-        flshCtrl.EnableFlashlight(true);
-		
+        flshCtrl.EnableFlashlight(true);		
 
-        moveCtrl.SetWalkingSpeed(1.5f, 1.5f);
+        m_movementController.SetMaxWalkingSpeed(1.5f, 1.5f);
 
 	}
 
@@ -193,7 +181,7 @@ public class SiljaBehaviour : MonoBehaviour
 
         flshCtrl.EnableFlashlight(false);
 
-        moveCtrl.SetWalkingSpeed(1.1f, 0.9f);
+        m_movementController.SetMaxWalkingSpeed(1.1f, 0.9f);
 
 		cameraFollow.CamControlType = CameraFollow.CameraControlType.CCT_Default;
 	}
@@ -205,7 +193,7 @@ public class SiljaBehaviour : MonoBehaviour
 
         flshCtrl.EnableFlashlight(state);
 
-        charAudio.PlayFlashlightSound();
+        m_characterAudio.PlayFlashlightSound();
 		firstPersonRig.gameObject.SetActive(state);
 	}
 
@@ -227,12 +215,42 @@ public class SiljaBehaviour : MonoBehaviour
 
     public void ResetCharacter()
     {
-        moveCtrl.EnableMoving(true);
+        m_movementController.EnableMoving(true);
 
         flshCtrl.RechargeFlashlight();
 
         EnableFirstPerson();
         StartCoroutine(BlinkingEffect());
 
+    }
+
+    private void UpdateMovementInput()
+    {
+        Vector3 forward = thisCamera.transform.forward;
+
+        forward.y = 0;
+        forward.Normalize();
+
+
+        float v = Input.GetAxisRaw("Vertical");
+        float h = Input.GetAxisRaw("Horizontal");
+
+        Vector3 right = new Vector3(forward.z, 0, -forward.x);
+        Vector3 moveDir = (h * right + v * forward).normalized;
+
+
+        if( moveDir.magnitude > 0f )
+            RotateCharacterTowards(forward);
+        MoveCharacterTowards(moveDir, new Vector2(h, v));
+    }
+
+    public void PlaySiljaCaughtRandomSound()
+    {
+        m_characterAudio.PlaySiljaCaughtRandomSound();
+    }
+
+    public void SetHeartbeatVolume(float volume)
+    {
+        m_characterAudio.SetHeartbeatVolume(volume);
     }
 }

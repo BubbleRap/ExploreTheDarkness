@@ -20,13 +20,7 @@ public class CharacterAnimation : MonoBehaviour
 
     public void Start()
     {
-        Debug.Log("hasTransformHierarchy: " + m_animator.hasTransformHierarchy);
-        Debug.Log("isHuman: " + m_animator.isHuman);
-        Debug.Log("isInitialized: " + m_animator.isInitialized);
-        Debug.Log("spine: " + (m_animator.GetBoneTransform(HumanBodyBones.Spine) != null));
 
-        Debug.Log("avatar.isHuman: " + m_animator.avatar.isHuman);
-        Debug.Log("avatar.isValid: " + m_animator.avatar.isValid);
     }
 
     private void OnAnimatorIK(int layerIndex)
@@ -65,5 +59,10 @@ public class CharacterAnimation : MonoBehaviour
     {
         m_lookDirection = dir;
         m_lookWeight = weight;
+    }
+
+    public void SetAnimationState(string name)
+    {
+        m_animator.CrossFade(name, 0f);
     }
 }

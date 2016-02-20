@@ -3,134 +3,103 @@ using System.Collections;
 
 public class MovementController : MonoBehaviour 
 {
-	private CharacterController charController;
-	private CharacterMotor charMotor;
+    public Vector2 MoveSpeed { get; private set; }
+    public bool IsMoving { get; private set; }
+    public bool CanMove { get; private set; }
 
-	private CharacterAnimation characterAnimator;
 
-	private Transform cameraTransform;
-	private Vector3 moveDirection = Vector3.zero;
+    private CharacterController m_charController;
+    private CharacterMotor m_charMotor;
 
-	[HideInInspector]
-    public Vector2 moveSpeed;
-
-	public float movingSpeed = 1f;
-
-	private Vector3 targetDirection = Vector3.zero;
-	private Vector3 motorMovement = Vector3.zero;
+    private float m_movingSpeed = 1f;
+    private Vector3 m_motorMovement = Vector3.zero;
 	
-	public float rotationSpeed = 150f;
-	public float moveAccel = 2.5f;
+    private float m_rotationSpeed = 150f;
+    private float m_moveAccel = 2.5f;
 
-	public bool canMove = true;
-
-	[HideInInspector]
-	public float v = 0;
-	[HideInInspector]
-	public float h = 0;
-
-	private bool lookingAround = false;
-	private CameraFollow camFollowComp = null;
-	private CameraInput camInputComp = null;
 
 	void Awake()
 	{
-        charController = gameObject.AddComponent<CharacterController>();
-        charController.slopeLimit = 45f;
-        charController.stepOffset = 0.3f;
-        charController.skinWidth = 0.01f;
-        charController.radius = 0.25f;
-        charController.height = 1.76f;
+        m_charController = gameObject.AddComponent<CharacterController>();
+        m_charMotor = gameObject.AddComponent<CharacterMotor>();
 
+        IsMoving = false;
+        CanMove = true;
+	} 
 
-        charMotor = gameObject.AddComponent<CharacterMotor>();
-        charMotor.useFixedUpdate = false;
-        charMotor.movement.maxBackwardsSpeed = 1f;
-        charMotor.movement.maxForwardSpeed = 1f;
-        charMotor.movement.maxSidewaysSpeed = 1f;
-        charMotor.jumping.enabled = false;
-        charMotor.movingPlatform.enabled = false;
-        charMotor.sliding.enabled = false;
-
-        camFollowComp = GetComponentInChildren<CameraFollow>();
-		camInputComp = GetComponentInChildren<CameraInput>();
-	}
-
-    public void Initialize( Transform rigCamera, CharacterAnimation rigAnimator)
+    public void InitializeCharacterController(float slopeLimit,
+                                              float stepOffset,
+                                              float skinWidth,
+                                              float radius,
+                                              float height)
     {
-        cameraTransform = rigCamera;
-        characterAnimator = rigAnimator;
+        m_charController.slopeLimit = slopeLimit;
+        m_charController.stepOffset = stepOffset;
+        m_charController.skinWidth = skinWidth;
+        m_charController.radius = radius;
+        m_charController.height = height;
     }
 
-	void Update()
-	{
-		Vector3 forward = cameraTransform.forward;
+    public void InitializeCharacterMotor(bool useFixedUpdate,
+                                         float maxBackwardsSpeed,
+                                         float maxForwardSpeed,
+                                         float maxSidewaysSpeed,
+                                         bool jumpingEnabled,
+                                         bool movingPlatformEnabled,
+                                         bool slidingEnabled)
+    {
+        m_charMotor.useFixedUpdate = useFixedUpdate;
+        m_charMotor.movement.maxBackwardsSpeed = maxBackwardsSpeed;
+        m_charMotor.movement.maxForwardSpeed = maxForwardSpeed;
+        m_charMotor.movement.maxSidewaysSpeed = maxSidewaysSpeed;
+        m_charMotor.jumping.enabled = jumpingEnabled;
+        m_charMotor.movingPlatform.enabled = movingPlatformEnabled;
+        m_charMotor.sliding.enabled = slidingEnabled;
+    }
 
-		forward.y = 0;
-		forward = forward.normalized;
+    public void EnableMoving( bool state )
+    {
+        CanMove = state;
 
-		if(canMove)
-		{
-			v = Input.GetAxisRaw("Vertical");
-			h = Input.GetAxisRaw("Horizontal");
-		}
+        MoveSpeed = Vector2.zero;
+        m_charMotor.inputMoveDirection = Vector3.zero;
+    }
 
-		Vector3 right = new Vector3(forward.z, 0, -forward.x);
-		targetDirection = (h * right + v * forward).normalized;
+    public void RotateTowardsDirection(Vector3 desiredDirection)
+    {
+        if( !CanMove )
+            return;
+        
+         Vector3 moveDirection = Vector3.RotateTowards(transform.forward, desiredDirection, m_rotationSpeed * Mathf.Deg2Rad * Time.deltaTime, 300f);
+         moveDirection.Normalize();
 
+         transform.rotation = Quaternion.LookRotation(moveDirection);
+    }
 
-		if( targetDirection.magnitude > 0f )
-		{
-			moveDirection = Vector3.RotateTowards(transform.forward, forward, rotationSpeed * Mathf.Deg2Rad * Time.deltaTime, 300f);
-            moveDirection.Normalize();
+    public void MoveTowardsDirection(Vector3 targetDirection, Vector2 forwardSideDirection)
+    {
+        if( !CanMove )
+            return;
+        
+        IsMoving = (targetDirection != Vector3.zero);
 
-            float turning = Vector3.Dot(forward, transform.forward);
+        float curSmooth = m_moveAccel * Time.deltaTime;
 
-            characterAnimator.SetTurningSpeed(1f - turning);
+        MoveSpeed = Vector2.Lerp(MoveSpeed, forwardSideDirection * m_movingSpeed, curSmooth);
 
-			transform.rotation = Quaternion.LookRotation(moveDirection);
-		}
+        if( targetDirection.magnitude > 0f )
+            m_motorMovement = targetDirection.normalized;
 
-
-		float curSmooth = moveAccel * Time.deltaTime;
-		
-        moveSpeed = Vector2.Lerp(moveSpeed, new Vector2(h,v) * movingSpeed, curSmooth);
-
-        characterAnimator.SetForwardSpeed (moveSpeed.y);
-        characterAnimator.SetSidewaysSpeed (moveSpeed.x);
-
-
-		if( targetDirection.magnitude > 0f )
-			motorMovement = targetDirection.normalized;
-
-
-        charMotor.inputMoveDirection = motorMovement * moveSpeed.magnitude;
-
+        m_charMotor.inputMoveDirection = m_motorMovement * MoveSpeed.magnitude;
 
         // Stop movement if speed is low forward and sideways
         //if( moveSpeed.y < 0.175f ||  moveSpeed.x < 0.175f )
-         //   charMotor.inputMoveDirection = Vector3.zero;
-
-		// reseting values used by animator
-		v = 0f; h = 0f;
-	}
-
-	public void EnableMoving( bool state )
-	{
-		canMove = state;
-
-        moveSpeed = Vector2.zero;
-        charMotor.inputMoveDirection = Vector3.zero;
-	}
-
-    public void SetWalkingSpeed(float forwardSpeed, float sidewaysSpeed)
-    {
-        charMotor.movement.maxForwardSpeed = forwardSpeed;
-        charMotor.movement.maxSidewaysSpeed = sidewaysSpeed;
+        //   charMotor.inputMoveDirection = Vector3.zero;
     }
 
-    public bool isMoving()
-	{
-        return targetDirection != Vector3.zero;
+    public void SetMaxWalkingSpeed(float forwardSpeed, float sidewaysSpeed)
+    {
+        m_charMotor.movement.maxForwardSpeed = forwardSpeed;
+        m_charMotor.movement.maxSidewaysSpeed = sidewaysSpeed;
     }
 }
