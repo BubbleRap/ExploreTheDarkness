@@ -1,34 +1,44 @@
 fileFormatVersion: 2
-guid: 1d38b8f88e36c2f44a00b517a20acbcc
-timeCreated: 1453729168
+guid: 592fa78e2f3e28e45b600803db8b6342
+timeCreated: 1456315378
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: Flashlight_Assembled
-    100002: Flashlight_Battery
-    100004: Flashlight_Body
-    100006: Flashlight_Head
-    100008: //RootNode
+    100002: Flashlight_Assembled_frontGlass
+    100004: Flashlight_Battery
+    100006: Flashlight_Body
+    100008: Flashlight_frontGlass
+    100010: Flashlight_Head
+    100012: //RootNode
     400000: Flashlight_Assembled
-    400002: Flashlight_Battery
-    400004: Flashlight_Body
-    400006: Flashlight_Head
-    400008: //RootNode
+    400002: Flashlight_Assembled_frontGlass
+    400004: Flashlight_Battery
+    400006: Flashlight_Body
+    400008: Flashlight_frontGlass
+    400010: Flashlight_Head
+    400012: //RootNode
     2300000: Flashlight_Assembled
-    2300002: Flashlight_Battery
-    2300004: Flashlight_Body
-    2300006: Flashlight_Head
+    2300002: Flashlight_Assembled_frontGlass
+    2300004: Flashlight_Battery
+    2300006: Flashlight_Body
+    2300008: Flashlight_frontGlass
+    2300010: Flashlight_Head
     3300000: Flashlight_Assembled
-    3300002: Flashlight_Battery
-    3300004: Flashlight_Body
-    3300006: Flashlight_Head
-    4300000: Flashlight_Assembled
-    4300002: Flashlight_Body
-    4300004: Flashlight_Battery
-    4300006: Flashlight_Head
+    3300002: Flashlight_Assembled_frontGlass
+    3300004: Flashlight_Battery
+    3300006: Flashlight_Body
+    3300008: Flashlight_frontGlass
+    3300010: Flashlight_Head
+    4300000: Flashlight_Assembled_frontGlass
+    4300002: Flashlight_frontGlass
+    4300004: Flashlight_Assembled
+    4300006: Flashlight_Body
+    4300008: Flashlight_Battery
+    4300010: Flashlight_Head
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
@@ -56,15 +66,15 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     secondaryUVAngleDistortion: 8
-    secondaryUVAreaDistortion: 15.000001
+    secondaryUVAreaDistortion: 15
     secondaryUVHardAngle: 88
-    secondaryUVPackMargin: 4
+    secondaryUVPackMargin: 10
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
