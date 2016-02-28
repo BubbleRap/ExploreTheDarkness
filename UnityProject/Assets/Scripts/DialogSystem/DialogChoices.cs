@@ -5,14 +5,7 @@ using UnityEngine.UI;
 
 public class DialogChoices : MonoBehaviour {
 
-	[TextArea(3,10)]
-	public string[] dialog;
 	private int ID = 0;
-
-	[TextArea(3,10)]
-	public string[] option1;
-	[TextArea(3,10)]
-	public string[] option2;
 
 	public Dialog[] Dialog;
 
