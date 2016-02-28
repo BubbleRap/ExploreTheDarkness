@@ -166,24 +166,27 @@ MonoBehaviour:
   - 
   - 
   Dialog:
-  - Text: '1988
-
-
-      A sunny day in Copenhagen.
-
-      "Morning, sweetie." Mom says.'
+  - Text: (0)You are driving in the Car
     options:
-    - Text: You get out of the bed with a smile.
+    - Text: Stop
       gotoID: 1
-    - Text: You stay in bed a little longer.
+    - Text: keep driving
       gotoID: 2
-  - Text: 'You pour milk over your cereals.
-
-      Cap''n Crunch looks happier than usual.'
+  - Text: (1)There is a stoplight
     options:
-    - Text: You eat some cereal.
+    - Text: stop
+      gotoID: 3
+    - Text: keep driving
       gotoID: 2
-  - Text: '"Hurry up, we have to go!"'
+  - Text: (3)"Hurry up, we have to go!"
+    options:
+    - Text: You get ready and go out of the door.
+      gotoID: 0
+  - Text: (4)"Hurry up, we have to go!"
+    options:
+    - Text: You get ready and go out of the door.
+      gotoID: 0
+  - Text: (5)"Hurry up, we have to go!"
     options:
     - Text: You get ready and go out of the door.
       gotoID: 0
