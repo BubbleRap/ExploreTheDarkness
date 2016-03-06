@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
-public class LightStateOn : AbstractLightState
+﻿public class LightStateOn : AbstractLightState
 {
     public override void OnEnter()
     {
