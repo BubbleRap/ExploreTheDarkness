@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 using UnityEngine.UI;
 
@@ -12,7 +13,7 @@ public class DialogChoices : MonoBehaviour {
 
 	public float delayBetweenDialogs = 0.4f;
 
-	public Dialog[] Dialog;
+	public List<Dialog> Dialog;
 
 	public Text Description;
 	public GameObject Choice;
@@ -32,7 +33,7 @@ public class DialogChoices : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(ID <= Dialog.Length && isFaded)
+		if(ID <= Dialog.Count && isFaded)
 		{
 			if(Description.text != Dialog[ID].Text)
 			{
@@ -95,7 +96,7 @@ public class DialogChoices : MonoBehaviour {
 
 	public void dialogNext(int OptionNumber)
 	{
-		if(Dialog[ID].options[OptionNumber].gotoID <= Dialog.Length)
+		if(Dialog[ID].options[OptionNumber].gotoID <= Dialog.Count)
 		{
 			isFaded = false;
 			StartCoroutine(FadeOut(Description,1));
@@ -106,6 +107,11 @@ public class DialogChoices : MonoBehaviour {
 			ID = Dialog[ID].options[OptionNumber].gotoID;
 		}
 	}
+
+    public void SortDialogsByIndex()
+    {
+        Dialog.Sort( (Dialog left, Dialog right) => { return left.index.index.CompareTo(right.index.index);} );
+    }
 
 	IEnumerator FadeIn (Text text, float time)
 	{
