@@ -30,7 +30,7 @@ public class LightSwitchInteraction : IInteractableObject
 		_collider.enabled = interactionIsActive = _defaultState;
 
 		foreach( Light light in _lightSource )
-			light.enabled = interactionIsActive;
+			light.gameObject.SetActive(interactionIsActive);
 
 
 		emitColorOn = new Color[_emissiveSurfaces.Length];
