@@ -155,43 +155,44 @@ MonoBehaviour:
     - Text: There is blood
       gotoID: 1
   - Text: "(1) \nYour ears are ringing. \nYou unfasten your seatbelt and open the
-      car door.\n\nYou walk towards him. \nHe is breathing hoarsely and there is blood
-      in his mouth.  \n \nYou see your mom in the car. \nShe is moving her head."
+      car door.\n\nYou walk towards him. He is having trouble breathing. \nThere is
+      blood in his mouth.  \n\nYou see your mom in the car. \nShe is moving her head
+      slowly."
     options:
     - Text: You turn your father on to his side
-      gotoID: 2
+      gotoID: 8
     - Text: you get your mom out of the car
-      gotoID: 2
-  - Text: "(2) \n\nYou feel like the world is spinning.\n\nIn the glove compartment
-      in the car there is a cell phone.\n\n"
+      gotoID: 9
+  - Text: "(2) \n\nYou feel nauseous, like the world is spinning.\n\nIn the glove
+      compartment in the car there is a cell phone.\n\n"
     options:
     - Text: You call 911
       gotoID: 3
   - Text: "(3) \n\u201CHello, what is your emergency?\u201D a woman says\n\n\u201CThe
-      car crashed... My mom and dad, \nthere is blood coming out of his mouth\u201D
-      You say\n\n\u201CWhere are you my dear?\u201D She says\n\n\u201CI don\u2019t
+      car crashed... My mom and dad, there is blood coming out of his mouth\u201D
+      You say\n\n\u201CWhere are you my dear?\u201D She says\n\n\u201CI-I don\u2019t
       know\u2026 I think we are in a forest, close to the sea I think. \u201D You
       whisper"
     options:
-    - Text: '"They wont open their eyes"'
+    - Text: You hear seagulls in the distance
       gotoID: 7
-  - Text: "(4)\nThere are tubes sticking out of your dad. \nYou look at his chest
-      as it moves up and down. \nHe turns his head and smiles at you."
+  - Text: "(4)\nYou sit restlessly by the hospital bed. \nThere are tubes sticking
+      out of your dad and strange beeping noises. You look at his chest as it moves
+      up and down. \nHe turns his head and smiles at you."
     options:
     - Text: Your mom dies
       gotoID: 5
   - Text: "(5) \nYou always wanted a cat.\n\nOn the floor in the lady\u2019s apartment
-      \nthere are kittens running around playing. \nShe says that she  won\u2019t
-      be able to sell all of them. \nThe place smells funny.\n\nYour dad lets you
-      pick whichever one you want."
+      \nthere are kittens running around playing. \n\nThe place smells funny.\n\nYour
+      dad lets you pick whichever one you want."
     options:
-    - Text: ' You get the small black one'
-      gotoID: 6
-    - Text: 'you get the striped yellow one
+    - Text: ' You get the small black male'
+      gotoID: 11
+    - Text: 'you get the striped yellow female
 
 
 '
-      gotoID: 6
+      gotoID: 10
   - Text: "(6) \nAt school you eat your lunch alone. \nSometimes in the breaks, you
       go to the bathroom \nso people don\u2019t notice that you are not part of anything.
       \n\n"
@@ -204,6 +205,27 @@ MonoBehaviour:
       you say\n\nThe woman tells you that they will come get you soon."
     options:
     - Text: Everything is going to be all right
+      gotoID: 4
+  - Text: "(8) \nYou roll him over"
+    options:
+    - Text: He breathes easier now
+      gotoID: 2
+  - Text: "(9) \nYou look into your mother\u2019s eyes, but she is staring right through
+      you.\n\nYou unfasten her seatbelt and try to move her."
+    options:
+    - Text: Something inside her sounds broken
+      gotoID: 2
+  - Text: "(10) \nYou love her."
+    options:
+    - Text: She makes you forget.
+      gotoID: 6
+  - Text: "(11) \nYou love him."
+    options:
+    - Text: he makes you forget
+      gotoID: 6
+  - Text: "(12) \nYou love him."
+    options:
+    - Text: he makes you forget
       gotoID: 4
   Description: {fileID: 1703661309}
   Choice: {fileID: 2117197186}
