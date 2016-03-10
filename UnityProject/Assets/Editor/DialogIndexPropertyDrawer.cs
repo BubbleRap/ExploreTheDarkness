@@ -45,8 +45,15 @@ public class DialogIndexPropertyDrawer : PropertyDrawer {
                 
             DialogChoices dialogSystem = property.serializedObject.targetObject as DialogChoices;
 
-            dialogSystem.MoveFromTo(currentIndex, propertyItem.intValue);
-            //dialogSystem.SortDialogsByIndex();
+            int destIdx = propertyItem.intValue;
+
+            if( destIdx < 0 ) 
+                destIdx = 0;
+            
+            if( destIdx >= dialogsList.arraySize )
+                destIdx = dialogsList.arraySize - 1;
+            
+            dialogSystem.MoveFromTo(currentIndex, destIdx);
             dialogSystem.SyncronizeIndexes();
         }
 
