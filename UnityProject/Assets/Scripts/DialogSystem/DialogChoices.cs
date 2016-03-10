@@ -108,9 +108,28 @@ public class DialogChoices : MonoBehaviour {
 		}
 	}
 
+    public void MoveFromTo(int src, int dst)
+    {
+        Dialog item = Dialog[src];
+        Dialog.RemoveAt(src);
+        Dialog.Insert(dst, item);
+    }
+
+    public void SyncronizeIndexes()
+    {
+        for(int i = 0; i < Dialog.Count; i++ )
+            Dialog[i].index.index = i;
+    }
+
     public void SortDialogsByIndex()
     {
         Dialog.Sort( (Dialog left, Dialog right) => { return left.index.index.CompareTo(right.index.index);} );
+    }
+
+    public void IncrementIndeciesFrom(int fromIdx)
+    {
+        for( int i = fromIdx; i < Dialog.Count; i++ )
+            Dialog[i].index.index++;
     }
 
 	IEnumerator FadeIn (Text text, float time)
