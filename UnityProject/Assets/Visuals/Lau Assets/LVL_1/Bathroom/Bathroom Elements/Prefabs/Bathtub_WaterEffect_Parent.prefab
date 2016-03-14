@@ -1913,7 +1913,7 @@ ParticleSystem:
         rgba: 1979709921
       maxColor:
         serializedVersion: 2
-        rgba: 2219065910
+        rgba: 3695460917
       minMaxState: 0
     startSize:
       scalar: 0.12
@@ -2036,7 +2036,7 @@ ParticleSystem:
         m_RotationOrder: 0
       minMaxState: 3
     randomizeRotationDirection: 0
-    gravityModifier: 0.2
+    gravityModifier: 0.3
     maxNumParticles: 1000
     rotation3D: 0
   ShapeModule:
@@ -2064,7 +2064,7 @@ ParticleSystem:
     serializedVersion: 2
     m_Type: 0
     rate:
-      scalar: 35
+      scalar: 30
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3387,7 +3387,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 3019570136
+        rgba: 4143643608
       minMaxState: 0
     startSize:
       scalar: 1
