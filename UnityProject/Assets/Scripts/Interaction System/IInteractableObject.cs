@@ -15,7 +15,7 @@ public class IInteractableObject : MonoBehaviour
 
 	public WorkState ActiveWhen;
 	
-	protected bool interactionIsActive = false;
+    public bool interactionIsActive = false;
 	private Renderer m_renderer;
 	
 	public virtual bool Activate() { return (interactionIsActive = !interactionIsActive); }

@@ -10,15 +10,17 @@ public class MonsterBehaviour : CharacterBehaviour, IAgent
         Crawling
     }
         
-    private MonsterState m_state;
+    private MonsterState m_state = MonsterState.Crawling;
     private SiljaBehaviour m_character;
 
-    private void Awake()
+    private new void Awake()
     {
         base.Awake();
 
-        m_movementController.InitializeCharacterController(45f, 0.3f, 0.01f, 0.15f, 2.5f);
+        m_movementController.InitializeCharacterController(45f, 0.3f, 0.01f, 0.15f, 2.0f);
         m_movementController.InitializeCharacterMotor(false, 0.5f, 0.5f, 0.5f, false, false, false);
+
+        SetBehaviourState(m_state);
     }
 
     private void Start()
@@ -28,6 +30,9 @@ public class MonsterBehaviour : CharacterBehaviour, IAgent
 
     private void Update()
     {
+        if(m_character == null)
+            return;
+        
         Vector3 dirToChar = m_character.transform.position - transform.position;
         dirToChar.y = 0f;
         dirToChar.Normalize();
@@ -85,5 +90,19 @@ public class MonsterBehaviour : CharacterBehaviour, IAgent
         }
 
         return isVisible;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        IInteractableObject interactable = other.GetComponent<IInteractableObject>();
+        interactable.Activate();
+
+        Debug.Log(interactable.gameObject.name);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        IInteractableObject interactable = other.GetComponent<IInteractableObject>();
+        interactable.Activate();
     }
 }
