@@ -23,6 +23,9 @@ public class ObjectivesManager : MonoBehaviour
 
 	public bool IsInteractionEligable( IInteractableObject interaction )
 	{
+        if(m_objectives.Length == 0)
+            return true;
+        
 		Objective currentObj = m_objectives[objectiveIdx];
 
 		if( currentObj.m_interactions.Contains( interaction ) )
@@ -40,6 +43,9 @@ public class ObjectivesManager : MonoBehaviour
 
 	public void OnInteractionComplete( IInteractableObject interaction, bool state )
 	{
+        if(m_objectives.Length == 0)
+            return;
+        
 		Objective current = m_objectives[objectiveIdx];
 		if( current.m_interactions.Contains( interaction ) )
 		   	current.OnInteractionComplete( state ); 
