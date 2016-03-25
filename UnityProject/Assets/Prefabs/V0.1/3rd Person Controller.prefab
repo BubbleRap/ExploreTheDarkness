@@ -6085,7 +6085,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100332}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65f5677aa325c184f801528d78a73827, type: 3}
   m_Name: 
@@ -6110,15 +6110,15 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100332}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 899f97884c6d96b4ca20648ec109a37f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pattern: 12
   patternScale: 1
-  activeSample: {x: -0.0625, y: 0.3148148, z: 0.1875, w: -0.018518507}
-  activeIndex: 13
+  activeSample: {x: 0, y: 0, z: 0, w: 0}
+  activeIndex: -1
 --- !u!114 &11429968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6202,7 +6202,7 @@ MonoBehaviour:
   UseDithering: 0
   QualityLevel: 1
   BlendAmount: 0
-  LutTexture: {fileID: 2800000, guid: bba8a11f372a6a64981b162bea32d491, type: 3}
+  LutTexture: {fileID: 2800000, guid: d054047631b15bc4d857c846162c3d62, type: 3}
   LutBlendTexture: {fileID: 0}
   MaskTexture: {fileID: 0}
   UseDepthMask: 0
@@ -6321,7 +6321,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100332}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b642ff60407fe724bafa6602199213c0, type: 3}
   m_Name: 
@@ -6430,7 +6430,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100332}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 646b5bc27a658f447b1d929fd5ffbd70, type: 3}
   m_Name: 
