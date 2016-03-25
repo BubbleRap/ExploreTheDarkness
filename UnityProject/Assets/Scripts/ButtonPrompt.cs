@@ -9,6 +9,7 @@ public class ButtonPrompt : MonoBehaviour {
 
 	private Interactor interactor;
 	private Transform connectedObject;
+    private Renderer m_renderer;
     private TextMesh textMesh;
 
     void Awake()
@@ -34,6 +35,7 @@ public class ButtonPrompt : MonoBehaviour {
 
 	public void SetConnectedTransform(Transform t){
 		connectedObject = t;
+        m_renderer = connectedObject.GetComponent<Renderer>();
 	}
 
 	void Update () {
@@ -41,23 +43,19 @@ public class ButtonPrompt : MonoBehaviour {
 		float size = (hudCamera.gameObject.transform.position - transform.position).magnitude ;
 		transform.localScale = new Vector3(size,size,size);
 
-		foreach (TextMesh m in this.GetComponentsInChildren<TextMesh> ())
-			m.color = new Color (
-				1f, 1f, 1f, Mathf.Lerp(m.color.a, GetAlpha (),0.1f));
+        textMesh.color = new Color (1f, 1f, 1f, Mathf.Lerp(textMesh.color.a, GetAlpha (),0.1f));
 
 		transform.LookAt(hudCamera.gameObject.transform);
 	}
 
 	private float GetAlpha(){
 
-		if (connectedObject != null &&
-			connectedObject.GetComponent<Renderer> () != null &&
-			!connectedObject.GetComponent<Renderer> ().isVisible)
+        if (m_renderer != null && !m_renderer.isVisible)
 			return 0f;
 		else {
 			Vector3 objToCamera = Camera.main.transform.position - connectedObject.position;
 
-            LayerMask mask = LayerMask.NameToLayer("Default") ;
+            LayerMask mask = 1 << LayerMask.NameToLayer("Default");
 
 			if (Physics.Raycast( Camera.main.transform.position, objToCamera.normalized, objToCamera.magnitude, mask ))
 				return 0f;
