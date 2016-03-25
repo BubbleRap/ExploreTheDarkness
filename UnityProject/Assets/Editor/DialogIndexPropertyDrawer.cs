@@ -23,8 +23,38 @@ public class DialogIndexPropertyDrawer : PropertyDrawer {
 
         if( KeyPressed(label.text, KeyCode.Return))
         {
+            SerializedProperty dialogsList = property.serializedObject.FindProperty("Dialog");
+         
+            int currentIndex = -1;
+            for( int i = 0; i < dialogsList.arraySize; i++ )
+            {
+                SerializedProperty propertyElement = dialogsList.GetArrayElementAtIndex(i).FindPropertyRelative("index");
+    
+                if( propertyElement.propertyPath == property.propertyPath)
+                {
+                    currentIndex = i;
+                    break;
+                }
+            }
+            
+            if(currentIndex == -1)
+            {
+                Debug.Log("not found");
+                return;
+            }
+                
             DialogChoices dialogSystem = property.serializedObject.targetObject as DialogChoices;
-            dialogSystem.SortDialogsByIndex();
+
+            int destIdx = propertyItem.intValue;
+
+            if( destIdx < 0 ) 
+                destIdx = 0;
+            
+            if( destIdx >= dialogsList.arraySize )
+                destIdx = dialogsList.arraySize - 1;
+            
+            dialogSystem.MoveFromTo(currentIndex, destIdx);
+            dialogSystem.SyncronizeIndexes();
         }
 
         EditorGUI.indentLevel = indent;
