@@ -146,50 +146,105 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d0d0a005c934cc387de8e937621319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialog:
-  - '1988
-
-
-    A sunny day in Copenhagen.
-
-    "Morning, sweetie." Mom says.'
-  - 'You pour milk over your cereals.
-
-    Cap''n Crunch looks happier than usual.'
-  - '"Hurry up, we have to go!"'
-  option1:
-  - You get out of the bed with a smile.
-  - You eat some cereal.
-  - You get ready and go out of the door.
-  option2:
-  - You stay in bed a little longer.
-  - 
-  - 
   Dialog:
-  - Text: (0)You are driving in the Car
+  - Text: "(0) Lisa and Michella look at you \nfrom the other side of the bunk bed.
+      \n\n'So what will it be Silja...truth or dare?' Lisa sayes"
     options:
-    - Text: Stop
+    - Text: Truth
       gotoID: 1
-    - Text: keep driving
+    - Text: Dare
       gotoID: 2
-  - Text: (1)There is a stoplight
+  - Text: (1) Michella looks at Lisa and winks. ' So... have you had sex yet?'
     options:
-    - Text: stop
+    - Text: 'Sure. '
       gotoID: 3
-    - Text: keep driving
-      gotoID: 2
-  - Text: (3)"Hurry up, we have to go!"
+    - Text: Have you?
+      gotoID: 6
+  - Text: (2) Michella sends Lisa a smile. Go talk to Christian.
     options:
-    - Text: You get ready and go out of the door.
-      gotoID: 0
-  - Text: (4)"Hurry up, we have to go!"
+    - Text: "That's not fair.\t\t"
+      gotoID: 4
+    - Text: I'm seeing someone, so...
+      gotoID: 3
+  - Text: '(3) Lisa and Michella gasps: Really? Who?   '
     options:
-    - Text: You get ready and go out of the door.
-      gotoID: 0
-  - Text: (5)"Hurry up, we have to go!"
+    - Text: '... that wasn''t really the question, was it now?'
+      gotoID: 4
+    - Text: Just someone... you haven't met him, so... Who's next?
+      gotoID: 4
+  - Text: '(4) Michella looks at Lisa: "She should answer, right?" Lisa nods: "After
+      all what we told you...?"'
     options:
-    - Text: You get ready and go out of the door.
-      gotoID: 0
+    - Text: You can't make up the rules as you go.
+      gotoID: 5
+    - Text: 'You tell them who it is. '
+      gotoID: 5
+  - Text: '(5) Before you can say anything there''s a knock on the door. And the teacher
+      appears: He hands you a phone: "I''ts your dad."  Michella looks at you and
+      slowly waves her head from one side to the next. The teacher gestures you to
+      take the phone.'
+    options:
+    - Text: We're in the middle of something, so...
+      gotoID: 9
+    - Text: Why? Is it urgent or what?
+      gotoID: 9
+  - Text: '(6) Michella shrugs and Lisa laughs: "Seriousily, haven''t you tried it
+      yet?"'
+    options:
+    - Text: 'Of course. '
+      gotoID: 3
+    - Text: Not really.
+      gotoID: 8
+  - Text: (7) ????
+    options:
+    - Text: 'I''ll call him back later. '
+      gotoID: 11
+    - Text: 'What is it? Is it important? '
+      gotoID: 12
+  - Text: '(8)Michella tilts her head a bit and looks at you: "And what''s that supposed
+      to mean...?"'
+    options:
+    - Text: That I kind of had sex with someone...
+      gotoID: 3
+    - Text: I don't wanna talk about it, okay?
+      gotoID: 11
+  - Text: (9)  The teacher covers the phone with a hand. "Don't you talk to me like
+      that, young lady." He stares you in the eyes. MIchella and Lisa holds their
+      breath.
+    options:
+    - Text: 'You take the phone and put it to your ear.  '
+      gotoID: 10
+  - Text: '(10) "Hi dad..." you say. "What''s up?" '
+    options:
+    - Text: 
+      gotoID: 11
+    - Text: 
+      gotoID: 12
+  - Text: '(11) "Eh okay, then  just give us a yes or no, okay?" Michella says and
+      puts her arms across her chest. '
+    options:
+    - Text: 'Sorry... '
+      gotoID: 5
+    - Text: 'Yes, then. '
+      gotoID: 5
+  - Text: (12) ????
+    options:
+    - Text: 'I''ll call him later. '
+      gotoID: 11
+    - Text: Why? Is it urgent?
+      gotoID: 12
+  - Text: (13) ???
+    options:
+    - Text: 'I''ll call him later. '
+      gotoID: 11
+    - Text: Why? Is it urgent?
+      gotoID: 12
+  - Text: (14) ????
+    options:
+    - Text: 'I''ll call him later. '
+      gotoID: 11
+    - Text: Why? Is it urgent?
+      gotoID: 12
   Description: {fileID: 1703661309}
   Choice: {fileID: 2117197186}
   MultipleChoice: {fileID: 250261857}
