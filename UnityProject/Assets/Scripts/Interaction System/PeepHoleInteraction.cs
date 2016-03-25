@@ -16,6 +16,8 @@ public class PeepHoleInteraction : IInteractableObject
 
     private void Awake()
     {
+        base.Awake();
+
         _siljaBeh = DarknessManager.Instance.m_mainCharacter;
 
         _camFollow = _siljaBeh.cameraFollow;
