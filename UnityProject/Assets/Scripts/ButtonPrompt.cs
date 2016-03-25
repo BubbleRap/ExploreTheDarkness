@@ -9,6 +9,12 @@ public class ButtonPrompt : MonoBehaviour {
 
 	private Interactor interactor;
 	private Transform connectedObject;
+    private TextMesh textMesh;
+
+    void Awake()
+    {
+        textMesh = GetComponentInChildren<TextMesh>();
+    }
 
 	void Start()
 	{
@@ -16,17 +22,14 @@ public class ButtonPrompt : MonoBehaviour {
 	}
 
 	void OnEnable(){
-		foreach (TextMesh m in this.GetComponentsInChildren<TextMesh> ())
-			m.color = new Color (
-				1f, 1f, 1f, 0f);
+        textMesh.color = new Color (1f, 1f, 1f, 0f);
 
 		GameObject siljaGO = GameObject.FindGameObjectWithTag("Player");
 		interactor = siljaGO.GetComponent<Interactor>();
 	}
 
 	public void SetText(string text){
-		foreach (TextMesh m in this.GetComponentsInChildren<TextMesh> ())
-			m.text = text;
+        textMesh.text = text;
 	}
 
 	public void SetConnectedTransform(Transform t){
@@ -53,21 +56,22 @@ public class ButtonPrompt : MonoBehaviour {
 			return 0f;
 		else {
 			Vector3 objToCamera = Camera.main.transform.position - connectedObject.position;
-			if (Physics.Raycast(
-				connectedObject.transform.position, 
-				objToCamera, 
-				objToCamera.magnitude,
-				LayerMask.NameToLayer("Default")))
+
+            LayerMask mask = LayerMask.NameToLayer("Default") ;
+
+			if (Physics.Raycast( Camera.main.transform.position, objToCamera.normalized, objToCamera.magnitude, mask ))
 				return 0f;
 
-			RaycastHit hit;
+          
 
-			if(Physics.Raycast(Camera.main.transform.position,-objToCamera, out hit, 10F,LayerMask.NameToLayer("Trigger"))){
-				if(hit.transform.gameObject != connectedObject.gameObject)
-				{
-					return 0f;
-				}
-			}
+			//RaycastHit hit;
+
+			//if(Physics.Raycast(Camera.main.transform.position,-objToCamera, out hit, 10F,LayerMask.NameToLayer("Trigger"))){
+			//	if(hit.transform.gameObject != connectedObject.gameObject)
+			//	{
+			//		return 0f;
+			//	}
+			//}
 		}
 
 		/*

@@ -116,7 +116,7 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 
         if (Input.GetKeyUp(KeyCode.Q)
         && camTransitioner.Mode != CameraTransitioner.CameraMode.Transitioning
-        && !interactor.isInteracting)
+        && !interactor.IsInteracting)
         {
             if (m_isLookingInFP)
             {
