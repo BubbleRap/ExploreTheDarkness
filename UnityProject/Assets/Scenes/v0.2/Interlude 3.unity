@@ -150,83 +150,134 @@ MonoBehaviour:
   fadeTimeOption: 0.8
   delayBetweenDialogs: 0.4
   Dialog:
-  - Text: "(0) \nYour dad is on the concrete."
+  - index:
+      index: 0
+    Text: Your dad is on the concrete.
     options:
     - Text: There is blood
       gotoID: 1
-  - Text: "(1) \nYour ears are ringing. \nYou unfasten your seatbelt and open the
-      car door.\n\nYou walk towards him. He is having trouble breathing. \nThere is
-      blood in his mouth.  \n\nYou see your mom in the car. \nShe is moving her head
-      slowly."
+  - index:
+      index: 1
+    Text: "Your ears are ringing. \nYou unfasten your seatbelt and open the car door.\n\nYou
+      walk towards him. He is having trouble breathing, \nthere is blood in his mouth.
+      \ \n\nYou see your mom in the car. \nShe is moving her head slowly."
     options:
     - Text: You turn your father on to his side
-      gotoID: 8
+      gotoID: 2
     - Text: you get your mom out of the car
-      gotoID: 9
-  - Text: "(2) \n\nYou feel nauseous, like the world is spinning.\n\nIn the glove
-      compartment in the car there is a cell phone.\n\n"
+      gotoID: 3
+  - index:
+      index: 2
+    Text: You roll him over
+    options:
+    - Text: 'He breathes easier now
+
+'
+      gotoID: 12
+  - index:
+      index: 3
+    Text: "You look into your mother\u2019s eyes, but she is staring right through
+      you.\n\nYou unfasten her seatbelt and try to move her."
+    options:
+    - Text: Something inside her feels broken
+      gotoID: 4
+  - index:
+      index: 4
+    Text: 'You feel nauseous. The world is spinning.
+
+
+      In the glove compartment in the car there is a cell phone.
+
+
+'
     options:
     - Text: You call 911
-      gotoID: 3
-  - Text: "(3) \n\u201CHello, what is your emergency?\u201D a woman says\n\n\u201CThe
-      car crashed... My mom and dad, there is blood coming out of his mouth\u201D
-      You say\n\n\u201CWhere are you my dear?\u201D She says\n\n\u201CI-I don\u2019t
-      know\u2026 I think we are in a forest, close to the sea I think. \u201D You
-      whisper"
+      gotoID: 5
+  - index:
+      index: 5
+    Text: "\u201CHello, what is your emergency?\u201D a woman says\n\n\u201CThe car
+      crashed... My mom and dad, \nthere is blood in his mouth.\u201D You say\n\n\u201CWhere
+      are you my dear?\u201D She says\n\n\u201CI-I don\u2019t know\u2026 I think we
+      are in a forest, close to the sea I think. \u201D You whisper"
     options:
     - Text: You hear seagulls in the distance
-      gotoID: 7
-  - Text: "(4)\nYou sit restlessly by the hospital bed. \nThere are tubes sticking
-      out of your dad and strange beeping noises. You look at his chest as it moves
-      up and down. \nHe turns his head and smiles at you."
+      gotoID: 6
+  - index:
+      index: 6
+    Text: "\u201CHow old are you dear?\u201D The woman asks\n\n\u201CI am 11.\u201D
+      you say\n\nThe woman tells you that they will come get you soon."
     options:
-    - Text: Your mom dies
-      gotoID: 5
-  - Text: "(5) \nYou always wanted a cat.\n\nOn the floor in the lady\u2019s apartment
-      \nthere are kittens running around playing. \n\nThe place smells funny.\n\nYour
-      dad lets you pick whichever one you want."
+    - Text: Everything is going to be all right
+      gotoID: 7
+  - index:
+      index: 7
+    Text: "You sit restlessly by the hospital bed. \nThere are tubes sticking out
+      of your dad \nand strange beeping noises. \nYou look at his chest as it moves
+      up and down. \n"
+    options:
+    - Text: He turns his head and smiles at you
+      gotoID: 13
+  - index:
+      index: 8
+    Text: "You always wanted a cat.\n\nOn the floor in the lady\u2019s apartment \nthere
+      are kittens running around playing. \n\nThe place smells funny.\n\nYour dad
+      lets you pick whichever one you want."
     options:
     - Text: ' You get the small black male'
-      gotoID: 11
+      gotoID: 9
     - Text: 'you get the striped yellow female
 
 
 '
       gotoID: 10
-  - Text: "(6) \nAt school you eat your lunch alone. \nSometimes in the breaks, you
-      go to the bathroom \nso people don\u2019t notice that you are not part of anything.
+  - index:
+      index: 9
+    Text: You love him.
+    options:
+    - Text: he makes you forget
+      gotoID: 11
+  - index:
+      index: 10
+    Text: You love her.
+    options:
+    - Text: She makes you forget.
+      gotoID: 11
+  - index:
+      index: 11
+    Text: "At school you eat your lunch alone. \nSometimes in the breaks, you go to
+      the bathroom \nso people don\u2019t notice that you are not part of anything.
       \n\n"
     options:
     - Text: 'Of course. '
       gotoID: 3
     - Text: Not really.
       gotoID: 8
-  - Text: "(7) \n\u201CHow old are you dear?\u201D The woman asks\n\n\u201CI am 11.\u201D
-      you say\n\nThe woman tells you that they will come get you soon."
+  - index:
+      index: 12
+    Text: "You stagger towards the car. \nThe world is spinning.\n\nIn the glove compartment
+      in the car there is a cell phone.\n\n"
     options:
-    - Text: Everything is going to be all right
-      gotoID: 4
-  - Text: "(8) \nYou roll him over"
+    - Text: you call 911
+      gotoID: 5
+  - index:
+      index: 13
+    Text: "When the doctors mention your mother, \nyou are asked to leave the room.
+      \n\nYou see your mother through a glass window. \nIt distorts her features. "
     options:
-    - Text: He breathes easier now
-      gotoID: 2
-  - Text: "(9) \nYou look into your mother\u2019s eyes, but she is staring right through
-      you.\n\nYou unfasten her seatbelt and try to move her."
+    - Text: You wait
+      gotoID: 14
+  - index:
+      index: 14
+    Text: Your dad is released from Hospital.
     options:
-    - Text: Something inside her sounds broken
-      gotoID: 2
-  - Text: "(10) \nYou love her."
+    - Text: 'He looks different. '
+      gotoID: 15
+  - index:
+      index: 15
+    Text: 
     options:
-    - Text: She makes you forget.
-      gotoID: 6
-  - Text: "(11) \nYou love him."
-    options:
-    - Text: he makes you forget
-      gotoID: 6
-  - Text: "(12) \nYou love him."
-    options:
-    - Text: he makes you forget
-      gotoID: 4
+    - Text: Your mother dies
+      gotoID: 8
   Description: {fileID: 1703661309}
   Choice: {fileID: 2117197186}
   MultipleChoice: {fileID: 250261857}
