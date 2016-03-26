@@ -104,7 +104,7 @@ public class DialogChoices : MonoBehaviour {
 
 	public void dialogNext(int OptionNumber)
 	{
-		if(Dialog[ID].options[OptionNumber].gotoID <= Dialog.Count)
+		if(Dialog[ID].options[OptionNumber].gotoID <= Dialog.Count && Dialog[ID].options[OptionNumber].gotoID != 0)
 		{
 			isFaded = false;
 			StartCoroutine(FadeOut(Description,1));
@@ -124,7 +124,12 @@ public class DialogChoices : MonoBehaviour {
 					settingNumber ++;
 				}
 			}
+		}
 
+		if(Dialog[ID].options[OptionNumber].gotoID == 0)
+		{
+			fadeImage.enabled = true;
+			StartCoroutine(FadeToNewScene(fadeImage,fadeInBlack));
 		}
 	}
 
@@ -212,6 +217,26 @@ public class DialogChoices : MonoBehaviour {
 
 		isFadedBG = true;
 		fadeImage.enabled = false;
+	}
+
+	IEnumerator FadeToNewScene (Image fade, float time)
+	{
+		float colorAlpha = fade.color.a;
+		float elapsedTime = 0;
+
+		if(Application.loadedLevel < Application.levelCount)
+		{
+			Application.LoadLevelAsync(Application.loadedLevel + 1);
+		}
+
+		while(elapsedTime < time)
+		{
+			fade.color = new Color(fade.color.r,fade.color.g,fade.color.b,Mathf.Lerp(0,1,(elapsedTime / time)));
+
+			elapsedTime += Time.deltaTime;
+
+			yield return null;
+		}
 	}
 
 	public void changeBackground(Sprite background)
