@@ -158,17 +158,17 @@ MonoBehaviour:
       gotoID: 1
   - index:
       index: 1
-    Text: "Your ears are ringing. \nYou unfasten your seatbelt and open the car door.\n\nYou
-      walk towards him. He is having trouble breathing, \nthere is blood in his mouth.
-      \ \n\nYou see your mom in the car. \nShe is moving her head slowly."
+    Text: "You open the car door and walk towards him. \n\nHe is having trouble breathing.
+      There is blood in his mouth.  \n\nYou see your mom in the car. \nShe is moving
+      her head."
     options:
     - Text: You turn your father on to his side
       gotoID: 2
-    - Text: you get your mom out of the car
+    - Text: You get your mom out of the car
       gotoID: 3
   - index:
       index: 2
-    Text: You roll him over
+    Text: You roll him over.
     options:
     - Text: 'He breathes easier now
 
@@ -186,10 +186,7 @@ MonoBehaviour:
     Text: 'You feel nauseous. The world is spinning.
 
 
-      In the glove compartment in the car there is a cell phone.
-
-
-'
+      In the glove compartment in the car there is a cell phone.'
     options:
     - Text: You call 911
       gotoID: 5
@@ -197,22 +194,23 @@ MonoBehaviour:
       index: 5
     Text: "\u201CHello, what is your emergency?\u201D a woman says\n\n\u201CThe car
       crashed... My mom and dad, \nthere is blood in his mouth.\u201D You say\n\n\u201CWhere
-      are you my dear?\u201D She says\n\n\u201CI-I don\u2019t know\u2026 I think we
-      are in a forest, close to the sea I think. \u201D You whisper"
+      are you my dear?\u201D She says\n\nYou look around but there are just trees."
     options:
     - Text: You hear seagulls in the distance
       gotoID: 6
   - index:
       index: 6
-    Text: "\u201CHow old are you dear?\u201D The woman asks\n\n\u201CI am 11.\u201D
-      you say\n\nThe woman tells you that they will come get you soon."
+    Text: "\u201CI-I don\u2019t know\u2026 I think we are in a forest, close to the
+      sea I think. \u201D You whisper \n\n\u201CHow old are you dear?\u201D The woman
+      asks\n\n\u201CI am 11.\u201D you say\n\n\"it is going to be all right\" The
+      woman says"
     options:
-    - Text: Everything is going to be all right
+    - Text: You close your eyes
       gotoID: 7
   - index:
       index: 7
-    Text: "You sit restlessly by the hospital bed. \nThere are tubes sticking out
-      of your dad \nand strange beeping noises. \nYou look at his chest as it moves
+    Text: "You sit restlessly by the hospital bed. \n\nThere are tubes sticking out
+      of your dad \nand strange beeping noises. \n\nYou look at his chest as it moves
       up and down. \n"
     options:
     - Text: He turns his head and smiles at you
@@ -223,25 +221,28 @@ MonoBehaviour:
       are kittens running around playing. \n\nThe place smells funny.\n\nYour dad
       lets you pick whichever one you want."
     options:
-    - Text: ' You get the small black male'
+    - Text: ' You get the affectionate black male'
       gotoID: 9
-    - Text: 'you get the striped yellow female
+    - Text: 'You get the playful orange female
 
 
 '
       gotoID: 10
   - index:
       index: 9
-    Text: You love him.
+    Text: 'He follows you around.
+
+
+      You love him. '
     options:
-    - Text: he makes you forget
-      gotoID: 11
+    - Text: He makes you forget
+      gotoID: 0
   - index:
       index: 10
-    Text: You love her.
+    Text: "You play with her all the time. \n\nYou love her."
     options:
     - Text: She makes you forget.
-      gotoID: 11
+      gotoID: 0
   - index:
       index: 11
     Text: "At school you eat your lunch alone. \nSometimes in the breaks, you go to
@@ -254,29 +255,46 @@ MonoBehaviour:
       gotoID: 8
   - index:
       index: 12
-    Text: "You stagger towards the car. \nThe world is spinning.\n\nIn the glove compartment
-      in the car there is a cell phone.\n\n"
+    Text: "You stagger towards the car. \n\nThe world is spinning.\n\nIn the glove
+      compartment in the car there is a cell phone.\n\n"
     options:
-    - Text: you call 911
+    - Text: You call 911
       gotoID: 5
   - index:
       index: 13
     Text: "When the doctors mention your mother, \nyou are asked to leave the room.
-      \n\nYou see your mother through a glass window. \nIt distorts her features. "
+      \n\nYou see your mother through a glass window. "
     options:
-    - Text: You wait
-      gotoID: 14
+    - Text: 'It distorts her features '
+      gotoID: 16
   - index:
       index: 14
     Text: Your dad is released from Hospital.
     options:
-    - Text: 'He looks different. '
-      gotoID: 15
+    - Text: 'He looks different '
+      gotoID: 17
   - index:
       index: 15
     Text: 
     options:
-    - Text: Your mother dies
+    - Text: Your mother dies.
+      gotoID: 14
+  - index:
+      index: 16
+    Text: 'Outside the snow starts meling and the days get longer.
+
+
+      You play songs to your mother when she sleeps from your discman.
+
+      It makes her breathing calm. '
+    options:
+    - Text: Talking turns to whisper around you
+      gotoID: 15
+  - index:
+      index: 17
+    Text: 'Your dad dosent leave the apartment often '
+    options:
+    - Text: You eat alone
       gotoID: 8
   Description: {fileID: 1703661309}
   Choice: {fileID: 2117197186}
@@ -574,7 +592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7490196, g: 0.4117647, b: 0.10980392, a: 1}
+  m_Color: {r: 0.9098039, g: 0.54509807, b: 0.21960784, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -582,8 +600,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 56f5d385dd9a44c51ad6bcc98b6a84f0, type: 3}
-    m_FontSize: 16
+    m_Font: {fileID: 12800000, guid: ad0a98c36e28a42c989a5946f3674d2a, type: 3}
+    m_FontSize: 15
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -714,7 +732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7490196, g: 0.4117647, b: 0.10980392, a: 1}
+  m_Color: {r: 0.9117647, g: 0.5474372, b: 0.22123702, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -722,8 +740,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 56f5d385dd9a44c51ad6bcc98b6a84f0, type: 3}
-    m_FontSize: 16
+    m_Font: {fileID: 12800000, guid: ad0a98c36e28a42c989a5946f3674d2a, type: 3}
+    m_FontSize: 15
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -802,7 +820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7490196, g: 0.4117647, b: 0.10980392, a: 1}
+  m_Color: {r: 0.9098039, g: 0.54509807, b: 0.21960784, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -810,7 +828,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 56f5d385dd9a44c51ad6bcc98b6a84f0, type: 3}
+    m_Font: {fileID: 12800000, guid: ad0a98c36e28a42c989a5946f3674d2a, type: 3}
     m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
@@ -947,7 +965,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 33dfd0e07dfb346c083084166d5edff4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f85008c4493ab45b6bcb396dd6a6e8fa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1077,8 +1095,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 56f5d385dd9a44c51ad6bcc98b6a84f0, type: 3}
-    m_FontSize: 16
+    m_Font: {fileID: 12800000, guid: ad0a98c36e28a42c989a5946f3674d2a, type: 3}
+    m_FontSize: 15
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
