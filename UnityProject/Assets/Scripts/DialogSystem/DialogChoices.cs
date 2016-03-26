@@ -13,11 +13,15 @@ public class DialogChoices : MonoBehaviour {
 
 	public float delayBetweenDialogs = 0.4f;
 
+	public Setting[] settings;
+	private int settingNumber = 0;
+
 	public List<Dialog> Dialog;
 
 	public Text Description;
 	public GameObject Choice;
 	public GameObject MultipleChoice;
+	public Image backgroundImage;
 
 	private GameObject optionText1_single = null;
 	private GameObject optionText1_multiple = null;
@@ -105,6 +109,16 @@ public class DialogChoices : MonoBehaviour {
 			StartCoroutine(FadeOut(optionText2_multiple.GetComponent<Text>(),delayBetweenDialogs));
 
 			ID = Dialog[ID].options[OptionNumber].gotoID;
+
+			if(settingNumber < settings.Length)
+			{
+				if(settings[settingNumber].changeAtID == ID)
+				{
+					changeBackground(settings[settingNumber].background);
+					settingNumber ++;
+				}
+			}
+
 		}
 	}
 
@@ -156,5 +170,40 @@ public class DialogChoices : MonoBehaviour {
 		yield return new WaitForSeconds(delay);
 
 		isFaded = true;
+	}
+
+	/*
+	IEnumerator FadeInBg (Sprite background, float time)
+	{
+		float colorAlpha = text.color.a;
+		float elapsedTime = 0;
+
+		while(elapsedTime < time)
+		{
+			text.color = new Color(text.color.r,text.color.g,text.color.b,Mathf.Lerp(0,1,(elapsedTime / time)));
+
+			elapsedTime += Time.deltaTime;
+
+			yield return null;
+		}
+	}
+	*/
+
+	/*
+	IEnumerator FadeOutBg (Text text, float delay)
+	{
+		float colorAlpha = text.color.a;
+
+		text.color = new Color(text.color.r,text.color.g,text.color.b,0);
+
+		yield return new WaitForSeconds(delay);
+
+		isFaded = true;
+	}
+	*/
+
+	public void changeBackground(Sprite background)
+	{
+		backgroundImage.sprite = background;
 	}
 }
