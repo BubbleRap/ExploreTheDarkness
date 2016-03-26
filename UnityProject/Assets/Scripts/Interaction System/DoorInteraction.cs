@@ -13,7 +13,7 @@ public class DoorInteraction : IInteractableObject
     private Animator m_animator;
     private SphereCollider m_collider;
 
-    private void Awake()
+    private new void Awake()
     {
         base.Awake();
 
@@ -39,14 +39,10 @@ public class DoorInteraction : IInteractableObject
         if(interactionIsActive)
         {
             ActionsToDisplay = m_actionOnOpen;
-            if(openOut)
-            {
-                m_animator.SetTrigger(m_openOutTrigger);
-            }
-            else
-            {
+            //if(openOut)
+            //    m_animator.SetTrigger(m_openOutTrigger);
+            //else
                 m_animator.SetTrigger(m_openInTrigger);
-            }
         }
         else
         {
