@@ -55,6 +55,8 @@ public class IInteractableObject : MonoBehaviour
 
     protected void Start()
 	{     
+        m_character = DarknessManager.Instance.m_mainCharacter;
+
 		if (TextToDisplay == "")
 			TextToDisplay = gameObject.name;
 
@@ -81,7 +83,6 @@ public class IInteractableObject : MonoBehaviour
 			}
 			else
 			{
-				m_character = DarknessManager.Instance.m_mainCharacter;
 				isEligable = true   && (  (ActiveWhen == WorkState.DarkModeOnly && !LightStatesMachine.Instance.IsLightOn()) 
 			                            		||(ActiveWhen == WorkState.LightModeOnly && !LightStatesMachine.Instance.IsLightOn()));
 			}
@@ -93,13 +94,13 @@ public class IInteractableObject : MonoBehaviour
         if(isEligable)
         {
             // close object
-            if( IsCamCloserThan(2f) && IsVisibleWithin(3f * m_cameraRelativePosition.magnitude))
+            if( IsCharCloserThan(2f) && IsVisibleWithin(3f * m_cameraRelativePosition.magnitude))
             {
                 textToOutput = ActionsToDisplay;
                 closeInteraction = true;
             }
             // far object
-            else if(IsCamCloserThan(5f) && IsVisibleWithin(90f))
+            else if(IsCharCloserThan(5f) && IsVisibleWithin(90f))
             {
                 textToOutput = TextToDisplay;
             }
@@ -154,6 +155,11 @@ public class IInteractableObject : MonoBehaviour
 	{
 		return m_cameraRelativePosition.magnitude < dist;
 	}
+
+    public bool IsCharCloserThan(float dist)
+    {
+        return (m_character.transform.position - transform.position).magnitude < dist;
+    }
 
 	public bool isObjectClose()
 	{
