@@ -149,6 +149,13 @@ MonoBehaviour:
   fadeTimeBigText: 0.8
   fadeTimeOption: 0.8
   delayBetweenDialogs: 0.4
+  settings:
+  - changeAtID: 7
+    background: {fileID: 21300000, guid: 97ced27bf56fd468fa8abfbb12ba56fb, type: 3}
+  - changeAtID: 14
+    background: {fileID: 21300000, guid: b6e7002142002460c807721fa2e088d0, type: 3}
+  - changeAtID: 8
+    background: {fileID: 21300000, guid: 6218021e355f442a486c61931a01d3b3, type: 3}
   Dialog:
   - index:
       index: 0
@@ -211,7 +218,7 @@ MonoBehaviour:
       index: 7
     Text: "You sit restlessly by the hospital bed. \n\nThere are tubes sticking out
       of your dad \nand strange beeping noises. \n\nYou look at his chest as it moves
-      up and down. \n"
+      up and down. "
     options:
     - Text: He turns his head and smiles at you
       gotoID: 13
@@ -256,7 +263,7 @@ MonoBehaviour:
   - index:
       index: 12
     Text: "You stagger towards the car. \n\nThe world is spinning.\n\nIn the glove
-      compartment in the car there is a cell phone.\n\n"
+      compartment in the car there is a cell phone."
     options:
     - Text: You call 911
       gotoID: 5
@@ -272,7 +279,7 @@ MonoBehaviour:
     Text: Your dad is released from Hospital.
     options:
     - Text: 'He looks different '
-      gotoID: 17
+      gotoID: 8
   - index:
       index: 15
     Text: 
@@ -292,13 +299,14 @@ MonoBehaviour:
       gotoID: 15
   - index:
       index: 17
-    Text: 'Your dad dosent leave the apartment often '
+    Text: 
     options:
-    - Text: You eat alone
+    - Text: You always wanted a cat
       gotoID: 8
   Description: {fileID: 1703661309}
   Choice: {fileID: 2117197186}
   MultipleChoice: {fileID: 250261857}
+  backgroundImage: {fileID: 1530367124}
 --- !u!4 &291847569
 Transform:
   m_ObjectHideFlags: 0
