@@ -28,6 +28,8 @@ public class LookInDetailInteraction : IInteractableObject
 
 	void Awake()
 	{
+        base.Awake();
+
 		_originalPos = transform.position;
 		_originalRot = transform.rotation;
 

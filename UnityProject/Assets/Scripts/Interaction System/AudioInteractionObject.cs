@@ -12,8 +12,10 @@ public class AudioInteractionObject : IInteractableObject
 
 	private AudioSource soundSource;
 
-	void Start()
+	new void Start()
 	{
+        base.Start();
+
 		if(internalPlay)
 			soundSource = transform.gameObject.GetComponent<AudioSource>();
 		else

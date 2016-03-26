@@ -22,15 +22,12 @@ public class IInteractableObject : MonoBehaviour
 	
 	public bool disableOnActive = true;
 
-	private GameObject label;
-	private GameObject buttonPrompt;
-
     private SiljaBehaviour m_character;
 	private Interactor interactor;
 
-	private bool objectIsFar = false;
+	//private bool objectIsFar = false;
 	private bool objectIsClose = false;
-	public float distance = 1f;
+	//public float distance = 1f;
 	
 	public string TextToDisplay = "some string";
 	public string ActionsToDisplay = "Look";
@@ -39,17 +36,32 @@ public class IInteractableObject : MonoBehaviour
 
 	public UnityEvent m_onInteractionActivated = new UnityEvent();
 
-	void Start()
-	{
+    protected CharacterBehaviour m_interactingBehaviour;
+
+    private ButtonPrompt buttonPrompt;
+
+    protected void Awake()
+    {
+        GameObject promtGO = Instantiate(Resources.Load<GameObject>("buttonPrompt")) as GameObject;
+        promtGO.transform.parent = transform;
+
+        buttonPrompt = promtGO.GetComponent<ButtonPrompt>();
+
+        buttonPrompt.SetText ("default");
+        buttonPrompt.SetConnectedTransform (this.transform);
+
+        //buttonPrompt.gameObject.SetActive(false);
+    }
+
+    protected void Start()
+	{     
+        m_character = DarknessManager.Instance.m_mainCharacter;
+
 		if (TextToDisplay == "")
 			TextToDisplay = gameObject.name;
 
 		if (ActionsToDisplay == "")
 			ActionsToDisplay = gameObject.name;
-
-  //      interactor = DarknessManager.Instance.m_mainCharacter.interactor;
-        
-
     }
 	
 	protected void Update()
@@ -61,7 +73,6 @@ public class IInteractableObject : MonoBehaviour
 
 		m_cameraRelativePosition = Camera.main.transform.InverseTransformPoint(transform.position);
 
-		bool isClose = (transform.position - interactor.transform.position).magnitude < distance;
 		bool isEligable = interactionIsActive || ActiveWhen == WorkState.WorksAlways;
 
 		if( ActiveWhen != WorkState.WorksAlways )
@@ -72,62 +83,55 @@ public class IInteractableObject : MonoBehaviour
 			}
 			else
 			{
-				m_character = DarknessManager.Instance.m_mainCharacter;
 				isEligable = true   && (  (ActiveWhen == WorkState.DarkModeOnly && !LightStatesMachine.Instance.IsLightOn()) 
 			                            		||(ActiveWhen == WorkState.LightModeOnly && !LightStatesMachine.Instance.IsLightOn()));
 			}
 		}
+		
+        string textToOutput = "";
+        bool closeInteraction = interactor.IsInteracting  && interactionIsActive;
 
-		OnInteractionClose( (interactor.isInteracting  && interactionIsActive)
-						|| (isClose
-				&& IsVisibleWithin(3f * m_cameraRelativePosition.magnitude)
-		                && isEligable));
+        if(isEligable)
+        {
+            // close object
+            if( IsCharCloserThan(2f) && IsVisibleWithin(3f * m_cameraRelativePosition.magnitude))
+            {
+                textToOutput = ActionsToDisplay;
+                closeInteraction = true;
+            }
+            // far object
+            else if(IsCharCloserThan(5f) && IsVisibleWithin(90f))
+            {
+                textToOutput = TextToDisplay;
+            }
+        }
+        // use null string for nothing
+        buttonPrompt.SetText (textToOutput);
 
-		OnInteractionFar(IsVisibleWithin(90f) && IsCamCloserThan(5f) && !isObjectClose() && isEligable);
-
-		if( label == null )
-		{
-			label = Instantiate(Resources.Load<GameObject>("buttonPrompt")) as GameObject;
-			label.GetComponent<ButtonPrompt> ().SetText (this.TextToDisplay);
-			label.GetComponent<ButtonPrompt> ().SetConnectedTransform (this.transform);
-			
-			label.SetActive(false);
-		}
-
-		if( buttonPrompt == null )
-		{
-			buttonPrompt = Instantiate(Resources.Load<GameObject>("buttonPrompt")) as GameObject;
-			buttonPrompt.GetComponent<ButtonPrompt> ().SetText (this.ActionsToDisplay);
-			buttonPrompt.GetComponent<ButtonPrompt> ().SetConnectedTransform (this.transform);
-
-			buttonPrompt.SetActive(false);
-		}
+        // interaction logic call
+        OnInteractionClose(closeInteraction);
+         
 		
 		Vector3 direction = ((transform.position - Vector3.up * 1.5f) - Camera.main.transform.position).normalized;
-		label.transform.position = transform.position - direction * 0.25f;
-		label.transform.LookAt(Camera.main.gameObject.transform);
+
 		buttonPrompt.transform.position = transform.position - direction * 0.25f;
 		buttonPrompt.transform.LookAt(Camera.main.gameObject.transform);
 	}
 
-	public void ActivateLabel( bool state )
-	{
-		label.SetActive(state && (!interactionIsActive || !disableOnActive));
-	}
-
 	public void ActivatePromtButton( bool state )
 	{
-		buttonPrompt.SetActive(state && (!interactionIsActive || !disableOnActive));
+        buttonPrompt.gameObject.SetActive(state && (!interactionIsActive || !disableOnActive)
+        );
 	}
 
 	public void changePromt(string action)
 	{
 		ActionsToDisplay = action;
-		buttonPrompt.GetComponent<ButtonPrompt> ().SetText (this.ActionsToDisplay);
+		buttonPrompt.SetText (ActionsToDisplay);
 	}
 	
-	public bool IsActivated(){
-		return buttonPrompt != null && buttonPrompt.activeSelf;
+	public bool IsPromtActivated(){
+        return buttonPrompt.gameObject.activeInHierarchy;
 	}
 
 	public bool IsInteracting
@@ -152,6 +156,11 @@ public class IInteractableObject : MonoBehaviour
 		return m_cameraRelativePosition.magnitude < dist;
 	}
 
+    public bool IsCharCloserThan(float dist)
+    {
+        return (m_character.transform.position - transform.position).magnitude < dist;
+    }
+
 	public bool isObjectClose()
 	{
 		return objectIsClose;
@@ -164,46 +173,22 @@ public class IInteractableObject : MonoBehaviour
 		
 		if( state )
 		{
-			if(interactor.interactionObjects.Count > 0)
+            if(interactor.CloseInteractionsCount > 0)
 			{
 				objectIsClose = !state;
 				return;
 			}
-					
-			interactor.OnInteractionEnter( gameObject );
+			
+            buttonPrompt.SetText (ActionsToDisplay);
+
+			interactor.OnInteractionEnter( this );
 		}
 		else
 		{
-			interactor.OnInteractionExit( gameObject );
+			interactor.OnInteractionExit( this );
 		}
 		
 		objectIsClose = state;
-	}
-
-	public void OnInteractionFar( bool state )
-	{
-		if( objectIsFar == state )
-			return;
-
-		if( state )
-		{
-			interactor.OnHighlightEnter( gameObject );
-		}
-		else
-		{
-			interactor.OnHighlightExit( gameObject );
-		}
-
-		objectIsFar = state;
-	}
-	
-	void OnDestroy()
-	{
-		Destroy(label);
-		Destroy(buttonPrompt);
-		label = null;
-		buttonPrompt = null;
-		Resources.UnloadUnusedAssets();
 	}
 
 	// Exposed for inspector purposes
@@ -211,4 +196,14 @@ public class IInteractableObject : MonoBehaviour
 	{
 		Activate();
 	}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        m_interactingBehaviour = other.gameObject.GetComponent<CharacterBehaviour>();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        m_interactingBehaviour = null;
+    }
 }

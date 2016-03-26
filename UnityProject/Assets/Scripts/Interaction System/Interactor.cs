@@ -3,55 +3,25 @@ using System.Collections.Generic;
 
 public class Interactor : MonoBehaviour 
 {	
-	private GameObject currentInteractionObject = null;
-	private List<GameObject> interactionObjectsFar = new List<GameObject>();
-	[HideInInspector] 
-	public List<GameObject> interactionObjects = new List<GameObject>();
+    private IInteractableObject currentInteractionObject = null;
+    private List<IInteractableObject> interactionObjects = new List<IInteractableObject>();
 
-	[HideInInspector]
-	public bool isInteracting = false;
+    public bool IsInteracting { get; set; }
+    public int CloseInteractionsCount { get {return interactionObjects.Count;} }
 
-	public void OnInteractionEnter( GameObject interactionObject )
+    public void OnInteractionEnter( IInteractableObject interactionObject )
 	{
 		if( !interactionObjects.Contains( interactionObject ) )
 			interactionObjects.Add( interactionObject );
-
-		IInteractableObject promt = interactionObject.GetComponent<IInteractableObject>();
-		promt.ActivatePromtButton(true);
-
 	}
 
-	public void OnInteractionExit( GameObject interactionObject)
+    public void OnInteractionExit( IInteractableObject interactionObject)
 	{
 		if( interactionObjects.Contains( interactionObject ) )
 			interactionObjects.Remove( interactionObject );	
 
-		IInteractableObject promt = interactionObject.GetComponent<IInteractableObject>();
-		promt.ActivatePromtButton(false);
-
 		if( currentInteractionObject == interactionObject )
-		{
 			currentInteractionObject = null;
-		}
-	}
-
-	public void OnHighlightEnter( GameObject interactionObject )
-	{
-		if( !interactionObjectsFar.Contains( interactionObject ) )
-			interactionObjectsFar.Add( interactionObject );
-
-		IInteractableObject label = interactionObject.GetComponent<IInteractableObject>();
-		label.ActivateLabel(true);
-
-	}
-
-	public void OnHighlightExit( GameObject interactionObject)
-	{
-		if( interactionObjectsFar.Contains( interactionObject ) )
-			interactionObjectsFar.Remove( interactionObject );	
-
-		IInteractableObject label = interactionObject.GetComponent<IInteractableObject>();
-		label.ActivateLabel(false);
 	}
 
 	void Update () 
@@ -98,7 +68,7 @@ public class Interactor : MonoBehaviour
 		if( Input.GetKeyDown(KeyCode.E) )
 		{
 			IInteractableObject interactableInterface = currentInteractionObject.GetComponent<IInteractableObject>();
-			isInteracting = interactableInterface.Activate();
+			IsInteracting = interactableInterface.Activate();
 		}
 	}
 

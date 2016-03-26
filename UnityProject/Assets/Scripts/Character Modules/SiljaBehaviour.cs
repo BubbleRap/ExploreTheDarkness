@@ -78,7 +78,7 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 		set { m_movementController.EnableMoving(value); }
 	}
 
-	void Awake()
+	private new void Awake()
 	{
         base.Awake();
 
@@ -116,7 +116,7 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 
         if (Input.GetKeyUp(KeyCode.Q)
         && camTransitioner.Mode != CameraTransitioner.CameraMode.Transitioning
-        && !interactor.isInteracting)
+        && !interactor.IsInteracting)
         {
             if (m_isLookingInFP)
             {

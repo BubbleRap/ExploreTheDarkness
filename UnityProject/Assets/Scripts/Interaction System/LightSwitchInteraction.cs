@@ -9,7 +9,6 @@ public class LightSwitchInteraction : IInteractableObject
 	public bool _defaultState = false;
 
 	private Collider _collider;
-	private SiljaBehaviour _cachedBeh;
 
 
 	#region Lau-san stuff
@@ -21,6 +20,8 @@ public class LightSwitchInteraction : IInteractableObject
 
 	private void Awake()
 	{
+        base.Awake();
+
 		foreach( Collider col in GetComponents<Collider>() )
 			if( col.isTrigger )
 			{
@@ -86,13 +87,13 @@ public class LightSwitchInteraction : IInteractableObject
 	private void Update()
 	{
 		base.Update();
-
+    
 		if( !interactionIsActive )
 			return;
-
-        if (_cachedBeh != null)
-            _cachedBeh.flshCtrl.ChargeFlashlight();
-
+    
+        //if (m_interactingBehaviour != null)
+        //    m_interactingBehaviour.flshCtrl.ChargeFlashlight();
+    
     }
 
 	private void OnTriggerEnter(Collider other)
@@ -100,7 +101,7 @@ public class LightSwitchInteraction : IInteractableObject
 		if( other.tag != "Player" )
 			return;
 
-		_cachedBeh = other.gameObject.GetComponent<SiljaBehaviour>();
+		m_interactingBehaviour = other.gameObject.GetComponent<SiljaBehaviour>();
 	}
 
 	private void OnTriggerExit(Collider other)
@@ -108,12 +109,12 @@ public class LightSwitchInteraction : IInteractableObject
 		if( other.tag != "Player" )
 			return;
 
-		_cachedBeh = null;
+		m_interactingBehaviour = null;
 	}
 
 	private void OnDisable()
 	{
-		_cachedBeh = null;
+		m_interactingBehaviour = null;
 	}
 
 }
