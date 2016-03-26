@@ -10,6 +10,8 @@ public class DialogChoices : MonoBehaviour {
 
 	public float fadeTimeBigText = 0.8f;
 	public float fadeTimeOption = 0.8f;
+	public float fadeInBlack = 1.0f;
+	public float fadeOutBlack = 1.0f;
 
 	public float delayBetweenDialogs = 0.4f;
 
@@ -22,12 +24,14 @@ public class DialogChoices : MonoBehaviour {
 	public GameObject Choice;
 	public GameObject MultipleChoice;
 	public Image backgroundImage;
+	public Image fadeImage;
 
 	private GameObject optionText1_single = null;
 	private GameObject optionText1_multiple = null;
 	private GameObject optionText2_multiple = null;
 
 	private bool isFaded = true;
+	private bool isFadedBG = true;
 
 	private int marginHeight = 20;
 
@@ -37,7 +41,7 @@ public class DialogChoices : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(ID <= Dialog.Count && isFaded)
+		if(ID <= Dialog.Count && isFaded && isFadedBG)
 		{
 			if(Description.text != Dialog[ID].Text)
 			{
@@ -114,7 +118,9 @@ public class DialogChoices : MonoBehaviour {
 			{
 				if(settings[settingNumber].changeAtID == ID)
 				{
-					changeBackground(settings[settingNumber].background);
+					isFadedBG = false;
+					fadeImage.enabled = true;
+					StartCoroutine(FadeInBg(fadeImage,fadeInBlack));
 					settingNumber ++;
 				}
 			}
@@ -172,35 +178,41 @@ public class DialogChoices : MonoBehaviour {
 		isFaded = true;
 	}
 
-	/*
-	IEnumerator FadeInBg (Sprite background, float time)
+	IEnumerator FadeInBg (Image fade, float time)
 	{
-		float colorAlpha = text.color.a;
+		float colorAlpha = fade.color.a;
 		float elapsedTime = 0;
 
 		while(elapsedTime < time)
 		{
-			text.color = new Color(text.color.r,text.color.g,text.color.b,Mathf.Lerp(0,1,(elapsedTime / time)));
+			fade.color = new Color(fade.color.r,fade.color.g,fade.color.b,Mathf.Lerp(0,1,(elapsedTime / time)));
 
 			elapsedTime += Time.deltaTime;
 
 			yield return null;
 		}
-	}
-	*/
 
-	/*
-	IEnumerator FadeOutBg (Text text, float delay)
+		changeBackground(settings[settingNumber - 1].background);
+		StartCoroutine(FadeOutBg(fadeImage,fadeOutBlack));
+	}
+
+	IEnumerator FadeOutBg (Image fade, float time)
 	{
-		float colorAlpha = text.color.a;
+		float colorAlpha = fade.color.a;
+		float elapsedTime = 0;
 
-		text.color = new Color(text.color.r,text.color.g,text.color.b,0);
+		while(elapsedTime < time)
+		{
+			fade.color = new Color(fade.color.r,fade.color.g,fade.color.b,Mathf.Lerp(1,0,(elapsedTime / time)));
 
-		yield return new WaitForSeconds(delay);
+			elapsedTime += Time.deltaTime;
 
-		isFaded = true;
+			yield return null;
+		}
+
+		isFadedBG = true;
+		fadeImage.enabled = false;
 	}
-	*/
 
 	public void changeBackground(Sprite background)
 	{
