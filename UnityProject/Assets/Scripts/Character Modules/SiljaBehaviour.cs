@@ -78,7 +78,7 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 		set { m_movementController.EnableMoving(value); }
 	}
 
-	void Awake()
+	private new void Awake()
 	{
         base.Awake();
 
