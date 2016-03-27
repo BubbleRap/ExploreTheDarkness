@@ -15,7 +15,7 @@ public class IInteractableObject : MonoBehaviour
 
 	public WorkState ActiveWhen;
 	
-    public bool interactionIsActive = false;
+    protected bool interactionIsActive = false;
 	private Renderer m_renderer;
 	
 	public virtual bool Activate() { return (interactionIsActive = !interactionIsActive); }
@@ -43,7 +43,7 @@ public class IInteractableObject : MonoBehaviour
     protected void Awake()
     {
         GameObject promtGO = Instantiate(Resources.Load<GameObject>("buttonPrompt")) as GameObject;
-        promtGO.transform.parent = transform;
+        //promtGO.transform.parent = transform;
 
         buttonPrompt = promtGO.GetComponent<ButtonPrompt>();
 

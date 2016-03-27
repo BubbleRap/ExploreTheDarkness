@@ -1,10 +1,21 @@
+using System;
 using UnityEngine;
 using System.Collections;
 
 using UnityStandardAssets.ImageEffects;
 
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+
 public class LookInDetailInteraction : IInteractableObject 
 {
+    [Serializable]
+    public class InteractionComponent
+    {
+        public Collider collider;
+        public string animationTrigger;
+    }
+
 	public enum ObjectOrientation
 	{
 		Y_up,
@@ -16,8 +27,10 @@ public class LookInDetailInteraction : IInteractableObject
 	public float _rotationSensetivity = 0.4f;
 	public float _faceDistance = 0.25f;
 
+    public InteractionComponent[] m_interactiveComponents;
+
 	private SiljaBehaviour _siljaBeh;
-	private Vector3 _prevMousePos;
+	//private Vector3 _prevMousePos;
 
 	private Vector3 _originalPos;
 	private Quaternion _originalRot;
@@ -25,6 +38,8 @@ public class LookInDetailInteraction : IInteractableObject
 	private Collider _collider;
 
 	private DepthOfField _dof;
+
+    private Animator m_animator;
 
 	void Awake()
 	{
@@ -36,6 +51,17 @@ public class LookInDetailInteraction : IInteractableObject
 		_collider = GetComponent<Collider>();
 
 		_dof = Camera.main.GetComponent<DepthOfField>();
+
+        m_animator = GetComponentInParent<Animator>();
+
+        foreach( InteractionComponent com in m_interactiveComponents )
+        {
+            OnMouseClick onClick = com.collider.gameObject.AddComponent<OnMouseClick>();
+            onClick.onMouseClick += OnComponentClicked;
+
+            OnMouseDrag onDrag = com.collider.gameObject.AddComponent<OnMouseDrag>();
+            onDrag.onMouseDrag += OnComponentDragged;
+        }
 	}
 
 	public override bool Activate()
@@ -131,22 +157,58 @@ public class LookInDetailInteraction : IInteractableObject
             _siljaBeh.ShiftToFirstPerson();
     }
 
-	private new void Update()
-	{
-		base.Update();
+	//private new void Update()
+	//{
+	//	base.Update();
+    //
+	//	Vector3 mouseVelocity = Input.mousePosition - _prevMousePos;
+	//	_prevMousePos = Input.mousePosition;
+    //
+	//	if( interactionIsActive )
+	//	{
+    //        RaycastHit hit;
+    //        if(Input.GetMouseButtonUp(0))
+    //        {
+    //            if(Physics.Raycast( Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+    //            {
+    //                OnComponentClicked(hit.collider);
+    //            }
+    //        }
+    //
+	//		if( Input.GetMouseButton(0) )
+	//		{
+	//			Vector3 dir = 	mouseVelocity.y * _rotationSensetivity * Camera.main.transform.right +
+	//							-mouseVelocity.x * _rotationSensetivity * Camera.main.transform.up;
+    //
+	//			transform.Rotate( dir , Space.World );
+	//		}
+	//	}
+	//}
 
-		Vector3 mouseVelocity = Input.mousePosition - _prevMousePos;
-		_prevMousePos = Input.mousePosition;
+    private void OnComponentClicked(Collider collider)
+    {
+        foreach(InteractionComponent component in m_interactiveComponents)
+        {
+            if(component.collider == collider)
+            {
+                if(string.IsNullOrEmpty(component.animationTrigger))
+                    return;
+                
+                Animator animator = collider.GetComponent<Animator>();
+                animator.SetTrigger(component.animationTrigger);
+                break;
+            }
+        }
+    }
 
-		if( interactionIsActive )
-		{
-			if( Input.GetMouseButton(0) )
-			{
-				Vector3 dir = 	mouseVelocity.y * _rotationSensetivity * Camera.main.transform.right +
-								-mouseVelocity.x * _rotationSensetivity * Camera.main.transform.up;
+    private void OnComponentDragged(PointerEventData data)
+    {
+        if( interactionIsActive )
+        {
+            Vector3 dir = data.delta.y * _rotationSensetivity * Camera.main.transform.right +
+                -data.delta.x * _rotationSensetivity * Camera.main.transform.up;
 
-				transform.Rotate( dir , Space.World );
-			}
-		}
-	}
+            transform.Rotate(dir, Space.World);
+        }
+    }
 }
