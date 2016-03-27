@@ -66,6 +66,7 @@ public class HighlightsFX : MonoBehaviour
 		SetOccluderObjects();
 		
 		m_blur = gameObject.AddComponent<BlurOptimized>();
+		m_blur.blurShader = Shader.Find("Hidden/FastBlur");
 		m_blur.enabled = false;
 
 		highlightObjects = FindObjectsOfType<IInteractableObject>();
