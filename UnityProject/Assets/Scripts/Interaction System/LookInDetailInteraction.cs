@@ -166,6 +166,7 @@ public class LookInDetailInteraction : IInteractableObject
                 if(component.collider == collider)
                 {
                     component.onInteract.Invoke();
+                    return;
                 }
             }
         }
