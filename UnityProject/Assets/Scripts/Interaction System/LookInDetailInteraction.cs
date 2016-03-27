@@ -13,7 +13,7 @@ public class LookInDetailInteraction : IInteractableObject
     public class InteractionComponent
     {
         public Collider collider;
-        public string animationTrigger;
+        public UnityEvent onInteract;
     }
 
 	public enum ObjectOrientation
@@ -157,46 +157,16 @@ public class LookInDetailInteraction : IInteractableObject
             _siljaBeh.ShiftToFirstPerson();
     }
 
-	//private new void Update()
-	//{
-	//	base.Update();
-    //
-	//	Vector3 mouseVelocity = Input.mousePosition - _prevMousePos;
-	//	_prevMousePos = Input.mousePosition;
-    //
-	//	if( interactionIsActive )
-	//	{
-    //        RaycastHit hit;
-    //        if(Input.GetMouseButtonUp(0))
-    //        {
-    //            if(Physics.Raycast( Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
-    //            {
-    //                OnComponentClicked(hit.collider);
-    //            }
-    //        }
-    //
-	//		if( Input.GetMouseButton(0) )
-	//		{
-	//			Vector3 dir = 	mouseVelocity.y * _rotationSensetivity * Camera.main.transform.right +
-	//							-mouseVelocity.x * _rotationSensetivity * Camera.main.transform.up;
-    //
-	//			transform.Rotate( dir , Space.World );
-	//		}
-	//	}
-	//}
-
     private void OnComponentClicked(Collider collider)
     {
-        foreach(InteractionComponent component in m_interactiveComponents)
+        if( interactionIsActive )
         {
-            if(component.collider == collider)
+            foreach(InteractionComponent component in m_interactiveComponents)
             {
-                if(string.IsNullOrEmpty(component.animationTrigger))
-                    return;
-                
-                Animator animator = collider.GetComponent<Animator>();
-                animator.SetTrigger(component.animationTrigger);
-                break;
+                if(component.collider == collider)
+                {
+                    component.onInteract.Invoke();
+                }
             }
         }
     }
