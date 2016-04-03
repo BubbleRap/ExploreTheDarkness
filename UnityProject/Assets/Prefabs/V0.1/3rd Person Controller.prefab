@@ -1343,8 +1343,6 @@ GameObject:
   - 114: {fileID: 11462506}
   - 114: {fileID: 11446044}
   - 82: {fileID: 8219598}
-  - 135: {fileID: 13534574}
-  - 54: {fileID: 5434036}
   - 114: {fileID: 11475066}
   - 114: {fileID: 11470834}
   - 114: {fileID: 11412696}
@@ -1359,7 +1357,9 @@ GameObject:
   - 114: {fileID: 11428828}
   - 114: {fileID: 11466150}
   - 114: {fileID: 11427842}
-  - 114: {fileID: 11442204}
+  - 114: {fileID: 11488410}
+  - 54: {fileID: 5478330}
+  - 135: {fileID: 13579040}
   m_Layer: 9
   m_Name: 3rd Person Camera
   m_TagString: MainCamera
@@ -2948,6 +2948,21 @@ GameObject:
   - 4: {fileID: 486080}
   m_Layer: 0
   m_Name: DEF-thigh.01.L
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &153304
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 417112}
+  m_Layer: 0
+  m_Name: EyesPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5516,7 +5531,8 @@ Transform:
   m_LocalRotation: {x: -0.025014699, y: 0.0016157742, z: 0.017898602, w: 0.99952555}
   m_LocalPosition: {x: 0.0000000114087015, y: 0.07557482, z: -0.000000002910383}
   m_LocalScale: {x: 0.99999994, y: 1, z: 0.99999994}
-  m_Children: []
+  m_Children:
+  - {fileID: 417112}
   m_Father: {fileID: 498596}
   m_RootOrder: 0
 --- !u!4 &414020
@@ -5551,6 +5567,18 @@ Transform:
   - {fileID: 435312}
   m_Father: {fileID: 406894}
   m_RootOrder: 3
+--- !u!4 &417112
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153304}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.11, z: 0.105}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 413810}
+  m_RootOrder: 0
 --- !u!4 &417454
 Transform:
   m_ObjectHideFlags: 1
@@ -6276,7 +6304,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113692}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.8853758, z: 0}
+  m_LocalPosition: {x: 0, y: -0.8853758, z: 0.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 437544}
@@ -7401,7 +7429,7 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!54 &5434036
+--- !u!54 &5478330
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -8635,20 +8663,6 @@ MonoBehaviour:
   separableBlurShader: {fileID: 4800000, guid: e97c14fbb5ea04c3a902cc533d7fc5d1, type: 3}
   chromAberrationShader: {fileID: 4800000, guid: 2b4f29398d9484ccfa9fd220449f5eee,
     type: 3}
---- !u!114 &11442204
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -768656878, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EventMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &11446044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8662,7 +8676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraFocusTarget: {fileID: 400042}
   cameraDistance: 1.15
-  minDistance: 0.01
+  minDistance: 0.34
   maxDistance: 1.35
   yaw: 80
   pitch: 60
@@ -8821,7 +8835,7 @@ MonoBehaviour:
   TppOnlyGameplayComponents: []
   FppOnlyGameplayComponents: []
   TppTransformChildren:
-  - {fileID: 0}
+  - {fileID: 113692}
   FppTransformChildren: []
 --- !u!114 &11464638
 MonoBehaviour:
@@ -8889,29 +8903,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cefcedbd0f2ff6479d6bf55abd84c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  approachingSpeed: 0.05
+  approachingSpeed: 1.5
   fallbackCurve:
     serializedVersion: 2
     m_Curve:
     - time: 0
       value: 0
-      inSlope: 2
-      outSlope: 0.00666504
-      tangentMode: 17
-    - time: 0.4987399
-      value: 0.0033241212
-      inSlope: 0.00666504
-      outSlope: 5.5428596
-      tangentMode: 5
-    - time: 1.0005187
-      value: 1.0012754
-      inSlope: 1.4566178
-      outSlope: 1.4566178
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
+    - time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   fallbackTime: 5
+  HeadBone: {fileID: 417112}
+  hasHit: 0
+  currentHitDistance: 0
 --- !u!114 &11476534
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8990,6 +9002,20 @@ MonoBehaviour:
   shaderFXAAPreset3: {fileID: 4800000, guid: c182fa94a5a0a4c02870641efcd38cd5, type: 3}
   shaderFXAAII: {fileID: 4800000, guid: cd5b323dcc592457790ff18b528f5e67, type: 3}
   shaderFXAAIII: {fileID: 4800000, guid: c547503fff0e8482ea5793727057041c, type: 3}
+--- !u!114 &11488410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -768656878, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!124 &12400002
 Behaviour:
   m_ObjectHideFlags: 1
@@ -8997,17 +9023,17 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100332}
   m_Enabled: 1
---- !u!135 &13534574
+--- !u!135 &13579040
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100332}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.025
+  m_Radius: 0.01
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &13700000
 SkinnedMeshRenderer:
@@ -9712,10 +9738,10 @@ SkinnedMeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191126}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: e951ec75fd4739c4b91802f9498d4db8, type: 2}
+  - {fileID: 2100000, guid: e79a4b8d7375710449277414cd93905a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
