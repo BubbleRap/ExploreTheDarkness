@@ -25,9 +25,8 @@ public class LookInDetailInteraction : IInteractableObject
 	public ObjectOrientation orientation = ObjectOrientation.Y_up;
 
 	public float _faceDistance = 0.25f;
-    public float _inertionDamp = 0.5f;
-    public float _maxDelta = 0.15f;
-    public float _dragSpeed = 3f;
+    private float _dragSpeed = 5f;
+    private float m_acceleration = 10f;
 
     public InteractionComponent[] m_interactiveComponents;
 
@@ -39,11 +38,13 @@ public class LookInDetailInteraction : IInteractableObject
 	private Collider _collider;
 
 	private DepthOfField _dof;
-    private Vector2 m_inertion;
+
+    private Vector2 m_velocity;
+    private Vector2 m_targetVelocity;
 
     private Animator m_animator;
     private bool m_horizontalDrag = false;
-    private Vector3 m_currentRotationAxis = Vector3.up;
+    //private bool m_isDragging = false;
 
 	void Awake()
 	{
@@ -74,10 +75,18 @@ public class LookInDetailInteraction : IInteractableObject
     {
         base.Update();
 
-        m_inertion = Vector2.MoveTowards(m_inertion, Vector2.zero, _inertionDamp * Time.deltaTime);
+        // horizontal movement
+        m_velocity.x = Mathf.Lerp(m_velocity.x, m_targetVelocity.x, m_acceleration * Time.deltaTime);
+        transform.Rotate(m_velocity.x * Camera.main.transform.up * Time.deltaTime, Space.World);
 
-        transform.Rotate(m_inertion.x * Camera.main.transform.up * _dragSpeed * 1000f * Time.deltaTime, Space.World);
-        transform.Rotate(m_inertion.y * Camera.main.transform.right * _dragSpeed * 1000f * Time.deltaTime, Space.World);
+        // vertical movement
+        m_velocity.y = Mathf.Lerp(m_velocity.y, m_targetVelocity.y, m_acceleration * Time.deltaTime);
+        transform.Rotate(m_velocity.y * -transform.right * Time.deltaTime, Space.World);
+    }
+
+    private void LateUpdate()
+    {
+        m_targetVelocity = Vector3.zero;
     }
 
 	public override bool Activate()
@@ -199,7 +208,7 @@ public class LookInDetailInteraction : IInteractableObject
 
 
         m_horizontalDrag = Mathf.Abs(data.delta.x) > Mathf.Abs(data.delta.y);
-        m_currentRotationAxis = m_horizontalDrag ? Camera.main.transform.up :  Camera.main.transform.right;
+        //m_isDragging = true;
     }
 
     private void OnComponentDragged(PointerEventData data)
@@ -208,20 +217,16 @@ public class LookInDetailInteraction : IInteractableObject
             return;
 
         if(m_horizontalDrag)
-        {
-            float horizAmount = -data.delta.x / (float) Screen.width;
-            m_inertion.x = Mathf.Clamp(horizAmount, -_maxDelta, _maxDelta);
-        }
+            m_targetVelocity.x =  -data.delta.x * _dragSpeed;
         else
-        {
-            float vertAmount = data.delta.y / (float) Screen.height;
-            m_inertion.y = Mathf.Clamp(vertAmount, -_maxDelta, _maxDelta);
-        }
+            m_targetVelocity.y = -data.delta.y * _dragSpeed;
     }
 
     private void OnComponentDragEnd(PointerEventData data)
     {
         if( !interactionIsActive )
             return;
+
+        //m_isDragging = false;
     }
 }
