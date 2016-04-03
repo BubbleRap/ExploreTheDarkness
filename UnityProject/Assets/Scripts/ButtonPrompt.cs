@@ -55,12 +55,16 @@ public class ButtonPrompt : MonoBehaviour {
 		else {
 			Vector3 objToCamera = Camera.main.transform.position - connectedObject.position;
 
+            RaycastHit hit;
             LayerMask mask = 1 << LayerMask.NameToLayer("Default");
 
-			if (Physics.Raycast( Camera.main.transform.position, objToCamera.normalized, objToCamera.magnitude, mask ))
+            if (Physics.Raycast( Camera.main.transform.position, objToCamera.normalized, out hit, objToCamera.magnitude, mask ))
+            {
+                
 				return 0f;
+            }
 
-          
+            //Debug.DrawLine(Camera.main.transform.position, Camera.main.transform.position + objToCamera.normalized * objToCamera.magnitude, Color.red);
 
 			//RaycastHit hit;
 
