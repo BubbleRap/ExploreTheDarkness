@@ -30,25 +30,17 @@ public class SubtitleManager : MonoBehaviour {
 
 	Dictionary<float, string> phoneSubtitles = new Dictionary<float, string>()
 	{
-		{ 1f, "Hi this is Erik from 237. Just calling to check on you guys? "},
+		{ 1f, "Hi this is Erik from upstairs, i’ve been trying to call you..."},
 		{ 6f, ""},
-		{ 7f, "I hear some strange sounds that might be from your floor.\nIf there’s anything I can do, please call me."},
-		{ 10f, "You know where I live, just above you."},
-		{ 14f, ""},
-		{ 15f, "And say hello to Silja from me. Bye."},
+		{ 7f, "I know that my party dosent start until an hour, \nbut I can hear that you are home."},
+		{ 14f, "Do you need help getting up here?"},
 		{ 17f, ""},
-		{ 20f, "Uh, hi again, this is Erik again, from 237."},
-		{ 24f, "It’s just... those sounds coming from below…"},
-		{ 28f, "… do you want me to pop by?"},
-		{ 30f, "Or call me OK? Bye"},
-		{ 32f, ""},
-		{ 35f, "Hi, hi, hi... it’s Erik … again …"},
-		{ 39f, ""},
-		{ 40f, "I just wanted to say that the sounds must be coming from your floor."},
-		{ 44f, ""},
-		{ 45f, "It’s making me a bit anxious…"},
-		{ 48f, "Please call me right away. Bye."},
-		{ 51f, ""},
+		{ 18f, "I’m hearing wired noises coming from your apartment..."},
+		{ 22f, ""},
+		{ 23f, "I’m worried..."},
+		{ 25f, "" },
+		{ 27f, "I’m coming down now to check on you, \ni'll bring the Die Heart VHS that I borrowed."},
+		{ 34f, "" },
 	};
 
 	public void Phone(){
