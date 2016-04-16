@@ -1,30 +1,35 @@
 fileFormatVersion: 2
 guid: 0c17765e6d374e743a04b1b56f4ee7e2
 ModelImporter:
-  serializedVersion: 18
+  serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
     100002: BathTub
     100004: forh_ng
     100006: "forh\xE6ng"
     100008: Plane
+    100010: BathTub_Water2_Low
     400000: //RootNode
     400002: BathTub
     400004: forh_ng
     400006: "forh\xE6ng"
     400008: Plane
+    400010: BathTub_Water2_Low
     2300000: BathTub
     2300002: forh_ng
     2300004: "forh\xE6ng"
     2300006: Plane
+    2300008: BathTub_Water2_Low
     3300000: BathTub
     3300002: forh_ng
     3300004: "forh\xE6ng"
     3300006: Plane
+    3300008: BathTub_Water2_Low
     4300000: forh_ng
     4300002: BathTub
     4300004: "forh\xE6ng"
     4300006: Plane
+    4300008: BathTub_Water2_Low
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -33,12 +38,17 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
+    resampleRotations: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
     animationCompression: 1
-    animationRotationError: .5
-    animationPositionError: .5
-    animationScaleError: .5
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     clipAnimations: []
@@ -62,24 +72,25 @@ ModelImporter:
     useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
-    splitTangentsAcrossUV: 1
     normalImportMode: 0
-    tangentImportMode: 1
+    tangentImportMode: 4
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
     human: []
     skeleton: []
-    armTwist: .5
-    foreArmTwist: .5
-    upperLegTwist: .5
-    legTwist: .5
-    armStretch: .0500000007
-    legStretch: .0500000007
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
+    hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
+  humanoidOversampling: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
