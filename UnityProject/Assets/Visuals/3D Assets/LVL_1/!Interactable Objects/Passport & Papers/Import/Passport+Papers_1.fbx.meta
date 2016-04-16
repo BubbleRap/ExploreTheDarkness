@@ -1,0 +1,91 @@
+fileFormatVersion: 2
+guid: 00624801010180a47b6b7cd3a3f43b92
+timeCreated: 1436364141
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: FatherCreditCard
+    100002: FatherPassport
+    100004: FAthersPinCode
+    100006: InsurancePaper
+    100008: //RootNode
+    400000: FatherCreditCard
+    400002: FatherPassport
+    400004: FAthersPinCode
+    400006: InsurancePaper
+    400008: //RootNode
+    2300000: FatherCreditCard
+    2300002: FatherPassport
+    2300004: FAthersPinCode
+    2300006: InsurancePaper
+    3300000: FatherCreditCard
+    3300002: FatherPassport
+    3300004: FAthersPinCode
+    3300006: InsurancePaper
+    4300000: FAthersPinCode
+    4300002: FatherCreditCard
+    4300004: InsurancePaper
+    4300006: FatherPassport
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

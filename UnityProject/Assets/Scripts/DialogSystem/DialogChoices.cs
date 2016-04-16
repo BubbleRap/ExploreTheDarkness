@@ -16,7 +16,7 @@ public class DialogChoices : MonoBehaviour {
 	public float delayBetweenDialogs = 0.4f;
 
 	public Setting[] settings;
-	private int settingNumber = 0;
+	private int settingNumber = -1;
 
 	public List<Dialog> Dialog;
 
@@ -114,6 +114,24 @@ public class DialogChoices : MonoBehaviour {
 
 			ID = Dialog[ID].options[OptionNumber].gotoID;
 
+			int prevSettingNumber = settingNumber;
+
+			for(int i = 0; i < settings.Length; i++)
+			{
+				if(settings[i].changeAtID == ID)
+				{
+					settingNumber = i;
+				}
+			}
+
+			if(settingNumber != prevSettingNumber)
+			{
+				isFadedBG = false;
+				fadeImage.enabled = true;
+				StartCoroutine(FadeInBg(fadeImage,fadeInBlack));
+			}
+
+			/*
 			if(settingNumber < settings.Length)
 			{
 				if(settings[settingNumber].changeAtID == ID)
@@ -124,13 +142,16 @@ public class DialogChoices : MonoBehaviour {
 					settingNumber ++;
 				}
 			}
+			*/
 		}
 
+		/*
 		if(Dialog[ID].options[OptionNumber].gotoID == 0)
 		{
 			fadeImage.enabled = true;
 			StartCoroutine(FadeToNewScene(fadeImage,fadeInBlack));
 		}
+		*/
 	}
 
     public void MoveFromTo(int src, int dst)
@@ -197,7 +218,7 @@ public class DialogChoices : MonoBehaviour {
 			yield return null;
 		}
 
-		changeBackground(settings[settingNumber - 1].background);
+		changeBackground(settings[settingNumber].background);
 		StartCoroutine(FadeOutBg(fadeImage,fadeOutBlack));
 	}
 
