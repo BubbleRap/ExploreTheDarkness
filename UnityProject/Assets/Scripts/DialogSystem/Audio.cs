@@ -40,6 +40,10 @@ public class Audio : MonoBehaviour {
 			trailSource.Play();
 			activateTrail = true;
 		}
+
+		if (Input.GetKeyDown (KeyCode.P)) {
+			trailSource.Play();
+		}
 	}
 
 	IEnumerator WaitAndPlay(float waitTime) {
