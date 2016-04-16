@@ -55,22 +55,22 @@ public class ButtonPrompt : MonoBehaviour {
 		else {
 			Vector3 objToCamera = Camera.main.transform.position - connectedObject.position;
 
-            LayerMask mask = 1 << LayerMask.NameToLayer("Default");
+            //10 is far, right?
+            if (objToCamera.sqrMagnitude > 100)
+                return 0f;
 
-			if (Physics.Raycast( Camera.main.transform.position, objToCamera.normalized, objToCamera.magnitude, mask ))
-				return 0f;
+            LayerMask mask = (1 << (LayerMask.NameToLayer("Default"))); //~(1 << (LayerMask.NameToLayer("Trigger") | LayerMask.NameToLayer("Character")));
+            RaycastHit hit;
 
-          
-
-			//RaycastHit hit;
-
-			//if(Physics.Raycast(Camera.main.transform.position,-objToCamera, out hit, 10F,LayerMask.NameToLayer("Trigger"))){
-			//	if(hit.transform.gameObject != connectedObject.gameObject)
-			//	{
-			//		return 0f;
-			//	}
-			//}
-		}
+            if (Physics.Raycast(Camera.main.transform.position, -objToCamera.normalized, out hit, objToCamera.magnitude, mask))
+            {
+                if (hit.transform.gameObject != connectedObject.gameObject &&
+                    hit.transform.gameObject != connectedObject.transform.parent.gameObject)
+                {
+                    return 0f;
+                }
+            }
+        }
 
 		/*
 		Vector2 screenpos = Camera.main.WorldToScreenPoint (transform.position);
@@ -91,6 +91,14 @@ public class ButtonPrompt : MonoBehaviour {
 		float dist = distFromSilja;
 
 		return 1f - (dist*dist);
-
 	}
+
+    void OnDrawGizmos()
+    {
+        if (textMesh.color.a > 0)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(Camera.main.transform.position, connectedObject.position);
+        }
+    }
 }

@@ -111,15 +111,15 @@ public class CameraPhysics : MonoBehaviour
         return hasHit;
     }
 
-    void OnDrawGizmosSelected()
-    {
-            Gizmos.color = Color.red;
+    //void OnDrawGizmosSelected()
+    //{
+    //        Gizmos.color = Color.red;
 
-            Gizmos.DrawLine(
-                HeadBone.position,
-                ((raycasts[0].transform != null) ? raycasts[0].point :
-                HeadBone.position + transform.forward * -follower.maxDistance));
-    }
+    //        Gizmos.DrawLine(
+    //            HeadBone.position,
+    //            ((raycasts[0].transform != null) ? raycasts[0].point :
+    //            HeadBone.position + transform.forward * -follower.maxDistance));
+    //}
 
     void OnTriggerEnter(Collider c)
     {

@@ -106,7 +106,7 @@ public class IInteractableObject : MonoBehaviour
             }
         }
         // use null string for nothing
-        buttonPrompt.SetText (IsInteracting ? null : textToOutput);
+        buttonPrompt.SetText ((IsInteracting && this as DoorInteraction == null) ? null : textToOutput);
 
         // interaction logic call
         OnInteractionClose(closeInteraction);
