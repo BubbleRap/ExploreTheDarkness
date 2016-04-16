@@ -126,11 +126,9 @@ public class HighlightsFX : MonoBehaviour
 			if( !isInCloseFrame || highlightObjects[i].IsInteracting)
 				continue;
 			
-			Renderer renderer = highlightObjects[i].GetComponent<Renderer>();
-			if( renderer == null )
-				continue;
-			
-			m_renderBuffer.DrawRenderer( renderer, m_highlightMaterial, 0, (int) m_sortingType );
+			Renderer[] renderers = highlightObjects[i].GetComponentsInChildren<Renderer>();
+            foreach( Renderer renderer in renderers)			
+			    m_renderBuffer.DrawRenderer( renderer, m_highlightMaterial, 0, (int) m_sortingType );
 		}
 
 		RenderTexture.active = rt;

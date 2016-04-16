@@ -25,7 +25,7 @@ TagManager:
   - LightProbe
   - Camera
   - Character
-  - 
+  - InteractiveComponents
   - Menu
   - Trigger
   - firstPersonCharacter
