@@ -41,7 +41,11 @@ public class CameraTransitioner : MonoBehaviour {
 	private UnityEvent onFPPTransitionComplete = new UnityEvent();
 	private UnityEvent onTPPTransitionComplete = new UnityEvent();
 
-	public void AddFPPCompleteAction( UnityAction action )
+    private Transform OtherCameraTransform;
+    private Transform prevOtherCameraTransformParent;
+
+
+    public void AddFPPCompleteAction( UnityAction action )
 	{
 		onFPPTransitionComplete.AddListener( action );
 	}
@@ -100,6 +104,31 @@ public class CameraTransitioner : MonoBehaviour {
 		           "TurnOffFpp", "TurnOnTpp", 
 		           gameObject, gameObject );
 	}
+
+    public void TransitionTPPtoOther(Transform other)
+    {
+        TPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
+        TPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
+
+        OtherCameraTransform = other;
+        prevOtherCameraTransformParent = other.parent;
+        other.SetParent(FPPCameraTransform.parent);
+
+        Transition(TPPCameraTransform, other,
+                   "TurnOffTpp", "TurnOnFpp",
+                   gameObject, gameObject);
+    }
+
+    public void TransitionOtherToTPP(Transform other)
+    {
+        OtherCameraTransform = other;
+        prevOtherCameraTransformParent = other.parent;
+        other.SetParent(FPPCameraTransform.parent);
+
+        Transition(other, TPPCameraTransform,
+                   "TurnOffFpp", "TurnOnTpp",
+                   gameObject, gameObject);
+    }
 
 	//THE transition function
 	public void Transition(Transform fromTransform, Transform toTransform,
@@ -226,6 +255,11 @@ public class CameraTransitioner : MonoBehaviour {
 //		ThisCamera.useOcclusionCulling = FppCameraSetup.useOcclusionCulling;
 //		ThisCamera.hdr = FppCameraSetup.hdr;
 
+        if (OtherCameraTransform != null)
+            OtherCameraTransform.SetParent(prevOtherCameraTransformParent);
+        OtherCameraTransform = null;
+
+
 		onFPPTransitionComplete.Invoke();
 		CleanFPPCompleteActions();
 	}
@@ -243,7 +277,11 @@ public class CameraTransitioner : MonoBehaviour {
 			c.enabled = true;
 		}
 
-		onTPPTransitionComplete.Invoke();
+        if (OtherCameraTransform != null)
+            OtherCameraTransform.SetParent(prevOtherCameraTransformParent);
+        OtherCameraTransform = null;
+
+        onTPPTransitionComplete.Invoke();
 		CleanTPPCompleteActions();
 	}
 
