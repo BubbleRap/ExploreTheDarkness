@@ -14,7 +14,7 @@ public class Audio : MonoBehaviour {
 	private bool activateEnd = false;
 	private bool activateTrail = false;
 
-	public AudioClip endTrail;
+	public AudioSource trailSource;
 
 	// Use this for initialization
 	void Start () {
@@ -37,8 +37,7 @@ public class Audio : MonoBehaviour {
 
 		if(dialogManager.getID() >= endAtDialogNumber && !audioSource.isPlaying && activateEnd && !activateTrail)
 		{
-			audioSource.clip = endTrail;
-			audioSource.Play();
+			trailSource.Play();
 			activateTrail = true;
 		}
 	}
