@@ -93,12 +93,12 @@ public class ButtonPrompt : MonoBehaviour {
 		return 1f - (dist*dist);
 	}
 
-    void OnDrawGizmos()
-    {
-        if (textMesh.color.a > 0)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(Camera.main.transform.position, connectedObject.position);
-        }
-    }
+    //void OnDrawGizmos()
+    //{
+    //    if (textMesh.color.a > 0)
+    //    {
+    //        Gizmos.color = Color.red;
+    //        Gizmos.DrawLine(Camera.main.transform.position, connectedObject.position);
+    //    }
+    //}
 }
