@@ -89,6 +89,7 @@ public class CameraFollow : MonoBehaviour
 		case CameraControlType.CCT_LookingAtObject:
 			
 			transform.rotation = Quaternion.Slerp( transform.rotation, Quaternion.LookRotation( focusPoint - transform.position ), Time.deltaTime );
+            
 			break;
 			
 		case CameraControlType.CCT_Overwritten:

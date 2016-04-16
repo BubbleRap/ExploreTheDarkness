@@ -81,14 +81,14 @@ public class CameraTransitioner : MonoBehaviour {
 		iTween.Init( gameObject );
 	}
 
-	public void TransitionTPPtoFPP()
+	public void TransitionTPPtoFPP(Transform lookingAt = null)
 	{
 		TPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
 		TPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
 
 		Transition( TPPCameraTransform, FPPCameraTransform, 
 		           "TurnOffTpp", "TurnOnFpp", 
-		           gameObject, gameObject );
+		           gameObject, gameObject, lookingAt );
 	}
 
 	public void TransitionFPPtoTPP()
@@ -104,12 +104,18 @@ public class CameraTransitioner : MonoBehaviour {
 	//THE transition function
 	public void Transition(Transform fromTransform, Transform toTransform,
 	                       string onStart, string onComplete,
-	                       GameObject onStartTarget, GameObject onCompleteTarget)
+	                       GameObject onStartTarget, GameObject onCompleteTarget, Transform lookingAt = null)
 	{
+        Quaternion prevToTransformLookAtRot = toTransform.rotation;
+        if (lookingAt != null)
+            toTransform.LookAt(lookingAt);
+
 		toPosition = toTransform.localPosition;
 		toRotation = toTransform.localRotation;
 
-		fromPosition = fromTransform.localPosition;
+        toTransform.rotation = prevToTransformLookAtRot;
+
+        fromPosition = fromTransform.localPosition;
 		fromRotation = fromTransform.localRotation;
 
 		iTween.ValueTo(gameObject, iTween.Hash(
