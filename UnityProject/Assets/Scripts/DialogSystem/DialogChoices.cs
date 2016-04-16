@@ -264,4 +264,9 @@ public class DialogChoices : MonoBehaviour {
 	{
 		backgroundImage.sprite = background;
 	}
+
+	public int getID()
+	{
+		return ID;
+	}
 }

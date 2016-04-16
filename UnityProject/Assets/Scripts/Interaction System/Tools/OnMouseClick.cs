@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 
 public class OnMouseClick : MonoBehaviour, IPointerClickHandler
 {
-    public delegate void ColiderEvent(Collider collider);
-    public ColiderEvent onMouseClick = (Collider collider) => {};
+    public delegate void ColiderEvent(Collider collider, PointerEventData eventData);
+    public ColiderEvent onMouseClick = (Collider collider, PointerEventData eventData) => {};
 
     private Collider m_collider;
 
@@ -18,6 +18,6 @@ public class OnMouseClick : MonoBehaviour, IPointerClickHandler
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
-        onMouseClick(m_collider);
+        onMouseClick(m_collider, eventData);
     }
 }

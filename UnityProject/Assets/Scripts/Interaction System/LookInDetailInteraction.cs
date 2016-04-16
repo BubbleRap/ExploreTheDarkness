@@ -23,14 +23,14 @@ public class LookInDetailInteraction : IInteractableObject
 	}
 
 	public ObjectOrientation orientation = ObjectOrientation.Y_up;
-	[Range(0.001f, 0.5f)]
-	public float _rotationSensetivity = 0.4f;
+
 	public float _faceDistance = 0.25f;
+    private float _dragSpeed = 5f;
+    private float m_acceleration = 10f;
 
     public InteractionComponent[] m_interactiveComponents;
 
 	private SiljaBehaviour _siljaBeh;
-	//private Vector3 _prevMousePos;
 
 	private Vector3 _originalPos;
 	private Quaternion _originalRot;
@@ -39,7 +39,12 @@ public class LookInDetailInteraction : IInteractableObject
 
 	private DepthOfField _dof;
 
+    private Vector2 m_velocity;
+    private Vector2 m_targetVelocity;
+
     private Animator m_animator;
+    private bool m_horizontalDrag = false;
+    //private bool m_isDragging = false;
 
 	void Awake()
 	{
@@ -60,9 +65,29 @@ public class LookInDetailInteraction : IInteractableObject
             onClick.onMouseClick += OnComponentClicked;
 
             OnMouseDrag onDrag = com.collider.gameObject.AddComponent<OnMouseDrag>();
+            onDrag.onMouseDragBegin += OnComponentDragBegin;
             onDrag.onMouseDrag += OnComponentDragged;
+            onDrag.onMouseDragEnd += OnComponentDragEnd;
         }
 	}
+
+    private new void Update()
+    {
+        base.Update();
+
+        // horizontal movement
+        m_velocity.x = Mathf.Lerp(m_velocity.x, m_targetVelocity.x, m_acceleration * Time.deltaTime);
+        transform.Rotate(m_velocity.x * Camera.main.transform.up * Time.deltaTime, Space.World);
+
+        // vertical movement
+        m_velocity.y = Mathf.Lerp(m_velocity.y, m_targetVelocity.y, m_acceleration * Time.deltaTime);
+        transform.Rotate(m_velocity.y * -transform.right * Time.deltaTime, Space.World);
+    }
+
+    private void LateUpdate()
+    {
+        m_targetVelocity = Vector3.zero;
+    }
 
 	public override bool Activate()
 	{
@@ -157,28 +182,51 @@ public class LookInDetailInteraction : IInteractableObject
             _siljaBeh.ShiftToFirstPerson();
     }
 
-    private void OnComponentClicked(Collider collider)
+    private void OnComponentClicked(Collider collider, PointerEventData eventData)
     {
-        if( interactionIsActive )
+        if(eventData.dragging)
+            return;
+        
+        if( !interactionIsActive )
+            return;
+
+        foreach(InteractionComponent component in m_interactiveComponents)
         {
-            foreach(InteractionComponent component in m_interactiveComponents)
+            if(component.collider == collider)
             {
-                if(component.collider == collider)
-                {
-                    component.onInteract.Invoke();
-                }
+                component.onInteract.Invoke();
+                return;
             }
         }
+
+    }
+
+    private void OnComponentDragBegin(PointerEventData data)
+    {
+        if( !interactionIsActive )
+            return;  
+
+
+        m_horizontalDrag = Mathf.Abs(data.delta.x) > Mathf.Abs(data.delta.y);
+        //m_isDragging = true;
     }
 
     private void OnComponentDragged(PointerEventData data)
     {
-        if( interactionIsActive )
-        {
-            Vector3 dir = data.delta.y * _rotationSensetivity * Camera.main.transform.right +
-                -data.delta.x * _rotationSensetivity * Camera.main.transform.up;
+        if( !interactionIsActive )
+            return;
 
-            transform.Rotate(dir, Space.World);
-        }
+        if(m_horizontalDrag)
+            m_targetVelocity.x =  -data.delta.x * _dragSpeed;
+        else
+            m_targetVelocity.y = -data.delta.y * _dragSpeed;
+    }
+
+    private void OnComponentDragEnd(PointerEventData data)
+    {
+        if( !interactionIsActive )
+            return;
+
+        //m_isDragging = false;
     }
 }

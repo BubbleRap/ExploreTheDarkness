@@ -70,6 +70,8 @@ public class AudioInteractionObject : IInteractableObject
 
 	private IEnumerator DisactivateOnStopPlaying()
 	{
+        yield return new WaitForSeconds(0.1f);
+
 		if(! soundSource.isPlaying )
 		{
 			Debug.Log("Nooo, something is wrong with the " + soundSource.gameObject.name);
@@ -79,12 +81,21 @@ public class AudioInteractionObject : IInteractableObject
 		while( soundSource.isPlaying )
 			yield return null;
 
-		// disactivate all the interaction components
-		foreach( MonoBehaviour behaviour in gameObject.GetComponents<MonoBehaviour>() )
-		{
-			IInteractableObject interactableInterface = behaviour as IInteractableObject;
-			if( interactableInterface != null )
-				interactableInterface.Activate();
-		}
+        // if there's a two-state interaction happening, don't disable the interaction.
+        // (we don't wanna play the audio again when we're leaving the interaction)
+        foreach (MonoBehaviour behaviour in gameObject.GetComponents<MonoBehaviour>())
+        {
+            IInteractableObject interactableInterface = behaviour as IInteractableObject;
+            if (interactableInterface != null)
+                if ((interactableInterface is LookInDetailInteraction ||
+                    interactableInterface is LookAtInteractionObject ||
+                    interactableInterface is PeepHoleInteraction) &&
+                    interactableInterface.IsInteracting)
+                    yield break;
+        }
+
+        if (interactionIsActive)
+            Activate();
+		
 	}
 }

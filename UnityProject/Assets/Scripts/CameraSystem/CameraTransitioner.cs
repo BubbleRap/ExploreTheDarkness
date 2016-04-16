@@ -41,7 +41,11 @@ public class CameraTransitioner : MonoBehaviour {
 	private UnityEvent onFPPTransitionComplete = new UnityEvent();
 	private UnityEvent onTPPTransitionComplete = new UnityEvent();
 
-	public void AddFPPCompleteAction( UnityAction action )
+    private Transform OtherCameraTransform;
+    private Transform prevOtherCameraTransformParent;
+
+
+    public void AddFPPCompleteAction( UnityAction action )
 	{
 		onFPPTransitionComplete.AddListener( action );
 	}
@@ -67,8 +71,8 @@ public class CameraTransitioner : MonoBehaviour {
 		Mode = CameraMode.Tpp;
 
 		TppOnlyGameplayComponents.AddRange (new Behaviour[]{
-			GetComponent<CameraPhysics>(),
-			GetComponent<AudioSource>() 
+			GetComponent<CameraPhysics>()
+			//,GetComponent<AudioSource>() 
 		});
 
 //		FppOnlyComponents.AddRange (new Behaviour[]{
@@ -81,14 +85,14 @@ public class CameraTransitioner : MonoBehaviour {
 		iTween.Init( gameObject );
 	}
 
-	public void TransitionTPPtoFPP()
+	public void TransitionTPPtoFPP(Transform lookingAt = null)
 	{
 		TPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
 		TPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
 
 		Transition( TPPCameraTransform, FPPCameraTransform, 
 		           "TurnOffTpp", "TurnOnFpp", 
-		           gameObject, gameObject );
+		           gameObject, gameObject, lookingAt );
 	}
 
 	public void TransitionFPPtoTPP()
@@ -101,15 +105,46 @@ public class CameraTransitioner : MonoBehaviour {
 		           gameObject, gameObject );
 	}
 
+    public void TransitionTPPtoOther(Transform other)
+    {
+        TPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
+        TPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
+
+        OtherCameraTransform = other;
+        prevOtherCameraTransformParent = other.parent;
+        other.SetParent(FPPCameraTransform.parent);
+
+        Transition(TPPCameraTransform, other,
+                   "TurnOffTpp", "TurnOnFpp",
+                   gameObject, gameObject);
+    }
+
+    public void TransitionOtherToTPP(Transform other)
+    {
+        OtherCameraTransform = other;
+        prevOtherCameraTransformParent = other.parent;
+        other.SetParent(FPPCameraTransform.parent);
+
+        Transition(other, TPPCameraTransform,
+                   "TurnOffFpp", "TurnOnTpp",
+                   gameObject, gameObject);
+    }
+
 	//THE transition function
 	public void Transition(Transform fromTransform, Transform toTransform,
 	                       string onStart, string onComplete,
-	                       GameObject onStartTarget, GameObject onCompleteTarget)
+	                       GameObject onStartTarget, GameObject onCompleteTarget, Transform lookingAt = null)
 	{
+        Quaternion prevToTransformLookAtRot = toTransform.rotation;
+        if (lookingAt != null)
+            toTransform.LookAt(lookingAt);
+
 		toPosition = toTransform.localPosition;
 		toRotation = toTransform.localRotation;
 
-		fromPosition = fromTransform.localPosition;
+        toTransform.rotation = prevToTransformLookAtRot;
+
+        fromPosition = fromTransform.localPosition;
 		fromRotation = fromTransform.localRotation;
 
 		iTween.ValueTo(gameObject, iTween.Hash(
@@ -220,6 +255,11 @@ public class CameraTransitioner : MonoBehaviour {
 //		ThisCamera.useOcclusionCulling = FppCameraSetup.useOcclusionCulling;
 //		ThisCamera.hdr = FppCameraSetup.hdr;
 
+        if (OtherCameraTransform != null)
+            OtherCameraTransform.SetParent(prevOtherCameraTransformParent);
+        OtherCameraTransform = null;
+
+
 		onFPPTransitionComplete.Invoke();
 		CleanFPPCompleteActions();
 	}
@@ -237,7 +277,11 @@ public class CameraTransitioner : MonoBehaviour {
 			c.enabled = true;
 		}
 
-		onTPPTransitionComplete.Invoke();
+        if (OtherCameraTransform != null)
+            OtherCameraTransform.SetParent(prevOtherCameraTransformParent);
+        OtherCameraTransform = null;
+
+        onTPPTransitionComplete.Invoke();
 		CleanTPPCompleteActions();
 	}
 

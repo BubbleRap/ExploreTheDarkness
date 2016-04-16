@@ -47,7 +47,7 @@ public class IInteractableObject : MonoBehaviour
 
         buttonPrompt = promtGO.GetComponent<ButtonPrompt>();
 
-        buttonPrompt.SetText ("default");
+        buttonPrompt.SetText ("");
         buttonPrompt.SetConnectedTransform (this.transform);
 
         //buttonPrompt.gameObject.SetActive(false);
@@ -106,7 +106,7 @@ public class IInteractableObject : MonoBehaviour
             }
         }
         // use null string for nothing
-        buttonPrompt.SetText (textToOutput);
+        buttonPrompt.SetText (IsInteracting ? null : textToOutput);
 
         // interaction logic call
         OnInteractionClose(closeInteraction);

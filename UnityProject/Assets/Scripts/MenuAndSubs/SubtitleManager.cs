@@ -56,16 +56,82 @@ public class SubtitleManager : MonoBehaviour {
 		StartCoroutine ("PlayDictionary", phoneSubtitles);
 	}
 
+	Dictionary<float, string> electricitySubtitles = new Dictionary<float, string>()
+	{
+		{ 1f, "I can't remember how many times I had to replace the fuse."},
+		{ 4f, "By now I must be and expert at it."},
+		{ 8f, ""},
+	};
+
+	public void Electricity(){
+		StopAllCoroutines ();
+		StartCoroutine ("PlayDictionary", electricitySubtitles);
+	}
+
 	Dictionary<float, string> picSubtitles = new Dictionary<float, string>()
 	{
-		{ 1f, "Do you remember all the fuzz Dad made,\nso you wouldn’t see his legs?"},
-		{ 4f, "It was so silly!"},
-		{ 7f, ""},
+		{ 1f, "Dad always took the time, to hide the fact that he was in a wheelchair.\n Especially on photos."},
+		{ 8f, ""},
 	};
 
 	public void Portrait(){
 		StopAllCoroutines ();
 		StartCoroutine ("PlayDictionary", picSubtitles);
+	}
+
+	Dictionary<float, string> dateSubtitles = new Dictionary<float, string>()
+	{
+		{ 1f, "Tuesday, the 21th of September."},
+		{ 4f, ""},
+	};
+
+	public void Calendar(){
+		StopAllCoroutines ();
+		StartCoroutine ("PlayDictionary", dateSubtitles);
+	}
+
+	Dictionary<float, string> postcardsSubtitles = new Dictionary<float, string>()
+	{
+		{ 1f, "Of all the places, Paris would properly be the place to go."},
+		{ 5f, ""},
+	};
+
+	public void Postcards(){
+		StopAllCoroutines ();
+		StartCoroutine ("PlayDictionary", postcardsSubtitles);
+	}
+
+	Dictionary<float, string> darknessSubtitles = new Dictionary<float, string>()
+	{
+		{ 1f, "It's too dark."},
+		{ 3f, ""},
+	};
+
+	public void Darkness(){
+		StopAllCoroutines ();
+		StartCoroutine ("PlayDictionary", darknessSubtitles);
+	}
+
+	Dictionary<float, string> darkness2Subtitles = new Dictionary<float, string>()
+	{
+		{ 1f, "Maybe I should use my old flashlight?"},
+		{ 5f, ""},
+	};
+
+	public void Darkness2(){
+		StopAllCoroutines ();
+		StartCoroutine ("PlayDictionary", darkness2Subtitles);
+	}
+
+	Dictionary<float, string> darkness3Subtitles = new Dictionary<float, string>()
+	{
+		{ 1f, "Hmmm... No batteries"},
+		{ 5f, ""},
+	};
+
+	public void Darkness3(){
+		StopAllCoroutines ();
+		StartCoroutine ("PlayDictionary", darkness3Subtitles);
 	}
 
 
