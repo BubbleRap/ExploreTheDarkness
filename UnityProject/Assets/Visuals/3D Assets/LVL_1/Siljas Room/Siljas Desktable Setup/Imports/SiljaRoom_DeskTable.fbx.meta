@@ -1,0 +1,77 @@
+fileFormatVersion: 2
+guid: 085b489116b7cec4d99af1bfc3625c43
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Silja_DeskTable
+    100002: Silja_DeskTable_Skuffer_bottom
+    100004: Silja_DeskTable_Skuffer_top
+    100006: //RootNode
+    400000: Silja_DeskTable
+    400002: Silja_DeskTable_Skuffer_bottom
+    400004: Silja_DeskTable_Skuffer_top
+    400006: //RootNode
+    2300000: Silja_DeskTable
+    2300002: Silja_DeskTable_Skuffer_bottom
+    2300004: Silja_DeskTable_Skuffer_top
+    3300000: Silja_DeskTable
+    3300002: Silja_DeskTable_Skuffer_bottom
+    3300004: Silja_DeskTable_Skuffer_top
+    4300000: Silja_DeskTable_Skuffer_bottom
+    4300002: Silja_DeskTable_Skuffer_top
+    4300004: Silja_DeskTable
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 
