@@ -23,6 +23,9 @@ public class DoorInteraction : IInteractableObject
 
     public override bool Activate()
     {
+        if (m_interactingBehaviour == null)
+            return false;
+
         interactionIsActive = !interactionIsActive;
 
         // calculate from which side the player is standing

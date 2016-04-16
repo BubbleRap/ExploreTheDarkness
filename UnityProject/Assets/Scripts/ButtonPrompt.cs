@@ -62,10 +62,15 @@ public class ButtonPrompt : MonoBehaviour {
             LayerMask mask = (1 << (LayerMask.NameToLayer("Default"))); //~(1 << (LayerMask.NameToLayer("Trigger") | LayerMask.NameToLayer("Character")));
             RaycastHit hit;
 
-            if (Physics.Raycast(Camera.main.transform.position, -objToCamera.normalized, out hit, objToCamera.magnitude, mask))
+            if (Camera.main != null && 
+                Physics.Raycast(Camera.main.transform.position, -objToCamera.normalized, out hit, objToCamera.magnitude, mask) &&
+                hit.transform != null &&
+                connectedObject != null)
             {
                 if (hit.transform.gameObject != connectedObject.gameObject &&
+                    (connectedObject.transform.parent == null ||
                     hit.transform.gameObject != connectedObject.transform.parent.gameObject)
+                    )
                 {
                     return 0f;
                 }
