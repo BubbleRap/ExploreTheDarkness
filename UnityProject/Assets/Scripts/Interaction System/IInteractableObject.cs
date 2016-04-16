@@ -47,7 +47,7 @@ public class IInteractableObject : MonoBehaviour
 
         buttonPrompt = promtGO.GetComponent<ButtonPrompt>();
 
-        buttonPrompt.SetText ("default");
+        buttonPrompt.SetText ("");
         buttonPrompt.SetConnectedTransform (this.transform);
 
         //buttonPrompt.gameObject.SetActive(false);
