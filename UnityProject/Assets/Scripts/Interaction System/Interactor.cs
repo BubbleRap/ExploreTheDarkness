@@ -67,8 +67,14 @@ public class Interactor : MonoBehaviour
 
 		if( Input.GetKeyDown(KeyCode.E) )
 		{
-			IInteractableObject interactableInterface = currentInteractionObject.GetComponent<IInteractableObject>();
-			IsInteracting = interactableInterface.Activate();
+            IsInteracting = false;
+
+			IInteractableObject[] interactableInterfaces = currentInteractionObject.GetComponents<IInteractableObject>();
+            foreach (IInteractableObject ie in interactableInterfaces)
+            {
+                IsInteracting = ie.Activate() || IsInteracting;
+            }
+			
 		}
 	}
 
