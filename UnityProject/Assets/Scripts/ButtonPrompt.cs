@@ -12,9 +12,12 @@ public class ButtonPrompt : MonoBehaviour {
     private Renderer m_renderer;
     private TextMesh textMesh;
 
+    private Renderer cachedRenderer;
+
     void Awake()
     {
         textMesh = GetComponentInChildren<TextMesh>();
+        cachedRenderer = textMesh.GetComponent<Renderer>();
     }
 
 	void Start()
@@ -23,7 +26,8 @@ public class ButtonPrompt : MonoBehaviour {
 	}
 
 	void OnEnable(){
-        textMesh.color = new Color (1f, 1f, 1f, 0f);
+        textMesh.color = Color.white;
+        cachedRenderer.material.color = new Color (1f, 1f, 1f, 0f);
 
 		GameObject siljaGO = GameObject.FindGameObjectWithTag("Player");
 		interactor = siljaGO.GetComponent<Interactor>();
@@ -43,7 +47,7 @@ public class ButtonPrompt : MonoBehaviour {
 		float size = (hudCamera.gameObject.transform.position - transform.position).magnitude ;
 		transform.localScale = new Vector3(size,size,size);
 
-        textMesh.color = new Color (1f, 1f, 1f, Mathf.Lerp(textMesh.color.a, GetAlpha (),0.1f));
+        cachedRenderer.material.color = new Color (1f, 1f, 1f, Mathf.Lerp(cachedRenderer.material.color.a, GetAlpha (),0.1f));
 
 		transform.LookAt(hudCamera.gameObject.transform);
 	}
