@@ -16,7 +16,7 @@ public class DialogChoices : MonoBehaviour {
 	public float delayBetweenDialogs = 0.4f;
 
 	public Setting[] settings;
-	private int settingNumber = 0;
+	private int settingNumber = -1;
 
 	public List<Dialog> Dialog;
 
