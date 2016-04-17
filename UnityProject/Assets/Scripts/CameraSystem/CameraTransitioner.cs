@@ -105,6 +105,16 @@ public class CameraTransitioner : MonoBehaviour {
 		           gameObject, gameObject );
 	}
 
+    public void TransitionFPPtoFPP()
+    {
+        FPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
+        FPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
+
+        Transition( ThisCamera.transform, FPPCameraTransform, 
+            "TurnOffFpp", "TurnOnFpp", 
+            gameObject, gameObject );
+    }
+
     public void TransitionTPPtoOther(Transform other)
     {
         TPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
@@ -174,15 +184,6 @@ public class CameraTransitioner : MonoBehaviour {
 		ThisCamera.transform.localRotation = Quaternion.Lerp(
 			fromRotation, 
 			toRotation, state);
-
-	
-
-//		if (state > 0.75f){
-//			ThisCamera.cullingMask = FppCameraSetup.cullingMask;
-//		} else {
-//			ThisCamera.cullingMask = TppCameraSetup.cullingMask;
-//		}
-
 	}
 
 	//additional callback functions on the beginning and end of transitions - they turn on and off components.
@@ -206,11 +207,6 @@ public class CameraTransitioner : MonoBehaviour {
 		foreach(Behaviour c in TppOnlyComponents){
 			c.enabled = true;
 		}
-
-//		ThisCamera.clearFlags = TppCameraSetup.clearFlags;
-//		ThisCamera.cullingMask = TppCameraSetup.cullingMask;
-//		ThisCamera.useOcclusionCulling = TppCameraSetup.useOcclusionCulling;
-//		ThisCamera.hdr = TppCameraSetup.hdr;
 	}
 
 	public void TurnOffTpp(){
@@ -249,11 +245,6 @@ public class CameraTransitioner : MonoBehaviour {
 		foreach(Behaviour c in FppOnlyGameplayComponents){
 			c.enabled = true;
 		}
-
-//		ThisCamera.clearFlags = FppCameraSetup.clearFlags;
-//		ThisCamera.cullingMask = FppCameraSetup.cullingMask;
-//		ThisCamera.useOcclusionCulling = FppCameraSetup.useOcclusionCulling;
-//		ThisCamera.hdr = FppCameraSetup.hdr;
 
         if (OtherCameraTransform != null)
             OtherCameraTransform.SetParent(prevOtherCameraTransformParent);
