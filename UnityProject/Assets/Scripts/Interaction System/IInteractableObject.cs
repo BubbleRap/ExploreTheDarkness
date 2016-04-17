@@ -40,7 +40,7 @@ public class IInteractableObject : MonoBehaviour
 
     private ButtonPrompt buttonPrompt;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         GameObject promtGO = Instantiate(Resources.Load<GameObject>("buttonPrompt")) as GameObject;
         //promtGO.transform.parent = transform;
