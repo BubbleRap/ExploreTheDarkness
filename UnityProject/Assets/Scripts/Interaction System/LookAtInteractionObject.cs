@@ -36,9 +36,19 @@ public class LookAtInteractionObject : IInteractableObject
 			return false;
 
 		interactionIsActive = !interactionIsActive;
+       
 
-		_siljaBeh.cameraFollow.CamControlType = interactionIsActive ? CameraFollow.CameraControlType.CCT_LookingAtObject : 
-			CameraFollow.CameraControlType.CCT_Default;
+        if(interactionIsActive)
+        {
+            _siljaBeh.cameraFollow.CamControlType = CameraFollow.CameraControlType.CCT_LookingAtObject;
+        }
+        else
+        {
+            if(LightStatesMachine.Instance.IsLightOn())
+                _siljaBeh.cameraFollow.CamControlType = CameraFollow.CameraControlType.CCT_Default;
+            else
+                _siljaBeh.cameraFollow.CamControlType = CameraFollow.CameraControlType.CCT_FPSLook;
+        }
 		
 		_siljaBeh.cameraFollow.focusPoint = transform.position;
 		
@@ -56,20 +66,34 @@ public class LookAtInteractionObject : IInteractableObject
             if (overrideTransform != null)
             {
                 overrideTransform.LookAt(transform);
-                transitioner.TransitionTPPtoOther(overrideTransform);
+
+                if(LightStatesMachine.Instance.IsLightOn())
+                    transitioner.TransitionTPPtoOther(overrideTransform);
+                else
+                    transitioner.TransitionFPPtoOther(overrideTransform);
             }
             else {
-                transitioner.TransitionTPPtoFPP(transform);
+                if(LightStatesMachine.Instance.IsLightOn())
+                    transitioner.TransitionTPPtoFPP(transform);
+                else
+                    transitioner.TransitionFPPtoFPP();
             }
         }
         else {
             if (overrideTransform != null)
             {
                 overrideTransform.LookAt(transform);
-                transitioner.TransitionOtherToTPP(overrideTransform);
+
+                if(LightStatesMachine.Instance.IsLightOn())
+                    transitioner.TransitionOtherToTPP(overrideTransform);
+                else
+                    transitioner.TransitionOtherToFPP(overrideTransform);
             }
             else {
-                transitioner.TransitionFPPtoTPP();
+                if(LightStatesMachine.Instance.IsLightOn())
+                    transitioner.TransitionFPPtoTPP();
+                else
+                    transitioner.TransitionFPPtoFPP();
             }
         }
         

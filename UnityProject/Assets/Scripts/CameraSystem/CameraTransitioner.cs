@@ -140,6 +140,31 @@ public class CameraTransitioner : MonoBehaviour {
                    gameObject, gameObject);
     }
 
+    public void TransitionFPPtoOther(Transform other)
+    {
+        FPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
+        FPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
+
+        OtherCameraTransform = other;
+        prevOtherCameraTransformParent = other.parent;
+        other.SetParent(FPPCameraTransform.parent);
+
+        Transition(FPPCameraTransform, other,
+            "TurnOffFpp", "TurnOnFpp",
+            gameObject, gameObject);
+    }
+
+    public void TransitionOtherToFPP(Transform other)
+    {
+        OtherCameraTransform = other;
+        prevOtherCameraTransformParent = other.parent;
+        other.SetParent(FPPCameraTransform.parent);
+
+        Transition(other, FPPCameraTransform,
+            "TurnOffFpp", "TurnOnFpp",
+            gameObject, gameObject);
+    }
+
 	//THE transition function
 	public void Transition(Transform fromTransform, Transform toTransform,
 	                       string onStart, string onComplete,
