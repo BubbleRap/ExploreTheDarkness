@@ -73,7 +73,8 @@ public class IInteractableObject : MonoBehaviour
 
 		m_cameraRelativePosition = Camera.main.transform.InverseTransformPoint(transform.position);
 
-		bool isEligable = interactionIsActive || ActiveWhen == WorkState.WorksAlways;
+        bool isEligable = 
+            interactionIsActive || ActiveWhen == WorkState.WorksAlways;
 
 		if( ActiveWhen != WorkState.WorksAlways )
 		{
@@ -83,7 +84,8 @@ public class IInteractableObject : MonoBehaviour
 			}
 			else
 			{
-				isEligable = true   && (  (ActiveWhen == WorkState.DarkModeOnly && !LightStatesMachine.Instance.IsLightOn()) 
+                isEligable = true && 
+                    (  (ActiveWhen == WorkState.DarkModeOnly && !LightStatesMachine.Instance.IsLightOn()) 
 			                            		||(ActiveWhen == WorkState.LightModeOnly && !LightStatesMachine.Instance.IsLightOn()));
 			}
 		}
@@ -106,7 +108,11 @@ public class IInteractableObject : MonoBehaviour
             }
         }
         // use null string for nothing
-        buttonPrompt.SetText ((IsInteracting && this as DoorInteraction == null) ? null : textToOutput);
+        bool showText = LightStatesMachine.Instance.IsLightOn() && !IsInteracting;
+        if((this as DoorInteraction) != null)
+            showText = true;
+
+        buttonPrompt.SetText (showText ? textToOutput : "");
 
         // interaction logic call
         OnInteractionClose(closeInteraction);
@@ -122,12 +128,6 @@ public class IInteractableObject : MonoBehaviour
 	{
         buttonPrompt.gameObject.SetActive(state && (!interactionIsActive || !disableOnActive)
         );
-	}
-
-	public void changePromt(string action)
-	{
-		ActionsToDisplay = action;
-		buttonPrompt.SetText (ActionsToDisplay);
 	}
 	
 	public bool IsPromtActivated(){
@@ -179,7 +179,7 @@ public class IInteractableObject : MonoBehaviour
 				return;
 			}
 			
-            buttonPrompt.SetText (ActionsToDisplay);
+            //buttonPrompt.SetText (ActionsToDisplay);
 
 			interactor.OnInteractionEnter( this );
 		}
