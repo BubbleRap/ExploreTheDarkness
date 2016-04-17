@@ -33,17 +33,15 @@ public class Audio : MonoBehaviour {
 		{
 			audioSource.loop = false;
 			activateEnd = true;
+
+            trailSource.PlayScheduled( AudioSettings.dspTime + audioSource.clip.length - audioSource.time);
 		}
 
-		if(dialogManager.getID() >= endAtDialogNumber && !audioSource.isPlaying && activateEnd && !activateTrail)
-		{
-			trailSource.Play();
-			activateTrail = true;
-		}
-
-		if (Input.GetKeyDown (KeyCode.P)) {
-			trailSource.Play();
-		}
+		//if(dialogManager.getID() >= endAtDialogNumber && !audioSource.isPlaying && activateEnd && !activateTrail)
+		//{
+		//	trailSource.Play();
+		//	activateTrail = true;
+		//}
 	}
 
 	IEnumerator WaitAndPlay(float waitTime) {
