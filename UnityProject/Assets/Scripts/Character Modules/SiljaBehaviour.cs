@@ -114,28 +114,28 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
         UpdateMovementInput();
 
 
-        if (Input.GetKeyUp(KeyCode.Q)
-        && camTransitioner.Mode != CameraTransitioner.CameraMode.Transitioning
-        && !interactor.IsInteracting)
-        {
-            if (m_isLookingInFP)
-            {
-                m_isLookingInFP = false;
-                ShiftToThirdPerson();
-                EnableFlashlight(false);
-            }
-            else
-            {
-                m_isLookingInFP = true;
-                ShiftToFirstPerson();
-                EnableFlashlight(true);
-            }
-        }
-
-        if (Input.GetKeyUp(KeyCode.F) && m_isLookingInFP)
-        {
-            EnableFlashlight(!flshCtrl.IsEnabled);
-        }
+        //if (Input.GetKeyUp(KeyCode.Q)
+        //&& camTransitioner.Mode != CameraTransitioner.CameraMode.Transitioning
+        //&& !interactor.IsInteracting)
+        //{
+        //    if (m_isLookingInFP)
+        //    {
+        //        m_isLookingInFP = false;
+        //        ShiftToThirdPerson();
+        //        EnableFlashlight(false);
+        //    }
+        //    else
+        //    {
+        //        m_isLookingInFP = true;
+        //        ShiftToFirstPerson();
+        //        EnableFlashlight(true);
+        //    }
+        //}
+        //
+        //if (Input.GetKeyUp(KeyCode.F) && m_isLookingInFP)
+        //{
+        //    EnableFlashlight(!flshCtrl.IsEnabled);
+        //}
          
     }
 
@@ -161,6 +161,13 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 		camTransitioner.TransitionTPPtoFPP();
 		Invoke("EnableFirstPerson",ShiftDuration);
 	}
+
+    public void ShiftFirstToFirstPerson()
+    {
+        cameraFollow.CamControlType = CameraFollow.CameraControlType.CCT_FPSLook;   
+        camTransitioner.TransitionFPPtoFPP();
+        Invoke("EnableFirstPerson",ShiftDuration);
+    }
 
 	public void EnableFirstPerson() {
 
