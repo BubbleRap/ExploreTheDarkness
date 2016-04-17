@@ -154,13 +154,13 @@ MonoBehaviour:
   settings:
   - changeAtID: 6
     background: {fileID: 21300000, guid: 911a0a05aa09b4b80b1e51faae0ce677, type: 3}
-  - changeAtID: 7
+  - changeAtID: 9
     background: {fileID: 21300000, guid: 2bbb1966b6cff47a2ac396d67f4d5cc4, type: 3}
-  - changeAtID: 11
-    background: {fileID: 21300000, guid: 1f96177eb35a24557ad93716601bafdb, type: 3}
   - changeAtID: 12
+    background: {fileID: 21300000, guid: 1f96177eb35a24557ad93716601bafdb, type: 3}
+  - changeAtID: 13
     background: {fileID: 21300000, guid: e17dedc15b7e54a31b84ddba5426e9bb, type: 3}
-  - changeAtID: 8
+  - changeAtID: 10
     background: {fileID: 21300000, guid: 3426c02b88c1f4788adb6b2b03bdee43, type: 3}
   Dialog:
   - index:
@@ -178,7 +178,7 @@ MonoBehaviour:
       gotoID: 2
   - index:
       index: 2
-    Text: You open the door and see your parents laughing at the table.
+    Text: You open the door and see your parents sitting at the table laughing.
     options:
     - Text: They look so happy, you decide not to disturb them
       gotoID: 3
@@ -197,7 +197,7 @@ MonoBehaviour:
     Text: Your dad is bragging and people are looking but he does not notice.
     options:
     - Text: 'You pull his sleeve '
-      gotoID: 9
+      gotoID: 7
   - index:
       index: 5
     Text: "\u201CDad, I want to go home\u201D you say\n\n\u201CThey have different
@@ -213,92 +213,124 @@ MonoBehaviour:
       in the carpet that makes you fall."
     options:
     - Text: You cry out
-      gotoID: 7
+      gotoID: 9
   - index:
       index: 7
-    Text: Your parents pick you up and carry you out to the car.
-    options:
-    - Text: You close your eyes
-      gotoID: 8
-  - index:
-      index: 8
-    Text: You are in the car. Your dad is driving.
-    options:
-    - Text: 'The street lights flashes by '
-      gotoID: 21
-  - index:
-      index: 9
     Text: "Your dad picks you up and swings you around:\n\n\u201COh there is my big
       girl!\u201D He says a little too loud"
     options:
     - Text: His breath smells of alcohol
-      gotoID: 10
+      gotoID: 8
   - index:
-      index: 10
+      index: 8
     Text: "\u201CI want to go home\u201D You say\n\nYour mother smiles at you and
       strokes your hair.\n\n\u201CDo you want to watch a different movie honey?\u201D"
     options:
     - Text: You insist that you go home
-      gotoID: 8
+      gotoID: 10
+  - index:
+      index: 9
+    Text: Your parents pick you up and carry you out to the car.
+    options:
+    - Text: You close your eyes
+      gotoID: 10
+  - index:
+      index: 10
+    Text: You are in the car. Your dad is driving.
+    options:
+    - Text: 'The street lights flash by '
+      gotoID: 11
   - index:
       index: 11
+    Text: "The lights illuminate your mother\u2019s hair.\n\nYour dad turns on the
+      radio."
+    options:
+    - Text: 'You leave the main road and enter the woods '
+      gotoID: 12
+  - index:
+      index: 12
     Text: 'Your dad is on the concrete.
 
 '
     options:
     - Text: There is blood
-      gotoID: 12
+      gotoID: 13
   - index:
-      index: 12
+      index: 13
     Text: "You are at a police station. \n\nYour parents have been at the hospital
       for three days now.\n\nYou have a glass of red lemonade in front of you. \nAn
       officer is smiling at you.\n\n\u201CWould you like something else?\u201D"
     options:
     - Text: You shake your head
-      gotoID: 13
+      gotoID: 14
   - index:
-      index: 13
+      index: 14
     Text: "Her hair is in a tight bun, and she keeps clicking her pen. \n\n\u201CI
       know this is a hard time for you, but we just need to ask you some questions.
       \nIs that alright?\u201D"
     options:
     - Text: 'You nod '
-      gotoID: 22
+      gotoID: 15
     - Text: 'You do nothing '
-      gotoID: 22
-  - index:
-      index: 14
-    Text: "\u201CWhere were you earlier in the evening?\u201D She asks"
-    options:
-    - Text: "\u201CAt a party\u201D you answer"
       gotoID: 15
   - index:
       index: 15
+    Text: '"Who was driving the car 3 nights ago, when the accident happened?" The
+      officer askes '
+    options:
+    - Text: '"My mom" you say'
+      gotoID: 17
+    - Text: '"My Dad" You say '
+      gotoID: 16
+  - index:
+      index: 16
+    Text: "\u201CWhere were you earlier in the evening?\u201D She asks"
+    options:
+    - Text: "\u201CAt a party\u201D you answer"
+      gotoID: 18
+  - index:
+      index: 17
+    Text: "The officer pauses. \n\n\u201CI know you are scared, but you can tell me
+      the truth.\u201D She says\n\n\u201CLets start again shall we\u201D she says"
+    options:
+    - Text: 'You look down at the table '
+      gotoID: 16
+  - index:
+      index: 18
     Text: "\u201COk, that\u2019s very good Silja. Did people have fun at the party\u201D
       she says"
     options:
     - Text: You nod
-      gotoID: 16
-    - Text: 'You shake your head '
       gotoID: 19
+    - Text: 'You shake your head '
+      gotoID: 20
   - index:
-      index: 16
+      index: 19
     Text: '"Was there alcohol at the party?" She asks'
     options:
     - Text: 'You say nothing '
-      gotoID: 17
+      gotoID: 21
     - Text: You nod
-      gotoID: 17
+      gotoID: 21
   - index:
-      index: 17
+      index: 20
+    Text: "She raises her brows and looks at you.\n\n\u201CDid your parents have fun
+      at the party?\u201D"
+    options:
+    - Text: 'You nod '
+      gotoID: 19
+    - Text: You say nothing
+      gotoID: 19
+  - index:
+      index: 21
     Text: '"Did your father drink anything at the party?" The officer asks'
     options:
     - Text: 'You say nothing '
-      gotoID: 18
+      gotoID: 22
     - Text: You nod
       gotoID: 0
   - index:
-      index: 18
+      index: 22
     Text: "\u201CIts ok, you can tell me\u201D She says \n\u201CIt is ok if he did,
       nothing will happen to him.\u201D\n\n\u201CIn fact, it is better with the insurance
       and stuff. \nSo Silja did he drink anything at the party? Beer or wine?\u201D"
@@ -307,54 +339,6 @@ MonoBehaviour:
       gotoID: 0
     - Text: No
       gotoID: 0
-  - index:
-      index: 19
-    Text: "She raises her brows and looks at you.\n\n\u201CDid your parents have fun
-      at the party?\u201D"
-    options:
-    - Text: 'You nod '
-      gotoID: 16
-    - Text: You say nothing
-      gotoID: 16
-  - index:
-      index: 20
-    Text: "Your father rarely leaves the apartment. \nIn fact he hardly ever leaves
-      his room. "
-    options:
-    - Text: You hate it
-      gotoID: 8
-  - index:
-      index: 21
-    Text: "The lights illuminate your mother\u2019s hair.\n\nYour dad turns on the
-      radio."
-    options:
-    - Text: 'You leave the main road and enter the woods '
-      gotoID: 11
-  - index:
-      index: 22
-    Text: '"Who was driving the car 3 nights ago, when the accident happened?" The
-      officer askes '
-    options:
-    - Text: '"My mom" you say'
-      gotoID: 23
-    - Text: '"My Dad" You say '
-      gotoID: 14
-  - index:
-      index: 23
-    Text: "The officer pauses. \n\n\u201CI know you are scared, but you can tell me
-      the truth.\u201D She says\n\n\u201CLets start again shall we\u201D she says"
-    options:
-    - Text: 'You look down at the table '
-      gotoID: 14
-  - index:
-      index: 24
-    Text: "The officer pauses and looks at you. \nThen she cracks a big smile.\n\n\u201CYour
-      mom doesn\u2019t have a driver's license. \nI know you are scared, but you can
-      tell me the truth.\u201D\n\nShe says\n\n\u201CLets start again shall we\u201D
-      she says"
-    options:
-    - Text: 'You look down at the table '
-      gotoID: 14
   Description: {fileID: 1703661309}
   Choice: {fileID: 2117197186}
   MultipleChoice: {fileID: 250261857}
