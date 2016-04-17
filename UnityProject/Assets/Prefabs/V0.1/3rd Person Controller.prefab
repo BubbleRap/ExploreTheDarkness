@@ -1290,6 +1290,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400322}
   - 108: {fileID: 10800002}
+  - 114: {fileID: 11411808}
   m_Layer: 14
   m_Name: LilleBrorLightSmall
   m_TagString: Untagged
@@ -1360,6 +1361,7 @@ GameObject:
   - 114: {fileID: 11488410}
   - 54: {fileID: 5478330}
   - 135: {fileID: 13579040}
+  - 114: {fileID: 11476246}
   m_Layer: 9
   m_Name: 3rd Person Camera
   m_TagString: MainCamera
@@ -1394,22 +1396,6 @@ GameObject:
   - 199: {fileID: 19900000}
   m_Layer: 0
   m_Name: AtmosphericDust_Lau
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100344
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400344}
-  - 108: {fileID: 10800004}
-  m_Layer: 14
-  m_Name: LilleBrorLightBig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4526,7 +4512,6 @@ Transform:
   m_LocalPosition: {x: 0.06974077, y: 0.5558186, z: -2.6614447}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 400344}
   - {fileID: 400322}
   m_Father: {fileID: 400058}
   m_RootOrder: 4
@@ -5068,7 +5053,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400164}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!4 &400326
 Transform:
   m_ObjectHideFlags: 1
@@ -5136,18 +5121,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400042}
   m_RootOrder: 3
---- !u!4 &400344
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100344}
-  m_LocalRotation: {x: 0.68870187, y: -0.68047607, z: 0.23487847, w: -0.08645341}
-  m_LocalPosition: {x: 1.6786474, y: -0.33792397, z: -2.1184905}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400164}
-  m_RootOrder: 0
 --- !u!4 &400346
 Transform:
   m_ObjectHideFlags: 1
@@ -6171,7 +6144,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113828}
   m_LocalRotation: {x: 0, y: 0, z: 1.1641532e-10, w: 1}
-  m_LocalPosition: {x: -0, y: 0.807, z: -0.424}
+  m_LocalPosition: {x: 0, y: 0.921, z: -0.424}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400042}
@@ -8399,10 +8372,10 @@ Light:
   m_Enabled: 1
   serializedVersion: 6
   m_Type: 0
-  m_Color: {r: 0.41034484, g: 0.41034484, b: 0.41034484, a: 1}
-  m_Intensity: 2
+  m_Color: {r: 1, g: 0.96835697, b: 0.71323526, a: 1}
+  m_Intensity: 1.5
   m_Range: 12
-  m_SpotAngle: 60
+  m_SpotAngle: 50
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -8419,40 +8392,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967039
   m_Lightmapping: 1
-  m_BounceIntensity: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
-  m_AreaSize: {x: 1, y: 1}
---- !u!108 &10800004
-Light:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100344}
-  m_Enabled: 1
-  serializedVersion: 6
-  m_Type: 0
-  m_Color: {r: 0.30866802, g: 0.34827587, b: 0.34827587, a: 1}
-  m_Intensity: 2
-  m_Range: 8
-  m_SpotAngle: 75
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: 3
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294963967
-  m_Lightmapping: 1
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0.75
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
@@ -8526,6 +8466,72 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   volume: 1
+--- !u!114 &11411808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0109504c2f6a31b4498a8fd6a490584a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowmapMode: 0
+  m_Cameras:
+  - {fileID: 2000014}
+  m_CurrentCamera: {fileID: 0}
+  m_Size: {x: 10, y: 10, z: 20}
+  m_SpotNear: 0.05
+  m_SpotFar: 1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ColorFilterMask:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Brightness: 0.25
+  m_BrightnessColored: 5
+  m_Extinction: 0.5
+  m_MinDistFromCamera: 0
+  m_ShadowmapRes: 1024
+  m_DepthShader: {fileID: 4800000, guid: 7e188a1e08ecfae4785bed08b1013219, type: 3}
+  m_ColorFilterShader: {fileID: 4800000, guid: 78da0b5fc3a6e8a469d047d71187e7ef, type: 3}
+  m_Colored: 0
+  m_ColorBalance: 1
+  m_EpipolarLines: 256
+  m_EpipolarSamples: 512
+  m_CoordShader: {fileID: 4800000, guid: 170533b360a07f945b98b5d9d11bff19, type: 3}
+  m_DepthBreaksShader: {fileID: 4800000, guid: 8675ad07e6cda494d977506a7a2a8fbd, type: 3}
+  m_RaymarchShader: {fileID: 4800000, guid: 8b94af9deac0e2d4e9523f6090a3e61e, type: 3}
+  m_InterpolateAlongRaysShader: {fileID: 4800000, guid: b4040e961c997484e824ff979a17c3c0,
+    type: 3}
+  m_SamplePositionsShader: {fileID: 4800000, guid: 328e45223da3ee24a9b9bc2020d76aa4,
+    type: 3}
+  m_FinalInterpolationShader: {fileID: 4800000, guid: 3fe6f8dd2066bc741806972899aa82f6,
+    type: 3}
+  m_DepthThreshold: 0.5
+  m_InterpolationStep: 32
+  m_ShowSamples: 0
+  m_ShowInterpolatedSamples: 0
+  m_ShowSamplesBackgroundFade: 0.8
+  m_AttenuationCurveOn: 0
+  m_AttenuationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &11412696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8564,7 +8570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teddyLight: {fileID: 10800000}
-  teddyLightFlash: {fileID: 10800004}
+  teddyLightFlash: {fileID: 0}
   teddyLightFlash2: {fileID: 10800002}
   fadingOutSpeed: 0.002
   fadingInSpeed: 0.012
@@ -8924,6 +8930,20 @@ MonoBehaviour:
   HeadBone: {fileID: 417112}
   hasHit: 0
   currentHitDistance: 0
+--- !u!114 &11476246
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -768656878, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!114 &11476534
 MonoBehaviour:
   m_ObjectHideFlags: 1

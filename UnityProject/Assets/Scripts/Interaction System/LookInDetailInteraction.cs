@@ -129,8 +129,6 @@ public class LookInDetailInteraction : IInteractableObject
 
 
 		_siljaBeh.IsMoveEnabled = false;
-
-		//_dof.enabled = true;
 			
 		transitioner.AddFPPCompleteAction( () =>
 		{
@@ -157,23 +155,26 @@ public class LookInDetailInteraction : IInteractableObject
 	}
 
 	private void OnInvestigateDisabled()
-	{
+    {
 		CameraTransitioner transitioner = _siljaBeh.thisCamera.GetComponent<CameraTransitioner>();
 		CameraFollow camControl = _siljaBeh.thisCamera.GetComponent<CameraFollow>();
 
 		//_dof.enabled = false;
 
-		transitioner.AddTPPCompleteAction( () =>
-		                                  {	
-			// setting up the character motion state
+        UnityAction finishAction = () =>
+        {   
+            // setting up the character motion state
 
-			_siljaBeh.IsMoveEnabled = true;
-			camControl.CamControlType = CameraFollow.CameraControlType.CCT_Default;
-			
-			if( _collider != null )
-				_collider.enabled = true;
-		});
-		
+            _siljaBeh.IsMoveEnabled = true;
+
+            if( _collider != null )
+                _collider.enabled = true;
+        };
+
+        if (LightStatesMachine.Instance.IsLightOn())
+            transitioner.AddTPPCompleteAction(finishAction);
+        else
+            transitioner.AddFPPCompleteAction(finishAction);
 		
 		// reversing the previous object's transform
 		transform.position = _originalPos;
@@ -182,7 +183,7 @@ public class LookInDetailInteraction : IInteractableObject
 		if (LightStatesMachine.Instance.IsLightOn())
 		    _siljaBeh.ShiftToThirdPerson();
         else
-            _siljaBeh.ShiftToFirstPerson();
+            _siljaBeh.ShiftFirstToFirstPerson();
     }
 
     private void OnComponentClicked(Collider collider, PointerEventData eventData)

@@ -6,12 +6,14 @@ using UnityEngine.UI;
 
 public class DialogChoices : MonoBehaviour {
 
-	private int ID = 0;
+	private int ID = -1;
 
 	public float fadeTimeBigText = 0.8f;
 	public float fadeTimeOption = 0.8f;
 	public float fadeInBlack = 1.0f;
 	public float fadeOutBlack = 1.0f;
+
+	public float beginingDelay = 8.0f;
 
 	public float delayBetweenDialogs = 0.4f;
 
@@ -37,11 +39,18 @@ public class DialogChoices : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		isFaded = true;
+		isFadedBG = true;
+		fadeImage.enabled = true;
+		fadeImage.color = new Color(fadeImage.color.r,fadeImage.color.g,fadeImage.color.b,1.0f);
+		StartCoroutine(FadeOutBgBegin(fadeImage,beginingDelay,fadeOutBlack));
+
+		clear();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(ID <= Dialog.Count && isFaded && isFadedBG)
+		if(ID <= Dialog.Count && isFaded && isFadedBG && ID > -1)
 		{
 			if(Description.text != Dialog[ID].Text)
 			{
@@ -113,6 +122,7 @@ public class DialogChoices : MonoBehaviour {
 			StartCoroutine(FadeOut(optionText2_multiple.GetComponent<Text>(),delayBetweenDialogs));
 
 			ID = Dialog[ID].options[OptionNumber].gotoID;
+			Dialog [ID].onDialogActivated.Invoke ();
 
 			int prevSettingNumber = settingNumber;
 
@@ -237,6 +247,28 @@ public class DialogChoices : MonoBehaviour {
 		fadeImage.enabled = false;
 	}
 
+	IEnumerator FadeOutBgBegin (Image fade, float delay, float time)
+	{
+		float colorAlpha = fade.color.a;
+		float elapsedTime = 0;
+
+		yield return new WaitForSeconds(delay);
+
+		while(elapsedTime < time)
+		{
+			fade.color = new Color(fade.color.r,fade.color.g,fade.color.b,Mathf.Lerp(1,0,(elapsedTime / time)));
+
+			elapsedTime += Time.deltaTime;
+
+			yield return null;
+		}
+
+		isFadedBG = true;
+		fadeImage.enabled = false;
+
+		ID = 0;
+	}
+
 	IEnumerator FadeToNewScene (Image fade, float time)
 	{
 		float colorAlpha = fade.color.a;
@@ -265,5 +297,19 @@ public class DialogChoices : MonoBehaviour {
 	public int getID()
 	{
 		return ID;
+	}
+
+	public void clear()
+	{
+		Description.text = "";
+
+		optionText1_single = Choice.transform.GetChild(0).gameObject;
+
+		optionText1_multiple = MultipleChoice.transform.GetChild(0).gameObject;
+		optionText2_multiple = MultipleChoice.transform.GetChild(1).gameObject;
+		optionText1_single.GetComponent<Text>().text = "";
+
+		optionText1_multiple.GetComponent<Text>().text = "";
+		optionText2_multiple.GetComponent<Text>().text = "";
 	}
 }

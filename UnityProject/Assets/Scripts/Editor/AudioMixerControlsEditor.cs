@@ -20,12 +20,14 @@ public class AudioMixerControlsEditor : Editor {
 
             myTarget.m_audioMixer = (AudioMixer) EditorGUILayout.ObjectField("Audio Mixer", myTarget.m_audioMixer, typeof(AudioMixer), false);
             myTarget.m_audioSource = (AudioSource) EditorGUILayout.ObjectField("Audio Source", myTarget.m_audioSource, typeof(AudioSource), true);
+			myTarget.m_time = EditorGUILayout.FloatField ("Time", myTarget.m_time);
         }
 
         if( myTarget.m_mixingType == AudioMixerControls.MixingType.FadeToSnapshot )
         {
             myTarget.m_snapshotName = EditorGUILayout.TextField("Snapshot Name", myTarget.m_snapshotName);
             myTarget.m_audioMixer = (AudioMixer) EditorGUILayout.ObjectField("Audio Mixer", myTarget.m_audioMixer, typeof(AudioMixer), false);
+			myTarget.m_time = EditorGUILayout.FloatField ("Time", myTarget.m_time);
         }
 
         if( myTarget.m_mixingType == AudioMixerControls.MixingType.PlayOneShot )
