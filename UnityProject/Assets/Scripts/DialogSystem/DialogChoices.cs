@@ -113,6 +113,7 @@ public class DialogChoices : MonoBehaviour {
 			StartCoroutine(FadeOut(optionText2_multiple.GetComponent<Text>(),delayBetweenDialogs));
 
 			ID = Dialog[ID].options[OptionNumber].gotoID;
+			Dialog [ID].onDialogActivated.Invoke ();
 
 			int prevSettingNumber = settingNumber;
 
