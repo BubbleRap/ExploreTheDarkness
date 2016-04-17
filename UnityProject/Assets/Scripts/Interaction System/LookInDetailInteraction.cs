@@ -75,13 +75,16 @@ public class LookInDetailInteraction : IInteractableObject
     {
         base.Update();
 
-        // horizontal movement
-        m_velocity.x = Mathf.Lerp(m_velocity.x, m_targetVelocity.x, m_acceleration * Time.deltaTime);
-        transform.Rotate(m_velocity.x * Camera.main.transform.up * Time.deltaTime, Space.World);
+        if (IsInteracting)
+        {
+            // horizontal movement
+            m_velocity.x = Mathf.Lerp(m_velocity.x, m_targetVelocity.x, m_acceleration * Time.deltaTime);
+            transform.Rotate(m_velocity.x * Camera.main.transform.up * Time.deltaTime, Space.World);
 
-        // vertical movement
-        m_velocity.y = Mathf.Lerp(m_velocity.y, m_targetVelocity.y, m_acceleration * Time.deltaTime);
-        transform.Rotate(m_velocity.y * -transform.right * Time.deltaTime, Space.World);
+            // vertical movement
+            m_velocity.y = Mathf.Lerp(m_velocity.y, m_targetVelocity.y, m_acceleration * Time.deltaTime);
+            transform.Rotate(m_velocity.y * -transform.right * Time.deltaTime, Space.World);
+        }
     }
 
     private void LateUpdate()

@@ -100,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &24845501
 Transform:
   m_ObjectHideFlags: 0
@@ -202,7 +202,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &180058589
 Transform:
   m_ObjectHideFlags: 0
@@ -304,7 +304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &244768137
 Transform:
   m_ObjectHideFlags: 0
@@ -458,11 +458,11 @@ MonoBehaviour:
   fadeOutBlack: 1
   delayBetweenDialogs: 0.4
   settings:
-  - changeAtID: 7
-    background: {fileID: 21300000, guid: 97ced27bf56fd468fa8abfbb12ba56fb, type: 3}
-  - changeAtID: 14
-    background: {fileID: 21300000, guid: b6e7002142002460c807721fa2e088d0, type: 3}
   - changeAtID: 8
+    background: {fileID: 21300000, guid: 97ced27bf56fd468fa8abfbb12ba56fb, type: 3}
+  - changeAtID: 12
+    background: {fileID: 21300000, guid: b6e7002142002460c807721fa2e088d0, type: 3}
+  - changeAtID: 14
     background: {fileID: 21300000, guid: 6218021e355f442a486c61931a01d3b3, type: 3}
   Dialog:
   - index:
@@ -471,16 +471,26 @@ MonoBehaviour:
     options:
     - Text: There is blood
       gotoID: 1
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 1
     Text: "You open the car door and walk towards him. \n\nHe is having trouble breathing.
-      There is blood in his mouth.  \n\nYou see your mom in the car. \nShe is moving
+      There is blood in his mouth.\n\nYou see your mom in the car.\nShe is moving
       her head."
     options:
     - Text: You turn your father on to his side
       gotoID: 2
     - Text: You get your mom out of the car
       gotoID: 3
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 2
     Text: You roll him over.
@@ -488,130 +498,200 @@ MonoBehaviour:
     - Text: 'He breathes easier now
 
 '
-      gotoID: 12
+      gotoID: 4
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 3
     Text: "You look into your mother\u2019s eyes, but she is staring right through
       you.\n\nYou unfasten her seatbelt and try to move her."
     options:
     - Text: Something inside her feels broken
-      gotoID: 4
+      gotoID: 5
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 4
-    Text: 'You feel nauseous. The world is spinning.
-
-
-      In the glove compartment in the car there is a cell phone.'
-    options:
-    - Text: You call 911
-      gotoID: 5
-  - index:
-      index: 5
-    Text: "\u201CHello, what is your emergency?\u201D a woman says\n\n\u201CThe car
-      crashed... My mom and dad, \nthere is blood in his mouth.\u201D You say\n\n\u201CWhere
-      are you my dear?\u201D She says\n\nYou look around but there are just trees."
-    options:
-    - Text: You hear seagulls in the distance
-      gotoID: 6
-  - index:
-      index: 6
-    Text: "\u201CI-I don\u2019t know\u2026 I think we are in a forest, close to the
-      sea I think. \u201D You whisper \n\n\u201CHow old are you dear?\u201D The woman
-      asks\n\n\u201CI am 11.\u201D you say\n\n\"it is going to be all right\" The
-      woman says"
-    options:
-    - Text: You close your eyes
-      gotoID: 7
-  - index:
-      index: 7
-    Text: "You sit restlessly by the hospital bed. \n\nThere are tubes sticking out
-      of your dad \nand strange beeping noises. \n\nYou look at his chest as it moves
-      up and down. "
-    options:
-    - Text: He turns his head and smiles at you
-      gotoID: 13
-  - index:
-      index: 8
-    Text: "You always wanted a cat.\n\nOn the floor in the lady\u2019s apartment \nthere
-      are kittens running around playing. \n\nThe place smells funny.\n\nYour dad
-      lets you pick whichever one you want."
-    options:
-    - Text: ' You get the affectionate black male'
-      gotoID: 9
-    - Text: 'You get the playful orange female
-
-
-'
-      gotoID: 10
-  - index:
-      index: 9
-    Text: 'He follows you around.
-
-
-      You love him. '
-    options:
-    - Text: He makes you forget
-      gotoID: 0
-  - index:
-      index: 10
-    Text: "You play with her all the time. \n\nYou love her."
-    options:
-    - Text: She makes you forget.
-      gotoID: 0
-  - index:
-      index: 11
-    Text: "At school you eat your lunch alone. \nSometimes in the breaks, you go to
-      the bathroom \nso people don\u2019t notice that you are not part of anything.
-      \n\n"
-    options:
-    - Text: 'Of course. '
-      gotoID: 3
-    - Text: Not really.
-      gotoID: 8
-  - index:
-      index: 12
-    Text: "You stagger towards the car. \n\nThe world is spinning.\n\nIn the glove
+    Text: "You stagger towards the car.\n\nThe world is spinning.\r\n\nIn the glove
       compartment in the car there is a cell phone."
     options:
     - Text: You call 911
-      gotoID: 5
+      gotoID: 6
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
-      index: 13
-    Text: "When the doctors mention your mother, \nyou are asked to leave the room.
-      \n\nYou see your mother through a glass window. "
+      index: 5
+    Text: "You feel nauseous. The world is spinning.\r\nIn the glove compartment in
+      the car there is a cell phone."
     options:
-    - Text: 'It distorts her features '
-      gotoID: 16
+    - Text: You call 911
+      gotoID: 6
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
-      index: 14
-    Text: Your dad is released from Hospital.
+      index: 6
+    Text: "\u201CHello, what is your emergency?\u201D a woman says\r\n\n\u201CThe
+      car crashed... My mom and dad, \r\nthere is blood in his mouth.\u201D You say\r\n\n\u201CWhere
+      are you my dear?\u201D She says\r\nYou look around but there are just trees."
     options:
-    - Text: 'He looks different '
-      gotoID: 17
+    - Text: You hear seagulls in the distance
+      gotoID: 7
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
-      index: 15
+      index: 7
+    Text: "\u201CI-I don\u2019t know\u2026 I think we are in a forest, close to the
+      sea I think. \u201D You whisper \r\n\n\u201CHow old are you dear?\u201D The
+      woman asks\r\n\n\u201CI am 11.\u201D you say\r\n\n\"it is going to be all right\"
+      The woman says\r\n"
+    options:
+    - Text: You close your eyes
+      gotoID: 8
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 404972989}
+          m_MethodName: FadeOutAudio
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - index:
+      index: 8
+    Text: "You sit restlessly by the hospital bed.\n \r\nThere are tubes sticking
+      out of your dad \r\nand strange beeping noises. \r\n\nYou look at his chest
+      as it moves up and down."
+    options:
+    - Text: He turns his head and smiles at you
+      gotoID: 9
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - index:
+      index: 9
+    Text: "When the doctors mention your mother, \r\nyou are asked to leave the room.\n\nYou
+      see your mother through a glass window."
+    options:
+    - Text: It distorts her features
+      gotoID: 10
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - index:
+      index: 10
+    Text: "People whisper when you are near.\r\n\nWhen your mother sleeps, you play
+      songs from your discman to her.\r\n\nIt makes her breathing calm."
+    options:
+    - Text: Outside the snow starts melting and the days get longer.
+      gotoID: 11
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - index:
+      index: 11
     Text: 
     options:
     - Text: Your mother dies.
-      gotoID: 14
+      gotoID: 12
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
-      index: 16
-    Text: 'Outside the snow starts meling and the days get longer.
-
-
-      You play songs to your mother when she sleeps from your discman.
-
-      It makes her breathing calm. '
+      index: 12
+    Text: Your dad is released from Hospital.
     options:
-    - Text: Talking turns to whisper around you
-      gotoID: 15
+    - Text: He looks different
+      gotoID: 13
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
-      index: 17
-    Text: "Your father rarely leaves the apartment. \nIn fact he hardly ever leaves
-      his room. "
+      index: 13
+    Text: "Your father rarely leaves the apartment.\n \r\nIn fact he hardly ever leaves
+      his room."
     options:
     - Text: You hate it
-      gotoID: 8
+      gotoID: 14
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - index:
+      index: 14
+    Text: "You always wanted a cat.\r\n\nOn the floor in the lady\u2019s apartment
+      \r\nthere are kittens running around playing.\n \r\nThe place smells funny.\r\n\nYour
+      dad lets you pick whichever one you want."
+    options:
+    - Text: You get the affectionate black male
+      gotoID: 15
+    - Text: You get the playful orange female
+      gotoID: 16
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - index:
+      index: 15
+    Text: 'He follows you around.
+
+
+      You love him.'
+    options:
+    - Text: He makes you forget
+      gotoID: 0
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - index:
+      index: 16
+    Text: 'You play with her all the time.
+
+
+      You love her.'
+    options:
+    - Text: She makes you forget
+      gotoID: 0
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   Description: {fileID: 1703661309}
   Choice: {fileID: 2117197186}
   MultipleChoice: {fileID: 250261857}
@@ -725,13 +805,14 @@ GameObject:
   m_Component:
   - 4: {fileID: 404972987}
   - 82: {fileID: 404972988}
+  - 114: {fileID: 404972989}
   m_Layer: 0
   m_Name: Atmosphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &404972987
 Transform:
   m_ObjectHideFlags: 0
@@ -752,7 +833,8 @@ AudioSource:
   m_GameObject: {fileID: 404972986}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24352808, guid: dd3106cbd7c1e004f8be40f2aacc073c,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 60c8701fc674dcc4691f0abe86900255, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -818,6 +900,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &404972989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 404972986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66af249acd5d04e6795c831b72e8f9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_mixingType: 1
+  m_volume: 1
+  m_minValue: -80
+  m_maxValue: 0
+  m_paramName: atmosFade
+  m_snapshotName: My Snapshot
+  m_time: 10
+  m_audioMixer: {fileID: 24100000, guid: dd3106cbd7c1e004f8be40f2aacc073c, type: 2}
+  m_audioSource: {fileID: 404972988}
 --- !u!1 &522248347
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,6 +983,7 @@ Transform:
   - {fileID: 725039031}
   - {fileID: 24845501}
   - {fileID: 1923478084}
+  - {fileID: 1891886167}
   m_Father: {fileID: 522248348}
   m_RootOrder: 0
 --- !u!1 &650161887
@@ -925,8 +1028,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogManager: {fileID: 291847568}
   startAtDialogNumber: 0
-  secondsToStart: 0
-  endAtDialogNumber: 1
+  secondsToStart: 44
+  endAtDialogNumber: 7
   trailSource: {fileID: 1481565030}
 --- !u!82 &650161890
 AudioSource:
@@ -936,8 +1039,9 @@ AudioSource:
   m_GameObject: {fileID: 650161887}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1bfd966d53e761c4284a0bc605415889, type: 3}
+  OutputAudioMixerGroup: {fileID: 24376086, guid: dd3106cbd7c1e004f8be40f2aacc073c,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: e7b7a97d855cdcb4a90fb836e88dc099, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1113,7 +1217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &725039031
 Transform:
   m_ObjectHideFlags: 0
@@ -1135,7 +1239,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b97fad6926bcbbd4fb9672e9e8cbfa89, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 46e9a9a78be582844a7e9470a2665e3d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1496,7 +1600,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1155977372
 Transform:
   m_ObjectHideFlags: 0
@@ -1508,7 +1612,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1780081572}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!114 &1155977373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1520,22 +1624,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522f0b4dc62644c098273da732a24cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogManager: {fileID: 0}
+  dialogManager: {fileID: 291847568}
   startAtDialogNumber: 0
-  secondsToStart: 0
-  endAtDialogNumber: 1
-  trailSource: {fileID: 0}
+  secondsToStart: 44
+  endAtDialogNumber: 10
+  trailSource: {fileID: 1186617477}
 --- !u!82 &1155977374
 AudioSource:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1155977371}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 67ba6298e14f66f43b7b855e7e585bcc, type: 3}
-  m_PlayOnAwake: 1
+  OutputAudioMixerGroup: {fileID: 24312144, guid: dd3106cbd7c1e004f8be40f2aacc073c,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 0728116539482d547b696ca6e38182eb, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -1626,6 +1731,109 @@ Transform:
   m_Children: []
   m_Father: {fileID: 522248348}
   m_RootOrder: 2
+--- !u!1 &1186617475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1186617476}
+  - 82: {fileID: 1186617477}
+  m_Layer: 0
+  m_Name: Drone Piano End
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1186617476
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1186617475}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1780081572}
+  m_RootOrder: 3
+--- !u!82 &1186617477
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1186617475}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24312144, guid: dd3106cbd7c1e004f8be40f2aacc073c,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: fc74306ee75a26646a9b466373d595cc, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &1209530097
 GameObject:
   m_ObjectHideFlags: 0
@@ -1781,7 +1989,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1400635892
 Transform:
   m_ObjectHideFlags: 0
@@ -1878,7 +2086,7 @@ GameObject:
   - 4: {fileID: 1481565029}
   - 82: {fileID: 1481565030}
   m_Layer: 0
-  m_Name: Tail part 1
+  m_Name: Part 1 tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1895,7 +2103,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1780081572}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!82 &1481565030
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1904,8 +2112,9 @@ AudioSource:
   m_GameObject: {fileID: 1481565028}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7bc37dea0c1a8b64286d1600526ddc9e, type: 3}
+  OutputAudioMixerGroup: {fileID: 24386368, guid: dd3106cbd7c1e004f8be40f2aacc073c,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: d1ebdfbe2dc1a564eabd6e25ca8ed449, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2305,10 +2514,113 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 650161888}
-  - {fileID: 1155977372}
   - {fileID: 1481565029}
+  - {fileID: 1155977372}
+  - {fileID: 1186617476}
   m_Father: {fileID: 522248348}
   m_RootOrder: 1
+--- !u!1 &1891886166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1891886167}
+  - 82: {fileID: 1891886168}
+  m_Layer: 0
+  m_Name: Drone intro
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1891886167
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1891886166}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 551653804}
+  m_RootOrder: 7
+--- !u!82 &1891886168
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1891886166}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 455309700d34b0a4a93c89ef2c80e771, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &1923478083
 GameObject:
   m_ObjectHideFlags: 0
@@ -2324,7 +2636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1923478084
 Transform:
   m_ObjectHideFlags: 0

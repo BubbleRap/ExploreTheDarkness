@@ -49,13 +49,16 @@ public class CameraPhysics : MonoBehaviour
 
             if (currentHitDistance < follower.cameraDistance)
             {
-                // if there is a hit, then get a close up
+                //OPTION 1: Lerping the camera to quickly solve the tunneling. Elastic.
                 follower.cameraDistance =
                     Mathf.Lerp(
                         follower.cameraDistance,
                         currentHitDistance,
                         approachingSpeed * Time.deltaTime //* ((collidingColliders.Count > 0) ? 2 : 1)
                 );
+
+                // OPTION 2: very strct camera distance, never tunneling through walls
+                //follower.cameraDistance = currentHitDistance;
 
                 _timer = 0f;
                 fallbackFrom = follower.cameraDistance;

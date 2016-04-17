@@ -167,11 +167,11 @@ MonoBehaviour:
       index: 0
     Text: You have watched the same cartoon two times in a row now.
     options:
-    - Text: You turn it of
+    - Text: You turn it off
       gotoID: 1
   - index:
       index: 1
-    Text: "Your parents are in the other room with many people you don\u2019t know.
+    Text: "Your parents are in the other room with many people you don\u2019t know.\n
       \nThe music is getting louder."
     options:
     - Text: You get up to look for your parents
@@ -190,7 +190,7 @@ MonoBehaviour:
       your father stumbles out.\n\nHe gives you a hug that is a little too tight.\n\n\u201COh
       aren\u2019t you the sweetest!\u201D He says"
     options:
-    - Text: His breath smells
+    - Text: His breath smells of alcohol
       gotoID: 5
   - index:
       index: 4
@@ -209,8 +209,8 @@ MonoBehaviour:
   - index:
       index: 6
     Text: "It is dark upstairs, and you don\u2019t like it. \n\nYou see the light
-      switch at the end of the hall.\n\nYou run towards the switch, \nbut a fold in
-      the carpet makes you fall."
+      switch at the end of the hall.\n\nYou run towards it, \nbut there is a fold
+      in the carpet that makes you fall."
     options:
     - Text: You cry out
       gotoID: 7
@@ -231,7 +231,7 @@ MonoBehaviour:
     Text: "Your dad picks you up and swings you around:\n\n\u201COh there is my big
       girl!\u201D He says a little too loud"
     options:
-    - Text: His breath smells
+    - Text: His breath smells of alcohol
       gotoID: 10
   - index:
       index: 10
@@ -258,7 +258,7 @@ MonoBehaviour:
       gotoID: 13
   - index:
       index: 13
-    Text: "Her hair is in a tight bund, and she keeps clicking her pen. \n\n\u201CI
+    Text: "Her hair is in a tight bun, and she keeps clicking her pen. \n\n\u201CI
       know this is a hard time for you, but we just need to ask you some questions.
       \nIs that alright?\u201D"
     options:
@@ -274,7 +274,7 @@ MonoBehaviour:
       gotoID: 15
   - index:
       index: 15
-    Text: "\u201COk, that\u2019s good Silja. Did people have fun at the party\u201D
+    Text: "\u201COk, that\u2019s very good Silja. Did people have fun at the party\u201D
       she says"
     options:
     - Text: You nod
@@ -341,10 +341,8 @@ MonoBehaviour:
       gotoID: 14
   - index:
       index: 23
-    Text: "The officer pauses and looks at you. \nThen she cracks a big smile.\n\n\u201CYour
-      mom doesn\u2019t have a driver's license. \nI know you are scared, but you can
-      tell me the truth.\u201D\n\nShe says\n\n\u201CLets start again shall we\u201D
-      she says"
+    Text: "The officer pauses. \n\n\u201CI know you are scared, but you can tell me
+      the truth.\u201D She says\n\n\u201CLets start again shall we\u201D she says"
     options:
     - Text: 'You look down at the table '
       gotoID: 14
