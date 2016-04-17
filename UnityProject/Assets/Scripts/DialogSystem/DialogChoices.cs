@@ -144,14 +144,11 @@ public class DialogChoices : MonoBehaviour {
 			}
 			*/
 		}
-
-		/*
-		if(Dialog[ID].options[OptionNumber].gotoID == 0)
+		else if(Dialog[ID].options[OptionNumber].gotoID == 0)
 		{
 			fadeImage.enabled = true;
 			StartCoroutine(FadeToNewScene(fadeImage,fadeInBlack));
 		}
-		*/
 	}
 
     public void MoveFromTo(int src, int dst)
