@@ -63,7 +63,7 @@ public class ButtonPrompt : MonoBehaviour {
             if (objToCamera.sqrMagnitude > 100)
                 return 0f;
 
-            LayerMask mask = (1 << (LayerMask.NameToLayer("Default"))); //~(1 << (LayerMask.NameToLayer("Trigger") | LayerMask.NameToLayer("Character")));
+            LayerMask mask = (1 << (LayerMask.NameToLayer("Default") | 1 << (LayerMask.NameToLayer("InteractiveComponents")))); //~(1 << (LayerMask.NameToLayer("Trigger") | LayerMask.NameToLayer("Character")));
             RaycastHit hit;
 
             if (Camera.main != null && 
@@ -73,7 +73,9 @@ public class ButtonPrompt : MonoBehaviour {
             {
                 if (hit.transform.gameObject != connectedObject.gameObject &&
                     (connectedObject.transform.parent == null ||
-                    hit.transform.gameObject != connectedObject.transform.parent.gameObject)
+                    hit.transform.gameObject != connectedObject.transform.parent.gameObject) &&
+                    (hit.transform.parent == null ||
+                    hit.transform.parent.gameObject != connectedObject.gameObject)
                     )
                 {
                     return 0f;
