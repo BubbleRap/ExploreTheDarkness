@@ -753,7 +753,7 @@ MonoBehaviour:
       You love him.'
     options:
     - Text: He makes you forget
-      gotoID: 0
+      gotoID: 17
     onDialogActivated:
       m_PersistentCalls:
         m_Calls: []
@@ -767,7 +767,7 @@ MonoBehaviour:
       You love her.'
     options:
     - Text: She makes you forget
-      gotoID: 0
+      gotoID: 17
     onDialogActivated:
       m_PersistentCalls:
         m_Calls: []
@@ -1268,7 +1268,7 @@ MonoBehaviour:
   dialogManager: {fileID: 291847568}
   startAtDialogNumber: 0
   secondsToStart: 4
-  endAtDialogNumber: 0
+  endAtDialogNumber: 17
   trailSource: {fileID: 0}
 --- !u!82 &657241751
 AudioSource:
@@ -1333,7 +1333,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1551,7 +1551,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -2366,7 +2366,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -2469,7 +2469,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -2864,7 +2864,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:

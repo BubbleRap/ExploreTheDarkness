@@ -51,7 +51,7 @@ public class DialogChoices : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(ID <= Dialog.Count && isFaded && isFadedBG && ID > -1)
+		if(ID < Dialog.Count && isFaded && isFadedBG && ID > -1)
 		{
 			if(Description.text != Dialog[ID].Text)
 			{
@@ -114,7 +114,7 @@ public class DialogChoices : MonoBehaviour {
 
 	public void dialogNext(int OptionNumber)
 	{
-		if(Dialog[ID].options[OptionNumber].gotoID <= Dialog.Count && Dialog[ID].options[OptionNumber].gotoID != 0)
+		if(Dialog[ID].options[OptionNumber].gotoID < Dialog.Count)
 		{
 			isFaded = false;
 			StartCoroutine(FadeOut(Description,1));
@@ -155,10 +155,11 @@ public class DialogChoices : MonoBehaviour {
 			}
 			*/
 		}
-		else if(Dialog[ID].options[OptionNumber].gotoID == 0)
+		else if(Dialog[ID].options[OptionNumber].gotoID >= Dialog.Count)
 		{
 			isEnd = true;
 			fadeImage.enabled = true;
+			ID = Dialog[ID].options[OptionNumber].gotoID;
 			StartCoroutine(FadeInBg(fadeImage,fadeInBlack));
 		}
 	}
