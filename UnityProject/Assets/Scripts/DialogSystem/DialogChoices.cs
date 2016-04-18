@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class DialogChoices : MonoBehaviour {
 
 	private int ID = -1;
+	private bool isEnd = false;
 
 	public float fadeTimeBigText = 0.8f;
 	public float fadeTimeOption = 0.8f;
@@ -156,8 +157,9 @@ public class DialogChoices : MonoBehaviour {
 		}
 		else if(Dialog[ID].options[OptionNumber].gotoID == 0)
 		{
+			isEnd = true;
 			fadeImage.enabled = true;
-			StartCoroutine(FadeToNewScene(fadeImage,fadeInBlack));
+			StartCoroutine(FadeInBg(fadeImage,fadeInBlack));
 		}
 	}
 
@@ -225,8 +227,11 @@ public class DialogChoices : MonoBehaviour {
 			yield return null;
 		}
 
-		changeBackground(settings[settingNumber].background);
-		StartCoroutine(FadeOutBg(fadeImage,fadeOutBlack));
+		if(!isEnd)
+		{
+			changeBackground(settings[settingNumber].background);
+			StartCoroutine(FadeOutBg(fadeImage,fadeOutBlack));
+		}
 	}
 
 	IEnumerator FadeOutBg (Image fade, float time)
@@ -311,5 +316,10 @@ public class DialogChoices : MonoBehaviour {
 
 		optionText1_multiple.GetComponent<Text>().text = "";
 		optionText2_multiple.GetComponent<Text>().text = "";
+	}
+
+	public bool getIsEnd()
+	{
+		return isEnd; 
 	}
 }
