@@ -30,6 +30,7 @@ public class EndDialog : MonoBehaviour {
 			{
 				if(!EndSong.loop && !EndSong.isPlaying)
 				{
+					dialogManager.setNextID();
 					endImage.enabled = true;
 					StartCoroutine(FadeInBg(endImage,fadeInImageBegin,fadeInTime));
 					isActive = true;
@@ -37,6 +38,7 @@ public class EndDialog : MonoBehaviour {
 			}
 			else if(!fadeInOnTrail)
 			{
+				dialogManager.setNextID();
 				endImage.enabled = true;
 				StartCoroutine(FadeInBg(endImage,fadeInImageBegin,fadeInTime));
 				isActive = true;
@@ -59,8 +61,6 @@ public class EndDialog : MonoBehaviour {
 
 			yield return null;
 		}
-
-		dialogManager.setNextID();
 
 		StartCoroutine(FadeOutBg(endImage,imageStayTime,fadeOutTime));
 	}
