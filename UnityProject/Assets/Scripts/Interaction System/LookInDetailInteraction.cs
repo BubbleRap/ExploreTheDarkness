@@ -15,15 +15,7 @@ public class LookInDetailInteraction : IInteractableObject
         public Collider collider;
         public UnityEvent onInteract;
     }
-
-	public enum ObjectOrientation
-	{
-		Y_up,
-		Z_up
-	}
-
-	public ObjectOrientation orientation = ObjectOrientation.Y_up;
-
+        
 	public float _faceDistance = 0.25f;
     private float _dragSpeed = 5f;
     private float m_acceleration = 10f;
@@ -44,7 +36,6 @@ public class LookInDetailInteraction : IInteractableObject
 
     private Animator m_animator;
     private bool m_horizontalDrag = false;
-    //private bool m_isDragging = false;
 
 	void Awake()
 	{
@@ -142,9 +133,6 @@ public class LookInDetailInteraction : IInteractableObject
 
 			transform.LookAt(fpCamTransform);
 
-			if( orientation == ObjectOrientation.Z_up )
-				transform.Rotate(new Vector3(90f, 0f, 0f));
-
 			if( _collider != null )
 				_collider.enabled = false;
 
@@ -223,7 +211,7 @@ public class LookInDetailInteraction : IInteractableObject
         if(m_horizontalDrag)
             m_targetVelocity.x =  -data.delta.x * _dragSpeed;
         else
-            m_targetVelocity.y = -data.delta.y * _dragSpeed;
+            m_targetVelocity.y = data.delta.y * _dragSpeed;
     }
 
     private void OnComponentDragEnd(PointerEventData data)
