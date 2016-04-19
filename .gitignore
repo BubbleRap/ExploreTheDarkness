@@ -1,5 +1,12 @@
 # Unity generated #
 # =============== #
+
+# Folders:
+# Ignore: name DOT meta
+*.meta
+# Include: name DOT extension DOT meta
+!*.*.meta
+
 Temp/
 Obj/
 UnityGenerated/
@@ -32,27 +39,17 @@ Icon?
 ehthumbs.db
 Thumbs.db
 
-
-UnityProject/Assets/Modules_room/test/Materials/unnamed.mat
-UnityProject/Assets/Visuals/Objects/Materials/StylizedGuitar_Diffuse.mat
-
-UnityProject/Assets/Visuals/Objects/Materials/Ã¡Ã¥Ã«Ã®Ã¥ Ã­Ã¥Ã¯Ã°.mat
-UnityProject/Assets/Visuals/Objects/Materials/Ã¡Ã¥Ã«Ã®Ã¥ Ã­Ã¥Ã¯Ã°.mat.meta
-UnityProject/Assets/Visuals/Objects/Materials/Ã±Ã²Ã¥ÃªÃ«Ã® Ã¬Ã Ã²Ã®Ã¢Ã®Ã¥ Ã¯.mat
-UnityProject/Assets/Visuals/Objects/Materials/Ã±Ã²Ã¥ÃªÃ«Ã® Ã¬Ã Ã²Ã®Ã¢Ã®Ã¥ Ã¯.mat.meta
-UnityProject/Assets/Visuals/Objects/Materials/Ã¡Ã¥Ã«Ã®Ã¥ Ã­Ã¥Ã¯Ã°.mat
-UnityProject/Assets/Visuals/Objects/Materials/Ã¡Ã¥Ã«Ã®Ã¥ Ã­Ã¥Ã¯Ã°.mat.meta
-UnityProject/Assets/Visuals/Objects/Materials/Ã±Ã²Ã¥ÃªÃ«Ã® Ã¬Ã Ã²Ã®Ã¢Ã®Ã¥ Ã¯.mat
-UnityProject/Assets/Visuals/Objects/Materials/Ã±Ã²Ã¥ÃªÃ«Ã® Ã¬Ã Ã²Ã®Ã¢Ã®Ã¥ Ã¯.mat.meta
 UnityProject/Assets/RAIN.meta
 UnityProject/Assets/RAIN/RainAssets.meta
-UnityProject/Assets/Standard Assets/Toon Shading.meta
 UnityProject/Assets/RAIN/Editor/RAINProjectState.asset
+UnityProject/Assets/RAIN/Editor/RAINProjectState.asset.meta
 UnityProject/Assets/RAIN/Editor/RAINSettings.asset
+UnityProject/Assets/RAIN/Editor/RAINSettings.asset.meta
 UnityProject/Assets/RAIN/Editor/RAINSkin.asset
 UnityProject/Assets/RAIN/Editor/RAINSkin.asset.meta
+UnityProject/Assets/RAIN/Editor/RAINEditor.dll
 UnityProject/Assets/RAIN/Editor/RAINEditor.dll.meta
+UnityProject/Assets/RAIN/Editor/RAINMetaformEditor.dll
 UnityProject/Assets/RAIN/Editor/RAINMetaformEditor.dll.meta
 UnityProject/Assets/AI/Cache/BTEditorWindowState.asset
 UnityProject/Assets/AI/Cache/BTEditorWindowState.asset.meta
-Cache.meta
