@@ -580,8 +580,8 @@ MonoBehaviour:
   - index:
       index: 6
     Text: "\u201CHello, what is your emergency?\u201D a woman says\r\n\n\u201CThe
-      car crashed... My mom and dad, \r\nthere is blood in his mouth.\u201D You say\r\n\n\u201CWhere
-      are you my dear?\u201D She says\r\nYou look around but there are just trees."
+      car crashed... My mom and dad, \r\nthere is blood in his mouth.\u201D You say\n\n\u201CWhere
+      are you my dear?\u201D She says\r\n\nYou look around but there are just trees."
     options:
     - Text: You hear seagulls in the distance
       gotoID: 7
@@ -705,7 +705,7 @@ MonoBehaviour:
     onDialogActivated:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 681903992}
+        - m_Target: {fileID: 0}
           m_MethodName: FadeToSnapshot
           m_Mode: 1
           m_Arguments:
@@ -803,10 +803,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogManager: {fileID: 291847568}
   endImage: {fileID: 2066576952}
-  fadeInImageBegin: 4
-  fadeInTime: 3
-  imageStayTime: 10
-  fadeOutTime: 3
+  fadeInImageBegin: 8
+  fadeInTime: 1
+  imageStayTime: 8
+  fadeOutTime: 4
+  fadeInOnTrail: 1
+  EndSong: {fileID: 681903991}
 --- !u!1 &350879512
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,7 +1224,7 @@ MonoBehaviour:
   m_maxValue: -20
   m_paramName: part1Fade
   m_snapshotName: PartOne
-  m_time: 8
+  m_time: 12
   m_audioMixer: {fileID: 24100000, guid: dd3106cbd7c1e004f8be40f2aacc073c, type: 2}
   m_audioSource: {fileID: 650161890}
 --- !u!1 &657241748
@@ -1260,15 +1262,15 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 657241748}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 522f0b4dc62644c098273da732a24cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogManager: {fileID: 291847568}
-  startAtDialogNumber: 0
-  secondsToStart: 4
-  endAtDialogNumber: 17
+  startAtDialogNumber: 18
+  secondsToStart: 7
+  endAtDialogNumber: 19
   trailSource: {fileID: 0}
 --- !u!82 &657241751
 AudioSource:
@@ -1278,9 +1280,9 @@ AudioSource:
   m_GameObject: {fileID: 657241748}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24386142, guid: dd3106cbd7c1e004f8be40f2aacc073c,
+  OutputAudioMixerGroup: {fileID: 24374694, guid: dd3106cbd7c1e004f8be40f2aacc073c,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 1d80182e006ff6144893c40c0d8a3615, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 030c9ac1fb09f634ca271f27ae252d1b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1452,7 +1454,6 @@ GameObject:
   - 4: {fileID: 681903989}
   - 82: {fileID: 681903991}
   - 114: {fileID: 681903990}
-  - 114: {fileID: 681903992}
   m_Layer: 0
   m_Name: part 2 loop
   m_TagString: Untagged
@@ -1485,8 +1486,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogManager: {fileID: 291847568}
   startAtDialogNumber: 12
-  secondsToStart: 4
-  endAtDialogNumber: 14
+  secondsToStart: 0
+  endAtDialogNumber: 15
   trailSource: {fileID: 1174344851}
 --- !u!82 &681903991
 AudioSource:
@@ -1563,26 +1564,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &681903992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 681903988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66af249acd5d04e6795c831b72e8f9da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_mixingType: 2
-  m_volume: 1
-  m_minValue: -20
-  m_maxValue: 80
-  m_paramName: My Exposed Parameter
-  m_snapshotName: PartTwo
-  m_time: 8
-  m_audioMixer: {fileID: 24100000, guid: dd3106cbd7c1e004f8be40f2aacc073c, type: 2}
-  m_audioSource: {fileID: 0}
 --- !u!1 &725039030
 GameObject:
   m_ObjectHideFlags: 0
@@ -1847,11 +1828,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_mixingType: 1
   m_volume: 1
-  m_minValue: -80
+  m_minValue: -40
   m_maxValue: -20
   m_paramName: part1Fade
   m_snapshotName: Part 1
-  m_time: 4
+  m_time: 18
   m_audioMixer: {fileID: 24100000, guid: dd3106cbd7c1e004f8be40f2aacc073c, type: 2}
   m_audioSource: {fileID: 650161890}
 --- !u!1 &978827471
@@ -2414,7 +2395,7 @@ AudioSource:
   m_GameObject: {fileID: 1174344849}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24305152, guid: dd3106cbd7c1e004f8be40f2aacc073c,
+  OutputAudioMixerGroup: {fileID: 24386142, guid: dd3106cbd7c1e004f8be40f2aacc073c,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 987d3372c6f082d458695963cb45fcaa, type: 3}
   m_PlayOnAwake: 0
