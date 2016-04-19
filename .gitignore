@@ -7,6 +7,9 @@
 # Include: name DOT extension DOT meta
 !*.*.meta
 
+*.fbm
+*.fbm.meta
+
 Temp/
 Obj/
 UnityGenerated/
