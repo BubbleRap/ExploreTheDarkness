@@ -323,4 +323,9 @@ public class DialogChoices : MonoBehaviour {
 	{
 		return isEnd; 
 	}
+
+	public void setNextID()
+	{
+		ID++;
+	}
 }

@@ -14,6 +14,9 @@ public class EndDialog : MonoBehaviour {
 	public float fadeOutTime = 1.0f;
 	private bool isActive = false;
 
+	public bool fadeInOnTrail = false;
+	public AudioSource EndSong;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -23,9 +26,21 @@ public class EndDialog : MonoBehaviour {
 	void Update () {
 		if(dialogManager.getIsEnd() && !isActive)
 		{
-			endImage.enabled = true;
-			StartCoroutine(FadeInBg(endImage,fadeInImageBegin,fadeInTime));
-			isActive = true;
+			if(EndSong != null && fadeInOnTrail)
+			{
+				if(!EndSong.loop && !EndSong.isPlaying)
+				{
+					endImage.enabled = true;
+					StartCoroutine(FadeInBg(endImage,fadeInImageBegin,fadeInTime));
+					isActive = true;
+				}
+			}
+			else if(!fadeInOnTrail)
+			{
+				endImage.enabled = true;
+				StartCoroutine(FadeInBg(endImage,fadeInImageBegin,fadeInTime));
+				isActive = true;
+			}
 		}
 	}
 
@@ -44,6 +59,8 @@ public class EndDialog : MonoBehaviour {
 
 			yield return null;
 		}
+
+		dialogManager.setNextID();
 
 		StartCoroutine(FadeOutBg(endImage,imageStayTime,fadeOutTime));
 	}
