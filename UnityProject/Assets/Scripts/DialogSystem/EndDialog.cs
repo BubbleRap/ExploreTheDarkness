@@ -16,6 +16,7 @@ public class EndDialog : MonoBehaviour {
 
 	public bool fadeInOnTrail = false;
 	public AudioSource EndSong;
+	public AudioSource EndTail;
 
 	// Use this for initialization
 	void Start () {
@@ -26,9 +27,9 @@ public class EndDialog : MonoBehaviour {
 	void Update () {
 		if(dialogManager.getIsEnd() && !isActive)
 		{
-			if(EndSong != null && fadeInOnTrail)
+			if(fadeInOnTrail)
 			{
-				if(!EndSong.loop && !EndSong.isPlaying)
+				if(!EndSong.isPlaying && !EndTail.isPlaying)
 				{
 					dialogManager.setNextID();
 					endImage.enabled = true;
