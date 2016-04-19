@@ -23,10 +23,25 @@ public class DoorInteraction : IInteractableObject
 
     public override bool Activate()
     {
-        if (m_interactingBehaviour == null)
-            return false;
+		interactionIsActive = !interactionIsActive;
 
-        interactionIsActive = !interactionIsActive;
+		if (m_interactingBehaviour == null)
+		{
+			if(interactionIsActive)
+			{
+				ActionsToDisplay = m_actionOnOpen;
+				//if(openOut)
+				//    m_animator.SetTrigger(m_openOutTrigger);
+				//else
+				m_animator.SetTrigger(m_openInTrigger);
+			}
+			else
+			{
+				ActionsToDisplay = m_actionOnClosed;
+				m_animator.SetTrigger(m_closeTrigger);
+			}
+			return false;
+		}
 
         // calculate from which side the player is standing
         Vector3 doorRightVector = transform.right;
