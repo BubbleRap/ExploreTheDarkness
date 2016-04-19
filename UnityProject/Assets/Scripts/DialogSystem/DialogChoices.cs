@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class DialogChoices : MonoBehaviour {
 
 	private int ID = -1;
+	private bool isEnd = false;
 
 	public float fadeTimeBigText = 0.8f;
 	public float fadeTimeOption = 0.8f;
@@ -50,7 +51,7 @@ public class DialogChoices : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(ID <= Dialog.Count && isFaded && isFadedBG && ID > -1)
+		if(ID < Dialog.Count && isFaded && isFadedBG && ID > -1)
 		{
 			if(Description.text != Dialog[ID].Text)
 			{
@@ -113,7 +114,7 @@ public class DialogChoices : MonoBehaviour {
 
 	public void dialogNext(int OptionNumber)
 	{
-		if(Dialog[ID].options[OptionNumber].gotoID <= Dialog.Count && Dialog[ID].options[OptionNumber].gotoID != 0)
+		if(Dialog[ID].options[OptionNumber].gotoID < Dialog.Count)
 		{
 			isFaded = false;
 			StartCoroutine(FadeOut(Description,1));
@@ -154,10 +155,12 @@ public class DialogChoices : MonoBehaviour {
 			}
 			*/
 		}
-		else if(Dialog[ID].options[OptionNumber].gotoID == 0)
+		else if(Dialog[ID].options[OptionNumber].gotoID >= Dialog.Count)
 		{
+			isEnd = true;
 			fadeImage.enabled = true;
-			StartCoroutine(FadeToNewScene(fadeImage,fadeInBlack));
+			ID = Dialog[ID].options[OptionNumber].gotoID;
+			StartCoroutine(FadeInBg(fadeImage,fadeInBlack));
 		}
 	}
 
@@ -225,8 +228,11 @@ public class DialogChoices : MonoBehaviour {
 			yield return null;
 		}
 
-		changeBackground(settings[settingNumber].background);
-		StartCoroutine(FadeOutBg(fadeImage,fadeOutBlack));
+		if(!isEnd)
+		{
+			changeBackground(settings[settingNumber].background);
+			StartCoroutine(FadeOutBg(fadeImage,fadeOutBlack));
+		}
 	}
 
 	IEnumerator FadeOutBg (Image fade, float time)
@@ -311,5 +317,15 @@ public class DialogChoices : MonoBehaviour {
 
 		optionText1_multiple.GetComponent<Text>().text = "";
 		optionText2_multiple.GetComponent<Text>().text = "";
+	}
+
+	public bool getIsEnd()
+	{
+		return isEnd; 
+	}
+
+	public void setNextID()
+	{
+		ID++;
 	}
 }

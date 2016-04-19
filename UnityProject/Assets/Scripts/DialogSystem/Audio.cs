@@ -14,6 +14,8 @@ public class Audio : MonoBehaviour {
 	private bool activateEnd = false;
 	private bool activateTrail = false;
 
+	private Coroutine coroutineSound;
+
 	public AudioSource trailSource;
 
 	// Use this for initialization
@@ -23,10 +25,15 @@ public class Audio : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(dialogManager.getID() >= startAtDialogNumber && dialogManager.getID() <= endAtDialogNumber && !audioSource.isPlaying && !activate)
+		if(dialogManager.getID() >= startAtDialogNumber && dialogManager.getID() < endAtDialogNumber && !audioSource.isPlaying && !activate)
 		{
-			StartCoroutine(WaitAndPlay(secondsToStart));
+			coroutineSound = StartCoroutine(WaitAndPlay(secondsToStart));
 			activate = true;
+		}
+
+		if(dialogManager.getID() >= endAtDialogNumber && activate)
+		{
+			StopCoroutine(coroutineSound);
 		}
 
 		if(dialogManager.getID() >= endAtDialogNumber && audioSource.isPlaying && !activateEnd)

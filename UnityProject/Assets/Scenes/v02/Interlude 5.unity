@@ -150,6 +150,7 @@ MonoBehaviour:
   fadeTimeOption: 0.8
   fadeInBlack: 1
   fadeOutBlack: 1
+  beginingDelay: 8
   delayBetweenDialogs: 0.4
   settings:
   - changeAtID: 6
@@ -169,6 +170,11 @@ MonoBehaviour:
     options:
     - Text: You turn it off
       gotoID: 1
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 1
     Text: "Your parents are in the other room with many people you don\u2019t know.\n
@@ -176,6 +182,22 @@ MonoBehaviour:
     options:
     - Text: You get up to look for your parents
       gotoID: 2
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1532531124}
+          m_MethodName: FadeToSnapshot
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 2
     Text: You open the door and see your parents sitting at the table laughing.
@@ -184,6 +206,11 @@ MonoBehaviour:
       gotoID: 3
     - Text: You walk towards them
       gotoID: 4
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 3
     Text: "You go back to watch the cartoon.\n\nAs you sit down the door opens and
@@ -192,12 +219,22 @@ MonoBehaviour:
     options:
     - Text: His breath smells of alcohol
       gotoID: 5
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 4
     Text: Your dad is bragging and people are looking but he does not notice.
     options:
     - Text: 'You pull his sleeve '
       gotoID: 7
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 5
     Text: "\u201CDad, I want to go home\u201D you say\n\n\u201CThey have different
@@ -206,6 +243,11 @@ MonoBehaviour:
     options:
     - Text: You walk upstairs
       gotoID: 6
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 6
     Text: "It is dark upstairs, and you don\u2019t like it. \n\nYou see the light
@@ -214,6 +256,11 @@ MonoBehaviour:
     options:
     - Text: You cry out
       gotoID: 9
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 7
     Text: "Your dad picks you up and swings you around:\n\n\u201COh there is my big
@@ -221,6 +268,11 @@ MonoBehaviour:
     options:
     - Text: His breath smells of alcohol
       gotoID: 8
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 8
     Text: "\u201CI want to go home\u201D You say\n\nYour mother smiles at you and
@@ -228,18 +280,33 @@ MonoBehaviour:
     options:
     - Text: You insist that you go home
       gotoID: 10
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 9
     Text: Your parents pick you up and carry you out to the car.
     options:
     - Text: You close your eyes
       gotoID: 10
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 10
     Text: You are in the car. Your dad is driving.
     options:
     - Text: 'The street lights flash by '
       gotoID: 11
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 11
     Text: "The lights illuminate your mother\u2019s hair.\n\nYour dad turns on the
@@ -247,6 +314,11 @@ MonoBehaviour:
     options:
     - Text: 'You leave the main road and enter the woods '
       gotoID: 12
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 12
     Text: 'Your dad is on the concrete.
@@ -255,6 +327,11 @@ MonoBehaviour:
     options:
     - Text: There is blood
       gotoID: 13
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 13
     Text: "You are at a police station. \n\nYour parents have been at the hospital
@@ -263,6 +340,11 @@ MonoBehaviour:
     options:
     - Text: You shake your head
       gotoID: 14
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 14
     Text: "Her hair is in a tight bun, and she keeps clicking her pen. \n\n\u201CI
@@ -273,6 +355,11 @@ MonoBehaviour:
       gotoID: 15
     - Text: 'You do nothing '
       gotoID: 15
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 15
     Text: '"Who was driving the car 3 nights ago, when the accident happened?" The
@@ -282,12 +369,22 @@ MonoBehaviour:
       gotoID: 17
     - Text: '"My Dad" You say '
       gotoID: 16
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 16
     Text: "\u201CWhere were you earlier in the evening?\u201D She asks"
     options:
     - Text: "\u201CAt a party\u201D you answer"
       gotoID: 18
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 17
     Text: "The officer pauses. \n\n\u201CI know you are scared, but you can tell me
@@ -295,6 +392,11 @@ MonoBehaviour:
     options:
     - Text: 'You look down at the table '
       gotoID: 16
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 18
     Text: "\u201COk, that\u2019s very good Silja. Did people have fun at the party\u201D
@@ -304,6 +406,11 @@ MonoBehaviour:
       gotoID: 19
     - Text: 'You shake your head '
       gotoID: 20
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 19
     Text: '"Was there alcohol at the party?" She asks'
@@ -312,6 +419,11 @@ MonoBehaviour:
       gotoID: 21
     - Text: You nod
       gotoID: 21
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 20
     Text: "She raises her brows and looks at you.\n\n\u201CDid your parents have fun
@@ -321,6 +433,11 @@ MonoBehaviour:
       gotoID: 19
     - Text: You say nothing
       gotoID: 19
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 21
     Text: '"Did your father drink anything at the party?" The officer asks'
@@ -329,6 +446,11 @@ MonoBehaviour:
       gotoID: 22
     - Text: You nod
       gotoID: 0
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   - index:
       index: 22
     Text: "\u201CIts ok, you can tell me\u201D She says \n\u201CIt is ok if he did,
@@ -339,6 +461,11 @@ MonoBehaviour:
       gotoID: 0
     - Text: No
       gotoID: 0
+    onDialogActivated:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   Description: {fileID: 1703661309}
   Choice: {fileID: 2117197186}
   MultipleChoice: {fileID: 250261857}
@@ -356,6 +483,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!1 &338783989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 338783990}
+  - 114: {fileID: 338783991}
+  m_Layer: 0
+  m_Name: Fade out background music
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &338783990
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 338783989}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1532531123}
+  m_RootOrder: 0
+--- !u!114 &338783991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 338783989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66af249acd5d04e6795c831b72e8f9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_mixingType: 1
+  m_volume: 1
+  m_minValue: -40
+  m_maxValue: 0
+  m_paramName: bakgroundVol
+  m_snapshotName: My Snapshot
+  m_time: 22
+  m_audioMixer: {fileID: 24100000, guid: cd9bd58eb43b08c4994dcc7e480eb168, type: 2}
+  m_audioSource: {fileID: 1532531126}
 --- !u!1 &350879512
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,6 +688,7 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -538,6 +714,63 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &928656289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 928656290}
+  m_Layer: 0
+  m_Name: Part 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &928656290
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 928656289}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 935484110}
+  m_RootOrder: 2
+--- !u!1 &935484109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 935484110}
+  m_Layer: 0
+  m_Name: '!SOUND'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &935484110
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 935484109}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 925.8576, y: 456.98813, z: 44.69892}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2120854567}
+  - {fileID: 1476436460}
+  - {fileID: 928656290}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
 --- !u!1 &978827471
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,6 +1191,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!1 &1476436459
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1476436460}
+  m_Layer: 0
+  m_Name: Part 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1476436460
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1476436459}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 935484110}
+  m_RootOrder: 1
 --- !u!1 &1530367122
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,6 +1285,148 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1530367122}
+--- !u!1 &1532531122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1532531123}
+  - 82: {fileID: 1532531126}
+  - 114: {fileID: 1532531125}
+  - 114: {fileID: 1532531124}
+  m_Layer: 0
+  m_Name: Music background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1532531123
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1532531122}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 338783990}
+  m_Father: {fileID: 2120854567}
+  m_RootOrder: 0
+--- !u!114 &1532531124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1532531122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66af249acd5d04e6795c831b72e8f9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_mixingType: 2
+  m_volume: 1
+  m_minValue: -60
+  m_maxValue: 0
+  m_paramName: backgroundVol
+  m_snapshotName: background
+  m_time: 24
+  m_audioMixer: {fileID: 24100000, guid: cd9bd58eb43b08c4994dcc7e480eb168, type: 2}
+  m_audioSource: {fileID: 1532531126}
+--- !u!114 &1532531125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1532531122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 522f0b4dc62644c098273da732a24cbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogManager: {fileID: 291847568}
+  startAtDialogNumber: 0
+  secondsToStart: 0
+  endAtDialogNumber: 10
+  trailSource: {fileID: 0}
+--- !u!82 &1532531126
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1532531122}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24374784, guid: cd9bd58eb43b08c4994dcc7e480eb168,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: a1b84a26e4ad80147aafdf755ba939e5, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &1561067013
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,6 +1642,126 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!1 &1996272654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1996272655}
+  - 82: {fileID: 1996272657}
+  - 114: {fileID: 1996272656}
+  m_Layer: 0
+  m_Name: Main loop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1996272655
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1996272654}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2120854567}
+  m_RootOrder: 1
+--- !u!114 &1996272656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1996272654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 522f0b4dc62644c098273da732a24cbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogManager: {fileID: 291847568}
+  startAtDialogNumber: 10
+  secondsToStart: 0
+  endAtDialogNumber: 20
+  trailSource: {fileID: 0}
+--- !u!82 &1996272657
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1996272654}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300001, guid: cd9bd58eb43b08c4994dcc7e480eb168,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 418d84dca9d8ea542b5163bffffee8a3, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &2001651541
 GameObject:
   m_ObjectHideFlags: 0
@@ -2804,3 +3326,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -10}
   m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2120854566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2120854567}
+  m_Layer: 0
+  m_Name: Part 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2120854567
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2120854566}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1532531123}
+  - {fileID: 1996272655}
+  m_Father: {fileID: 935484110}
+  m_RootOrder: 0
