@@ -95,7 +95,7 @@ public class SubtitleManager : MonoBehaviour {
 
 	Dictionary<float, string> darknessSubtitles = new Dictionary<float, string>()
 	{
-		{ 1f, "It's too dark."},
+		{ 1f, "It's so dark."},
 		{ 3f, ""},
 	};
 
