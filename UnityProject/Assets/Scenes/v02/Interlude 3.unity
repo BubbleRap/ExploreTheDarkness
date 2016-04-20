@@ -496,7 +496,7 @@ MonoBehaviour:
     Text: Your dad is on the concrete.
     options:
     - Text: There is blood
-      gotoID: 1
+      gotoID: 14
     onDialogActivated:
       m_PersistentCalls:
         m_Calls: []
@@ -803,12 +803,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogManager: {fileID: 291847568}
   endImage: {fileID: 2066576952}
-  fadeInImageBegin: 8
+  fadeInImageBegin: 1
   fadeInTime: 1
   imageStayTime: 8
   fadeOutTime: 4
   fadeInOnTrail: 1
   EndSong: {fileID: 681903991}
+  EndTail: {fileID: 1174344851}
 --- !u!1 &350879512
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,14 +1263,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 657241748}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 522f0b4dc62644c098273da732a24cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogManager: {fileID: 291847568}
   startAtDialogNumber: 18
-  secondsToStart: 7
+  secondsToStart: 0
   endAtDialogNumber: 19
   trailSource: {fileID: 0}
 --- !u!82 &657241751
