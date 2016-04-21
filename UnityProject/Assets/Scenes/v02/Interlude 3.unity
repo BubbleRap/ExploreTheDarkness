@@ -1488,7 +1488,7 @@ MonoBehaviour:
   dialogManager: {fileID: 291847568}
   startAtDialogNumber: 12
   secondsToStart: 0
-  endAtDialogNumber: 15
+  endAtDialogNumber: 14
   trailSource: {fileID: 1174344851}
 --- !u!82 &681903991
 AudioSource:
