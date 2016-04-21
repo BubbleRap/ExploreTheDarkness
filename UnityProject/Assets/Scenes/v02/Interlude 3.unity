@@ -496,7 +496,7 @@ MonoBehaviour:
     Text: Your dad is on the concrete.
     options:
     - Text: There is blood
-      gotoID: 14
+      gotoID: 1
     onDialogActivated:
       m_PersistentCalls:
         m_Calls: []
