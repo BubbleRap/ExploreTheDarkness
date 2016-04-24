@@ -110,7 +110,7 @@ public class CameraTransitioner : MonoBehaviour {
         FPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
         FPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
 
-        Transition( ThisCamera.transform, FPPCameraTransform, 
+        Transition( ThisCamera.transform, TPPCameraTransform, 
             "TurnOffFpp", "TurnOnFpp", 
             gameObject, gameObject );
     }
