@@ -15,12 +15,23 @@ public class LookInDetailInteraction : IInteractableObject
         public Collider collider;
         public UnityEvent onInteract;
     }
+
+    [Serializable]
+    public class ObjectMaterialContainer
+    {
+        public Renderer renderer;
+        public Material materialDefault;
+        public Material materialInteracting;
+    }
+       
         
 	public float _faceDistance = 0.25f;
     private float _dragSpeed = 5f;
     private float m_acceleration = 10f;
 
     public InteractionComponent[] m_interactiveComponents;
+    public ObjectMaterialContainer[] m_materialsToChange;
+
 
 	private SiljaBehaviour _siljaBeh;
 
@@ -95,7 +106,7 @@ public class LookInDetailInteraction : IInteractableObject
 			return false;
 
 		interactionIsActive = !interactionIsActive;
-
+       
 
 		if( interactionIsActive )
 		{
@@ -136,6 +147,10 @@ public class LookInDetailInteraction : IInteractableObject
 			if( _collider != null )
 				_collider.enabled = false;
 
+            // change materials
+            for(int i = 0; i < m_materialsToChange.Length; i++)
+                m_materialsToChange[i].renderer.sharedMaterial = m_materialsToChange[i].materialInteracting;
+
 		});
 		
 		
@@ -158,6 +173,10 @@ public class LookInDetailInteraction : IInteractableObject
             if( _collider != null )
                 _collider.enabled = true;
         };
+
+        // change materials
+        for(int i = 0; i < m_materialsToChange.Length; i++)
+            m_materialsToChange[i].renderer.sharedMaterial = m_materialsToChange[i].materialDefault;
 
         if (LightStatesMachine.Instance.IsLightOn())
             transitioner.AddTPPCompleteAction(finishAction);
