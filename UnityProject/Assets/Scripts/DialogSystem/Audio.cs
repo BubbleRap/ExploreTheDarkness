@@ -41,7 +41,10 @@ public class Audio : MonoBehaviour {
 			audioSource.loop = false;
 			activateEnd = true;
 
-            trailSource.PlayScheduled( AudioSettings.dspTime + audioSource.clip.length - audioSource.time);
+			if(trailSource != null)
+			{
+            	trailSource.PlayScheduled( AudioSettings.dspTime + audioSource.clip.length - audioSource.time);
+			}
 		}
 
 		//if(dialogManager.getID() >= endAtDialogNumber && !audioSource.isPlaying && activateEnd && !activateTrail)
