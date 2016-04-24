@@ -28,6 +28,7 @@ AudioMixerController:
     - 29c25eca602ac5a4292eb5031becf559
     - 2179c77fec626dc4bb9710fe51908d7b
     - 69569f3d747d5db4b8bce5d6bc140533
+    - 0916f5a089f36a94fa763392020f6b5a
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500003}
@@ -45,6 +46,7 @@ AudioMixerGroupController:
   - {fileID: 24386176}
   - {fileID: 24358406}
   - {fileID: 24394344}
+  - {fileID: 24334938}
   m_Volume: 24e19c9827f98374bbe4773c51cbad58
   m_Pitch: 5aefce78f2196954b8cd56a48308c83f
   m_Effects:
@@ -67,6 +69,23 @@ AudioMixerGroupController:
   m_Effects:
   - {fileID: 24418252}
   - {fileID: 24428786}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &24334938
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Light bulb flashing
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 0916f5a089f36a94fa763392020f6b5a
+  m_Children: []
+  m_Volume: 65912d5abc63abf4ebb53c85c6104286
+  m_Pitch: a943467e3e4120143bcff06fc3700949
+  m_Effects:
+  - {fileID: 24484688}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -279,6 +298,19 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &24484688
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 7f3de01707785574dbf272fbe189e6bf
+  m_EffectName: Attenuation
+  m_MixLevel: b5f3dbe9b1af4f64d9f69080a08de233
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &24491122
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -316,6 +348,7 @@ AudioMixerSnapshotController:
     e39f427957b37d74aab512a622042bbe: 3.3000014
     950fadc9328d37a4696d7662aa72ecf3: 0
     23db83e943641a8408b00732d0a83d4c: -10
+    65912d5abc63abf4ebb53c85c6104286: -10.345207
     e317e56a3f785454ebb1bd696b7feaef: 1000
     8496726b68f502343be18cfd969d7afb: 1185
     ce31397b7099fc7489f2bb7128601e31: -4
