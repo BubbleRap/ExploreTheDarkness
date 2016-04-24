@@ -33,6 +33,10 @@ public class DialogChoices : MonoBehaviour {
 	private GameObject optionText1_multiple = null;
 	private GameObject optionText2_multiple = null;
 
+	private Coroutine choice1;
+	private Coroutine choice2;
+	private Coroutine choice3;
+
 	private bool isFaded = true;
 	private bool isFadedBG = true;
 
@@ -75,7 +79,7 @@ public class DialogChoices : MonoBehaviour {
 
 					if(optionText1_single.GetComponent<Text>().text != Dialog[ID].options[0].Text)
 					{
-						StartCoroutine(FadeIn(optionText1_single.GetComponent<Text>(),fadeTimeOption));
+						choice1 = StartCoroutine(FadeIn(optionText1_single.GetComponent<Text>(),fadeTimeOption));
 						optionText1_single.GetComponent<Text>().text = Dialog[ID].options[0].Text;
 					}
 				}
@@ -88,13 +92,13 @@ public class DialogChoices : MonoBehaviour {
 
 					if(optionText1_multiple.GetComponent<Text>().text != Dialog[ID].options[0].Text)
 					{
-						StartCoroutine(FadeIn(optionText1_multiple.GetComponent<Text>(),fadeTimeOption));
+						choice2 = StartCoroutine(FadeIn(optionText1_multiple.GetComponent<Text>(),fadeTimeOption));
 						optionText1_multiple.GetComponent<Text>().text = Dialog[ID].options[0].Text;
 					}
 
 					if(optionText2_multiple.GetComponent<Text>().text != Dialog[ID].options[1].Text)
 					{
-						StartCoroutine(FadeIn(optionText2_multiple.GetComponent<Text>(),fadeTimeOption));
+						choice3 = StartCoroutine(FadeIn(optionText2_multiple.GetComponent<Text>(),fadeTimeOption));
 						optionText2_multiple.GetComponent<Text>().text = Dialog[ID].options[1].Text;
 					}
 				}
@@ -114,9 +118,25 @@ public class DialogChoices : MonoBehaviour {
 
 	public void dialogNext(int OptionNumber)
 	{
+		if(choice1 != null)
+		{
+			StopCoroutine(choice1);
+		}
+
+		if(choice2 != null)
+		{
+			StopCoroutine(choice2);
+		}
+
+		if(choice3 != null)
+		{
+			StopCoroutine(choice3);
+		}
+
 		if(Dialog[ID].options[OptionNumber].gotoID < Dialog.Count)
 		{
 			isFaded = false;
+
 			StartCoroutine(FadeOut(Description,1));
 			StartCoroutine(FadeOut(optionText1_single.GetComponent<Text>(),delayBetweenDialogs));
 			StartCoroutine(FadeOut(optionText1_multiple.GetComponent<Text>(),delayBetweenDialogs));
