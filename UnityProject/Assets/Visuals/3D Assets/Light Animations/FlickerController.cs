@@ -4,8 +4,8 @@ using System.Collections;
 public class FlickerController : MonoBehaviour {
 
 	Renderer thisRenderer;
-	Color emitColorOn;
-	Color emitColorOff;
+	public Color emitColorOn;
+	public Color emitColorOff;
 	public bool activateFlick;
 
 	// Use this for initialization
@@ -13,8 +13,9 @@ public class FlickerController : MonoBehaviour {
 	{
 		thisRenderer = this.gameObject.GetComponent<Renderer>();
 
-		emitColorOn = Color.white; 
-		emitColorOff = Color.black;
+		//emitColorOn = Color.white; 
+		//emitColorOff = Color.black;
+
 
 		thisRenderer.material.SetColor("_EmissionColor", emitColorOn);
 	}

@@ -18,6 +18,7 @@ public class RandomFlicker : MonoBehaviour {
 		while(true)
 		{
 		thisAnimation.Play();
+		this.gameObject.GetComponent<AudioMixerControls> ().PlayAudioSource();
 		randomizer = Random.Range(1.0f, 5.0f);
 		yield return new WaitForSeconds(randomizer);
 		}
