@@ -62,7 +62,9 @@ public class Interactor : MonoBehaviour
 			return;
 
 		// switching to the new interactable object
-		if( currentInteractionObject != interactionObjects[closestIdx] )
+		if(closestIdx < interactionObjects.Count &&
+            closestIdx >= 0 &&
+            currentInteractionObject != interactionObjects[closestIdx] )
 		{
 			currentInteractionObject = interactionObjects[closestIdx];
 		}

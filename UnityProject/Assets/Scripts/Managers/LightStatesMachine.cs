@@ -37,7 +37,7 @@ public class LightStatesMachine : MonoBehaviour {
 
     public bool IsLightOn()
     {
-        return State == stateOn;
+        return State is LightStateOn;
     }
 
     public void ChangeState(AbstractLightState state)
