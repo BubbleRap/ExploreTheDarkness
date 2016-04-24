@@ -9,6 +9,8 @@ public class Interactor : MonoBehaviour
     public bool IsInteracting { get; set; }
     public int CloseInteractionsCount { get {return interactionObjects.Count;} }
 
+    private CameraTransitioner transitioner;
+
     public void OnInteractionEnter( IInteractableObject interactionObject )
 	{
 		if( !interactionObjects.Contains( interactionObject ) )
@@ -69,8 +71,11 @@ public class Interactor : MonoBehaviour
 			currentInteractionObject = interactionObjects[closestIdx];
 		}
 
+        if (transitioner == null)
+            transitioner = Camera.main.GetComponent<CameraTransitioner>();
 
-		if( Input.GetKeyDown(KeyCode.E) )
+		if( Input.GetKeyDown(KeyCode.E) && 
+            transitioner.Mode != CameraTransitioner.CameraMode.Transitioning)
 		{
             IsInteracting = false;
 
