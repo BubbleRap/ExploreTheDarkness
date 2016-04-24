@@ -28,27 +28,31 @@ public class ObjectivesManager : MonoBehaviour
         
 		Objective currentObj = m_objectives[objectiveIdx];
 
-		if( currentObj.m_interactions.Contains( interaction ) )
+		if( currentObj.m_type == Objective.ObjectiveType.Sequentive &&
+            currentObj.m_interactions.Contains(interaction) )
 		{
-			if( currentObj.m_type == Objective.ObjectiveType.Sequentive )
-			{
-				int interactionIdx = currentObj.m_interactions.IndexOf( interaction );
-
-				return interactionIdx == currentObj.interactionIdx;
-			}
+            for (int i=0; i< currentObj.m_interactions.Count; ++i)
+            {
+                if (!currentObj.hasInteracted(i))
+                {
+                    if (currentObj.m_interactions[i] == interaction)
+                        return true;
+                    else return false;
+                }
+            }
 		}
 
 		return true;
 	}
 
-	public void OnInteractionComplete( IInteractableObject interaction, bool state )
+    public void OnInteractionComplete( IInteractableObject interaction, bool state )
 	{
         if(m_objectives.Length == 0)
             return;
         
 		Objective current = m_objectives[objectiveIdx];
 		if( current.m_interactions.Contains( interaction ) )
-		   	current.OnInteractionComplete( state ); 
+		   	current.OnInteractionComplete(interaction, state ); 
 	}
 
 	public void InitializeNextObjective()
@@ -62,8 +66,8 @@ public class Objective
 {
 	public string name;
 
-	[HideInInspector]
-	public int interactionIdx = 0;
+    [HideInInspector]
+    public List<bool> interactionsComplete = new List<bool>();
 
 	public enum ObjectiveState
 	{
@@ -88,14 +92,28 @@ public class Objective
 
 	public UnityEvent m_onObjectiveComplete = new UnityEvent();
 
-	public void OnInteractionComplete( bool state )
+	public void OnInteractionComplete(IInteractableObject interaction, bool state )
 	{
-		if( state )
-			interactionIdx ++;
-		else
-			interactionIdx --;
+        bool allComplete = true;
+        
+        for (int i = 0; i < m_interactions.Count; ++i)
+        {
+            if (m_interactions[i] == interaction)
+            {
+                if (!hasInteracted(i) && state)
+                    interactionsComplete[i] = true;
+                else if (hasInteracted(i) && !state)
+                    interactionsComplete[i] = false;
+            }
+            else if (m_type == Objective.ObjectiveType.Sequentive && state)
+            {
+                return;
+            }
 
-		if( interactionIdx >= m_interactions.Count )
+            allComplete = allComplete && hasInteracted(i);
+        }
+       
+		if( allComplete )
 		{
 			m_state = ObjectiveState.Completed;
 			m_onObjectiveComplete.Invoke();
@@ -105,4 +123,13 @@ public class Objective
 			ObjectivesManager.Instance.InitializeNextObjective();
 		}
 	}
+
+    internal bool hasInteracted(int i)
+    {
+        while (interactionsComplete.Count <= i)
+            interactionsComplete.Add(false);
+
+        return interactionsComplete[i];
+
+    }
 }
