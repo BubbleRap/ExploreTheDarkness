@@ -29,6 +29,8 @@ GameObject:
   - 114: {fileID: 11427426}
   - 54: {fileID: 5468272}
   - 82: {fileID: 8205300}
+  - 114: {fileID: 11466878}
+  - 114: {fileID: 11463958}
   m_Layer: 0
   m_Name: Discman_main
   m_TagString: Untagged
@@ -208,7 +210,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 161436}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
+  m_LocalRotation: {x: 0.34974855, y: -0.000000014357636, z: 0.000000050239752, w: 0.93684363}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -228,7 +230,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 141046}
-  m_LocalRotation: {x: -0.5413714, y: -0.45488125, z: -0.45488146, w: 0.54137135}
+  m_LocalRotation: {x: -0.26033112, y: -0.60496837, z: -0.21874045, w: 0.7199956}
   m_LocalPosition: {x: 12.888363, y: 2.8091562, z: 3.1291075}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
@@ -634,8 +636,9 @@ AudioSource:
   m_GameObject: {fileID: 141046}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3e1589010aaef4da597b2ba638643802, type: 3}
+  OutputAudioMixerGroup: {fileID: 24358406, guid: fdf708fc18281004eb72d452eae1c58d,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: a22a4910a9a1a5647a2452e635210149, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -754,7 +757,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  orientation: 0
   _faceDistance: 0.5
   m_interactiveComponents:
   - collider: {fileID: 6467466}
@@ -860,6 +862,100 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
+--- !u!114 &11463958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66af249acd5d04e6795c831b72e8f9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_mixingType: 1
+  m_volume: 1
+  m_minValue: -80
+  m_maxValue: -10
+  m_paramName: discmanVol
+  m_snapshotName: My Snapshot
+  m_time: 0
+  m_audioMixer: {fileID: 24100000, guid: fdf708fc18281004eb72d452eae1c58d, type: 2}
+  m_audioSource: {fileID: 8205300}
+--- !u!114 &11466878
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51c73ac33d9347d1a1b152899436752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActiveWhen: 0
+  disableOnActive: 1
+  TextToDisplay: Discman
+  ActionsToDisplay: Inspect
+  m_onInteractionActivated:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  m_onInteractionActivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: FadeToSnapshot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11463958}
+        m_MethodName: FadeInAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  m_onInteractionDisactivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: FadeToSnapshot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11463958}
+        m_MethodName: FadeOutAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!135 &13528088
 SphereCollider:
   m_ObjectHideFlags: 1
