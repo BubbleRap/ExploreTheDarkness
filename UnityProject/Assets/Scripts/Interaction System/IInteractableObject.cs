@@ -67,7 +67,8 @@ public class IInteractableObject : MonoBehaviour
 
     internal bool isVisible()
     {
-        return interactionIsActive ||
+        return interactionIsActive || 
+            LightStatesMachine.Instance.State is LightStateOff ||
             (buttonPrompt.gameObject.activeInHierarchy &&
             buttonPrompt.isVisible);
     }
@@ -104,7 +105,7 @@ public class IInteractableObject : MonoBehaviour
         if(isEligable)
         {
             // close object
-            if( IsCharCloserThan(2f) && IsVisibleWithin(3f * m_cameraRelativePosition.magnitude))
+            if( IsCharCloserThan(2f) && IsVisibleWithin(4f * Mathf.Sqrt(m_cameraRelativePosition.magnitude)))
             {
                 textToOutput = ActionsToDisplay;
                 closeInteraction = true;
