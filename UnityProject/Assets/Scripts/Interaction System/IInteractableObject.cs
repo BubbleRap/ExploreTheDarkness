@@ -2,6 +2,7 @@
 using System.Collections;
 
 using UnityEngine.Events;
+using System;
 
 public class IInteractableObject : MonoBehaviour 
 {
@@ -63,8 +64,15 @@ public class IInteractableObject : MonoBehaviour
 		if (ActionsToDisplay == "")
 			ActionsToDisplay = gameObject.name;
     }
-	
-	protected void Update()
+
+    internal bool isVisible()
+    {
+        return interactionIsActive ||
+            (buttonPrompt.gameObject.activeInHierarchy &&
+            buttonPrompt.isVisible);
+    }
+
+    protected void Update()
 	{
 		if( interactor == null )
 			interactor = FindObjectOfType(typeof(Interactor)) as Interactor;

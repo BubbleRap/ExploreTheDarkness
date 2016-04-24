@@ -14,6 +14,8 @@ public class ButtonPrompt : MonoBehaviour {
 
     private Renderer cachedRenderer;
 
+    public bool isVisible { get; private set; }
+
     void Awake()
     {
         textMesh = GetComponentInChildren<TextMesh>();
@@ -47,7 +49,11 @@ public class ButtonPrompt : MonoBehaviour {
 		float size = (hudCamera.gameObject.transform.position - transform.position).magnitude ;
 		transform.localScale = new Vector3(size,size,size);
 
-        cachedRenderer.material.color = new Color (1f, 1f, 1f, Mathf.Lerp(cachedRenderer.material.color.a, GetAlpha (),0.1f));
+        float alpha = GetAlpha();
+
+        isVisible = alpha > 0f;
+
+        cachedRenderer.material.color = new Color (1f, 1f, 1f, Mathf.Lerp(cachedRenderer.material.color.a, alpha, 0.1f));
 
 		transform.LookAt(hudCamera.gameObject.transform);
 	}

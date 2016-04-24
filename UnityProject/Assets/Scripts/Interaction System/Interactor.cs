@@ -46,6 +46,9 @@ public class Interactor : MonoBehaviour
 				continue;
 			}
 
+            if (!interactionObjects[i].isVisible())
+                continue;
+
 			Vector3 viewPos = Camera.main.WorldToViewportPoint( interactionObjects[i].transform.position );
 			float distance = Vector2.Distance( viewPos, Vector2.one * 0.5f );
 			if( distance < closestDistToCenter )
