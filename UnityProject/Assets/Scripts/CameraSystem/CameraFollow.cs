@@ -33,7 +33,7 @@ public class CameraFollow : MonoBehaviour
 	
 	[Range(0f, 2f)]
 	public float focusDistance = 0.5f;
-	[Range(0f, 45f)]
+	[Range(0f, 90f)]
 	public float focusAngleOffset = 30f;
 	
 	
