@@ -9,26 +9,22 @@ public class IInteractableObject : MonoBehaviour
 	public enum WorkState
 	{
 		WorksAlways,
-		DarkModeOnly,
-		LightModeOnly,
-		Never
+		Switchable
 	}
 
 	public WorkState ActiveWhen;
 	
     protected bool interactionIsActive = false;
+
 	private Renderer m_renderer;
 	
 	public virtual bool Activate() { return (interactionIsActive = !interactionIsActive); }
 	
 	public bool disableOnActive = true;
 
-    private SiljaBehaviour m_character;
-	private Interactor interactor;
+    public bool isSelected = false;
 
-	//private bool objectIsFar = false;
 	private bool objectIsClose = false;
-	//public float distance = 1f;
 	
 	public string TextToDisplay = "some string";
 	public string ActionsToDisplay = "Look";
@@ -37,27 +33,21 @@ public class IInteractableObject : MonoBehaviour
 
 	public UnityEvent m_onInteractionActivated = new UnityEvent();
 
-    protected CharacterBehaviour m_interactingBehaviour;
-
     private ButtonPrompt buttonPrompt;
 
     protected virtual void Awake()
     {
         GameObject promtGO = Instantiate(Resources.Load<GameObject>("buttonPrompt")) as GameObject;
-        //promtGO.transform.parent = transform;
+
 
         buttonPrompt = promtGO.GetComponent<ButtonPrompt>();
 
         buttonPrompt.SetText ("");
         buttonPrompt.SetConnectedTransform (this.transform);
-
-        //buttonPrompt.gameObject.SetActive(false);
     }
 
     protected void Start()
 	{     
-        m_character = DarknessManager.Instance.m_mainCharacter;
-
 		if (TextToDisplay == "")
 			TextToDisplay = gameObject.name;
 
@@ -75,8 +65,6 @@ public class IInteractableObject : MonoBehaviour
 
     protected void Update()
 	{
-		if( interactor == null )
-			interactor = FindObjectOfType(typeof(Interactor)) as Interactor;
 		if( m_renderer == null )
 			m_renderer = GetComponent<Renderer>();
 
@@ -86,41 +74,21 @@ public class IInteractableObject : MonoBehaviour
             interactionIsActive || ActiveWhen == WorkState.WorksAlways;
 
 		if( ActiveWhen != WorkState.WorksAlways )
-		{
-			if( ActiveWhen == WorkState.Never )
-			{
-				isEligable = false;
-			}
-			else
-			{
-                isEligable = true && 
-                    (  (ActiveWhen == WorkState.DarkModeOnly && !LightStatesMachine.Instance.IsLightOn()) 
-			                            		||(ActiveWhen == WorkState.LightModeOnly && !LightStatesMachine.Instance.IsLightOn()));
-			}
-		}
-		
-        string textToOutput = "";
+            isEligable = true && !LightStatesMachine.Instance.IsLightOn();
+
+        Interactor interactor = DarknessManager.Instance.m_mainCharacter.interactor;
         bool closeInteraction = interactor.IsInteracting  && interactionIsActive;
 
-        if(isEligable)
-        {
-            // close object
-            if( IsCharCloserThan(2f) && IsVisibleWithin(4f * Mathf.Sqrt(m_cameraRelativePosition.magnitude)))
-            {
-                textToOutput = ActionsToDisplay;
-                closeInteraction = true;
-            }
-            // far object
-            else if(IsCharCloserThan(5f) && IsVisibleWithin(90f))
-            {
-                textToOutput = TextToDisplay;
-            }
-        }
+       
+        closeInteraction = isEligable && IsCharCloserThan(1.5f);
+
+
         // use null string for nothing
         bool showText = LightStatesMachine.Instance.IsLightOn() && !IsInteracting;
         if((this as DoorInteraction) != null)
             showText = true;
 
+        string textToOutput = isSelected ? ActionsToDisplay : TextToDisplay;       
         buttonPrompt.SetText (showText ? textToOutput : "");
 
         // interaction logic call
@@ -148,18 +116,6 @@ public class IInteractableObject : MonoBehaviour
 		get { return interactionIsActive;}
 	}
 
-	public bool IsVisibleWithin(float angle)
-	{
-		// normalized angle view, where 1 is the field of view angle
-		float angleFraction = angle / Camera.main.fieldOfView * Camera.main.aspect / 1.78f;
-
-		bool isVisible = m_renderer == null || m_renderer.isVisible;
-		return m_cameraRelativePosition.x < angleFraction * m_cameraRelativePosition.z 
-			&& m_cameraRelativePosition.x > -angleFraction * m_cameraRelativePosition.z
-			&& isVisible;
-			//&& m_cameraRelativePosition.z < 5f;
-	}
-
 	public bool IsCamCloserThan( float dist )
 	{
 		return m_cameraRelativePosition.magnitude < dist;
@@ -167,7 +123,8 @@ public class IInteractableObject : MonoBehaviour
 
     public bool IsCharCloserThan(float dist)
     {
-        return (m_character.transform.position - transform.position).magnitude < dist;
+        SiljaBehaviour character = DarknessManager.Instance.m_mainCharacter;
+        return (character.transform.position - transform.position).magnitude < dist;
     }
 
 	public bool isObjectClose()
@@ -180,16 +137,10 @@ public class IInteractableObject : MonoBehaviour
 		if( objectIsClose == state)
 			return;
 		
+        Interactor interactor = DarknessManager.Instance.m_mainCharacter.interactor;
+
 		if( state )
 		{
-            if(interactor.CloseInteractionsCount > 0)
-			{
-				objectIsClose = !state;
-				return;
-			}
-			
-            //buttonPrompt.SetText (ActionsToDisplay);
-
 			interactor.OnInteractionEnter( this );
 		}
 		else
@@ -205,14 +156,4 @@ public class IInteractableObject : MonoBehaviour
 	{
 		Activate();
 	}
-
-    private void OnTriggerEnter(Collider other)
-    {
-        m_interactingBehaviour = other.gameObject.GetComponent<CharacterBehaviour>();
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        m_interactingBehaviour = null;
-    }
 }

@@ -12,6 +12,7 @@ public class DoorInteraction : IInteractableObject
 
     private Animator m_animator;
     private SphereCollider m_collider;
+    private CharacterBehaviour m_interactingBehaviour;
 
     private new void Awake()
     {
@@ -69,5 +70,15 @@ public class DoorInteraction : IInteractableObject
         }
 
         return false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        m_interactingBehaviour = other.GetComponent<CharacterBehaviour>();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        m_interactingBehaviour = null;
     }
 }

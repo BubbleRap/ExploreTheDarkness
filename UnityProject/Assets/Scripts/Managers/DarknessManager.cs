@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Rename to SceneManager please
+
 public class DarknessManager : MonoBehaviour
 {
     static private DarknessManager s_Instance;

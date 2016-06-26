@@ -95,26 +95,4 @@ public class LightSwitchInteraction : IInteractableObject
         //    m_interactingBehaviour.flshCtrl.ChargeFlashlight();
     
     }
-
-	private void OnTriggerEnter(Collider other)
-	{
-		if( other.tag != "Player" )
-			return;
-
-		m_interactingBehaviour = other.gameObject.GetComponent<SiljaBehaviour>();
-	}
-
-	private void OnTriggerExit(Collider other)
-	{
-		if( other.tag != "Player" )
-			return;
-
-		m_interactingBehaviour = null;
-	}
-
-	private void OnDisable()
-	{
-		m_interactingBehaviour = null;
-	}
-
 }

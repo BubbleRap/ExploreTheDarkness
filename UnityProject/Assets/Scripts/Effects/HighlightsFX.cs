@@ -47,7 +47,7 @@ public class HighlightsFX : MonoBehaviour
 
 	private BlurOptimized m_blur;
 
-	private IInteractableObject[] highlightObjects;
+	//private IInteractableObject[] highlightObjects;
 	private Renderer[] m_occluders = null;
 	
 	private Material m_highlightMaterial;
@@ -68,8 +68,6 @@ public class HighlightsFX : MonoBehaviour
 		m_blur = gameObject.AddComponent<BlurOptimized>();
 		m_blur.blurShader = Shader.Find("Hidden/FastBlur");
 		m_blur.enabled = false;
-
-		highlightObjects = FindObjectsOfType<IInteractableObject>();
 
 		m_RTWidth = (int) (Screen.width / (float) m_resolution);
 		m_RTHeight = (int) (Screen.height / (float) m_resolution);
@@ -110,27 +108,21 @@ public class HighlightsFX : MonoBehaviour
 	
 	private void RenderHighlights( RenderTexture rt)
 	{
-		if( highlightObjects == null )
-			return;
-
 		RenderTargetIdentifier rtid = new RenderTargetIdentifier(rt);
 		m_renderBuffer.SetRenderTarget( rtid );
 		
-		for(int i = 0; i < highlightObjects.Length; i++)
-		{
-			if( highlightObjects[i] == null )
-				continue;
+        IInteractableObject currentObejct = DarknessManager.Instance.m_mainCharacter.interactor.CurrentObject;
 
-			//bool isInCloseFrame = highlightObjects[i].IsVisibleWithin(30f) && highlightObjects[i].IsCamCloserThan(2f);
-			bool isInCloseFrame = highlightObjects[i].isObjectClose();
-				
-			if( !isInCloseFrame || highlightObjects[i].IsInteracting)
-				continue;
-			
-			Renderer[] renderers = highlightObjects[i].GetComponentsInChildren<Renderer>();
-            foreach( Renderer renderer in renderers)			
-			    m_renderBuffer.DrawRenderer( renderer, m_highlightMaterial, 0, (int) m_sortingType );
-		}
+        if( currentObejct == null )
+            return;
+
+        if( currentObejct.IsInteracting)
+            return;
+		
+        Renderer[] renderers = currentObejct.GetComponentsInChildren<Renderer>();
+        foreach( Renderer renderer in renderers)			
+		    m_renderBuffer.DrawRenderer( renderer, m_highlightMaterial, 0, (int) m_sortingType );
+
 
 		RenderTexture.active = rt;
 		Graphics.ExecuteCommandBuffer(m_renderBuffer);

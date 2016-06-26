@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 public class Interactor : MonoBehaviour 
 {	
-    private IInteractableObject currentInteractionObject = null;
+    public IInteractableObject CurrentObject { get; private set; }
+
     private List<IInteractableObject> interactionObjects = new List<IInteractableObject>();
 
     public bool IsInteracting { get; set; }
@@ -22,8 +23,8 @@ public class Interactor : MonoBehaviour
 		if( interactionObjects.Contains( interactionObject ) )
 			interactionObjects.Remove( interactionObject );	
 
-		if( currentInteractionObject == interactionObject )
-			currentInteractionObject = null;
+		if( CurrentObject == interactionObject )
+            DeselectCurrentObject(CurrentObject);
 	}
 
 	void Update () 
@@ -53,7 +54,7 @@ public class Interactor : MonoBehaviour
 
 			Vector3 viewPos = Camera.main.WorldToViewportPoint( interactionObjects[i].transform.position );
 			float distance = Vector2.Distance( viewPos, Vector2.one * 0.5f );
-			if( distance < closestDistToCenter )
+            if( distance < closestDistToCenter )
 			{
 				closestDistToCenter = distance;
 				closestIdx = i;
@@ -64,12 +65,12 @@ public class Interactor : MonoBehaviour
 			return;
 
 		// switching to the new interactable object
-		if(closestIdx < interactionObjects.Count &&
-            closestIdx >= 0 &&
-            currentInteractionObject != interactionObjects[closestIdx] )
+		if(closestIdx < interactionObjects.Count && closestIdx >= 0 
+            && CurrentObject != interactionObjects[closestIdx] )
 		{
-			currentInteractionObject = interactionObjects[closestIdx];
+            SelectCurrentObject(interactionObjects[closestIdx]);
 		}
+            
 
         if (transitioner == null)
             transitioner = Camera.main.GetComponent<CameraTransitioner>();
@@ -79,7 +80,7 @@ public class Interactor : MonoBehaviour
 		{
             IsInteracting = false;
 
-			IInteractableObject[] interactableInterfaces = currentInteractionObject.GetComponents<IInteractableObject>();
+			IInteractableObject[] interactableInterfaces = CurrentObject.GetComponents<IInteractableObject>();
             foreach (IInteractableObject ie in interactableInterfaces)
             {
                 IsInteracting = ie.Activate() || IsInteracting;
@@ -87,5 +88,17 @@ public class Interactor : MonoBehaviour
 			
 		}
 	}
+
+    private void SelectCurrentObject(IInteractableObject obj)
+    {
+        CurrentObject = obj;
+        CurrentObject.isSelected = true;
+    }
+
+    private void DeselectCurrentObject(IInteractableObject obj)
+    {
+        CurrentObject.isSelected = false;
+        CurrentObject = null;
+    }
 
 }
