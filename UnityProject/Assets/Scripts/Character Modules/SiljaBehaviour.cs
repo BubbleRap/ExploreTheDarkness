@@ -114,24 +114,24 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
         UpdateMovementInput();
 
 
-        //if (Input.GetKeyUp(KeyCode.Q)
-        //&& camTransitioner.Mode != CameraTransitioner.CameraMode.Transitioning
-        //&& !interactor.IsInteracting)
-        //{
-        //    if (m_isLookingInFP)
-        //    {
-        //        m_isLookingInFP = false;
-        //        ShiftToThirdPerson();
-        //        EnableFlashlight(false);
-        //    }
-        //    else
-        //    {
-        //        m_isLookingInFP = true;
-        //        ShiftToFirstPerson();
-        //        EnableFlashlight(true);
-        //    }
-        //}
-        //
+        if (Input.GetKeyUp(KeyCode.Q)
+        && camTransitioner.Mode != CameraTransitioner.CameraMode.Transitioning
+        && !interactor.IsInteracting)
+        {
+            if (m_isLookingInFP)
+            {
+                m_isLookingInFP = false;
+                ShiftToThirdPerson();
+                EnableFlashlight(false);
+            }
+            else
+            {
+                m_isLookingInFP = true;
+                ShiftToFirstPerson();
+                EnableFlashlight(true);
+            }
+        }
+        
         //if (Input.GetKeyUp(KeyCode.F) && m_isLookingInFP)
         //{
         //    EnableFlashlight(!flshCtrl.IsEnabled);
