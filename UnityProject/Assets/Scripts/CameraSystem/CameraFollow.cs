@@ -10,15 +10,10 @@ public class CameraFollow : MonoBehaviour
 	public float minDistance = 0.01f;
 	public float maxDistance = 1.15f;
 	
-	[Range(0f, 360f)]
-	public float yaw = 180f;
-	[Range(0f, 360f)]
-	public float pitch = 45f;
-	
-	[Range(0f,1.0f)]
-	public float followingSpeed = 0.05f;
-	[Range(0f,1.0f)]
-	public float orientationSpeed = 0.5f;
+	[Range(-1f, 1f)]
+	public float yaw = 0f;
+	[Range(-1f, 1f)]
+	public float pitch = -0.75f;
 	
 	[Range(0f, 1f)]
 	public float horizontalShakeIntensity = 0.0f;
@@ -42,11 +37,8 @@ public class CameraFollow : MonoBehaviour
 	public float maximumY = 60F;
 	private float rotationY = 0F;
 	
-	// General settings
-	[Range(0f, 10f)]
-	public float verticalSensetivity = 1f;
-	[Range(0f, 10f)]
-	public float horizontalSensetivity = 1f;
+    private float verticalSensetivity = 0.01f;
+    private float horizontalSensetivity = 0.01f;
 
 	public enum CameraControlType
 	{
@@ -65,24 +57,21 @@ public class CameraFollow : MonoBehaviour
 	[HideInInspector]
 	public Vector3 focusPoint;
 
-	void LateUpdate()
-	{
-		if( GetComponent<CameraTransitioner>().Mode == CameraTransitioner.CameraMode.Transitioning )
-			return;
-		
+    public void UpdateCameraControls(float horizDelta, float vertDelta)
+    {
 		switch( m_camControlType )
 		{
 		case CameraControlType.CCT_Default:
 
-			UpdateTPPAngles ();
-			TPCameraBehaviour();
+            UpdateTPPAngles (horizDelta, vertDelta);
+			UpdateTP();
 
             break;
 			
 		case CameraControlType.CCT_FPSLook:
 
-			UpdateTPPAngles ();
-			FPCameraBehaviour();
+            UpdateTPPAngles (horizDelta, vertDelta);
+            UpdateFP(horizDelta, vertDelta);
 			
 			break;
 			
@@ -95,47 +84,27 @@ public class CameraFollow : MonoBehaviour
 		case CameraControlType.CCT_Overwritten:
 			break;
 		}
-	}
+    }
 	
-	IEnumerator ShakeCamera()
-	{
-		while (true) 
-		{
-			shakeOffset = new Vector3( Random.Range(-horizontalShakeIntensity * 10, horizontalShakeIntensity * 10), 
-			                          Random.Range(-verticalShakeIntensity * 10, verticalShakeIntensity * 10), 0f);
-			yield return new WaitForSeconds(shakeFrequency);
-		}
-	}
-	
-	Vector3 GetVectorFromAngle (float x, float y, float distFromObj, Vector3 relativePosition = default(Vector3)) 
-	{
-		// Calculating the camera's position on the orbit
-		Vector3 up = (Quaternion.Euler(x, y, 0f) * Vector3.up).normalized;
-		return up * distFromObj;
-	}
-	
-	private void TPCameraBehaviour()
+	private void UpdateTP()
 	{
 		float distanceFactor = Mathf.Clamp01((cameraDistance - minDistance) / (maxDistance - minDistance));
 		float collisionFixHeight = Mathf.Lerp(collisionFixMinHeight, collisionFixMaxHeight, 1f - distanceFactor );
 		
 		// offset the camera corresponding to the angles and the shaking offsets
-		Vector3 relativePosition = GetVectorFromAngle(pitch - shakeOffset.y, yaw - shakeOffset.x, cameraDistance) + cameraFocusTarget.position + Vector3.up * collisionFixHeight;
-		
-		// Set up the camera on the orbit around the camera, using PITCH and YAW angles taken from CameraInput
-		transform.position = Vector3.Slerp(transform.position, relativePosition, followingSpeed);
-		
-		
+        Quaternion lookTransform = Quaternion.Euler(new Vector2(pitch * 360f + 180f + shakeOffset.x, yaw * 360f + 180f + shakeOffset.y));
+        Vector3 lookDirection = lookTransform * Vector3.forward * cameraDistance;
+        transform.position = cameraFocusTarget.position + lookDirection + Vector3.up * collisionFixHeight;
+       			
 		Vector3 camLocalDirection = new Vector3(-transform.localPosition.x, 0f, -transform.localPosition.z).normalized;
-		camLocalDirection = (Quaternion.Euler(0f, focusAngleOffset, 0f) * camLocalDirection) * focusDistance;
+        camLocalDirection = (Quaternion.Euler(0f, focusAngleOffset, 0f) * camLocalDirection) * focusDistance * 0f;
 		
-		transform.localRotation = Quaternion.LookRotation( ((-transform.localPosition + Vector3.up * collisionFixHeight) + camLocalDirection).normalized );
-		
+		transform.localRotation = Quaternion.LookRotation( ((-transform.localPosition + Vector3.up * collisionFixHeight) + camLocalDirection).normalized );		
 	}
 	
-	private void FPCameraBehaviour()
+    private void UpdateFP(float mouseX, float mouseY)
 	{
-		Vector3 deltaMousePosition = new Vector3 (Input.GetAxis ("Mouse X"), Input.GetAxis ("Mouse Y"), 0f);
+        Vector3 deltaMousePosition = new Vector3 (mouseX, mouseY);
 		
 		float rotationX = transform.localEulerAngles.y + deltaMousePosition.x * horizontalSensetivity;
 		
@@ -146,12 +115,22 @@ public class CameraFollow : MonoBehaviour
 		transform.parent.Rotate(0,rotationX, 0);
 	}
 
-	void UpdateTPPAngles ()
+    void UpdateTPPAngles (float mouseX, float mouseY)
 	{
-		Vector3 deltaMousePosition = new Vector3 (Input.GetAxis ("Mouse X"), Input.GetAxis ("Mouse Y"), 0f);
-		float pitchAngle = pitch + deltaMousePosition.y * verticalSensetivity ;
-		pitchAngle = Mathf.Clamp (pitchAngle, 30f, 110f);	
-		yaw = Mathf.Repeat(yaw + deltaMousePosition.x * horizontalSensetivity, 359.999f);
-		pitch = pitchAngle;
+        Vector3 deltaMousePosition = new Vector3 (mouseX, mouseY);
+		float pitchAngle = pitch + deltaMousePosition.y * verticalSensetivity;
+
+        pitch = Mathf.Clamp (pitchAngle, -0.85f, -0.4f);	
+		yaw = Mathf.Repeat(yaw + deltaMousePosition.x * horizontalSensetivity, 2f) - 1f;
 	}
+
+    IEnumerator ShakeCamera()
+    {
+        while (true) 
+        {
+            shakeOffset = new Vector3( Random.Range(-horizontalShakeIntensity * 10, horizontalShakeIntensity * 10), 
+                Random.Range(-verticalShakeIntensity * 10, verticalShakeIntensity * 10), 0f);
+            yield return new WaitForSeconds(shakeFrequency);
+        }
+    }
 }

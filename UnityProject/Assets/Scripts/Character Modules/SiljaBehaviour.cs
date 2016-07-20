@@ -20,12 +20,16 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 	public CameraFollow 		cameraFollow;
 
     public float ShiftDuration = 1f;
-	private bool m_isLookingInFP = false;
+	private bool m_isLookingInFP;
 
     public float m_normalDischargeSpeed = 1f;
     public float m_scaredDischargeSpeed = 6f;
+
+    private bool inputChanged;
+    private Vector3 oldForwardVector;
+    private float oldVerticalAxis, oldHorizontalAxis;
 	
-	public bool isFlashLightCollected = false;
+	public bool isFlashLightCollected;
 	public bool FlashLightCollected
 	{
 		get{ return isFlashLightCollected; }
@@ -33,8 +37,8 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 	}
         
 
-    private bool m_haveSeenRecently = false;
-	private bool m_isScared = false;
+    private bool m_haveSeenRecently;
+	private bool m_isScared;
 	public bool IsScared 
 	{ 
 		get { return m_isScared; } 
@@ -100,6 +104,9 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 	void Start()
 	{
 		EnableThirdPerson();
+
+        // cache the current camera vector
+        oldForwardVector = thisCamera.transform.forward;
 	}
         
 	void Update () 
@@ -107,6 +114,21 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
         UpdateInput();
         UpdateFlashlight();
         UpdateAudio();
+    }
+
+    void LateUpdate()
+    {
+        if( camTransitioner.Mode == CameraTransitioner.CameraMode.Transitioning )
+            return; 
+
+        float h = Input.GetAxis ("Mouse X");
+        float v = Input.GetAxis ("Mouse Y");
+
+        // if mouse was moved by the user
+        if(h > 0f || v > 0f)
+            inputChanged = true;
+
+        cameraFollow.UpdateCameraControls(h, v);
     }
 
     private void UpdateInput()
@@ -130,13 +152,7 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
                 ShiftToFirstPerson();
                 EnableFlashlight(true);
             }
-        }
-        
-        //if (Input.GetKeyUp(KeyCode.F) && m_isLookingInFP)
-        //{
-        //    EnableFlashlight(!flshCtrl.IsEnabled);
-        //}
-         
+        }       
     }
 
     private void UpdateFlashlight()
@@ -233,14 +249,24 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 
     private void UpdateMovementInput()
     {
-        Vector3 forward = thisCamera.transform.forward;
+        float v = Mathf.Round(Input.GetAxis("Vertical"));
+        float h = Mathf.Round(Input.GetAxis("Horizontal"));
+
+        if(v != oldVerticalAxis || h != oldHorizontalAxis)
+            inputChanged = true;
+
+        // keep the old forward vector until unput has changed
+        Vector3 forward = oldForwardVector;
+
+        if(inputChanged)
+        {
+            oldForwardVector = forward = thisCamera.transform.forward;
+            inputChanged = false;
+        }
 
         forward.y = 0;
         forward.Normalize();
-
-
-        float v = Input.GetAxisRaw("Vertical");
-        float h = Input.GetAxisRaw("Horizontal");
+      
 
         Vector3 right = new Vector3(forward.z, 0, -forward.x);
         Vector3 moveDir = (h * right + v * forward).normalized;
@@ -248,7 +274,11 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 
         if( moveDir.magnitude > 0f )
             RotateCharacterTowards(forward);
+        
         MoveCharacterTowards(moveDir, new Vector2(h, v));
+
+        oldVerticalAxis = v;
+        oldHorizontalAxis = h;
     }
 
     public void PlaySiljaCaughtRandomSound()

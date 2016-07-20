@@ -35,9 +35,6 @@ public class CameraTransitioner : MonoBehaviour {
 		TppTransformChildren,
 		FppTransformChildren;
 
-	//not to GetComponent all the time
-	private Camera ThisCamera;
-
 	private UnityEvent onFPPTransitionComplete = new UnityEvent();
 	private UnityEvent onTPPTransitionComplete = new UnityEvent();
 
@@ -65,9 +62,9 @@ public class CameraTransitioner : MonoBehaviour {
 		onTPPTransitionComplete.RemoveAllListeners();
 	}
 
-	void Awake (){
+	void Awake ()
+    {
 
-		ThisCamera = GetComponent<Camera>();
 		Mode = CameraMode.Tpp;
 
 		TppOnlyGameplayComponents.AddRange (new Behaviour[]{
@@ -87,8 +84,8 @@ public class CameraTransitioner : MonoBehaviour {
 
 	public void TransitionTPPtoFPP(Transform lookingAt = null)
 	{
-		TPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
-		TPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
+		TPPCameraTransform.localPosition = transform.localPosition;
+		TPPCameraTransform.localRotation = transform.localRotation;
 
 		Transition( TPPCameraTransform, FPPCameraTransform, 
 		           "TurnOffTpp", "TurnOnFpp", 
@@ -97,8 +94,8 @@ public class CameraTransitioner : MonoBehaviour {
 
 	public void TransitionFPPtoTPP()
 	{
-		FPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
-		FPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
+		FPPCameraTransform.localPosition = transform.localPosition;
+		FPPCameraTransform.localRotation = transform.localRotation;
 
 		Transition( FPPCameraTransform, TPPCameraTransform, 
 		           "TurnOffFpp", "TurnOnTpp", 
@@ -107,18 +104,18 @@ public class CameraTransitioner : MonoBehaviour {
 
     public void TransitionFPPtoFPP()
     {
-        FPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
-        FPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
+        FPPCameraTransform.localPosition = transform.localPosition;
+        FPPCameraTransform.localRotation = transform.localRotation;
 
-        Transition( ThisCamera.transform, TPPCameraTransform, 
+        Transition( transform, TPPCameraTransform, 
             "TurnOffFpp", "TurnOnFpp", 
             gameObject, gameObject );
     }
 
     public void TransitionTPPtoOther(Transform other)
     {
-        TPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
-        TPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
+        TPPCameraTransform.localPosition = transform.localPosition;
+        TPPCameraTransform.localRotation = transform.localRotation;
 
         OtherCameraTransform = other;
         prevOtherCameraTransformParent = other.parent;
@@ -142,8 +139,8 @@ public class CameraTransitioner : MonoBehaviour {
 
     public void TransitionFPPtoOther(Transform other)
     {
-        FPPCameraTransform.localPosition = ThisCamera.transform.localPosition;
-        FPPCameraTransform.localRotation = ThisCamera.transform.localRotation;
+        FPPCameraTransform.localPosition = transform.localPosition;
+        FPPCameraTransform.localRotation = transform.localRotation;
 
         OtherCameraTransform = other;
         prevOtherCameraTransformParent = other.parent;
@@ -203,10 +200,10 @@ public class CameraTransitioner : MonoBehaviour {
 	public void TransitionUpdate(float state)
 	{
 
-		ThisCamera.transform.localPosition = Vector3.Lerp(
+		transform.localPosition = Vector3.Lerp(
 			fromPosition, toPosition, state );
 
-		ThisCamera.transform.localRotation = Quaternion.Lerp(
+		transform.localRotation = Quaternion.Lerp(
 			fromRotation, 
 			toRotation, state);
 	}
@@ -241,9 +238,7 @@ public class CameraTransitioner : MonoBehaviour {
 		foreach (GameObject g in TppTransformChildren){
 			g.SetActive(false);
 		}
-
-		GetComponent<SphereCollider>().enabled = false;
-
+            
 		foreach(Behaviour c in TppOnlyGameplayComponents){
 			c.enabled = false;
 		}
@@ -287,8 +282,7 @@ public class CameraTransitioner : MonoBehaviour {
 		foreach (GameObject g in TppTransformChildren){
 			g.SetActive(true);
 		}
-
-		GetComponent<SphereCollider>().enabled = true;
+            
 		foreach(Behaviour c in TppOnlyGameplayComponents){
 			c.enabled = true;
 		}

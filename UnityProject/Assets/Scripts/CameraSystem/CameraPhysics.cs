@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System;
 
-public class RaycastResult
+public class CameraWhisker
 {
     public bool hasHit; 
+    public Vector3 direction;
     public float distance;
     public Vector3 hitPoint;
 }
@@ -12,15 +13,6 @@ public class RaycastResult
 [RequireComponent(typeof(CameraFollow))]
 public class CameraPhysics : MonoBehaviour 
 {
-	// Percents
-	[Range(0f, 10f)]
-    [Tooltip("In units per second")]
-	public float approachingSpeed = 0.1f;
-
-	public AnimationCurve fallbackCurve;
-	[Range(0f, 5f)]
-	public float fallbackTime = 5f;
-
     public Transform HeadBone;
 
     [Header("Debug")]
@@ -31,141 +23,159 @@ public class CameraPhysics : MonoBehaviour
 
     private const int WHISKERS_COUNT = 16;
 
-    private RaycastResult lineOfSight = new RaycastResult();
-    private RaycastResult backWhisker = new RaycastResult();
-    private RaycastResult[] whiskers = new RaycastResult[WHISKERS_COUNT];
-
-
-	private float _timer = 5f;
-	private float fallbackFrom = 0f;
+    private CameraWhisker lineOfSight = new CameraWhisker();
+    private CameraWhisker backWhisker = new CameraWhisker();
+    private CameraWhisker[] whiskers = new CameraWhisker[WHISKERS_COUNT];
 
     void Awake()
 	{
 		follower = GetComponent<CameraFollow> ();
 
         for(int i = 0; i < WHISKERS_COUNT; i++)
-            whiskers[i] = new RaycastResult();
+            whiskers[i] = new CameraWhisker();
     }
 
     void Update()
 	{
+        CameraSwingControl();
+        CameraDistanceControl();
+    }
 
-		_timer += Time.deltaTime;
-		_timer = Mathf.Clamp(_timer, 0f, fallbackTime);
+    // control the distance to the character
+    private void CameraDistanceControl()
+    {
+        CameraWhisker sightLine = CheckLineOfSight();
+        CameraWhisker backLine = CheckBackWhisker();
 
-        CheckLeftWhiskers();
-        CheckRightWhiskers();
+        float distanceFrom, distanceTo, lerpSpeed;
 
-        if(CheckBackWhisker())
+        if(sightLine != null && sightLine.hasHit)
         {
-            currentHitDistance = GetMaxDistance(ref backWhisker);
-
-            if (currentHitDistance < follower.cameraDistance)
-            {
-                //OPTION 1: Lerping the camera to quickly solve the tunneling. Elastic.
-                follower.cameraDistance =
-                    Mathf.Lerp(
-                        follower.cameraDistance,
-                        currentHitDistance,
-                        approachingSpeed * Time.deltaTime
-                );
-            
-                // OPTION 2: very strct camera distance, never tunneling through walls
-                //follower.cameraDistance = currentHitDistance;
-            
-                _timer = 0f;
-                fallbackFrom = follower.cameraDistance;
-            }
-            else
-            {
-                if (_timer < fallbackTime)
-                {
-                    // fallback the camera if there is no collision happening
-                    follower.cameraDistance = Mathf.Lerp(fallbackFrom, currentHitDistance, fallbackCurve.Evaluate(_timer / fallbackTime));
-                }
-            }
+            currentHitDistance = GetMaxDistance(ref sightLine);
+            // jump to the hit point
+            follower.cameraDistance = distanceTo = currentHitDistance;
+        }
+        else if(backLine != null && backLine.hasHit)
+        {
+            currentHitDistance = GetMaxDistance(ref backLine);
+            distanceTo = currentHitDistance;
         }
         else
         {
             currentHitDistance = follower.maxDistance;
-
-            if (_timer < fallbackTime)
-            {
-                // fallback the camera if there is no collision happening
-                follower.cameraDistance = Mathf.Lerp(fallbackFrom, follower.maxDistance, fallbackCurve.Evaluate(_timer / fallbackTime));
-            }
+            distanceTo = follower.maxDistance;
         }
+
+        follower.cameraDistance = Mathf.MoveTowards(follower.cameraDistance, distanceTo, Time.deltaTime);
     }
 
-    private float GetMaxDistance(ref RaycastResult whisker)
+    // control the obstacles avoidance by directing the camera between 
+    // left and right whiskers
+    private void CameraSwingControl()
+    {
+        CameraWhisker left = CheckLeftWhiskers();
+        CameraWhisker right = CheckRightWhiskers();
+
+        Vector3 swingToLeft = Vector3.zero, swingToRight = Vector3.zero;
+
+        if(left != null && left.hasHit)
+        {
+            Vector3 localDirection = transform.InverseTransformDirection(left.direction);
+            swingToRight = Vector3.Cross(Vector3.forward, localDirection);
+            //swingToRight *= (follower.maxDistance / left.distance);
+        }
+
+        if(right != null && right.hasHit)
+        {
+            Vector3 localDirection = transform.InverseTransformDirection(right.direction);
+            swingToLeft = Vector3.Cross(Vector3.forward, localDirection);
+            //swingToLeft *= (follower.maxDistance / right.distance);
+        }
+            
+        follower.yaw += (swingToRight.y + swingToLeft.y) * Time.deltaTime * 0.1f;
+    }
+
+    private float GetMaxDistance(ref CameraWhisker whisker)
     {
         return Mathf.Max(
-            follower.minDistance,
+                follower.minDistance,
                 Mathf.Min(
                 follower.maxDistance,
-                whisker.distance - 0.2f
+                whisker.distance - 0.3f
             )
         );
     }
 
-    private bool CheckLineOfSight()
+    private CameraWhisker CheckLineOfSight()
     {
         CheckCollisionsFor(transform.position, HeadBone.position, ref lineOfSight);
 
-        return lineOfSight.hasHit;
+        return lineOfSight;
     }
 
-    private bool CheckBackWhisker()
+    private CameraWhisker CheckBackWhisker()
     {
         CheckCollisionsFor(transform.position, transform.position - transform.forward, ref backWhisker);
 
-        return backWhisker.hasHit;
+        return backWhisker;
     }
 
-    private float CheckLeftWhiskers()
+    private CameraWhisker CheckLeftWhiskers()
     {
-        bool isColliding = false;
-        float avoidanceMagnitude = 0f;
-        int halfWhiskersCount = WHISKERS_COUNT / 2;
+        float minDistance = float.MaxValue;
+
+        // default 45 deg whisker
+        CameraWhisker closestObstacleWhisker = null;//whiskers[(int) (WHISKERS_COUNT * 0.25f)];
     
-        for( int i = 0; i < halfWhiskersCount; i++ )
+        for( int i = 0; i < (int) (WHISKERS_COUNT * 0.5f); i++ )
         {
-            Vector3 direction = Vector3.Lerp(-transform.right, transform.forward, i / (float)halfWhiskersCount);
-            if( CheckCollisionsFor(transform.position, transform.position + direction, ref whiskers[i]) )
-                isColliding = true;
+            Vector3 direction = Vector3.Lerp(-transform.right, transform.forward, i / (WHISKERS_COUNT * 0.5f));
+            CheckCollisionsFor(transform.position, transform.position + direction, ref whiskers[i]);
+            if(whiskers[i].hasHit)
+            {
+                if(whiskers[i].distance < minDistance)
+                {
+                    closestObstacleWhisker = whiskers[i];
+                    minDistance = whiskers[i].distance;
+                }
+            }
         }
-    
-        avoidanceMagnitude = isColliding ? -1f : 0f;
-    
-        // return a magnitude of obstacle avoidance to the right
-        return avoidanceMagnitude;
+
+        return closestObstacleWhisker;
     }
     
-    private float CheckRightWhiskers()
+    private CameraWhisker CheckRightWhiskers()
     {
-        bool isColliding = false;
-        float avoidanceMagnitude = 0f;
-        int halfWhiskersCount = WHISKERS_COUNT / 2;
+        float minDistance = float.MaxValue;
+
+        // default 45 deg whisker
+        CameraWhisker closestObstacleWhisker = null;//whiskers[(int) (WHISKERS_COUNT * 0.75f)];
     
-        for( int i = halfWhiskersCount; i < WHISKERS_COUNT; i++ )
+        for( int i = (int) (WHISKERS_COUNT * 0.5f); i < WHISKERS_COUNT; i++ )
         {
-            Vector3 direction = Vector3.Lerp(transform.right, transform.forward, (WHISKERS_COUNT - i) / (float) (WHISKERS_COUNT - halfWhiskersCount));
-            if(CheckCollisionsFor(transform.position, transform.position + direction, ref whiskers[i]))
-                isColliding = true;
+            Vector3 direction = Vector3.Lerp(transform.right, transform.forward, (WHISKERS_COUNT - i) /  (WHISKERS_COUNT - WHISKERS_COUNT * 0.5f));
+            CheckCollisionsFor(transform.position, transform.position + direction, ref whiskers[i]);
+            if(whiskers[i].hasHit)
+            {
+                if(whiskers[i].distance < minDistance)
+                {
+                    closestObstacleWhisker = whiskers[i];
+                    minDistance = whiskers[i].distance;
+                }
+            }
         }
-    
-        avoidanceMagnitude = isColliding ? 1f : 0f;
-    
-        // return a magnitude of obstacle avoidance to the left
-    
-        return avoidanceMagnitude;
+
+        return closestObstacleWhisker;
     }
 
 
 
-    private bool CheckCollisionsFor(Vector3 fromPoint, Vector3 toPoint, ref RaycastResult result)
+    private void CheckCollisionsFor(Vector3 fromPoint, Vector3 toPoint, ref CameraWhisker result)
     {
         RaycastHit outHit;
+
+        result.distance = (toPoint - fromPoint).magnitude;
+        result.hitPoint = toPoint;
 
         Vector3 direction = (toPoint - fromPoint).normalized;
         bool hasHit = 
@@ -176,16 +186,16 @@ public class CameraPhysics : MonoBehaviour
                 follower.maxDistance,
                 ((1 << LayerMask.NameToLayer("Default")))
             );
-
-        if(hasHit)
-            Debug.DrawLine(fromPoint, outHit.point, Color.red);
-        else
-            Debug.DrawLine(fromPoint, fromPoint + direction * follower.maxDistance, Color.green);
+                
+        Debug.DrawLine(fromPoint, fromPoint + direction * result.distance, hasHit ? Color.red : Color.green);
 
         result.hasHit = hasHit;
-        result.hitPoint = outHit.point;
-        result.distance = outHit.distance;
+        result.direction = direction;
 
-        return hasHit;
+        if(hasHit)
+        {
+            result.distance = outHit.distance;
+            result.hitPoint = outHit.point;
+        }
     }
 }

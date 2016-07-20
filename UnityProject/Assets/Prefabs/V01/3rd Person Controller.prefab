@@ -107,6 +107,7 @@ GameObject:
   - 114: {fileID: 11466150}
   - 114: {fileID: 11427842}
   - 114: {fileID: 11469434}
+  - 114: {fileID: 11441234}
   m_Layer: 9
   m_Name: Camera
   m_TagString: MainCamera
@@ -4061,7 +4062,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145928}
-  m_LocalRotation: {x: 0.16439287, y: 0.7196566, z: -0.57136256, w: -0.35862848}
+  m_LocalRotation: {x: 0.16439286, y: 0.7196565, z: -0.5713625, w: -0.35862845}
   m_LocalPosition: {x: -0.004786223, y: 0.12391471, z: -0.005623184}
   m_LocalScale: {x: 0.9999999, y: 0.9999998, z: 0.99999994}
   m_Children:
@@ -5560,6 +5561,20 @@ MonoBehaviour:
   vignetteShader: {fileID: 0}
   separableBlurShader: {fileID: 0}
   chromAberrationShader: {fileID: 0}
+--- !u!114 &11441234
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -768656878, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!114 &11446044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5575,10 +5590,8 @@ MonoBehaviour:
   cameraDistance: 1.15
   minDistance: 0.34
   maxDistance: 1.35
-  yaw: 80
-  pitch: 60
-  followingSpeed: 1
-  orientationSpeed: 0.08
+  yaw: -0.45
+  pitch: -0.7
   horizontalShakeIntensity: 0
   verticalShakeIntensity: 0
   shakeFrequency: 0.03
@@ -5588,8 +5601,6 @@ MonoBehaviour:
   focusAngleOffset: 45
   minimumY: -60
   maximumY: 60
-  verticalSensetivity: 1
-  horizontalSensetivity: 1
   focusPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &11449446
 MonoBehaviour:
@@ -5814,24 +5825,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cefcedbd0f2ff6479d6bf55abd84c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  approachingSpeed: 1.5
-  fallbackCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    - time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  fallbackTime: 5
   HeadBone: {fileID: 417112}
   hasHit: 0
   currentHitDistance: 0
