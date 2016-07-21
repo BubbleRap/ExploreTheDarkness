@@ -35,7 +35,7 @@ public class CameraPhysics : MonoBehaviour
             whiskers[i] = new CameraWhisker();
     }
 
-    void Update()
+    public void UpdateCameraCollisions()
 	{
         CameraSwingControl();
         CameraDistanceControl();
@@ -125,7 +125,7 @@ public class CameraPhysics : MonoBehaviour
         float minDistance = float.MaxValue;
 
         // default 45 deg whisker
-        CameraWhisker closestObstacleWhisker = null;//whiskers[(int) (WHISKERS_COUNT * 0.25f)];
+        CameraWhisker closestObstacleWhisker = null;
     
         for( int i = 0; i < (int) (WHISKERS_COUNT * 0.5f); i++ )
         {
@@ -149,7 +149,7 @@ public class CameraPhysics : MonoBehaviour
         float minDistance = float.MaxValue;
 
         // default 45 deg whisker
-        CameraWhisker closestObstacleWhisker = null;//whiskers[(int) (WHISKERS_COUNT * 0.75f)];
+        CameraWhisker closestObstacleWhisker = null;
     
         for( int i = (int) (WHISKERS_COUNT * 0.5f); i < WHISKERS_COUNT; i++ )
         {

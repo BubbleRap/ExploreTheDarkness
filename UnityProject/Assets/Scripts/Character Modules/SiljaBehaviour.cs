@@ -18,12 +18,18 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 	public CameraTransitioner	camTransitioner;
 	[HideInInspector]
 	public CameraFollow 		cameraFollow;
+    [HideInInspector]
+    public CameraPhysics        cameraPhysics;
+
 
     public float ShiftDuration = 1f;
 	private bool m_isLookingInFP;
 
     public float m_normalDischargeSpeed = 1f;
     public float m_scaredDischargeSpeed = 6f;
+
+    private float verticalSensetivity = 0.01f;
+    private float horizontalSensetivity = 0.01f;
 
     private bool inputChanged;
     private Vector3 oldForwardVector;
@@ -95,6 +101,7 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 
         camTransitioner = thisCamera.GetComponent<CameraTransitioner>();
 		cameraFollow = thisCamera.GetComponent<CameraFollow>();
+        cameraPhysics = thisCamera.GetComponent<CameraPhysics>();
         flshCtrl = gameObject.GetComponent<FlashlightController>();
 
 		firstPersonRig.gameObject.SetActive(false);
@@ -111,33 +118,39 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
         
 	void Update () 
 	{
-        UpdateInput();
+        if( camTransitioner.Mode == CameraTransitioner.CameraMode.Transitioning )
+            return; 
+        
+        UpdateSpecialInput();
+
+        UpdateCameraControl();
+        UpdateCameraCollisions();
+        UpdateMovementInput();
+
         UpdateFlashlight();
         UpdateAudio();
     }
 
-    void LateUpdate()
+    private void UpdateCameraCollisions()
     {
-        if( camTransitioner.Mode == CameraTransitioner.CameraMode.Transitioning )
-            return; 
+        cameraPhysics.UpdateCameraCollisions();
+    }
 
-        float h = Input.GetAxis ("Mouse X");
-        float v = Input.GetAxis ("Mouse Y");
+    private void UpdateCameraControl()
+    {
+        float h = Input.GetAxis ("Mouse X") * horizontalSensetivity;
+        float v = Input.GetAxis ("Mouse Y") * verticalSensetivity;
 
         // if mouse was moved by the user
-        if(h > 0f || v > 0f)
+        if(h != 0f || v != 0f)
             inputChanged = true;
 
         cameraFollow.UpdateCameraControls(h, v);
     }
 
-    private void UpdateInput()
+    private void UpdateSpecialInput()
     {
-        UpdateMovementInput();
-
-
         if (Input.GetKeyUp(KeyCode.Q)
-        && camTransitioner.Mode != CameraTransitioner.CameraMode.Transitioning
         && !interactor.IsInteracting)
         {
             if (m_isLookingInFP)
