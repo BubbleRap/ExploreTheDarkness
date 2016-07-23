@@ -120,20 +120,14 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 	{
         if( camTransitioner.Mode == CameraTransitioner.CameraMode.Transitioning )
             return; 
-        
-        UpdateSpecialInput();
 
-        UpdateCameraControl();
-        UpdateCameraCollisions();
         UpdateMovementInput();
+        UpdateSpecialInput();
+        UpdateCameraControl();
+
 
         UpdateFlashlight();
         UpdateAudio();
-    }
-
-    private void UpdateCameraCollisions()
-    {
-        cameraPhysics.UpdateCameraCollisions();
     }
 
     private void UpdateCameraControl()
@@ -145,6 +139,8 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
         if(h != 0f || v != 0f)
             inputChanged = true;
 
+        cameraFollow.CameraSwingControl();
+        cameraFollow.CameraDistanceControl();
         cameraFollow.UpdateCameraControls(h, v);
     }
 
