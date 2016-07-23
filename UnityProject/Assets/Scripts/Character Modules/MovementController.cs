@@ -65,36 +65,38 @@ public class MovementController : MonoBehaviour
         m_charMotor.inputMoveDirection = Vector3.zero;
     }
 
-    public void RotateTowardsDirection(Vector3 desiredDirection)
-    {
-        if( !CanMove )
-            return;
-        
-         Vector3 moveDirection = Vector3.RotateTowards(transform.forward, desiredDirection, m_rotationSpeed * Mathf.Deg2Rad * Time.deltaTime, 300f);
-         moveDirection.Normalize();
-
-         transform.rotation = Quaternion.LookRotation(moveDirection);
-    }
-
     public void MoveTowardsDirection(Vector3 targetDirection, Vector2 forwardSideDirection)
     {
         if( !CanMove )
             return;
         
         IsMoving = (targetDirection != Vector3.zero);
-
-        float curSmooth = m_moveAccel * Time.deltaTime;
-
-        MoveSpeed = Vector2.Lerp(MoveSpeed, forwardSideDirection * m_movingSpeed, curSmooth);
+        MoveSpeed = Vector2.Lerp(
+            MoveSpeed, 
+            forwardSideDirection * m_movingSpeed, 
+            m_moveAccel * Time.deltaTime
+        );
 
         if( targetDirection.magnitude > 0f )
             m_motorMovement = targetDirection.normalized;
-
         m_charMotor.inputMoveDirection = m_motorMovement * MoveSpeed.magnitude;
+    }
 
-        // Stop movement if speed is low forward and sideways
-        //if( moveSpeed.y < 0.175f ||  moveSpeed.x < 0.175f )
-        //   charMotor.inputMoveDirection = Vector3.zero;
+    public void RotateTowardsDirection(Vector3 desiredDirection)
+    {
+        if( !CanMove )
+            return;
+
+        Vector3 moveDirection = Vector3.RotateTowards( 
+            transform.forward, 
+            desiredDirection, 
+            m_rotationSpeed * Mathf.Deg2Rad * Time.deltaTime, 
+            300f);
+
+        moveDirection.y = 0f;
+        moveDirection.Normalize();
+
+        transform.rotation = Quaternion.LookRotation(moveDirection);
     }
 
     public void SetMaxWalkingSpeed(float forwardSpeed, float sidewaysSpeed)
