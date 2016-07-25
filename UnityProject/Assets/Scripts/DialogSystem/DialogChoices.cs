@@ -37,6 +37,10 @@ public class DialogChoices : MonoBehaviour {
 	private Coroutine choice2;
 	private Coroutine choice3;
 
+	private Coroutine choiceBlink1;
+
+	private Color ChoiceColor;
+
 	private bool isFaded = true;
 	private bool isFadedBG = true;
 
@@ -81,6 +85,12 @@ public class DialogChoices : MonoBehaviour {
 					{
 						choice1 = StartCoroutine(FadeIn(optionText1_single.GetComponent<Text>(),fadeTimeOption));
 						optionText1_single.GetComponent<Text>().text = Dialog[ID].options[0].Text;
+
+						if(ID == 0)
+						{
+							ChoiceColor = optionText1_single.GetComponent<Text>().color;
+							choiceBlink1 = StartCoroutine(ChoiceBlink(optionText1_single.GetComponent<Text>(),10f,0.6f));
+						}
 					}
 				}
 				else
@@ -121,6 +131,12 @@ public class DialogChoices : MonoBehaviour {
 		if(choice1 != null)
 		{
 			StopCoroutine(choice1);
+		}
+
+		if(choiceBlink1 != null)
+		{
+			StopCoroutine(choiceBlink1);
+			optionText1_single.GetComponent<Text>().color = ChoiceColor;
 		}
 
 		if(choice2 != null)
@@ -313,6 +329,41 @@ public class DialogChoices : MonoBehaviour {
 
 			yield return null;
 		}
+	}
+
+	IEnumerator ChoiceBlink (Text text, float delay, float time)
+	{
+		float elapsedTime = 0;
+		float elapsedTime2 = 0;
+
+		Color startColor = new Color(text.color.r,text.color.g,text.color.b);
+		Color endColor = new Color(text.color.r+0.4f,text.color.g+0.3f,text.color.b+0.1f);
+
+		yield return new WaitForSeconds(delay);
+
+		while(elapsedTime < time)
+		{
+			text.color = Color.Lerp(startColor, endColor, (elapsedTime / time));
+
+			elapsedTime += Time.deltaTime;
+
+			yield return null;
+		}
+
+		yield return new WaitForSeconds(0.2f);
+
+		while(elapsedTime2 < time)
+		{
+			text.color = Color.Lerp(endColor, startColor, (elapsedTime2 / time));
+
+			elapsedTime2 += Time.deltaTime;
+
+			yield return null;
+		}
+
+		yield return new WaitForSeconds(0.2f);
+
+		choiceBlink1 = StartCoroutine(ChoiceBlink(text,0f,time));
 	}
 
 	public void changeBackground(Sprite background)
