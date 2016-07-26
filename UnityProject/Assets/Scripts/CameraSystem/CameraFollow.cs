@@ -34,9 +34,6 @@ public class CameraFollow : MonoBehaviour
 
     private Vector3 shakeOffset;
 	
-	//public float collisionFixMinHeight = 0.45f;
-	//public float collisionFixMaxHeight = 0.8f;
-	
 	// FPS settings
     private float minimumY = -60F;
     private float maximumY = 60F;
@@ -177,15 +174,15 @@ public class CameraFollow : MonoBehaviour
         }
 
         // swing the camera along the wall's normal to avoid walls hack
-        if(lineOfSight.hasHit)
-        {
-            Vector3 localDirection = transform.InverseTransformDirection(lineOfSight.hitNormal);
-            float angle = Vector3.Cross(Vector3.forward, localDirection).y;
-        
-            // ranges [0.75f..1.0f] and [-1.0..-0.75] are critical:
-            // when the camera is colliding with the wall by 45 to 90 degrees
-            yaw -= angle * 0.0025f;
-        }
+        //if(lineOfSight.hasHit)
+        //{
+        //    Vector3 localDirection = transform.InverseTransformDirection(lineOfSight.hitNormal);
+        //    float angle = Vector3.Cross(Vector3.forward, localDirection).y;
+        //
+        //    // ranges [0.75f..1.0f] and [-1.0..-0.75] are critical:
+        //    // when the camera is colliding with the wall by 45 to 90 degrees
+        //    yaw -= angle * 0.0025f;
+        //}
     }
 
     // searches through (WHISKERS_COUNT/2) left raycasts and returns the one with the closest hit

@@ -280,9 +280,12 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
         Vector3 right = new Vector3(forward.z, 0, -forward.x);
         Vector3 moveDir = (h * right + v * forward).normalized;
 
-
+        // if moving
         if( moveDir.magnitude > 0f )
+        {
+            //cameraFollow.CameraSwingControl();
             RotateCharacterTowards(forward);
+        }
         
         MoveCharacterTowards(moveDir, new Vector2(h, v));
 
