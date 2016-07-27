@@ -47,6 +47,16 @@ public class LookInDetailInteraction : IInteractableObject
 
     private Animator m_animator;
     private bool m_horizontalDrag = false;
+	private bool m_isDragging = false;
+
+	private bool m_isMouseOver = false;
+	private bool m_isMouseOverInteraction = false;
+
+	private Texture2D cursorDrag;
+	private Texture2D cursorDraging;
+	private Texture2D cursorClick;
+	private CursorMode cursorMode = CursorMode.Auto;
+	private Vector2 hotSpot = new Vector2(30,40);
 
 	void Awake()
 	{
@@ -70,7 +80,13 @@ public class LookInDetailInteraction : IInteractableObject
             onDrag.onMouseDragBegin += OnComponentDragBegin;
             onDrag.onMouseDrag += OnComponentDragged;
             onDrag.onMouseDragEnd += OnComponentDragEnd;
+			onDrag.onMouseOver += OnComponentMouseOver;
+			onDrag.onMouseOut += OnComponentMouseOut;
         }
+
+		cursorDrag = UIManager.Instance.m_cursorDrag;
+		cursorDraging = UIManager.Instance.m_cursorDragging;
+		cursorClick = UIManager.Instance.m_cursorClick;
 	}
 
     private new void Update()
@@ -191,6 +207,8 @@ public class LookInDetailInteraction : IInteractableObject
 		    _siljaBeh.ShiftToThirdPerson();
         else
             _siljaBeh.ShiftFirstToFirstPerson();
+
+		Cursor.SetCursor(null, Vector2.zero, cursorMode);
     }
 
     private void OnComponentClicked(Collider collider, PointerEventData eventData)
@@ -219,7 +237,9 @@ public class LookInDetailInteraction : IInteractableObject
 
 
         m_horizontalDrag = Mathf.Abs(data.delta.x) > Mathf.Abs(data.delta.y);
-        //m_isDragging = true;
+        m_isDragging = true;
+
+		Cursor.SetCursor(cursorDraging, hotSpot, cursorMode);
     }
 
     private void OnComponentDragged(PointerEventData data)
@@ -233,11 +253,57 @@ public class LookInDetailInteraction : IInteractableObject
             m_targetVelocity.y = data.delta.y * _dragSpeed;
     }
 
-    private void OnComponentDragEnd(PointerEventData data)
+	private void OnComponentDragEnd(Collider collider, PointerEventData eventData)
     {
         if( !interactionIsActive )
             return;
 
-        //m_isDragging = false;
+		m_isDragging = false;
+
+		if(!m_isMouseOver)
+		{
+			Cursor.SetCursor(null, Vector2.zero, cursorMode);
+		}
+		else
+		{
+			Cursor.SetCursor(cursorDrag, hotSpot, cursorMode);
+		}
     }
+
+	private void OnComponentMouseOver(Collider collider, PointerEventData eventData)
+	{
+		if( !interactionIsActive )
+			return;
+		
+		if(!m_isDragging)
+		Cursor.SetCursor(cursorDrag, hotSpot, cursorMode);
+
+		m_isMouseOverInteraction = false;
+		foreach(InteractionComponent component in m_interactiveComponents)
+		{
+			if(component.collider == collider)
+			{
+				if(component.onInteract.GetPersistentEventCount() > 0)
+				{
+					m_isMouseOverInteraction = true;
+				}
+			}
+		}
+
+		if(m_isMouseOverInteraction && !m_isDragging)
+		Cursor.SetCursor(cursorClick, hotSpot, cursorMode);
+
+		m_isMouseOver = true;
+	}
+
+	private void OnComponentMouseOut(PointerEventData data)
+	{
+		if( !interactionIsActive )
+			return;
+		
+		if(!m_isDragging)
+		Cursor.SetCursor(null, Vector2.zero, cursorMode);
+
+		m_isMouseOver = false;
+	}
 }
