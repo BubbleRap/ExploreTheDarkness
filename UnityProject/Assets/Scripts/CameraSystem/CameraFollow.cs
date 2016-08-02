@@ -40,7 +40,7 @@ public class CameraFollow : MonoBehaviour
 	private float rotationY = 0F;
 
     // collisions avoidance
-    private const int WHISKERS_COUNT = 16;
+    private const int WHISKERS_COUNT = 32;
     private float m_swingSensitivity = 0.1f;
     private CameraWhisker lineOfSight = new CameraWhisker();
     private CameraWhisker backWhisker = new CameraWhisker();
@@ -158,7 +158,7 @@ public class CameraFollow : MonoBehaviour
             // (distance == max distance) = 0f, (distance == 0f) = 1f
             float distance = 1f - left.distance / maxDistance;
         
-            yaw += angle * distance * m_swingSensitivity * Time.deltaTime;;
+            yaw -= /*angle **/ distance * m_swingSensitivity * Time.deltaTime;;
         }
         
         // swinging to the left when obstacle from the right
@@ -170,7 +170,7 @@ public class CameraFollow : MonoBehaviour
             // (distance == max distance) = 0f, (distance == 0f) = 1f
             float distance = 1f - right.distance / maxDistance;
         
-            yaw += angle * distance * m_swingSensitivity * Time.deltaTime;
+            yaw += /*angle **/ distance * m_swingSensitivity * Time.deltaTime;
         }
 
         // swing the camera along the wall's normal to avoid walls hack
