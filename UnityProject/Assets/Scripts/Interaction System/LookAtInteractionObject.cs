@@ -61,6 +61,15 @@ public class LookAtInteractionObject : IInteractableObject
             StartCoroutine(UnfreezeSiljaAfterTransition(transitioner));
         }
 
+		if(interactionIsActive)
+		{
+			UIManager.Instance.lookAtUI(true);	
+		}
+		else
+		{
+			UIManager.Instance.lookAtUI(false);
+		}
+
         if (interactionIsActive)
         {
             if (overrideTransform != null)
@@ -98,7 +107,7 @@ public class LookAtInteractionObject : IInteractableObject
         }
         
         ObjectivesManager.Instance.OnInteractionComplete( this, true );
-		return false;
+		return interactionIsActive;
     }
 
     private IEnumerator UnfreezeSiljaAfterTransition(CameraTransitioner t)

@@ -83,14 +83,17 @@ public class LookInDetailInteraction : IInteractableObject
 			onDrag.onMouseOver += OnComponentMouseOver;
 			onDrag.onMouseOut += OnComponentMouseOut;
         }
-
-		cursorDrag = UIManager.Instance.m_cursorDrag;
-		cursorDraging = UIManager.Instance.m_cursorDragging;
-		cursorClick = UIManager.Instance.m_cursorClick;
 	}
 
     private new void Update()
     {
+		if(cursorDrag == null)
+		{
+			cursorDrag = UIManager.Instance.m_cursorDrag;
+			cursorDraging = UIManager.Instance.m_cursorDragging;
+			cursorClick = UIManager.Instance.m_cursorClick;
+		}
+
         base.Update();
 
         if (IsInteracting)
@@ -135,6 +138,8 @@ public class LookInDetailInteraction : IInteractableObject
 		else
 		{
 			OnInvestigateDisabled();
+			UIManager.Instance.hideCursor();
+			UIManager.Instance.lookAtUI(false);
 		}
 
 		return interactionIsActive;
@@ -151,6 +156,9 @@ public class LookInDetailInteraction : IInteractableObject
 		transitioner.AddFPPCompleteAction( () =>
 		{
 			camControl.CamControlType = CameraFollow.CameraControlType.CCT_Overwritten;
+
+			UIManager.Instance.showCursor();
+			UIManager.Instance.lookAtUI(true);
 
 			Transform fpCamTransform = transitioner.FPPCameraTransform;
 			transform.position = fpCamTransform.TransformPoint(Vector3.forward * _faceDistance);
@@ -260,13 +268,17 @@ public class LookInDetailInteraction : IInteractableObject
 
 		m_isDragging = false;
 
-		if(!m_isMouseOver)
+		if(m_isMouseOver && !m_isMouseOverInteraction)
 		{
-			Cursor.SetCursor(null, Vector2.zero, cursorMode);
+			Cursor.SetCursor(cursorDrag, hotSpot, cursorMode);
+		}
+		else if(m_isMouseOver && m_isMouseOverInteraction)
+		{
+			Cursor.SetCursor(cursorClick, hotSpot, cursorMode);
 		}
 		else
 		{
-			Cursor.SetCursor(cursorDrag, hotSpot, cursorMode);
+			Cursor.SetCursor(null, Vector2.zero, cursorMode);
 		}
     }
 
@@ -274,9 +286,6 @@ public class LookInDetailInteraction : IInteractableObject
 	{
 		if( !interactionIsActive )
 			return;
-		
-		if(!m_isDragging)
-		Cursor.SetCursor(cursorDrag, hotSpot, cursorMode);
 
 		m_isMouseOverInteraction = false;
 		foreach(InteractionComponent component in m_interactiveComponents)
@@ -289,6 +298,9 @@ public class LookInDetailInteraction : IInteractableObject
 				}
 			}
 		}
+
+		if(!m_isDragging)
+			Cursor.SetCursor(cursorDrag, hotSpot, cursorMode);
 
 		if(m_isMouseOverInteraction && !m_isDragging)
 		Cursor.SetCursor(cursorClick, hotSpot, cursorMode);

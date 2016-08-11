@@ -11,6 +11,7 @@ public class ButtonPrompt : MonoBehaviour {
 	private Transform connectedObject;
     private Renderer m_renderer;
     private TextMesh textMesh;
+	private SpriteRenderer spriteRenderer;
 
     private Renderer cachedRenderer;
 
@@ -20,6 +21,7 @@ public class ButtonPrompt : MonoBehaviour {
     {
         textMesh = GetComponentInChildren<TextMesh>();
         cachedRenderer = textMesh.GetComponent<Renderer>();
+		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
 	void Start()
@@ -39,6 +41,14 @@ public class ButtonPrompt : MonoBehaviour {
         textMesh.text = text;
 	}
 
+	public void setInteractableUI(bool boolean){
+		spriteRenderer.enabled = boolean;
+
+		Vector3 basePosition = textMesh.gameObject.transform.localPosition;
+		textMesh.gameObject.transform.localPosition = new Vector3(basePosition.x,boolean ? 0.021f : 0,basePosition.y);
+		spriteRenderer.gameObject.transform.localPosition = new Vector3(basePosition.x,boolean ? -0.021f : 0,basePosition.y);
+	}
+
 	public void SetConnectedTransform(Transform t){
 		connectedObject = t;
         m_renderer = connectedObject.GetComponent<Renderer>();
@@ -53,7 +63,13 @@ public class ButtonPrompt : MonoBehaviour {
 
         isVisible = alpha > 0f;
 
-        cachedRenderer.material.color = new Color (1f, 1f, 1f, Mathf.Lerp(cachedRenderer.material.color.a, alpha, 0.1f));
+		if(alpha < 0f)
+		{
+			alpha = 0;
+		}
+
+		cachedRenderer.material.color = new Color (1f, 1f, 1f, Mathf.Lerp(cachedRenderer.material.color.a, alpha, 0.1f));
+		spriteRenderer.material.color = cachedRenderer.material.color;
 
 		transform.LookAt(hudCamera.gameObject.transform);
 	}

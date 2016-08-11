@@ -90,6 +90,7 @@ public class IInteractableObject : MonoBehaviour
 
         string textToOutput = isSelected ? ActionsToDisplay : TextToDisplay;       
         buttonPrompt.SetText (showText ? textToOutput : "");
+		buttonPrompt.setInteractableUI(isSelected && !IsInteracting);
 
         // interaction logic call
         OnInteractionClose(closeInteraction);

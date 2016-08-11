@@ -66,19 +66,34 @@ public class Interactor : MonoBehaviour
 		if(closestIdx < interactionObjects.Count && closestIdx >= 0 
             && CurrentObject != interactionObjects[closestIdx] )
 		{
+			if(CurrentObject != null)
+			{
+				DeselectCurrentObject(CurrentObject);
+			}
+
             SelectCurrentObject(interactionObjects[closestIdx]);
 		}
 
-		if( Input.GetKeyDown(KeyCode.E))
+		if(!IsInteracting && Input.GetMouseButtonDown(0))
 		{
-            IsInteracting = false;
+			IsInteracting = false;
 
 			IInteractableObject[] interactableInterfaces = CurrentObject.GetComponents<IInteractableObject>();
             foreach (IInteractableObject ie in interactableInterfaces)
             {
-                IsInteracting = ie.Activate() || IsInteracting;
+				IsInteracting = ie.Activate() || IsInteracting;
             }
 			
+		}
+
+		if(IsInteracting && Input.GetMouseButtonDown(1))
+		{
+			IInteractableObject[] interactableInterfaces = CurrentObject.GetComponents<IInteractableObject>();
+			foreach (IInteractableObject ie in interactableInterfaces)
+			{
+				ie.Activate();
+				IsInteracting = false;
+			}
 		}
 	}
 
