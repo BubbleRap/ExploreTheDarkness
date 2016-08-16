@@ -14,10 +14,8 @@ public class CameraFollow : MonoBehaviour
 {
 	public Transform cameraFocusTarget = null; 
 	
-	[HideInInspector]
-	public float cameraDistance = 2;
-	public float minDistance = 0.01f;
-	public float maxDistance = 1.15f;
+    private const float minDistance = 0.01f;
+    private const float maxDistance = 1.15f;
 	
 	[Range(0f, 1f)]
 	public float yaw = 0f;
@@ -31,6 +29,7 @@ public class CameraFollow : MonoBehaviour
 	[Range(0f, 10f)]
 	public float shakeFrequency = 0f;
 
+    private float cameraDistance = 2f;
 
     private Vector3 shakeOffset;
 	
@@ -120,7 +119,7 @@ public class CameraFollow : MonoBehaviour
     public void CameraDistanceControl()
     {
         CheckCollisionsFor(cameraFocusTarget.position, transform.position, ref lineOfSight);
-        CheckCollisionsFor(transform.position, transform.position - transform.forward, ref backWhisker);
+        CheckCollisionsFor(transform.position, transform.position - transform.forward * maxDistance, ref backWhisker);
 
         // default case: no collisions, lerp to the maximum distance
         float distanceTo = maxDistance;
@@ -139,7 +138,7 @@ public class CameraFollow : MonoBehaviour
             distanceTo = Mathf.Clamp(backWhisker.distance, minDistance, maxDistance);
         }
 
-        cameraDistance = Mathf.MoveTowards(cameraDistance, distanceTo, Time.deltaTime);
+        cameraDistance = Mathf.MoveTowards(cameraDistance, distanceTo, Time.deltaTime * 0.5f);
     }
 
     // control the obstacles avoidance by directing the camera between 
@@ -196,7 +195,7 @@ public class CameraFollow : MonoBehaviour
         for( int i = 0; i < (int) (WHISKERS_COUNT * 0.5f); i++ )
         {
             Vector3 direction = Vector3.Slerp(-transform.right, transform.forward, i / (WHISKERS_COUNT * 0.5f));
-            CheckCollisionsFor(transform.position, transform.position + direction, ref whiskers[i]);
+            CheckCollisionsFor(transform.position, transform.position + direction * maxDistance, ref whiskers[i]);
             if(whiskers[i].hasHit)
             {
                 if(whiskers[i].distance < minDistance)
@@ -221,7 +220,7 @@ public class CameraFollow : MonoBehaviour
         for( int i = (int) (WHISKERS_COUNT * 0.5f); i < WHISKERS_COUNT; i++ )
         {
             Vector3 direction = Vector3.Slerp(transform.right, transform.forward, (WHISKERS_COUNT - i) /  (WHISKERS_COUNT - WHISKERS_COUNT * 0.5f));
-            CheckCollisionsFor(transform.position, transform.position + direction, ref whiskers[i]);
+            CheckCollisionsFor(transform.position, transform.position + direction * maxDistance, ref whiskers[i]);
             if(whiskers[i].hasHit)
             {
                 if(whiskers[i].distance < minDistance)
@@ -250,8 +249,8 @@ public class CameraFollow : MonoBehaviour
                 fromPoint,
                 direction,
                 out outHit,
-                maxDistance,
-                ((1 << LayerMask.NameToLayer("Default")))
+                result.distance,
+                1 << LayerMask.NameToLayer("Default")
             );
 
         Debug.DrawLine(fromPoint, fromPoint + direction * result.distance, hasHit ? Color.red : Color.green);
