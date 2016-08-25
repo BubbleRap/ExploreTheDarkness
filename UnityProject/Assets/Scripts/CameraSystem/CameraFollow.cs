@@ -18,11 +18,6 @@ public class CameraFollow : MonoBehaviour
     private const float maxDistance = 1.15f;
 	
 	[Range(0f, 1f)]
-	public float yaw = 0f;
-	[Range(0f, 1f)]
-	public float pitch = 0f;
-	
-	[Range(0f, 1f)]
 	public float horizontalShakeIntensity = 0.0f;
 	[Range(0f, 1f)]
 	public float verticalShakeIntensity = 0.0f;
@@ -30,6 +25,13 @@ public class CameraFollow : MonoBehaviour
 	public float shakeFrequency = 0f;
 
     private float cameraDistance = 2f;
+    private float m_lookOffset = 20f;
+
+    private float yaw = 0f;
+    private float pitch = 0f;
+
+    private float m_minPitch = 0.45f;
+    private float m_maxPitch = 0.55f;
 
     private Vector3 shakeOffset;
 	
@@ -40,7 +42,9 @@ public class CameraFollow : MonoBehaviour
 
     // collisions avoidance
     private const int WHISKERS_COUNT = 32;
-    private float m_swingSensitivity = 0.1f;
+    private float m_swingSensitivity = 0.05f;
+    private float m_whiskerLength = 2f;
+
     private CameraWhisker lineOfSight = new CameraWhisker();
     private CameraWhisker backWhisker = new CameraWhisker();
     private CameraWhisker[] whiskers = new CameraWhisker[WHISKERS_COUNT];
@@ -70,7 +74,7 @@ public class CameraFollow : MonoBehaviour
 
     public void UpdateCameraControls(float horizDelta, float vertDelta)
     {
-        pitch = Mathf.Clamp (pitch - vertDelta, 0.5f, 0.7f);    
+        pitch = Mathf.Clamp (pitch - vertDelta, m_minPitch, m_maxPitch);    
         yaw = Mathf.Repeat(yaw + horizDelta, 1f);
 
 		switch( m_camControlType )
@@ -100,7 +104,7 @@ public class CameraFollow : MonoBehaviour
 
         transform.position = cameraFocusTarget.position + toCameraDirection * cameraDistance;
 
-        Vector3 lookDirection = Quaternion.Euler(0f, 20f, 0f) * -toCameraDirection;
+        Vector3 lookDirection = Quaternion.Euler(0f, m_lookOffset, 0f) * -toCameraDirection;
         transform.rotation = Quaternion.LookRotation(lookDirection);
 	}
 	
@@ -151,37 +155,39 @@ public class CameraFollow : MonoBehaviour
         // swinging to the right when obstacle from the left
         if(left != null && left.hasHit)
         {
+            Debug.DrawLine(transform.position, left.hitPoint, Color.blue);
+
             Vector3 localDirection = transform.InverseTransformDirection(left.direction);
             // -90 degrees = -1f, 90 degrees = 1f
             float angle = Vector3.Cross(Vector3.forward, localDirection).y;
-            // (distance == max distance) = 0f, (distance == 0f) = 1f
-            float distance = 1f - left.distance / maxDistance;
+            // (distance == m_whiskerLength) = 0f, (distance == 0f) = 1f
+            // linear function
+            //float distance = 1f - left.distance / m_whiskerLength;
+
+            // quadratic function
+            float distance = 1f - (left.distance * left.distance) / (m_whiskerLength * m_whiskerLength);
         
-            yaw -= /*angle **/ distance * m_swingSensitivity * Time.deltaTime;;
+            yaw -= distance * m_swingSensitivity * Time.deltaTime;
         }
         
         // swinging to the left when obstacle from the right
         if(right != null && right.hasHit)
         {
+            Debug.DrawLine(transform.position, right.hitPoint, Color.blue);
+
             Vector3 localDirection = transform.InverseTransformDirection(right.direction);
             // -90 degrees = -1f, 90 degrees = 1f
             float angle = Vector3.Cross(Vector3.forward, localDirection).y;
-            // (distance == max distance) = 0f, (distance == 0f) = 1f
-            float distance = 1f - right.distance / maxDistance;
-        
-            yaw += /*angle **/ distance * m_swingSensitivity * Time.deltaTime;
-        }
 
-        // swing the camera along the wall's normal to avoid walls hack
-        //if(lineOfSight.hasHit)
-        //{
-        //    Vector3 localDirection = transform.InverseTransformDirection(lineOfSight.hitNormal);
-        //    float angle = Vector3.Cross(Vector3.forward, localDirection).y;
-        //
-        //    // ranges [0.75f..1.0f] and [-1.0..-0.75] are critical:
-        //    // when the camera is colliding with the wall by 45 to 90 degrees
-        //    yaw -= angle * 0.0025f;
-        //}
+            // (distance == m_whiskerLength) = 0f, (distance == 0f) = 1f
+            // linear function
+            //float distance = 1f - right.distance / m_whiskerLength;
+
+            // quadratic function
+            float distance = 1f - (right.distance * right.distance) / (m_whiskerLength * m_whiskerLength);
+        
+            yaw += distance * m_swingSensitivity * Time.deltaTime;
+        }
     }
 
     // searches through (WHISKERS_COUNT/2) left raycasts and returns the one with the closest hit
@@ -195,7 +201,10 @@ public class CameraFollow : MonoBehaviour
         for( int i = 0; i < (int) (WHISKERS_COUNT * 0.5f); i++ )
         {
             Vector3 direction = Vector3.Slerp(-transform.right, transform.forward, i / (WHISKERS_COUNT * 0.5f));
-            CheckCollisionsFor(transform.position, transform.position + direction * maxDistance, ref whiskers[i]);
+            // rotate the direction towards the character
+            direction = Quaternion.Euler(0f, -m_lookOffset, 0f) * direction;
+
+            CheckCollisionsFor(transform.position, transform.position + direction * m_whiskerLength, ref whiskers[i]);
             if(whiskers[i].hasHit)
             {
                 if(whiskers[i].distance < minDistance)
@@ -220,7 +229,10 @@ public class CameraFollow : MonoBehaviour
         for( int i = (int) (WHISKERS_COUNT * 0.5f); i < WHISKERS_COUNT; i++ )
         {
             Vector3 direction = Vector3.Slerp(transform.right, transform.forward, (WHISKERS_COUNT - i) /  (WHISKERS_COUNT - WHISKERS_COUNT * 0.5f));
-            CheckCollisionsFor(transform.position, transform.position + direction * maxDistance, ref whiskers[i]);
+            // rotate the direction towards the character
+            direction = Quaternion.Euler(0f, -m_lookOffset, 0f) * direction;
+
+            CheckCollisionsFor(transform.position, transform.position + direction * m_whiskerLength, ref whiskers[i]);
             if(whiskers[i].hasHit)
             {
                 if(whiskers[i].distance < minDistance)
