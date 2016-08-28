@@ -139,7 +139,7 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
         if(h != 0f || v != 0f)
             inputChanged = true;
 
-        cameraFollow.CameraSwingControl();
+        //cameraFollow.CameraSwingControl();
         cameraFollow.CameraDistanceControl();
         cameraFollow.UpdateCameraControls(h, v);
     }
@@ -283,7 +283,7 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
         // if moving
         if( moveDir.magnitude > 0f )
         {
-            //cameraFollow.CameraSwingControl();
+            cameraFollow.CameraSwingControl();
             RotateCharacterTowards(forward);
         }
         

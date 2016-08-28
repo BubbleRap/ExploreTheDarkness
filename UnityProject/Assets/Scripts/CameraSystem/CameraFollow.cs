@@ -16,6 +16,11 @@ public class CameraFollow : MonoBehaviour
 	
     private const float minDistance = 0.01f;
     private const float maxDistance = 1.15f;
+
+    private float m_distanceControlSpeed = 0.5f;
+
+    // reduces the shake effect, when constantly colliding with a wall
+    private float m_camMoveTresholdDistance = 0.05f;
 	
 	[Range(0f, 1f)]
 	public float horizontalShakeIntensity = 0.0f;
@@ -122,8 +127,10 @@ public class CameraFollow : MonoBehaviour
     // controls the camera distance to the character
     public void CameraDistanceControl()
     {
+        Vector3 targetFocusDir = (cameraFocusTarget.position - transform.position).normalized;
+
         CheckCollisionsFor(cameraFocusTarget.position, transform.position, ref lineOfSight);
-        CheckCollisionsFor(transform.position, transform.position - transform.forward * maxDistance, ref backWhisker);
+        CheckCollisionsFor(transform.position, transform.position - targetFocusDir * maxDistance, ref backWhisker);
 
         // default case: no collisions, lerp to the maximum distance
         float distanceTo = maxDistance;
@@ -142,8 +149,12 @@ public class CameraFollow : MonoBehaviour
             distanceTo = Mathf.Clamp(backWhisker.distance, minDistance, maxDistance);
         }
 
-        cameraDistance = Mathf.MoveTowards(cameraDistance, distanceTo, Time.deltaTime * 0.5f);
+        bool tresholdCheck = Mathf.Abs(cameraDistance - distanceTo) > m_camMoveTresholdDistance;
+        cameraDistance = tresholdCheck ? Mathf.MoveTowards(cameraDistance, distanceTo, m_distanceControlSpeed * Time.deltaTime) : cameraDistance;
     }
+
+    // looking up\down makes the camera closer. Expose a curve?
+    // make the turning speed faster
 
     // control the obstacles avoidance by directing the camera between 
     // left and right whiskers

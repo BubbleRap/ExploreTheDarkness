@@ -14,8 +14,8 @@ public class MovementController : MonoBehaviour
     private float m_movingSpeed = 1f;
     private Vector3 m_motorMovement = Vector3.zero;
 	
-    private float m_rotationSpeed = 150f;
-    private float m_moveAccel = 2.5f;
+    private float m_rotationSpeed = 5f;
+    private float m_moveAccel = 5f;
 
 
 	void Awake()
@@ -76,9 +76,8 @@ public class MovementController : MonoBehaviour
             forwardSideDirection * m_movingSpeed, 
             m_moveAccel * Time.deltaTime
         );
-
-        if( targetDirection.magnitude > 0f )
-            m_motorMovement = targetDirection.normalized;
+            
+        m_motorMovement = targetDirection.magnitude > 0f ? targetDirection.normalized : transform.forward;       
         m_charMotor.inputMoveDirection = m_motorMovement * MoveSpeed.magnitude;
     }
 
@@ -90,8 +89,8 @@ public class MovementController : MonoBehaviour
         Vector3 moveDirection = Vector3.RotateTowards( 
             transform.forward, 
             desiredDirection, 
-            m_rotationSpeed * Mathf.Deg2Rad * Time.deltaTime, 
-            300f);
+            m_rotationSpeed * Time.deltaTime,
+            0f);
 
         moveDirection.y = 0f;
         moveDirection.Normalize();
