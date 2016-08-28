@@ -171,12 +171,15 @@ public class CameraFollow : MonoBehaviour
             Vector3 localDirection = transform.InverseTransformDirection(left.direction);
             // -90 degrees = -1f, 90 degrees = 1f
             float angle = Vector3.Cross(Vector3.forward, localDirection).y;
-            // (distance == m_whiskerLength) = 0f, (distance == 0f) = 1f
+
             // linear function
             //float distance = 1f - left.distance / m_whiskerLength;
 
             // quadratic function
-            float distance = 1f - (left.distance * left.distance) / (m_whiskerLength * m_whiskerLength);
+            //float distance = ((m_whiskerLength - left.distance) * (m_whiskerLength - left.distance)) / (m_whiskerLength * m_whiskerLength);
+
+            // cubic function
+            float distance = ((m_whiskerLength - left.distance) * (m_whiskerLength - left.distance) * (m_whiskerLength - left.distance)) / (m_whiskerLength * m_whiskerLength * m_whiskerLength);
         
             yaw -= distance * m_swingSensitivity * Time.deltaTime;
         }
@@ -190,12 +193,14 @@ public class CameraFollow : MonoBehaviour
             // -90 degrees = -1f, 90 degrees = 1f
             float angle = Vector3.Cross(Vector3.forward, localDirection).y;
 
-            // (distance == m_whiskerLength) = 0f, (distance == 0f) = 1f
             // linear function
             //float distance = 1f - right.distance / m_whiskerLength;
 
             // quadratic function
-            float distance = 1f - (right.distance * right.distance) / (m_whiskerLength * m_whiskerLength);
+            //float distance = ((m_whiskerLength - right.distance) * (m_whiskerLength - right.distance)) / (m_whiskerLength * m_whiskerLength);
+
+            // cubic function
+            float distance = ((m_whiskerLength - right.distance) * (m_whiskerLength - right.distance) * (m_whiskerLength - right.distance)) / (m_whiskerLength * m_whiskerLength * m_whiskerLength);
         
             yaw += distance * m_swingSensitivity * Time.deltaTime;
         }
