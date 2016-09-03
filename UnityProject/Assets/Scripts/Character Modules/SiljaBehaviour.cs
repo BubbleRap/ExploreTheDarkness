@@ -139,7 +139,7 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
         if(h != 0f || v != 0f)
             inputChanged = true;
 
-        //cameraFollow.CameraSwingControl();
+        cameraFollow.CollectCameraWhiskers();
         cameraFollow.CameraDistanceControl();
         cameraFollow.UpdateCameraControls(h, v);
     }

@@ -14,7 +14,7 @@ public class CameraFollow : MonoBehaviour
 {
 	public Transform cameraFocusTarget = null; 
 	
-    private const float minDistance = 0.01f;
+    private const float minDistance = 0.2f;
     private const float maxDistance = 1.15f;
 
     private float m_distanceControlSpeed = 0.5f;
@@ -46,12 +46,16 @@ public class CameraFollow : MonoBehaviour
 	private float rotationY = 0F;
 
     // collisions avoidance
-    private const int WHISKERS_COUNT = 32;
+    private const int WHISKERS_COUNT = 16;
     private float m_swingSensitivity = 0.05f;
-    private float m_whiskerLength = 2f;
+    private float m_whiskerLength = 1.15f;
 
     private CameraWhisker lineOfSight = new CameraWhisker();
     private CameraWhisker backWhisker = new CameraWhisker();
+
+    // references to the left\right closest whiskers
+    private CameraWhisker left, right;
+
     private CameraWhisker[] whiskers = new CameraWhisker[WHISKERS_COUNT];
 
     void Awake()
@@ -77,10 +81,33 @@ public class CameraFollow : MonoBehaviour
 	[HideInInspector]
 	public Vector3 focusPoint;
 
+    public void CollectCameraWhiskers()
+    {
+        Vector3 targetFocusDir = (cameraFocusTarget.position - transform.position).normalized;
+
+        CheckCollisionsFor(cameraFocusTarget.position, transform.position, ref lineOfSight);
+        CheckCollisionsFor(transform.position, transform.position - targetFocusDir * maxDistance, ref backWhisker);
+
+        left = FindClosestLeftObstacle();
+        right = FindClosestRightObstacle();
+    }
+
     public void UpdateCameraControls(float horizDelta, float vertDelta)
     {
         pitch = Mathf.Clamp (pitch - vertDelta, m_minPitch, m_maxPitch);    
-        yaw = Mathf.Repeat(yaw + horizDelta, 1f);
+
+        //if(left != null && left.distance <= 0.2f && horizDelta > 0f)
+        //{
+        //    
+        //}
+        //else if(right != null && right.distance <= 0.2f && horizDelta < 0f)
+        //{
+        //    
+        //}
+        //else
+        {
+            yaw = Mathf.Repeat(yaw + horizDelta, 1f);
+        }
 
 		switch( m_camControlType )
 		{
@@ -127,30 +154,44 @@ public class CameraFollow : MonoBehaviour
     // controls the camera distance to the character
     public void CameraDistanceControl()
     {
-        Vector3 targetFocusDir = (cameraFocusTarget.position - transform.position).normalized;
-
-        CheckCollisionsFor(cameraFocusTarget.position, transform.position, ref lineOfSight);
-        CheckCollisionsFor(transform.position, transform.position - targetFocusDir * maxDistance, ref backWhisker);
+        if(lineOfSight != null && lineOfSight.hasHit)
+        {
+            // sight line hit: jump straight to the hit point
+            cameraDistance = Mathf.Clamp(lineOfSight.distance, minDistance, maxDistance);
+            return;
+        } 
 
         // default case: no collisions, lerp to the maximum distance
         float distanceTo = maxDistance;
 
-        if(lineOfSight != null && lineOfSight.hasHit)
-        {
-            distanceTo = Mathf.Clamp(lineOfSight.distance, minDistance, maxDistance);
-        
-            // sight line hit: jump straight to the hit point
-            cameraDistance = distanceTo;
-        }
-        else 
+        // the camera's line of sight distance is defined by the left/right whiskers distance
+        //if(left != null)
+        //{
+        //    float nDist = left.distance / m_whiskerLength;
+        //        distanceTo = Mathf.Clamp(nDist * maxDistance, minDistance, maxDistance);
+        //} 
+        //else
+        //if(right != null)
+        //{
+        //    float nDist = right.distance / m_whiskerLength;
+        //    distanceTo = Mathf.Clamp(nDist * maxDistance, minDistance, maxDistance);
+        //}
+        //else
         if(backWhisker != null && backWhisker.hasHit)
         {
             // back line hit: lerp to the hit point
             distanceTo = Mathf.Clamp(backWhisker.distance, minDistance, maxDistance);
         }
 
-        bool tresholdCheck = Mathf.Abs(cameraDistance - distanceTo) > m_camMoveTresholdDistance;
-        cameraDistance = tresholdCheck ? Mathf.MoveTowards(cameraDistance, distanceTo, m_distanceControlSpeed * Time.deltaTime) : cameraDistance;
+        float delta = Mathf.Abs(cameraDistance - distanceTo);   
+        if(delta > m_camMoveTresholdDistance)
+        {
+            cameraDistance = Mathf.MoveTowards(
+                cameraDistance, 
+                distanceTo, 
+                m_distanceControlSpeed * Time.deltaTime
+            );
+        }
     }
 
     // looking up\down makes the camera closer. Expose a curve?
@@ -160,11 +201,8 @@ public class CameraFollow : MonoBehaviour
     // left and right whiskers
     public void CameraSwingControl()
     {
-        CameraWhisker left = FindClosestLeftObstacle();
-        CameraWhisker right = FindClosestRightObstacle();
-
         // swinging to the right when obstacle from the left
-        if(left != null && left.hasHit)
+        if(left != null)
         {
             Debug.DrawLine(transform.position, left.hitPoint, Color.blue);
 
@@ -176,16 +214,16 @@ public class CameraFollow : MonoBehaviour
             //float distance = 1f - left.distance / m_whiskerLength;
 
             // quadratic function
-            //float distance = ((m_whiskerLength - left.distance) * (m_whiskerLength - left.distance)) / (m_whiskerLength * m_whiskerLength);
+            float distance = ((m_whiskerLength - left.distance) * (m_whiskerLength - left.distance)) / (m_whiskerLength * m_whiskerLength);
 
             // cubic function
-            float distance = ((m_whiskerLength - left.distance) * (m_whiskerLength - left.distance) * (m_whiskerLength - left.distance)) / (m_whiskerLength * m_whiskerLength * m_whiskerLength);
+            //float distance = ((m_whiskerLength - left.distance) * (m_whiskerLength - left.distance) * (m_whiskerLength - left.distance)) / (m_whiskerLength * m_whiskerLength * m_whiskerLength);
         
             yaw -= distance * m_swingSensitivity * Time.deltaTime;
         }
         
         // swinging to the left when obstacle from the right
-        if(right != null && right.hasHit)
+        if(right != null)
         {
             Debug.DrawLine(transform.position, right.hitPoint, Color.blue);
 
@@ -197,10 +235,10 @@ public class CameraFollow : MonoBehaviour
             //float distance = 1f - right.distance / m_whiskerLength;
 
             // quadratic function
-            //float distance = ((m_whiskerLength - right.distance) * (m_whiskerLength - right.distance)) / (m_whiskerLength * m_whiskerLength);
+            float distance = ((m_whiskerLength - right.distance) * (m_whiskerLength - right.distance)) / (m_whiskerLength * m_whiskerLength);
 
             // cubic function
-            float distance = ((m_whiskerLength - right.distance) * (m_whiskerLength - right.distance) * (m_whiskerLength - right.distance)) / (m_whiskerLength * m_whiskerLength * m_whiskerLength);
+            //float distance = ((m_whiskerLength - right.distance) * (m_whiskerLength - right.distance) * (m_whiskerLength - right.distance)) / (m_whiskerLength * m_whiskerLength * m_whiskerLength);
         
             yaw += distance * m_swingSensitivity * Time.deltaTime;
         }
