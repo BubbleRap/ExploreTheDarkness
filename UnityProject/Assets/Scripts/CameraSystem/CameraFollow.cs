@@ -35,8 +35,10 @@ public class CameraFollow : MonoBehaviour
     private float yaw = 0f;
     private float pitch = 0f;
 
+    // from 0.25 to 0.5 for the low look angle
     private float m_minPitch = 0.45f;
-    private float m_maxPitch = 0.55f;
+    // from 0.5 to 0.75f fot the high look angle
+    private float m_maxPitch = 0.65f;
 
     private Vector3 shakeOffset;
 	
@@ -50,6 +52,8 @@ public class CameraFollow : MonoBehaviour
     private float m_swingSensitivity = 0.05f;
     private float m_whiskerLength = 1.15f;
 
+    private float tempMaxDistance = 1.15f;
+
     private CameraWhisker lineOfSight = new CameraWhisker();
     private CameraWhisker backWhisker = new CameraWhisker();
 
@@ -62,6 +66,8 @@ public class CameraFollow : MonoBehaviour
     {
         for(int i = 0; i < WHISKERS_COUNT; i++)
             whiskers[i] = new CameraWhisker();
+
+        tempMaxDistance = maxDistance;
     }
 
 	public enum CameraControlType
@@ -86,7 +92,7 @@ public class CameraFollow : MonoBehaviour
         Vector3 targetFocusDir = (cameraFocusTarget.position - transform.position).normalized;
 
         CheckCollisionsFor(cameraFocusTarget.position, transform.position, ref lineOfSight);
-        CheckCollisionsFor(transform.position, transform.position - targetFocusDir * maxDistance, ref backWhisker);
+        CheckCollisionsFor(transform.position, transform.position - targetFocusDir * tempMaxDistance, ref backWhisker);
 
         left = FindClosestLeftObstacle();
         right = FindClosestRightObstacle();
@@ -94,7 +100,10 @@ public class CameraFollow : MonoBehaviour
 
     public void UpdateCameraControls(float horizDelta, float vertDelta)
     {
-        pitch = Mathf.Clamp (pitch - vertDelta, m_minPitch, m_maxPitch);    
+        pitch = Mathf.Clamp (pitch - vertDelta, m_minPitch, m_maxPitch);  
+        // remap pitch to -0.25 to 0.25, and then from -1 to 1
+        float pitchLerp = Mathf.Abs((pitch - 0.5f) * 4f);
+        tempMaxDistance = Mathf.Lerp(maxDistance, minDistance, pitchLerp);
 
         //if(left != null && left.distance <= 0.2f && horizDelta > 0f)
         //{
@@ -157,12 +166,12 @@ public class CameraFollow : MonoBehaviour
         if(lineOfSight != null && lineOfSight.hasHit)
         {
             // sight line hit: jump straight to the hit point
-            cameraDistance = Mathf.Clamp(lineOfSight.distance, minDistance, maxDistance);
+            cameraDistance = Mathf.Clamp(lineOfSight.distance, minDistance, tempMaxDistance);
             return;
         } 
 
         // default case: no collisions, lerp to the maximum distance
-        float distanceTo = maxDistance;
+        float distanceTo = tempMaxDistance;
 
         // the camera's line of sight distance is defined by the left/right whiskers distance
         //if(left != null)
@@ -180,7 +189,7 @@ public class CameraFollow : MonoBehaviour
         if(backWhisker != null && backWhisker.hasHit)
         {
             // back line hit: lerp to the hit point
-            distanceTo = Mathf.Clamp(backWhisker.distance, minDistance, maxDistance);
+            distanceTo = Mathf.Clamp(backWhisker.distance, minDistance, tempMaxDistance);
         }
 
         float delta = Mathf.Abs(cameraDistance - distanceTo);   
