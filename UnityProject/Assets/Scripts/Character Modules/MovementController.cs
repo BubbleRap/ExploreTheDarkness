@@ -71,12 +71,13 @@ public class MovementController : MonoBehaviour
             return;
         
         IsMoving = (targetDirection != Vector3.zero);
-        MoveSpeed = Vector2.Lerp(
+
+        MoveSpeed = Vector2.MoveTowards(
             MoveSpeed, 
-            forwardSideDirection * m_movingSpeed, 
+            forwardSideDirection * m_movingSpeed,
             m_moveAccel * Time.deltaTime
         );
-            
+
         m_motorMovement = targetDirection.magnitude > 0f ? targetDirection.normalized : transform.forward;       
         m_charMotor.inputMoveDirection = m_motorMovement * MoveSpeed.magnitude;
     }

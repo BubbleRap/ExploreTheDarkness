@@ -39,20 +39,17 @@ public class CharacterAnimation : MonoBehaviour
 
     public void SetForwardSpeed(float speed)
     {
-        if( m_animator.isInitialized )
-            m_animator.SetFloat(m_forwardSpeedKey, speed);
+        m_animator.SetFloat(m_forwardSpeedKey, speed);
     }
 
     public void SetSidewaysSpeed(float speed)
     {
-        if (m_animator.isInitialized)
-            m_animator.SetFloat(m_sidewaysSpeedKey, speed);
+        m_animator.SetFloat(m_sidewaysSpeedKey, speed);
     }
 
     public void SetTurningSpeed(float speed)
     {
-        if (m_animator.isInitialized)
-            m_animator.SetFloat(m_turningSpeedKey, speed);
+        m_animator.SetFloat(m_turningSpeedKey, speed);
     }
 
     public void SetLookingPoint(Vector3 dir, float weight = 1f)
