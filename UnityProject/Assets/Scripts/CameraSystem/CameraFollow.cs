@@ -12,10 +12,15 @@ public class CameraWhisker
 
 public class CameraFollow : MonoBehaviour 
 {
-	public Transform cameraFocusTarget = null; 
-	
-    private const float minDistance = 0.2f;
+    private const int WHISKERS_COUNT = 16;
+    private const int MAXBUFFERCOUNT = 1;
+    private const float minDistance = 0.01f;
     private const float maxDistance = 1.15f;
+
+
+    public float CameraDistance { get; private set; }
+
+	public Transform cameraFocusTarget = null; 
 
     private float m_distanceControlSpeed = 0.5f;
 
@@ -29,7 +34,6 @@ public class CameraFollow : MonoBehaviour
 	[Range(0f, 10f)]
 	public float shakeFrequency = 0f;
 
-    private float cameraDistance = 2f;
     private float m_lookOffset = 20f;
 
     private float yaw = 0f;
@@ -48,19 +52,18 @@ public class CameraFollow : MonoBehaviour
 	private float rotationY = 0F;
 
     // collisions avoidance
-    private const int WHISKERS_COUNT = 16;
     private float m_swingSensitivity = 0.05f;
     private float m_whiskerLength = 1.15f;
 
     private float tempMaxDistance = 1.15f;
 
-    private CameraWhisker lineOfSight = new CameraWhisker();
-    private CameraWhisker backWhisker = new CameraWhisker();
-
     // references to the left\right closest whiskers
     private CameraWhisker left, right;
-
+    private CameraWhisker lineOfSight = new CameraWhisker();
+    private CameraWhisker backWhisker = new CameraWhisker();
     private CameraWhisker[] whiskers = new CameraWhisker[WHISKERS_COUNT];
+
+    private Collider[] m_collidersBuffer = new Collider[MAXBUFFERCOUNT];
 
     void Awake()
     {
@@ -105,18 +108,7 @@ public class CameraFollow : MonoBehaviour
         float pitchLerp = Mathf.Abs((pitch - 0.5f) * 4f);
         tempMaxDistance = Mathf.Lerp(maxDistance, minDistance, pitchLerp);
 
-        //if(left != null && left.distance <= 0.2f && horizDelta > 0f)
-        //{
-        //    
-        //}
-        //else if(right != null && right.distance <= 0.2f && horizDelta < 0f)
-        //{
-        //    
-        //}
-        //else
-        {
-            yaw = Mathf.Repeat(yaw + horizDelta, 1f);
-        }
+        yaw = Mathf.Repeat(yaw + horizDelta, 1f);
 
 		switch( m_camControlType )
 		{
@@ -135,6 +127,14 @@ public class CameraFollow : MonoBehaviour
 		case CameraControlType.CCT_Overwritten:
 			break;
 		}
+
+        CheckSphereCollision(transform, cameraFocusTarget, 0.1f);
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(transform.position, 0.1f);
     }
 
 	private void UpdateTP()
@@ -143,7 +143,7 @@ public class CameraFollow : MonoBehaviour
         Quaternion toCameraRotation = Quaternion.Euler(new Vector2(pitch * 360f + shakeOffset.x, yaw * 360f + shakeOffset.y));
         Vector3 toCameraDirection = toCameraRotation * Vector3.forward;
 
-        transform.position = cameraFocusTarget.position + toCameraDirection * cameraDistance;
+        transform.position = cameraFocusTarget.position + toCameraDirection * CameraDistance;
 
         Vector3 lookDirection = Quaternion.Euler(0f, m_lookOffset, 0f) * -toCameraDirection;
         transform.rotation = Quaternion.LookRotation(lookDirection);
@@ -166,37 +166,24 @@ public class CameraFollow : MonoBehaviour
         if(lineOfSight != null && lineOfSight.hasHit)
         {
             // sight line hit: jump straight to the hit point
-            cameraDistance = Mathf.Clamp(lineOfSight.distance, minDistance, tempMaxDistance);
+            CameraDistance = Mathf.Clamp(lineOfSight.distance, minDistance, tempMaxDistance);
             return;
         } 
 
         // default case: no collisions, lerp to the maximum distance
         float distanceTo = tempMaxDistance;
 
-        // the camera's line of sight distance is defined by the left/right whiskers distance
-        //if(left != null)
-        //{
-        //    float nDist = left.distance / m_whiskerLength;
-        //        distanceTo = Mathf.Clamp(nDist * maxDistance, minDistance, maxDistance);
-        //} 
-        //else
-        //if(right != null)
-        //{
-        //    float nDist = right.distance / m_whiskerLength;
-        //    distanceTo = Mathf.Clamp(nDist * maxDistance, minDistance, maxDistance);
-        //}
-        //else
         if(backWhisker != null && backWhisker.hasHit)
         {
             // back line hit: lerp to the hit point
             distanceTo = Mathf.Clamp(backWhisker.distance, minDistance, tempMaxDistance);
         }
 
-        float delta = Mathf.Abs(cameraDistance - distanceTo);   
+        float delta = Mathf.Abs(CameraDistance - distanceTo);   
         if(delta > m_camMoveTresholdDistance)
         {
-            cameraDistance = Mathf.MoveTowards(
-                cameraDistance, 
+            CameraDistance = Mathf.MoveTowards(
+                CameraDistance, 
                 distanceTo, 
                 m_distanceControlSpeed * Time.deltaTime
             );
@@ -339,6 +326,30 @@ public class CameraFollow : MonoBehaviour
             result.hitPoint = outHit.point;
             result.hitNormal = outHit.normal;
         }
+    }
+
+    private void CheckSphereCollision(Transform origin, Transform target, float radius)
+    {
+        int count = 1;
+        Vector3 direction = (target.position - origin.position).normalized;
+
+        for(int i = 0; i < 10; i++)
+        //while(count > 0)
+        {      
+            count = Physics.OverlapSphereNonAlloc(
+                origin.position, 
+                radius, 
+                m_collidersBuffer, 
+                1 << LayerMask.NameToLayer("Default")
+            );
+
+            if(count == 0)
+                break;
+
+            origin.position += direction * Time.deltaTime;
+        }
+
+        CameraDistance = (origin.position - target.position).magnitude;
     }
 
     private IEnumerator ShakeCamera()
