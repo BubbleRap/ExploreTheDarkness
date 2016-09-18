@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 public class Interactor : MonoBehaviour 
 {	
+    public OnMouseOver m_backgroundOver;
+    public OnMouseClick m_backgroundClick;
+    public OnMouseDrag m_backgroundDrag;
+
     public IInteractableObject CurrentObject { get; private set; }
 
     private List<IInteractableObject> interactionObjects = new List<IInteractableObject>();
@@ -24,7 +28,7 @@ public class Interactor : MonoBehaviour
 		if( CurrentObject == interactionObject )
             DeselectCurrentObject(CurrentObject);
 	}
-
+       
 	void Update () 
 	{
 		// here should be descibed 3 cases:

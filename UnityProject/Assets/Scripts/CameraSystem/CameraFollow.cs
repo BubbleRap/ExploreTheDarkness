@@ -104,9 +104,12 @@ public class CameraFollow : MonoBehaviour
     public void UpdateCameraControls(float horizDelta, float vertDelta)
     {
         pitch = Mathf.Clamp (pitch - vertDelta, m_minPitch, m_maxPitch);  
+
+        // making camera close for angular looks
+
         // remap pitch to -0.25 to 0.25, and then from -1 to 1
-        float pitchLerp = Mathf.Abs((pitch - 0.5f) * 4f);
-        tempMaxDistance = Mathf.Lerp(maxDistance, minDistance, pitchLerp);
+        //float pitchLerp = Mathf.Abs((pitch - 0.5f) * 4f);
+        //tempMaxDistance = Mathf.Lerp(maxDistance, minDistance, pitchLerp);
 
         yaw = Mathf.Repeat(yaw + horizDelta, 1f);
 

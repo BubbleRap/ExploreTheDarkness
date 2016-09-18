@@ -26,7 +26,7 @@ public class LookInDetailInteraction : IInteractableObject
        
         
 	public float _faceDistance = 0.25f;
-    private float _dragSpeed = 5f;
+    private float _dragSpeed = 10f;
     private float m_acceleration = 10f;
 
     public InteractionComponent[] m_interactiveComponents;
@@ -73,15 +73,59 @@ public class LookInDetailInteraction : IInteractableObject
 
         foreach( InteractionComponent com in m_interactiveComponents )
         {
-            OnMouseClick onClick = com.collider.gameObject.AddComponent<OnMouseClick>();
-            onClick.onMouseClick += OnComponentClicked;
+            // caching lambda
+            InteractionComponent currentComponent = com;
 
-            OnMouseDrag onDrag = com.collider.gameObject.AddComponent<OnMouseDrag>();
+            OnMouseClick onClick = com.collider.gameObject.AddComponent<OnMouseClick>();
+            OnMouseOver onOver = com.collider.gameObject.AddComponent<OnMouseOver>();
+            OnMouseDrag onDrag = gameObject.AddComponent<OnMouseDrag>();
+
             onDrag.onMouseDragBegin += OnComponentDragBegin;
             onDrag.onMouseDrag += OnComponentDragged;
             onDrag.onMouseDragEnd += OnComponentDragEnd;
-			onDrag.onMouseOver += OnComponentMouseOver;
-			onDrag.onMouseOut += OnComponentMouseOut;
+
+            onClick.onMouseClick += (PointerEventData eventData) =>
+            {
+                if(eventData.dragging)
+                    return;
+
+                if(!interactionIsActive )
+                    return;
+
+                currentComponent.onInteract.Invoke();
+            };
+                
+            onOver.onMouseOver += (PointerEventData eventData) => 
+            {
+                if( !interactionIsActive )
+                    return;
+
+                m_isMouseOverInteraction = false;
+
+                if(currentComponent.onInteract.GetPersistentEventCount() > 0)
+                {
+                    m_isMouseOverInteraction = true;
+                }
+
+                if(!m_isDragging)
+                    Cursor.SetCursor(cursorDrag, hotSpot, cursorMode);
+
+                if(m_isMouseOverInteraction && !m_isDragging)
+                    Cursor.SetCursor(cursorClick, hotSpot, cursorMode);
+
+                m_isMouseOver = true;
+            };
+
+            onOver.onMouseOut += (PointerEventData data) =>
+            {
+                if(!interactionIsActive )
+                    return;
+
+                if(!m_isDragging)
+                    Cursor.SetCursor(null, Vector2.zero, cursorMode);
+
+                m_isMouseOver = false;
+            };
         }
 	}
 
@@ -147,9 +191,12 @@ public class LookInDetailInteraction : IInteractableObject
 
 	private void OnInvestigateEnabled()
 	{
-		CameraTransitioner transitioner = _siljaBeh.thisCamera.GetComponent<CameraTransitioner>();
-		CameraFollow camControl = _siljaBeh.thisCamera.GetComponent<CameraFollow>();
+        _siljaBeh.interactor.m_backgroundDrag.onMouseDragBegin += OnComponentDragBegin;
+        _siljaBeh.interactor.m_backgroundDrag.onMouseDrag += OnComponentDragged;
+        _siljaBeh.interactor.m_backgroundDrag.onMouseDragEnd += OnComponentDragEnd;
 
+        CameraTransitioner transitioner = _siljaBeh.camTransitioner;
+        CameraFollow camControl = _siljaBeh.cameraFollow;
 
 		_siljaBeh.IsMoveEnabled = false;
 			
@@ -176,15 +223,18 @@ public class LookInDetailInteraction : IInteractableObject
                 m_materialsToChange[i].renderer.sharedMaterial = m_materialsToChange[i].materialInteracting;
 
 		});
-		
-		
+			
 		_siljaBeh.ShiftToFirstPerson();
 	}
 
 	private void OnInvestigateDisabled()
     {
-		CameraTransitioner transitioner = _siljaBeh.thisCamera.GetComponent<CameraTransitioner>();
-		CameraFollow camControl = _siljaBeh.thisCamera.GetComponent<CameraFollow>();
+        _siljaBeh.interactor.m_backgroundDrag.onMouseDragBegin -= OnComponentDragBegin;
+        _siljaBeh.interactor.m_backgroundDrag.onMouseDrag -= OnComponentDragged;
+        _siljaBeh.interactor.m_backgroundDrag.onMouseDragEnd -= OnComponentDragEnd;
+
+        CameraTransitioner transitioner = _siljaBeh.camTransitioner;
+        CameraFollow camControl = _siljaBeh.cameraFollow;
 
 		//_dof.enabled = false;
 
@@ -219,30 +269,10 @@ public class LookInDetailInteraction : IInteractableObject
 		Cursor.SetCursor(null, Vector2.zero, cursorMode);
     }
 
-    private void OnComponentClicked(Collider collider, PointerEventData eventData)
-    {
-        if(eventData.dragging)
-            return;
-        
-        if( !interactionIsActive )
-            return;
-
-        foreach(InteractionComponent component in m_interactiveComponents)
-        {
-            if(component.collider == collider)
-            {
-                component.onInteract.Invoke();
-                return;
-            }
-        }
-
-    }
-
     private void OnComponentDragBegin(PointerEventData data)
     {
         if( !interactionIsActive )
             return;  
-
 
         m_horizontalDrag = Mathf.Abs(data.delta.x) > Mathf.Abs(data.delta.y);
         m_isDragging = true;
@@ -261,7 +291,7 @@ public class LookInDetailInteraction : IInteractableObject
             m_targetVelocity.y = data.delta.y * _dragSpeed;
     }
 
-	private void OnComponentDragEnd(Collider collider, PointerEventData eventData)
+	private void OnComponentDragEnd(PointerEventData eventData)
     {
         if( !interactionIsActive )
             return;
@@ -281,41 +311,4 @@ public class LookInDetailInteraction : IInteractableObject
 			Cursor.SetCursor(null, Vector2.zero, cursorMode);
 		}
     }
-
-	private void OnComponentMouseOver(Collider collider, PointerEventData eventData)
-	{
-		if( !interactionIsActive )
-			return;
-
-		m_isMouseOverInteraction = false;
-		foreach(InteractionComponent component in m_interactiveComponents)
-		{
-			if(component.collider == collider)
-			{
-				if(component.onInteract.GetPersistentEventCount() > 0)
-				{
-					m_isMouseOverInteraction = true;
-				}
-			}
-		}
-
-		if(!m_isDragging)
-			Cursor.SetCursor(cursorDrag, hotSpot, cursorMode);
-
-		if(m_isMouseOverInteraction && !m_isDragging)
-		Cursor.SetCursor(cursorClick, hotSpot, cursorMode);
-
-		m_isMouseOver = true;
-	}
-
-	private void OnComponentMouseOut(PointerEventData data)
-	{
-		if( !interactionIsActive )
-			return;
-		
-		if(!m_isDragging)
-		Cursor.SetCursor(null, Vector2.zero, cursorMode);
-
-		m_isMouseOver = false;
-	}
 }
