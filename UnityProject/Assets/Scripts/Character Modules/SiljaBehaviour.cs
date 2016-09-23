@@ -28,8 +28,8 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
     public float m_normalDischargeSpeed = 1f;
     public float m_scaredDischargeSpeed = 6f;
 
-    private float verticalSensetivity = 0.01f;
-    private float horizontalSensetivity = 0.01f;
+    private float verticalSensetivity = 0.5f;
+    private float horizontalSensetivity = 0.5f;
 
     private bool inputChanged;
     private Vector3 oldForwardVector;
@@ -132,8 +132,8 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 
     private void UpdateCameraControl()
     {
-        float h = Input.GetAxis ("Mouse X") * horizontalSensetivity;
-        float v = Input.GetAxis ("Mouse Y") * verticalSensetivity;
+        float h = Input.GetAxis ("Mouse X") * horizontalSensetivity * Time.deltaTime;
+        float v = Input.GetAxis ("Mouse Y") * verticalSensetivity * Time.deltaTime;
 
         // if mouse was moved by the user
         if(h != 0f || v != 0f)
@@ -146,22 +146,22 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 
     private void UpdateSpecialInput()
     {
-        if (Input.GetKeyUp(KeyCode.Q)
-        && !interactor.IsInteracting)
-        {
-            if (m_isLookingInFP)
-            {
-                m_isLookingInFP = false;
-                ShiftToThirdPerson();
-                EnableFlashlight(false);
-            }
-            else
-            {
-                m_isLookingInFP = true;
-                ShiftToFirstPerson();
-                EnableFlashlight(true);
-            }
-        }       
+        //if (Input.GetKeyUp(KeyCode.Q)
+        //&& !interactor.IsInteracting)
+        //{
+        //    if (m_isLookingInFP)
+        //    {
+        //        m_isLookingInFP = false;
+        //        ShiftToThirdPerson();
+        //        EnableFlashlight(false);
+        //    }
+        //    else
+        //    {
+        //        m_isLookingInFP = true;
+        //        ShiftToFirstPerson();
+        //        EnableFlashlight(true);
+        //    }
+        //}       
     }
 
     private void UpdateFlashlight()
