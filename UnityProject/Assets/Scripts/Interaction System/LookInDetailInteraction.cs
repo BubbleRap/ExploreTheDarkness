@@ -68,6 +68,7 @@ public class LookInDetailInteraction : IInteractableObject
 		_collider = GetComponent<Collider>();
 
 		_dof = Camera.main.GetComponent<DepthOfField>();
+        _dof.enabled = false;
 
         m_animator = GetComponentInParent<Animator>();
 
@@ -210,6 +211,7 @@ public class LookInDetailInteraction : IInteractableObject
 			Transform fpCamTransform = transitioner.FPPCameraTransform;
 			transform.position = fpCamTransform.TransformPoint(Vector3.forward * _faceDistance);
 
+            _dof.enabled = true;
 			_dof.focalLength = _faceDistance;
 			_dof.aperture = 50f;
 
@@ -236,7 +238,7 @@ public class LookInDetailInteraction : IInteractableObject
         CameraTransitioner transitioner = _siljaBeh.camTransitioner;
         CameraFollow camControl = _siljaBeh.cameraFollow;
 
-		//_dof.enabled = false;
+		_dof.enabled = false;
 
         UnityAction finishAction = () =>
         {   
