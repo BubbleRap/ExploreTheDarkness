@@ -60,10 +60,10 @@ public class LookInDetailInteraction : IInteractableObject
 
 	void Awake()
 	{
-        base.Awake();
+        _originalPos = transform.localPosition;
+        _originalRot = transform.localRotation;
 
-		_originalPos = transform.position;
-		_originalRot = transform.rotation;
+        base.Awake();
 
 		_collider = GetComponent<Collider>();
 
@@ -260,8 +260,8 @@ public class LookInDetailInteraction : IInteractableObject
             transitioner.AddFPPCompleteAction(finishAction);
 		
 		// reversing the previous object's transform
-		transform.position = _originalPos;
-		transform.rotation = _originalRot;
+		transform.localPosition = _originalPos;
+        transform.localRotation = _originalRot;
 		
 		if (LightStatesMachine.Instance.IsLightOn())
 		    _siljaBeh.ShiftToThirdPerson();

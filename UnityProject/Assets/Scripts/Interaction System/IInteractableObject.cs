@@ -157,4 +157,9 @@ public class IInteractableObject : MonoBehaviour
 	{
 		Activate();
 	}
+
+    public void DestroyMyself()
+    {
+        Destroy(this);
+    }
 }
