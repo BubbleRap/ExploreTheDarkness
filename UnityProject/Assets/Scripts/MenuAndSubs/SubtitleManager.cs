@@ -30,17 +30,12 @@ public class SubtitleManager : MonoBehaviour {
 
 	Dictionary<float, string> phoneSubtitles = new Dictionary<float, string>()
 	{
-		{ 1f, "Hi this is Erik from upstairs, i’ve been trying to call you..."},
+        { 1f, "Hi Matti, it’s Erik!"},
 		{ 6f, ""},
-		{ 7f, "I know that my party dosent start until an hour, \nbut I can hear that you are home."},
-		{ 14f, "Do you need help getting up here?"},
+        { 7f, "You are coming to my party right? Everyone is here!\nDo you need help getting up here?"},
 		{ 17f, ""},
-		{ 18f, "I’m hearing wired noises coming from your apartment..."},
-		{ 22f, ""},
-		{ 23f, "I’m worried..."},
-		{ 25f, "" },
-		{ 27f, "I’m coming down now to check on you, \ni'll bring the Die Heart VHS that I borrowed."},
-		{ 34f, "" },
+        { 18f, "You know what, i’m coming to get you! See you in a bit"},
+		{ 28f, "" },
 	};
 
 	public void Phone(){
