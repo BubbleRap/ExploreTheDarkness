@@ -12,38 +12,24 @@ public class IInteractableObject : MonoBehaviour
 		Switchable
 	}
 
-	public WorkState ActiveWhen;
+    public WorkState ActiveWhen;
+    public string TextToDisplay = "some string";
+    public string ActionsToDisplay = "Look";
+
+    public bool IsInteracting { get; set; }
+    public bool IsSelected { get; set; }
+    public bool IsObjectClose { get; set; }
 	
-    protected bool interactionIsActive = false;
+    public Action<IInteractableObject> onInteractionDestroyed = (IInteractableObject) => {};
+    public Action<IInteractableObject> onInteractionDisabled = (IInteractableObject) => {};
 
-	private Renderer m_renderer;
-	
-	public virtual bool Activate() { return (interactionIsActive = !interactionIsActive); }
-	
-	public bool disableOnActive = true;
+    public UnityEvent m_onInteractionActivated = new UnityEvent();	
 
-    public bool isSelected = false;
-
-	private bool objectIsClose = false;
-	
-	public string TextToDisplay = "some string";
-	public string ActionsToDisplay = "Look";
-
-	private Vector3 m_cameraRelativePosition;
-
-	public UnityEvent m_onInteractionActivated = new UnityEvent();
-
-    private ButtonPrompt buttonPrompt;
+    private Renderer m_renderer;
 
     protected virtual void Awake()
     {
-        GameObject promtGO = Instantiate(Resources.Load<GameObject>("buttonPrompt")) as GameObject;
-
-
-        buttonPrompt = promtGO.GetComponent<ButtonPrompt>();
-
-        buttonPrompt.SetText ("");
-        buttonPrompt.SetConnectedTransform (this.transform);
+        m_renderer = GetComponent<Renderer>();    
     }
 
     protected void Start()
@@ -55,109 +41,23 @@ public class IInteractableObject : MonoBehaviour
 			ActionsToDisplay = gameObject.name;
     }
 
-    internal bool isVisible()
-    {
-        return interactionIsActive || 
-            LightStatesMachine.Instance.State is LightStateOff ||
-            (buttonPrompt.gameObject.activeInHierarchy &&
-            buttonPrompt.isVisible);
+    public virtual bool Activate() 
+    { 
+        return IsInteracting = !IsInteracting; 
     }
-
-    protected void Update()
-	{
-		if( m_renderer == null )
-			m_renderer = GetComponent<Renderer>();
-
-		m_cameraRelativePosition = Camera.main.transform.InverseTransformPoint(transform.position);
-
-        bool isEligable = 
-            interactionIsActive || ActiveWhen == WorkState.WorksAlways;
-
-		if( ActiveWhen != WorkState.WorksAlways )
-            isEligable = true && !LightStatesMachine.Instance.IsLightOn();
-
-        Interactor interactor = DarknessManager.Instance.m_mainCharacter.interactor;
-        bool closeInteraction = interactor.IsInteracting  && interactionIsActive;
-
        
-        closeInteraction = isEligable && IsCharCloserThan(1.5f);
-
-
-        // use null string for nothing
-        bool showText = LightStatesMachine.Instance.IsLightOn() && !IsInteracting;
-        if((this as DoorInteraction) != null)
-            showText = true;
-
-        string textToOutput = isSelected ? ActionsToDisplay : TextToDisplay;       
-        buttonPrompt.SetText (showText ? textToOutput : "");
-		buttonPrompt.setInteractableUI(isSelected && !IsInteracting);
-
-        // interaction logic call
-        OnInteractionClose(closeInteraction);
-         
-		
-		Vector3 direction = ((transform.position - Vector3.up * 1.5f) - Camera.main.transform.position).normalized;
-
-		buttonPrompt.transform.position = transform.position - direction * 0.25f;
-		buttonPrompt.transform.LookAt(Camera.main.gameObject.transform);
-	}
-
-	public void ActivatePromtButton( bool state )
-	{
-        buttonPrompt.gameObject.SetActive(state && (!interactionIsActive || !disableOnActive)
-        );
-	}
-	
-	public bool IsPromtActivated(){
-        return buttonPrompt.gameObject.activeInHierarchy;
-	}
-
-	public bool IsInteracting
-	{
-		get { return interactionIsActive;}
-	}
-
-	public bool IsCamCloserThan( float dist )
-	{
-		return m_cameraRelativePosition.magnitude < dist;
-	}
-
-    public bool IsCharCloserThan(float dist)
+    public bool isVisible()
     {
-        SiljaBehaviour character = DarknessManager.Instance.m_mainCharacter;
-        return (character.transform.position - transform.position).magnitude < dist;
+        return IsInteracting || (LightStatesMachine.Instance.State is LightStateOff);
+    }
+        
+    // Exposed for inspector purposes
+    public void ActivateInteraction()
+    {
+        Activate();
     }
 
-	public bool isObjectClose()
-	{
-		return objectIsClose;
-	}
-	
-	public void OnInteractionClose( bool state )
-	{
-		if( objectIsClose == state)
-			return;
-		
-        Interactor interactor = DarknessManager.Instance.m_mainCharacter.interactor;
-
-		if( state )
-		{
-			interactor.OnInteractionEnter( this );
-		}
-		else
-		{
-			interactor.OnInteractionExit( this );
-		}
-		
-		objectIsClose = state;
-	}
-
-	// Exposed for inspector purposes
-	public void ActivateInteraction()
-	{
-		Activate();
-	}
-
+    // Exposed for inspector purposes
     public void DestroyMyself()
     {
         Destroy(this);
@@ -165,6 +65,11 @@ public class IInteractableObject : MonoBehaviour
 
     private void OnDisable()
     {
-        buttonPrompt.gameObject.SetActive(false);
+        onInteractionDisabled(this);
+    }
+
+    private void OnDestroy()
+    {
+        onInteractionDestroyed(this);
     }
 }

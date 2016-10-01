@@ -90,7 +90,7 @@ public class LookInDetailInteraction : IInteractableObject
                 if(eventData.dragging)
                     return;
 
-                if(!interactionIsActive )
+                if(!IsInteracting )
                     return;
 
                 currentComponent.onInteract.Invoke();
@@ -98,7 +98,7 @@ public class LookInDetailInteraction : IInteractableObject
                 
             onOver.onMouseOver += (PointerEventData eventData) => 
             {
-                if( !interactionIsActive )
+                if( !IsInteracting )
                     return;
 
                 m_isMouseOverInteraction = false;
@@ -119,7 +119,7 @@ public class LookInDetailInteraction : IInteractableObject
 
             onOver.onMouseOut += (PointerEventData data) =>
             {
-                if(!interactionIsActive )
+                if(!IsInteracting )
                     return;
 
                 if(!m_isDragging)
@@ -130,7 +130,7 @@ public class LookInDetailInteraction : IInteractableObject
         }
 	}
 
-    private new void Update()
+    private void Update()
     {
 		if(cursorDrag == null)
 		{
@@ -138,8 +138,6 @@ public class LookInDetailInteraction : IInteractableObject
 			cursorDraging = UIManager.Instance.m_cursorDragging;
 			cursorClick = UIManager.Instance.m_cursorClick;
 		}
-
-        base.Update();
 
         if (IsInteracting)
         {
@@ -169,10 +167,10 @@ public class LookInDetailInteraction : IInteractableObject
 		if( !ObjectivesManager.Instance.IsInteractionEligable( this ) )
 			return false;
 
-		interactionIsActive = !interactionIsActive;
+        base.Activate();
        
 
-		if( interactionIsActive )
+        if(IsInteracting)
 		{
 			OnInvestigateEnabled();
 
@@ -187,7 +185,7 @@ public class LookInDetailInteraction : IInteractableObject
 			UIManager.Instance.lookAtUI(false);
 		}
 
-		return interactionIsActive;
+        return IsInteracting;
 	}
 
 	private void OnInvestigateEnabled()
@@ -273,7 +271,7 @@ public class LookInDetailInteraction : IInteractableObject
 
     private void OnComponentDragBegin(PointerEventData data)
     {
-        if( !interactionIsActive )
+        if( !IsInteracting )
             return;  
 
         m_horizontalDrag = Mathf.Abs(data.delta.x) > Mathf.Abs(data.delta.y);
@@ -284,7 +282,7 @@ public class LookInDetailInteraction : IInteractableObject
 
     private void OnComponentDragged(PointerEventData data)
     {
-        if( !interactionIsActive )
+        if( !IsInteracting )
             return;
 
         if(m_horizontalDrag)
@@ -295,7 +293,7 @@ public class LookInDetailInteraction : IInteractableObject
 
 	private void OnComponentDragEnd(PointerEventData eventData)
     {
-        if( !interactionIsActive )
+        if( !IsInteracting )
             return;
 
 		m_isDragging = false;

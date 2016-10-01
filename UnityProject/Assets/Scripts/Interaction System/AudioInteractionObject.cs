@@ -28,10 +28,10 @@ public class AudioInteractionObject : IInteractableObject
 	// called by Interactor.cs
 	public override bool Activate()
 	{
-		interactionIsActive = !interactionIsActive;
+        base.Activate();
 
 		// START INTERACTION
-		if( interactionIsActive )
+        if( IsInteracting )
 		{
 			SubtitleManager.Instance.Stop();
 
@@ -94,8 +94,7 @@ public class AudioInteractionObject : IInteractableObject
                     yield break;
         }
 
-        if (interactionIsActive)
-            Activate();
-		
+        if (IsInteracting)
+            Activate();		
 	}
 }

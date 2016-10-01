@@ -30,9 +30,9 @@ public class PeepHoleInteraction : IInteractableObject
 		if( !ObjectivesManager.Instance.IsInteractionEligable( this ) )
 			return false;
 
-		interactionIsActive = !interactionIsActive;
+        base.Activate();
 
-		if( interactionIsActive )
+        if( IsInteracting )
 		{
 			if(LightStatesMachine.Instance.IsLightOn())
 				EnablePeepHoleTPP();
@@ -50,8 +50,8 @@ public class PeepHoleInteraction : IInteractableObject
 		}
 
 
-		ObjectivesManager.Instance.OnInteractionComplete( this, interactionIsActive );
-		return interactionIsActive;
+        ObjectivesManager.Instance.OnInteractionComplete( this, IsInteracting );
+        return IsInteracting;
 	}
 
 	private void EnablePeepHoleFPP()

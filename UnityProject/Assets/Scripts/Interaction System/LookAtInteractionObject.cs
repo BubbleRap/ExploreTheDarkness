@@ -35,10 +35,10 @@ public class LookAtInteractionObject : IInteractableObject
         if ( !ObjectivesManager.Instance.IsInteractionEligable( this ) )
 			return false;
 
-		interactionIsActive = !interactionIsActive;
+        base.Activate();
        
 
-        if(interactionIsActive)
+        if(IsInteracting)
         {
             _siljaBeh.cameraFollow.CamControlType = CameraFollow.CameraControlType.CCT_LookingAtObject;
         }
@@ -52,7 +52,7 @@ public class LookAtInteractionObject : IInteractableObject
 		
 		_siljaBeh.cameraFollow.focusPoint = transform.position;
 		
-        if (interactionIsActive)
+        if (IsInteracting)
         {
             _siljaBeh.IsMoveEnabled = false;
         }
@@ -61,7 +61,7 @@ public class LookAtInteractionObject : IInteractableObject
             StartCoroutine(UnfreezeSiljaAfterTransition(transitioner));
         }
 
-		if(interactionIsActive)
+        if(IsInteracting)
 		{
 			UIManager.Instance.lookAtUI(true);	
 		}
@@ -70,7 +70,7 @@ public class LookAtInteractionObject : IInteractableObject
 			UIManager.Instance.lookAtUI(false);
 		}
 
-        if (interactionIsActive)
+        if (IsInteracting)
         {
             if (overrideTransform != null)
             {
@@ -107,7 +107,7 @@ public class LookAtInteractionObject : IInteractableObject
         }
         
         ObjectivesManager.Instance.OnInteractionComplete( this, true );
-		return interactionIsActive;
+        return IsInteracting;
     }
 
     private IEnumerator UnfreezeSiljaAfterTransition(CameraTransitioner t)

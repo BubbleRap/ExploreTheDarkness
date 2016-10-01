@@ -12,9 +12,9 @@ public class GenericInteraction : IInteractableObject
 		if( !ObjectivesManager.Instance.IsInteractionEligable( this ) )
 			return false;
 
-		interactionIsActive = !interactionIsActive;
+        base.Activate();
 
-		if( interactionIsActive )
+        if(IsInteracting)
 		{
 			m_onInteractionActivate.Invoke();
 		}
@@ -23,7 +23,7 @@ public class GenericInteraction : IInteractableObject
 			m_onInteractionDisactivate.Invoke();
 		}
 
-		ObjectivesManager.Instance.OnInteractionComplete( this, interactionIsActive );
+        ObjectivesManager.Instance.OnInteractionComplete( this, IsInteracting );
 		return false;
 	}
 }

@@ -9,28 +9,81 @@ public class Interactor : MonoBehaviour
 
     public IInteractableObject CurrentObject { get; private set; }
 
-    private List<IInteractableObject> interactionObjects = new List<IInteractableObject>();
+    private Dictionary<IInteractableObject, ButtonPrompt> interactionObjects = 
+        new Dictionary<IInteractableObject, ButtonPrompt>();
+    
+    private List<IInteractableObject> m_sceneInteractions;
 
     public bool IsInteracting { get; set; }
     public int CloseInteractionsCount { get {return interactionObjects.Count;} }
 
     public void OnInteractionEnter( IInteractableObject interactionObject )
 	{
-		if( !interactionObjects.Contains( interactionObject ) )
-			interactionObjects.Add( interactionObject );
+		if( interactionObjects.ContainsKey( interactionObject ) )
+            return;
+        
+        GameObject promtGO = Instantiate(Resources.Load<GameObject>("buttonPrompt")) as GameObject;
+        ButtonPrompt buttonPrompt = promtGO.GetComponent<ButtonPrompt>(); 
+        buttonPrompt.SetText ("");
+        buttonPrompt.SetConnectedTransform (interactionObject.transform);
+
+
+        interactionObjects.Add(interactionObject, buttonPrompt);
+        interactionObject.onInteractionDestroyed += OnInteractionDestroyed;
+        interactionObject.onInteractionDisabled += OnInteractionDisabled;
 	}
 
     public void OnInteractionExit( IInteractableObject interactionObject)
 	{
-		if( interactionObjects.Contains( interactionObject ) )
-			interactionObjects.Remove( interactionObject );	
-
-		if( CurrentObject == interactionObject )
+        if( CurrentObject == interactionObject )
             DeselectCurrentObject(CurrentObject);
-	}
+        
+		if( !interactionObjects.ContainsKey( interactionObject ) )
+            return;
+        
+        Destroy(interactionObjects[interactionObject].gameObject);
+        interactionObject.onInteractionDestroyed -= OnInteractionDestroyed;
+        interactionObject.onInteractionDisabled -= OnInteractionDisabled;
+		interactionObjects.Remove( interactionObject );	
+    }
+
+    void Start()
+    {
+        // search for all the interactions in the scene
+        m_sceneInteractions = new List<IInteractableObject>(FindObjectsOfType<IInteractableObject>());
+    }
        
 	void Update () 
 	{
+        // iterate over all the interactions,
+        // checking on distance
+        // adding to the active list if close
+
+        for(int i = 0; i < m_sceneInteractions.Count; i++)
+        {
+            IInteractableObject interaction = m_sceneInteractions[i];
+                
+            bool isEligable = 
+                interaction.IsInteracting || interaction.ActiveWhen == IInteractableObject.WorkState.WorksAlways;
+
+            if( interaction.ActiveWhen != IInteractableObject.WorkState.WorksAlways )
+                isEligable = true && !LightStatesMachine.Instance.IsLightOn();
+
+            bool closeInteraction = isEligable && IsCharCloserThan(interaction, 1.5f);
+
+
+            if(closeInteraction)
+            {
+                OnInteractionEnter(interaction);
+            }
+
+            if(!closeInteraction)
+            {
+                OnInteractionExit(interaction);
+            }
+        }
+
+
 		// here should be descibed 3 cases:
 		// 1. start interaction
 		// 2. stop interaction
@@ -39,43 +92,44 @@ public class Interactor : MonoBehaviour
 
 		// select current interaction object going through the list
 		float closestDistToCenter = Mathf.Infinity;
-		int closestIdx = -1;
+        IInteractableObject closestInteraction = null;
 
-		for( int i = 0; i < interactionObjects.Count; i++ )
+		//for( int i = 0; i < interactionObjects.Count; i++ )
+        foreach(var interactionPair in interactionObjects)
 		{
-			// check if object was destroyed
-			if( interactionObjects[i] == null)
-			{
-				interactionObjects.RemoveAt( i );	
-				i--;
-				continue;
-			}
+            IInteractableObject iObject = interactionPair.Key;
+            ButtonPrompt promtObject = interactionPair.Value;
 
-            if (!interactionObjects[i].isVisible())
-                continue;
+            //if (!iObject.isVisible())
+            //    continue;
 
-			Vector3 viewPos = Camera.main.WorldToViewportPoint( interactionObjects[i].transform.position );
+            bool showText = LightStatesMachine.Instance.IsLightOn() && !iObject.IsInteracting;
+            if(iObject is DoorInteraction)
+                showText = true;
+
+            UpdatePromtButton(showText, iObject, promtObject);
+
+            Vector3 viewPos = Camera.main.WorldToViewportPoint( iObject.transform.position );
 			float distance = Vector2.Distance( viewPos, Vector2.one * 0.5f );
             if( distance < closestDistToCenter )
 			{
 				closestDistToCenter = distance;
-				closestIdx = i;
+                closestInteraction = iObject;
 			}
 		}
 
-		if( interactionObjects.Count == 0 )
+        if( closestInteraction == null )
 			return;
 
 		// switching to the new interactable object
-		if(closestIdx < interactionObjects.Count && closestIdx >= 0 
-            && CurrentObject != interactionObjects[closestIdx] )
+        if(CurrentObject != closestInteraction)
 		{
 			if(CurrentObject != null)
 			{
 				DeselectCurrentObject(CurrentObject);
 			}
 
-            SelectCurrentObject(interactionObjects[closestIdx]);
+            SelectCurrentObject(closestInteraction);
 		}
 
 		if(!IsInteracting && Input.GetMouseButtonDown(0))
@@ -101,16 +155,46 @@ public class Interactor : MonoBehaviour
 		}
 	}
 
+    public bool IsCharCloserThan(IInteractableObject obj, float dist)
+    {
+        return (transform.position - obj.transform.position).magnitude < dist;
+    }
+
+    private void UpdatePromtButton(bool showText, IInteractableObject iObject, ButtonPrompt promtObject)
+    {
+        if(IsInteracting)
+            showText = false;
+
+        string textToOutput = iObject.IsSelected ? iObject.ActionsToDisplay : iObject.TextToDisplay;       
+        promtObject.SetText (showText ? textToOutput : "");
+        promtObject.setInteractableUI(iObject.IsSelected && !IsInteracting);
+
+        Vector3 direction = ((iObject.transform.position - Vector3.up * 1.5f) - Camera.main.transform.position).normalized;
+        promtObject.transform.position = iObject.transform.position - direction * 0.25f;
+        promtObject.transform.LookAt(Camera.main.gameObject.transform);
+    }
+
     private void SelectCurrentObject(IInteractableObject obj)
     {
         CurrentObject = obj;
-        CurrentObject.isSelected = true;
+        CurrentObject.IsSelected = true;
     }
 
     private void DeselectCurrentObject(IInteractableObject obj)
     {
-        CurrentObject.isSelected = false;
+        CurrentObject.IsSelected = false;
         CurrentObject = null;
     }
 
+    private void OnInteractionDestroyed(IInteractableObject obj)
+    {
+        m_sceneInteractions.Remove(obj);
+        OnInteractionExit(obj);
+    }
+
+    private void OnInteractionDisabled(IInteractableObject obj)
+    {
+        m_sceneInteractions.Remove(obj);
+        OnInteractionExit(obj);
+    }
 }

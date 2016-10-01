@@ -14,6 +14,8 @@ public class DoorInteraction : IInteractableObject
     private SphereCollider m_collider;
     private CharacterBehaviour m_interactingBehaviour;
 
+    private bool m_interacted;
+
     private new void Awake()
     {
         base.Awake();
@@ -24,11 +26,11 @@ public class DoorInteraction : IInteractableObject
 
     public override bool Activate()
     {
-		interactionIsActive = !interactionIsActive;
+        m_interacted = !m_interacted;
 
 		if (m_interactingBehaviour == null)
 		{
-			if(interactionIsActive)
+            if(m_interacted)
 			{
 				ActionsToDisplay = m_actionOnOpen;
 				//if(openOut)
@@ -55,7 +57,7 @@ public class DoorInteraction : IInteractableObject
 
         bool openOut = dot >= 0f ? true : false;
 
-        if(interactionIsActive)
+        if(m_interacted)
         {
             ActionsToDisplay = m_actionOnOpen;
             //if(openOut)

@@ -6,9 +6,8 @@ public class LightSwitchInteraction : IInteractableObject
 {
 	public Light[] _lightSource;
 
-	public bool _defaultState = false;
-
 	private Collider _collider;
+    private bool m_interacted = true;
 
 
 	#region Lau-san stuff
@@ -28,10 +27,10 @@ public class LightSwitchInteraction : IInteractableObject
 				_collider = col;
 				break;
 			}
-		_collider.enabled = interactionIsActive = _defaultState;
+        _collider.enabled = m_interacted;
 
 		foreach( Light light in _lightSource )
-			light.gameObject.SetActive(interactionIsActive);
+            light.gameObject.SetActive(m_interacted);
 
 
 		emitColorOn = new Color[_emissiveSurfaces.Length];
@@ -39,7 +38,7 @@ public class LightSwitchInteraction : IInteractableObject
 		{
 			emitColorOn[i] = _emissiveSurfaces[i].material.GetColor("_EmissionColor");
 
-			if( _defaultState )
+            if( m_interacted )
 			{
 				_emissiveSurfaces[i].material.SetColor("_EmissionColor", emitColorOn[i]);
 				DynamicGI.SetEmissive(_emissiveSurfaces[i], emitColorOn[i] * Mathf.LinearToGammaSpace(emissionIntensity));
@@ -57,12 +56,14 @@ public class LightSwitchInteraction : IInteractableObject
 		if( !ObjectivesManager.Instance.IsInteractionEligable( this ) )
 			return false;
 
+        m_interacted = !m_interacted;
+
 		foreach( Light light in _lightSource )
-			light.enabled = !interactionIsActive;
+            light.enabled = m_interacted;
 
-		_collider.enabled = interactionIsActive = !interactionIsActive;
+        _collider.enabled = m_interacted;
 
-		if( interactionIsActive )
+        if( m_interacted )
 		{
 			for( int i = 0; i < _emissiveSurfaces.Length; i++ )
 			{
@@ -79,20 +80,8 @@ public class LightSwitchInteraction : IInteractableObject
 			}
 		}
 
-		ObjectivesManager.Instance.OnInteractionComplete( this, interactionIsActive );
+        ObjectivesManager.Instance.OnInteractionComplete( this, m_interacted );
 
 		return false;
 	}
-
-	private void Update()
-	{
-		base.Update();
-    
-		if( !interactionIsActive )
-			return;
-    
-        //if (m_interactingBehaviour != null)
-        //    m_interactingBehaviour.flshCtrl.ChargeFlashlight();
-    
-    }
 }
