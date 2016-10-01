@@ -162,4 +162,9 @@ public class IInteractableObject : MonoBehaviour
     {
         Destroy(this);
     }
+
+    private void OnDisable()
+    {
+        buttonPrompt.gameObject.SetActive(false);
+    }
 }

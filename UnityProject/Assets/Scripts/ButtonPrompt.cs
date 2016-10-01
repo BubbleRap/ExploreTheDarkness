@@ -105,17 +105,6 @@ public class ButtonPrompt : MonoBehaviour {
             }
         }
 
-		/*
-		Vector2 screenpos = Camera.main.WorldToScreenPoint (transform.position);
-		screenpos.x /= Screen.width;
-		screenpos.y /= Screen.height;
-
-		screenpos.x = Mathf.Abs(0.5f - screenpos.x);
-		screenpos.y = Mathf.Abs(0.5f - screenpos.y);
-		float distFromCenter = Mathf.Max (screenpos.x, screenpos.y);
-		distFromCenter *= 4;
-		*/
-
 		float distFromSilja = Vector3.Distance (connectedObject.position, interactor.transform.position);
 
 		distFromSilja /= 4f;
@@ -125,13 +114,4 @@ public class ButtonPrompt : MonoBehaviour {
 
 		return 1f - (dist*dist);
 	}
-
-    //void OnDrawGizmos()
-    //{
-    //    if (textMesh.color.a > 0)
-    //    {
-    //        Gizmos.color = Color.red;
-    //        Gizmos.DrawLine(Camera.main.transform.position, connectedObject.position);
-    //    }
-    //}
 }
