@@ -1,87 +1,85 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ButtonPrompt : MonoBehaviour {
 
 	public float distance = 0.5f;
 
-    private TextMesh textMesh;
-    private Renderer m_renderer;
-    private Renderer cachedRenderer;
-    private Transform connectedObject;
-	private SpriteRenderer spriteRenderer;
+    private Text m_text;
+    private Image m_clickImage;
+    private CanvasGroup m_group;
 
-    public bool isVisible { get; private set; }
+    private Canvas m_canvas;
+    private RectTransform m_Rect;
+    private Transform m_connectedTransform;
+
+    public bool IsVisible { get; private set; }
 
     void Awake()
     {
-        textMesh = GetComponentInChildren<TextMesh>();
-        cachedRenderer = textMesh.GetComponent<Renderer>();
-		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        m_Rect = transform as RectTransform;
+        m_group = GetComponent<CanvasGroup>();
+        m_text = GetComponentInChildren<Text>();
+        m_clickImage = GetComponentInChildren<Image>();
     }
 
-	void OnEnable()
+    void Start()
     {
-        textMesh.color = Color.white;
-        cachedRenderer.material.color = new Color (1f, 1f, 1f, 0f);
-	}
+        m_canvas = GetComponentInParent<Canvas>();
+    }
 
 	public void SetText(string text)
     {
-        textMesh.text = text;
+        m_text.text = text;
 	}
 
 	public void setInteractableUI(bool boolean)
     {
-		spriteRenderer.enabled = boolean;
+		m_clickImage.enabled = boolean;
 
-		Vector3 basePosition = textMesh.gameObject.transform.localPosition;
-
-		textMesh.gameObject.transform.localPosition = 
-            new Vector3(
-                basePosition.x, 
-                boolean ? 0.021f : 0f, 
-                basePosition.y);
-        
-		spriteRenderer.gameObject.transform.localPosition = 
-            new Vector3(
-                basePosition.x, 
-                boolean ? -0.021f : 0f, 
-                basePosition.y);
+		//Vector3 basePosition = m_text.gameObject.transform.localPosition;
+        //
+		//m_text.gameObject.transform.localPosition = 
+        //    new Vector3(
+        //        basePosition.x, 
+        //        boolean ? 0.021f : 0f, 
+        //        basePosition.y);
+        //
+		//m_clickImage.gameObject.transform.localPosition = 
+        //    new Vector3(
+        //        basePosition.x, 
+        //        boolean ? -0.021f : 0f, 
+        //        basePosition.y);
 	}
 
 	public void SetConnectedTransform(Transform t)
     {
-		connectedObject = t;
-        m_renderer = connectedObject.GetComponent<Renderer>();
+		m_connectedTransform = t;
 	}
 
 	void Update () 
     {
-        float size = (Camera.main.transform.position - transform.position).magnitude ;
-		transform.localScale = new Vector3(size,size,size);
+        Vector2 pos = UIManager.WorldToCanvasPosition(m_connectedTransform.position);
+        m_Rect.anchoredPosition = pos;
 
-        float alpha = GetAlpha();
+        float alpha = Mathf.Clamp01(GetAlpha());
 
-        isVisible = alpha > 0f;
+        IsVisible = alpha > 0f;
 
-		if(alpha < 0f)
-		{
-			alpha = 0;
-		}
+        // t was 0.1f here for some reason?
+        float currentAlpha = Mathf.Lerp(m_text.color.a, alpha, 0.1f);
 
-		cachedRenderer.material.color = new Color (1f, 1f, 1f, Mathf.Lerp(cachedRenderer.material.color.a, alpha, 0.1f));
-		spriteRenderer.material.color = cachedRenderer.material.color;
+        Color col = Color.white;
+        col.a = currentAlpha;
 
-        transform.LookAt(Camera.main.transform);
+        m_text.color = col;
+        m_clickImage.color = col;
 	}
 
 	private float GetAlpha()
     {
-        if (m_renderer != null && !m_renderer.isVisible)
-			return 0f;
-
-        float distFromSilja = Vector3.Distance (transform.position, Camera.main.transform.position);
+        float distFromSilja = Vector3.Distance (m_connectedTransform.position, Camera.main.transform.position);
 
         if(distFromSilja > 10f)
             return 0f;
