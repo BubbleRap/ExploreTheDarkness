@@ -4,10 +4,11 @@ using System.Collections;
 [RequireComponent(typeof(Collider))]
 public class LightSwitchInteraction : IInteractableObject 
 {
+    public bool m_interacted = true;
 	public Light[] _lightSource;
 
 	private Collider _collider;
-    private bool m_interacted = true;
+
 
 
 	#region Lau-san stuff

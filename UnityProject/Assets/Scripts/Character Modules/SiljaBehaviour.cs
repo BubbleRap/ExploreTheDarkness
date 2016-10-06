@@ -28,8 +28,8 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
     public float m_normalDischargeSpeed = 1f;
     public float m_scaredDischargeSpeed = 6f;
 
-    private float verticalSensetivity = 0.5f;
-    private float horizontalSensetivity = 0.5f;
+    private float verticalSensetivity = 0.15f;
+    private float horizontalSensetivity = 0.15f;
 
     private bool inputChanged;
     private Vector3 oldForwardVector;
