@@ -733,7 +733,7 @@ public class SerializeRigidBody : IComponentSerializer {
             constraints = source.constraints;
             collisionDetectionMode = source.collisionDetectionMode;
             interpolation = source.interpolation;
-            solverIterationCount = source.solverIterationCount;
+            solverIterationCount = source.solverIterations;
         }
 
         public void Configure(Rigidbody body) {
@@ -754,7 +754,7 @@ public class SerializeRigidBody : IComponentSerializer {
             body.constraints = constraints;
             body.collisionDetectionMode = collisionDetectionMode;
             body.interpolation = interpolation;
-            body.solverIterationCount = solverIterationCount;
+            body.solverIterations = solverIterationCount;
             body.isKinematic = isKinematic;
             if (!isKinematic) {
                 body.velocity = velocity;
