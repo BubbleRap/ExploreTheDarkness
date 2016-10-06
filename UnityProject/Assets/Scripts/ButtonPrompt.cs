@@ -6,27 +6,19 @@ public class ButtonPrompt : MonoBehaviour {
 
 	public float distance = 0.5f;
 
-    private Text m_text;
-    private Image m_clickImage;
-    private CanvasGroup m_group;
+    private TextMesh m_text;
+    private Renderer m_textRenderer;
+    private SpriteRenderer m_clickImage;
 
-    private Canvas m_canvas;
-    private RectTransform m_Rect;
     private Transform m_connectedTransform;
 
     public bool IsVisible { get; private set; }
 
     void Awake()
     {
-        m_Rect = transform as RectTransform;
-        m_group = GetComponent<CanvasGroup>();
-        m_text = GetComponentInChildren<Text>();
-        m_clickImage = GetComponentInChildren<Image>();
-    }
-
-    void Start()
-    {
-        m_canvas = GetComponentInParent<Canvas>();
+        m_text = GetComponentInChildren<TextMesh>();
+        m_textRenderer = m_text.GetComponent<Renderer>();
+        m_clickImage = GetComponentInChildren<SpriteRenderer>();
     }
 
 	public void SetText(string text)
@@ -38,19 +30,19 @@ public class ButtonPrompt : MonoBehaviour {
     {
 		m_clickImage.enabled = boolean;
 
-		//Vector3 basePosition = m_text.gameObject.transform.localPosition;
-        //
-		//m_text.gameObject.transform.localPosition = 
-        //    new Vector3(
-        //        basePosition.x, 
-        //        boolean ? 0.021f : 0f, 
-        //        basePosition.y);
-        //
-		//m_clickImage.gameObject.transform.localPosition = 
-        //    new Vector3(
-        //        basePosition.x, 
-        //        boolean ? -0.021f : 0f, 
-        //        basePosition.y);
+		Vector3 basePosition = m_text.transform.localPosition;
+        
+		m_text.transform.localPosition = 
+            new Vector3(
+                basePosition.x, 
+                boolean ? 0.021f : 0f, 
+                basePosition.y);
+        
+		m_clickImage.transform.localPosition = 
+            new Vector3(
+                basePosition.x, 
+                boolean ? -0.021f : 0f, 
+                basePosition.y);
 	}
 
 	public void SetConnectedTransform(Transform t)
@@ -60,21 +52,24 @@ public class ButtonPrompt : MonoBehaviour {
 
 	void Update () 
     {
-        Vector2 pos = UIManager.WorldToCanvasPosition(m_connectedTransform.position);
-        m_Rect.anchoredPosition = pos;
+        Vector3 direction = ((m_connectedTransform.position - Vector3.up * 1.5f) - Camera.main.transform.position).normalized;
+        transform.position = m_connectedTransform.position - direction * 0.25f;
+        transform.LookAt(Camera.main.gameObject.transform);
+
+        float size = (Camera.main.transform.position - transform.position).magnitude ;
+        transform.localScale = new Vector3(size,size,size);
 
         float alpha = Mathf.Clamp01(GetAlpha());
-
         IsVisible = alpha > 0f;
 
-        // t was 0.1f here for some reason?
-        float currentAlpha = Mathf.Lerp(m_text.color.a, alpha, 0.1f);
+        float currentAlpha = Mathf.MoveTowards(m_text.color.a, alpha, Time.deltaTime);
 
         Color col = Color.white;
         col.a = currentAlpha;
 
         m_text.color = col;
-        m_clickImage.color = col;
+        //m_clickImage.color = col;
+        m_textRenderer.material.color = col;
 	}
 
 	private float GetAlpha()

@@ -8,8 +8,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22408430}
-  - 114: {fileID: 11400000}
   - 225: {fileID: 22504016}
+  - 114: {fileID: 114000013775024714}
   m_Layer: 12
   m_Name: buttonPromptCanvas
   m_TagString: Untagged
@@ -51,18 +51,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaa9c3a8231dee44ca5720c3c86f6ace, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 0.5
 --- !u!114 &11430870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -144,6 +132,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 22492854}
   - {fileID: 22444030}
@@ -163,6 +152,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22408430}
   m_RootOrder: 1
@@ -180,6 +170,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22408430}
   m_RootOrder: 0
@@ -234,3 +225,15 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
+--- !u!114 &114000013775024714
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d2c0f8b43b04ecd82c20659e91222c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 0.5

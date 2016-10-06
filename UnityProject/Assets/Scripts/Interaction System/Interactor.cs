@@ -10,15 +10,12 @@ public class Interactor : MonoBehaviour
     public bool IsInteracting { get; set; }
     public IInteractableObject CurrentObject { get; private set; }
 
-
-    private Canvas m_canvas;
     private List<IInteractableObject> m_sceneInteractions;
     private Dictionary<IInteractableObject, ButtonPrompt> interactionObjects;
 
 
     void Start()
     {
-        m_canvas = FindObjectOfType<Canvas>();
         interactionObjects = new Dictionary<IInteractableObject, ButtonPrompt>();
 
         // search for all the interactions in the scene
@@ -48,7 +45,7 @@ public class Interactor : MonoBehaviour
             if( interaction.ActiveWhen != IInteractableObject.WorkState.WorksAlways )
                 isEligable = true && !LightStatesMachine.Instance.IsLightOn();
 
-            bool closeInteraction = isEligable && IsCharCloserThan(interaction, 1.5f);
+            bool closeInteraction = interaction.enabled && isEligable && IsCharCloserThan(interaction, 3.0f);
 
 
             if(closeInteraction)
@@ -66,11 +63,14 @@ public class Interactor : MonoBehaviour
     private void CheckCurrentSelection()
     {
         // select current interaction object going through the list
+        if(CurrentObject != null && !IsCharCloserThan(CurrentObject, 1.5f))
+        {
+            DeselectCurrentObject(CurrentObject);
+        }
 
         float closestDistToCenter = Mathf.Infinity;
         IInteractableObject closestInteraction = null;
 
-        //for( int i = 0; i < interactionObjects.Count; i++ )
         foreach(var interactionPair in interactionObjects)
         {
             IInteractableObject iObject = interactionPair.Key;
@@ -90,7 +90,9 @@ public class Interactor : MonoBehaviour
 
             Vector3 viewPos = Camera.main.WorldToViewportPoint( iObject.transform.position );
             float distance = Vector2.Distance( viewPos, Vector2.one * 0.5f );
-            if( distance < closestDistToCenter )
+            bool isRealClose = IsCharCloserThan( iObject, 1.5f );
+
+            if( distance < closestDistToCenter && isRealClose)
             {
                 closestDistToCenter = distance;
                 closestInteraction = iObject;
@@ -157,8 +159,8 @@ public class Interactor : MonoBehaviour
         buttonPrompt.SetConnectedTransform (interactionObject.transform);
 
         // setting the object under Canvas
-        promtGO.transform.SetParent(UIManager.s_canvas.transform);
-        promtGO.transform.localScale = Vector3.one;
+        //promtGO.transform.SetParent(UIManager.s_canvas.transform);
+        //promtGO.transform.localScale = Vector3.one;
 
 
         interactionObjects.Add(interactionObject, buttonPrompt);
@@ -168,9 +170,6 @@ public class Interactor : MonoBehaviour
 
     private void OnInteractionExit( IInteractableObject interactionObject)
     {
-        if( CurrentObject == interactionObject )
-            DeselectCurrentObject(CurrentObject);
-
         if( !interactionObjects.ContainsKey( interactionObject ) )
             return;
 
