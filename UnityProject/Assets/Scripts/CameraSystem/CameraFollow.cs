@@ -120,7 +120,7 @@ public class CameraFollow : MonoBehaviour
             break;
 			
 		case CameraControlType.CCT_FPSLook:
-            UpdateFP(horizDelta * 50f, vertDelta * 50f);
+			UpdateTP();//UpdateFP(horizDelta * 50f, vertDelta * 50f);
 			break;
 			
 		case CameraControlType.CCT_LookingAtObject:		
