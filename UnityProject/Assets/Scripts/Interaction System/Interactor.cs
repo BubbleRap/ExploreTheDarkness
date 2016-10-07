@@ -119,6 +119,8 @@ public class Interactor : MonoBehaviour
         // this should be checking all interactions attached to a single game object,
         // but lets imagine there is one one at a time
 
+		if(CurrentObject == null) return;
+
         if(!IsInteracting && Input.GetMouseButtonDown(0))
         {
             IsInteracting = false;
