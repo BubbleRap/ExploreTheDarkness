@@ -8,20 +8,66 @@ public class SubtitleManager : MonoBehaviour {
     public static SubtitleManager Instance {
         get {return _Instance;}
     }
-        
+
+    public AudioClip[] audioClips;
+
+
 	public GUIStyle style;
 	public Material OutlineMaterial;
 
 	private string currentText = ""; 
+    private AudioSource m_audioSource;
+    private Dictionary<string, int> indexAccessor = new Dictionary<string, int>();
+
 	public bool isPlaying = false;
    
 
     void Awake(){
         _Instance = this;
+        m_audioSource = Camera.main.GetComponentInParent<AudioSource>();
+
+        string[] functionName = new string[]
+        {
+            "Diary",
+            "Phone",
+            "Electricity",
+            "Portrait",
+            "Calendar",
+            "Postcards", 
+            "Darkness",
+            "Darkness2", 
+            "Darkness3",
+            "FarHallo",         
+            "FarHoldOp",
+            "FarHvorErDu2",
+            "FarHvorErDu",
+            "SorryDad",
+            "WhereDoesErikLive",
+            "DearDiary4",
+            "DoorLocked",
+            "FieFarDuMaUnskylde",
+            "Dictaphone",
+            "DaddysPills",
+            "Melodi",
+            "TrorDuViKan",
+            "ViMaFinde",
+            "FarErDuHin",
+            "ManyPictures",
+            "Buscard"
+        };
+
+        for(int i = 0; i < functionName.Length; i++)
+            indexAccessor.Add(functionName[i], i);
     }
 
     public void PlayTeleText(string name)
     {
+        if(indexAccessor.ContainsKey(name))
+        {
+            int index = indexAccessor[name];
+            m_audioSource.PlayOneShot(audioClips[index]);
+        }
+
         Invoke(name, 0f);
     }
 
