@@ -15,6 +15,7 @@ public class IInteractableObject : MonoBehaviour
     public WorkState ActiveWhen;
     public string TextToDisplay = "some string";
     public string ActionsToDisplay = "Look";
+    public string TetelextName = "";
 
     public bool IsInteracting { get; set; }
     public bool IsSelected { get; set; }
@@ -43,6 +44,11 @@ public class IInteractableObject : MonoBehaviour
 
     public virtual bool Activate() 
     { 
+        if(!IsInteracting && !string.IsNullOrEmpty(TetelextName))
+        {
+            SubtitleManager.Instance.PlayTeleText(TetelextName);
+        }
+
         return IsInteracting = !IsInteracting; 
     }
        

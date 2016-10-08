@@ -16,7 +16,7 @@ public class GenericInteraction : IInteractableObject
 
         if(IsInteracting)
 		{
-			m_onInteractionActivate.Invoke();
+			m_onInteractionActivate.Invoke();               
 		}
 		else
 		{

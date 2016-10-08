@@ -36,8 +36,8 @@ public class CameraFollow : MonoBehaviour
 
     private float m_lookOffset = 20f;
 
-    private float yaw = 0f;
-    private float pitch = 0f;
+    private float yaw = 0.5f;
+    private float pitch = 0.45f;
 
     // from 0.25 to 0.5 for the low look angle
     private float m_minPitch = 0.45f;

@@ -4,11 +4,106 @@ using System.Collections.Generic;
 
 public class SubtitleManager : MonoBehaviour {
 
+    private static SubtitleManager _Instance;
+    public static SubtitleManager Instance {
+        get {return _Instance;}
+    }
+
+    public AudioClip[] audioClips;
+
+
 	public GUIStyle style;
 	public Material OutlineMaterial;
+
 	private string currentText = ""; 
+    private AudioSource m_audioSource;
+    private Dictionary<string, int> indexAccessor = new Dictionary<string, int>();
 
 	public bool isPlaying = false;
+   
+
+    void Awake(){
+        _Instance = this;
+        m_audioSource = Camera.main.GetComponentInParent<AudioSource>();
+
+        string[] functionName = new string[]
+        {
+            "Diary",
+            "Phone",
+            "Electricity",
+            "Portrait",
+            "Calendar",
+            "Postcards", 
+            "Darkness",
+            "Darkness2", 
+            "Darkness3",
+            "FarHallo",         
+            "FarHoldOp",
+            "FarHvorErDu2",
+            "FarHvorErDu",
+            "SorryDad",
+            "WhereDoesErikLive",
+            "DearDiary4",
+            "DoorLocked",
+            "FieFarDuMaUnskylde",
+            "Dictaphone",
+            "DaddysPills",
+            "Melodi",
+            "TrorDuViKan",
+            "ViMaFinde",
+            "FarErDuHin",
+            "ManyPictures",
+            "Buscard"
+        };
+
+        for(int i = 0; i < functionName.Length; i++)
+            indexAccessor.Add(functionName[i], i);
+    }
+
+    public void PlayTeleText(string name)
+    {
+        if(indexAccessor.ContainsKey(name))
+        {
+            int index = indexAccessor[name];
+            m_audioSource.PlayOneShot(audioClips[index]);
+        }
+
+        Invoke(name, 0f);
+    }
+
+    public void Stop(){
+        StopAllCoroutines ();
+        currentText = "";
+
+        isPlaying = false;
+    }
+
+    void OnGUI(){
+
+        style.font.material = OutlineMaterial;
+        GUI.Label (new Rect (Screen.width / 2, Screen.height * (3f/4f), -Screen.height * (8/10), 100), currentText, style);
+    }
+
+    private IEnumerator PlayDictionary(Dictionary<float,string> dict){
+
+        isPlaying = true;
+
+        float secondsCounter = 0f;
+        foreach (float key in dict.Keys) {
+            yield return new WaitForSeconds(key - secondsCounter);
+            secondsCounter = key;
+
+            string value = "";
+            dict.TryGetValue(key,out value);
+            //this.guiText.text = value;
+            currentText = value;
+        }
+        //this.guiText.text = "";
+        currentText = "";
+
+        isPlaying = false;
+    }
+
 
 	Dictionary<float, string> diarySubtitles = new Dictionary<float, string>()
 	{
@@ -321,48 +416,17 @@ public class SubtitleManager : MonoBehaviour {
 		StopAllCoroutines ();
 		StartCoroutine ("PlayDictionary", ManyPicturesSubs);
 	}
+       
+    Dictionary<float, string> BusCardSubs = new Dictionary<float, string>()
+    {
+        { 0.5f, "Hi, Dad"},
+        { 2f, "I just forgot the bus card."},
+        { 4f, "Did you see where I put it?"},
+        { 6f, ""},
+    };
 
-	private static SubtitleManager _Instance;
-	public static SubtitleManager Instance {
-		get {return _Instance;}
-	}
-
-	void Awake(){
-		_Instance = this;
-	}
-
-	private IEnumerator PlayDictionary(Dictionary<float,string> dict){
-
-		isPlaying = true;
-
-		float secondsCounter = 0f;
-		foreach (float key in dict.Keys) {
-			yield return new WaitForSeconds(key - secondsCounter);
-			secondsCounter = key;
-
-			string value = "";
-			dict.TryGetValue(key,out value);
-			//this.guiText.text = value;
-			currentText = value;
-		}
-		//this.guiText.text = "";
-		currentText = "";
-
-		isPlaying = false;
-	}
-
-	public void Stop(){
-		StopAllCoroutines ();
-		currentText = "";
-
-		isPlaying = false;
-	}
-
-	void OnGUI(){
-
-		style.font.material = OutlineMaterial;
-
-		GUI.Label (new Rect (Screen.width / 2, Screen.height * (3f/4f), -Screen.height * (8/10), 100), currentText, style);
-
-	}
+    public void Buscard(){
+        StopAllCoroutines ();
+        StartCoroutine ("PlayDictionary", BusCardSubs);
+    }
 }

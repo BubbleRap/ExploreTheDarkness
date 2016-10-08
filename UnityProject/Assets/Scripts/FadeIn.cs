@@ -128,7 +128,7 @@ public class FadeIn : MonoBehaviour {
 			}
 		} else {
 			siljaCharacter.GetComponent<AudioSource>().Play();
-			SubtitleManager.Instance.SorryDad();
+            SubtitleManager.Instance.PlayTeleText("SorryDad");
 			mainTheme.Play();
 			MenuController.canToggleMenu = true;
 			MonoBehaviour.Destroy(gameObject);//this);
