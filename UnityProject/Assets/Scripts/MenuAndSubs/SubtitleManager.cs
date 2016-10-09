@@ -152,7 +152,7 @@ public class SubtitleManager : MonoBehaviour {
 
 	Dictionary<float, string> picSubtitles = new Dictionary<float, string>()
 	{
-		{ 1f, "Dad always took the time, to hide the fact that he was in a wheelchair.\n Especially on photos."},
+		{ 1f, "I miss Mom."},
 		{ 8f, ""},
 	};
 
@@ -185,7 +185,7 @@ public class SubtitleManager : MonoBehaviour {
 
 	Dictionary<float, string> darknessSubtitles = new Dictionary<float, string>()
 	{
-		{ 1f, "It's so dark."},
+		{ 1f, "It's too dark."},
 		{ 3f, ""},
 	};
 
@@ -349,7 +349,7 @@ public class SubtitleManager : MonoBehaviour {
 
 	Dictionary<float, string>	DaddysPillsSubs = new Dictionary<float, string>()
 	{
-		{ 0.01f, "Daddy’s pills."},
+		{ 0.01f, "Dad’s pills."},
 		{ 3f, ""},
 	};
 
