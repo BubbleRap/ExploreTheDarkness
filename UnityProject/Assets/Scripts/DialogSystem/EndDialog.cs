@@ -13,6 +13,8 @@ public class EndDialog : MonoBehaviour {
 	public float imageStayTime = 10.0f;
 	public float fadeOutTime = 1.0f;
 	private bool isActive = false;
+	private bool doneLoading = false;
+	private bool fadeBlack = false;
 
 	public bool fadeInOnTrail = false;
 	public AudioSource EndSong;
@@ -71,7 +73,13 @@ public class EndDialog : MonoBehaviour {
 		float colorAlpha = fade.color.a;
 		float elapsedTime = 0;
 
-		yield return new WaitForSeconds(delay);
+		StartCoroutine(LoadLevel(Application.loadedLevel + 1));
+		//yield return new WaitForSeconds(delay);
+
+		while(!doneLoading)
+		{
+			yield return new WaitForSeconds(1f);
+		}
 
 		while(elapsedTime < time)
 		{
@@ -82,12 +90,29 @@ public class EndDialog : MonoBehaviour {
 			yield return null;
 		}
 
-		StartCoroutine(LoadLevel(Application.loadedLevel + 1));
+		fadeBlack = true;
+
+		yield return null;
 	}
 
 	public IEnumerator LoadLevel(int levelNumber) {
 		Application.backgroundLoadingPriority = ThreadPriority.Low;
 		AsyncOperation async = Application.LoadLevelAsync(levelNumber);
-		yield return async;
+		async.allowSceneActivation = false;
+
+		while(!async.isDone)
+		{
+			if(async.progress == 0.9f)
+			{
+				doneLoading = true;
+			}
+			if(fadeBlack)
+			{
+				async.allowSceneActivation = true;
+			}
+			yield return null;
+		}
+
+		yield return null;
 	}
 }
