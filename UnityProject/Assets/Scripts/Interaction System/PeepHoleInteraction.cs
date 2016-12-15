@@ -68,13 +68,11 @@ public class PeepHoleInteraction : IInteractableObject
 
 		_camTransitioner.Transition( 
 		                            _siljaBeh.thisCamera.transform, _camTransitioner.FPPCameraTransform,
-		                            "OnFPPStart", "OnFPPToComplete", 
-		          				 	gameObject, gameObject );
+		                            OnFPPToComplete);
 	}
 
 	private void DisablePeepHoleFPP()
 	{
-		Debug.Log("DisablePeepHoleFPP");
 		_overlay.enabled = false;
 
 		_camTransitioner.FPPCameraTransform.position = _originalPos;
@@ -82,13 +80,11 @@ public class PeepHoleInteraction : IInteractableObject
 
 		_camTransitioner.Transition( 
 		                            _siljaBeh.thisCamera.transform, _camTransitioner.FPPCameraTransform,
-		                            "OnFPPStart", "OnFPPFromComplete", 
-		           					gameObject, gameObject );
+		                            OnFPPFromComplete);
 	}
 
 	private void EnablePeepHoleTPP()
 	{
-		Debug.Log("EnablePeepHoleTPP");
 		_originalPos = _camTransitioner.FPPCameraTransform.position;
 		_originalRot = _camTransitioner.FPPCameraTransform.rotation;
 		
@@ -128,11 +124,6 @@ public class PeepHoleInteraction : IInteractableObject
 		});
 		
 		_siljaBeh.ShiftToThirdPerson();
-	}
-
-	private void OnFPPStart()
-	{
-		_camTransitioner.Mode = CameraTransitioner.CameraMode.Transitioning;
 	}
 
 	private void OnFPPToComplete()

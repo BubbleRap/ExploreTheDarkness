@@ -1,16 +1,20 @@
 ﻿using UnityEngine;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityStandardAssets.ImageEffects;
 using UnityEngine.Events;
 
-public class CameraTransitioner : MonoBehaviour {
+public class CameraTransitioner : MonoBehaviour 
+{
+    public enum CameraMode 
+    { 
+        Tpp, 
+        Fpp, 
+        Transitioning 
+    }
 
-	//duration of the transition.
-	public float TransitionTime;
-
-	public enum CameraMode { Fpp,Tpp, Transitioning }
-	[HideInInspector]
-	public CameraMode Mode;
+    public CameraMode Mode { get; set; }
 
 	//two objects which mark the transforms of the FPP and TPP camera
 	public Transform TPPCameraTransform, FPPCameraTransform;
@@ -18,29 +22,12 @@ public class CameraTransitioner : MonoBehaviour {
 	private Vector3 fromPosition, toPosition;
 	private Quaternion fromRotation, toRotation;
 
-	//Two prefabs holding the values of camera presets
-	public Camera TppCameraSetup, FppCameraSetup;
-
-	[HideInInspector]
-	public List<Behaviour> 
-		//Those components are toggled in the beginning of transition
-		TppOnlyComponents,
-		FppOnlyComponents,
-		//Gameplay components are disabled for the transition 
-		TppOnlyGameplayComponents,
-		FppOnlyGameplayComponents; 
-
-	//those child objects are disabled/enabled in each mode
-	public List<GameObject>
-		TppTransformChildren,
-		FppTransformChildren;
 
 	private UnityEvent onFPPTransitionComplete = new UnityEvent();
 	private UnityEvent onTPPTransitionComplete = new UnityEvent();
 
     private Transform OtherCameraTransform;
     private Transform prevOtherCameraTransformParent;
-
 
     public void AddFPPCompleteAction( UnityAction action )
 	{
@@ -52,44 +39,13 @@ public class CameraTransitioner : MonoBehaviour {
 		onTPPTransitionComplete.AddListener( action );
 	}
 
-	public void CleanFPPCompleteActions()
-	{
-		onFPPTransitionComplete.RemoveAllListeners();
-	}
-
-	public void CleanTPPCompleteActions()
-	{
-		onTPPTransitionComplete.RemoveAllListeners();
-	}
-
-	void Awake ()
-    {
-
-		Mode = CameraMode.Tpp;
-
-		TppOnlyGameplayComponents.AddRange (new Behaviour[]{
-			GetComponent<CameraPhysics>()
-			//,GetComponent<AudioSource>() 
-		});
-
-//		FppOnlyComponents.AddRange (new Behaviour[]{
-//			GetComponent<DepthOfField>(),
-//			GetComponent<Antialiasing>(),
-//			GetComponent<VignetteAndChromaticAberration>()
-//		});
-
-
-		iTween.Init( gameObject );
-	}
-
 	public void TransitionTPPtoFPP(Transform lookingAt = null)
 	{
 		TPPCameraTransform.localPosition = transform.localPosition;
 		TPPCameraTransform.localRotation = transform.localRotation;
 
 		Transition( TPPCameraTransform, FPPCameraTransform, 
-		           "TurnOffTpp", "TurnOnFpp", 
-		           gameObject, gameObject, lookingAt );
+		           TurnOnFpp, lookingAt );
 	}
 
 	public void TransitionFPPtoTPP()
@@ -98,8 +54,7 @@ public class CameraTransitioner : MonoBehaviour {
 		FPPCameraTransform.localRotation = transform.localRotation;
 
 		Transition( FPPCameraTransform, TPPCameraTransform, 
-		           "TurnOffFpp", "TurnOnTpp", 
-		           gameObject, gameObject );
+		           TurnOnTpp);
 	}
 
     public void TransitionFPPtoFPP()
@@ -108,8 +63,7 @@ public class CameraTransitioner : MonoBehaviour {
         FPPCameraTransform.localRotation = transform.localRotation;
 
         Transition( transform, TPPCameraTransform, 
-            "TurnOffFpp", "TurnOnFpp", 
-            gameObject, gameObject );
+            TurnOnFpp);
     }
 
     public void TransitionTPPtoOther(Transform other)
@@ -122,8 +76,7 @@ public class CameraTransitioner : MonoBehaviour {
         other.SetParent(FPPCameraTransform.parent);
 
         Transition(TPPCameraTransform, other,
-                   "TurnOffTpp", "TurnOnFpp",
-                   gameObject, gameObject);
+                   TurnOnFpp);
     }
 
     public void TransitionOtherToTPP(Transform other)
@@ -133,8 +86,7 @@ public class CameraTransitioner : MonoBehaviour {
         other.SetParent(FPPCameraTransform.parent);
 
         Transition(other, TPPCameraTransform,
-                   "TurnOffFpp", "TurnOnTpp",
-                   gameObject, gameObject);
+                   TurnOnTpp);
     }
 
     public void TransitionFPPtoOther(Transform other)
@@ -147,8 +99,7 @@ public class CameraTransitioner : MonoBehaviour {
         other.SetParent(FPPCameraTransform.parent);
 
         Transition(FPPCameraTransform, other,
-            "TurnOffFpp", "TurnOnFpp",
-            gameObject, gameObject);
+            TurnOnFpp);
     }
 
     public void TransitionOtherToFPP(Transform other)
@@ -158,14 +109,13 @@ public class CameraTransitioner : MonoBehaviour {
         other.SetParent(FPPCameraTransform.parent);
 
         Transition(other, FPPCameraTransform,
-            "TurnOffFpp", "TurnOnFpp",
-            gameObject, gameObject);
+            TurnOnFpp);
     }
 
 	//THE transition function
 	public void Transition(Transform fromTransform, Transform toTransform,
-	                       string onStart, string onComplete,
-	                       GameObject onStartTarget, GameObject onCompleteTarget, Transform lookingAt = null)
+	                       Action onComplete,
+	                       Transform lookingAt = null)
 	{
         Quaternion prevToTransformLookAtRot = toTransform.rotation;
         if (lookingAt != null)
@@ -179,121 +129,55 @@ public class CameraTransitioner : MonoBehaviour {
         fromPosition = fromTransform.localPosition;
 		fromRotation = fromTransform.localRotation;
 
-		iTween.ValueTo(gameObject, iTween.Hash(
-			"from", 0f,
-			"to", 1f,
-			"time", TransitionTime,
-			"easetype", iTween.EaseType.easeInOutSine,
-			
-			"onstart", onStart,			//callback on start of the tween
-			"onupdate", "TransitionUpdate",		//method called on each update
-			"oncomplete", onComplete,			//callback on complete of the tween
-			
-			"onstarttarget", onStartTarget,
-			"onupdatetarget", gameObject,
-			"oncompletetarget", onCompleteTarget,
-			
-			"ignoreTimeScale", true
-			));
+        StartCoroutine(TransitionRoutine(onComplete));
 	}
 
-	public void TransitionUpdate(float state)
-	{
+    private IEnumerator TransitionRoutine(Action onEnd)
+    {
+        float from = 0f;
+        float to = 1f;
 
-		transform.localPosition = Vector3.Lerp(
-			fromPosition, toPosition, state );
+        Mode = CameraMode.Transitioning;
 
-		transform.localRotation = Quaternion.Lerp(
-			fromRotation, 
-			toRotation, state);
-	}
+        while(from < to)
+        {
+            yield return null;
 
-	//additional callback functions on the beginning and end of transitions - they turn on and off components.
+            transform.localPosition = Vector3.Lerp(
+                fromPosition, toPosition, from / to );
 
-	public void TurnOffFpp(){
+            transform.localRotation = Quaternion.Lerp(
+                fromRotation, 
+                toRotation, from / to);
 
-		Mode = CameraMode.Transitioning;
+            from += Time.deltaTime;
+        }
 
-		foreach (GameObject g in FppTransformChildren){
-			g.SetActive(false);
-		}
-		
-		foreach(Behaviour c in FppOnlyGameplayComponents){
-			c.enabled = false;
-		}
-
-		foreach(Behaviour c in FppOnlyComponents){
-			c.enabled = false;
-		}
-
-		foreach(Behaviour c in TppOnlyComponents){
-			c.enabled = true;
-		}
-	}
-
-	public void TurnOffTpp(){
-		
-		Mode = CameraMode.Transitioning;
-
-		foreach (GameObject g in TppTransformChildren){
-			g.SetActive(false);
-		}
-            
-		foreach(Behaviour c in TppOnlyGameplayComponents){
-			c.enabled = false;
-		}
-		
-		foreach(Behaviour c in TppOnlyComponents){
-			c.enabled = false;
-		}
-
-		foreach(Behaviour c in FppOnlyComponents){
-			c.enabled = true;
-		}
-		
-
-	}
+        onEnd();
+    }
+        
 
 	public void TurnOnFpp(){
 		
 		Mode = CameraMode.Fpp;
 
-		foreach (GameObject g in FppTransformChildren){
-			g.SetActive(true);
-		}
-
-		foreach(Behaviour c in FppOnlyGameplayComponents){
-			c.enabled = true;
-		}
-
         if (OtherCameraTransform != null)
             OtherCameraTransform.SetParent(prevOtherCameraTransformParent);
         OtherCameraTransform = null;
 
-
 		onFPPTransitionComplete.Invoke();
-		CleanFPPCompleteActions();
+        onFPPTransitionComplete.RemoveAllListeners();
 	}
 
 	public void TurnOnTpp(){
 		
 		Mode = CameraMode.Tpp;
 
-		foreach (GameObject g in TppTransformChildren){
-			g.SetActive(true);
-		}
-            
-		foreach(Behaviour c in TppOnlyGameplayComponents){
-			c.enabled = true;
-		}
-
         if (OtherCameraTransform != null)
             OtherCameraTransform.SetParent(prevOtherCameraTransformParent);
         OtherCameraTransform = null;
 
         onTPPTransitionComplete.Invoke();
-		CleanTPPCompleteActions();
+        onTPPTransitionComplete.RemoveAllListeners();
 	}
-
-
 }

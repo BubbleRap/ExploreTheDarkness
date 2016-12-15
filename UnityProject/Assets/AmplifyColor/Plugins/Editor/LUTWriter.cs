@@ -77,7 +77,7 @@ namespace AmplifyColor
 			{
 				tImporter.mipmapEnabled = false;
 				tImporter.isReadable = true;
-				tImporter.textureType = TextureImporterType.Advanced;
+				tImporter.textureType = TextureImporterType.Default;
 				tImporter.filterMode = FilterMode.Bilinear;
 				tImporter.anisoLevel = 0;
 				tImporter.textureFormat = TextureImporterFormat.AutomaticTruecolor;

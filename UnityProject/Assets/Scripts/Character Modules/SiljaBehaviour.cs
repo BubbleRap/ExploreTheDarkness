@@ -18,9 +18,6 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 	public CameraTransitioner	camTransitioner;
 	[HideInInspector]
 	public CameraFollow 		cameraFollow;
-    [HideInInspector]
-    public CameraPhysics        cameraPhysics;
-
 
     public float ShiftDuration = 1f;
 	private bool m_isLookingInFP;
@@ -97,11 +94,9 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 
 
         interactor = gameObject.GetComponent<Interactor>();
-        gameObject.AddComponent<SiljaShakeOnScary>();
 
         camTransitioner = thisCamera.GetComponent<CameraTransitioner>();
 		cameraFollow = thisCamera.GetComponent<CameraFollow>();
-        cameraPhysics = thisCamera.GetComponent<CameraPhysics>();
         flshCtrl = gameObject.GetComponent<FlashlightController>();
 
 		firstPersonRig.gameObject.SetActive(false);
@@ -122,7 +117,6 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
             return; 
 
         UpdateMovementInput();
-        UpdateSpecialInput();
         UpdateCameraControl();
 
 
@@ -142,26 +136,6 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
         cameraFollow.CollectCameraWhiskers();
         cameraFollow.CameraDistanceControl();
         cameraFollow.UpdateCameraControls(h, v);
-    }
-
-    private void UpdateSpecialInput()
-    {
-        //if (Input.GetKeyUp(KeyCode.Q)
-        //&& !interactor.IsInteracting)
-        //{
-        //    if (m_isLookingInFP)
-        //    {
-        //        m_isLookingInFP = false;
-        //        ShiftToThirdPerson();
-        //        EnableFlashlight(false);
-        //    }
-        //    else
-        //    {
-        //        m_isLookingInFP = true;
-        //        ShiftToFirstPerson();
-        //        EnableFlashlight(true);
-        //    }
-        //}       
     }
 
     private void UpdateFlashlight()
@@ -196,8 +170,8 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 
 	public void EnableFirstPerson() {
 
+        siljaAnimation.gameObject.SetActive(false);
         flshCtrl.EnableFlashlight(true);		
-
         m_movementController.SetMaxWalkingSpeed(1.5f, 1.5f);
 
 	}
@@ -205,7 +179,7 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 	public void ShiftToThirdPerson()
 	{
 		camTransitioner.TransitionFPPtoTPP();
-
+        siljaAnimation.gameObject.SetActive(true);
 		Invoke("EnableThirdPerson",ShiftDuration);
 	}
 	

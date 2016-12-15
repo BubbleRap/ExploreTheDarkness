@@ -353,7 +353,7 @@ public class LevelLoader : MonoBehaviour
 		                                DestroyImmediate(list.Last());
 		                                list.Remove(list.Last());
 		                            }
-		                            if (type == typeof (NavMeshAgent))
+		                            if (type == typeof (UnityEngine.AI.NavMeshAgent))
 		                            {
 		                                var cp1 = cp;
 		                                var item1 = item;

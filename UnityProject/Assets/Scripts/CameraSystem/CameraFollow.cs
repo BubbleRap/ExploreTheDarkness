@@ -105,33 +105,28 @@ public class CameraFollow : MonoBehaviour
     {
         pitch = Mathf.Clamp (pitch - vertDelta, m_minPitch, m_maxPitch);  
 
-        // making camera close for angular looks
-
-        // remap pitch to -0.25 to 0.25, and then from -1 to 1
-        //float pitchLerp = Mathf.Abs((pitch - 0.5f) * 4f);
-        //tempMaxDistance = Mathf.Lerp(maxDistance, minDistance, pitchLerp);
-
         yaw = Mathf.Repeat(yaw + horizDelta, 1f);
 
 		switch( m_camControlType )
 		{
 		case CameraControlType.CCT_Default:
 			UpdateTP();
+            CheckSphereCollision(transform, cameraFocusTarget, 0.1f);
             break;
 			
 		case CameraControlType.CCT_FPSLook:
-			UpdateTP();//UpdateFP(horizDelta * 50f, vertDelta * 50f);
+			UpdateTP();
 			break;
 			
 		case CameraControlType.CCT_LookingAtObject:		
-			transform.rotation = Quaternion.Slerp( transform.rotation, Quaternion.LookRotation( focusPoint - transform.position ), Time.deltaTime );           
+			transform.rotation = Quaternion.Slerp( transform.rotation, Quaternion.LookRotation( focusPoint - transform.position ), Time.deltaTime );      
 			break;
 			
 		case CameraControlType.CCT_Overwritten:
 			break;
 		}
 
-        CheckSphereCollision(transform, cameraFocusTarget, 0.1f);
+
     }
 
     public void OnDrawGizmos()
@@ -209,15 +204,9 @@ public class CameraFollow : MonoBehaviour
             // -90 degrees = -1f, 90 degrees = 1f
             float angle = Vector3.Cross(Vector3.forward, localDirection).y;
 
-            // linear function
-            //float distance = 1f - left.distance / m_whiskerLength;
-
             // quadratic function
             float distance = ((m_whiskerLength - left.distance) * (m_whiskerLength - left.distance)) / (m_whiskerLength * m_whiskerLength);
 
-            // cubic function
-            //float distance = ((m_whiskerLength - left.distance) * (m_whiskerLength - left.distance) * (m_whiskerLength - left.distance)) / (m_whiskerLength * m_whiskerLength * m_whiskerLength);
-        
             yaw -= distance * m_swingSensitivity * Time.deltaTime;
         }
         
@@ -230,15 +219,9 @@ public class CameraFollow : MonoBehaviour
             // -90 degrees = -1f, 90 degrees = 1f
             float angle = Vector3.Cross(Vector3.forward, localDirection).y;
 
-            // linear function
-            //float distance = 1f - right.distance / m_whiskerLength;
-
             // quadratic function
             float distance = ((m_whiskerLength - right.distance) * (m_whiskerLength - right.distance)) / (m_whiskerLength * m_whiskerLength);
 
-            // cubic function
-            //float distance = ((m_whiskerLength - right.distance) * (m_whiskerLength - right.distance) * (m_whiskerLength - right.distance)) / (m_whiskerLength * m_whiskerLength * m_whiskerLength);
-        
             yaw += distance * m_swingSensitivity * Time.deltaTime;
         }
     }
@@ -353,15 +336,5 @@ public class CameraFollow : MonoBehaviour
         }
 
         CameraDistance = (origin.position - target.position).magnitude;
-    }
-
-    private IEnumerator ShakeCamera()
-    {
-        while (true) 
-        {
-            shakeOffset = new Vector3( Random.Range(-horizontalShakeIntensity * 10, horizontalShakeIntensity * 10), 
-                Random.Range(-verticalShakeIntensity * 10, verticalShakeIntensity * 10), 0f);
-            yield return new WaitForSeconds(shakeFrequency);
-        }
     }
 }

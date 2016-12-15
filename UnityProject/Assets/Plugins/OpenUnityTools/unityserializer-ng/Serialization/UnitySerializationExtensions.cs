@@ -569,18 +569,18 @@ public class SerializeGameObjectReference : SerializerExtensionBase<GameObject> 
 
 }
 
-[ComponentSerializerFor(typeof(NavMeshAgent))]
+[ComponentSerializerFor(typeof(UnityEngine.AI.NavMeshAgent))]
 public class SerializeNavMeshAgent : IComponentSerializer {
     public class StoredInfo {
         public bool hasPath, offMesh, autoBraking, autoTraverseOffMeshLink, autoRepath;
         public float x, y, z, speed, angularSpeed, height, offset, acceleration, radius, stoppingDistance;
         public int passable = -1, avoidancePriority;
-        public ObstacleAvoidanceType obstacleAvoidanceType;
+        public UnityEngine.AI.ObstacleAvoidanceType obstacleAvoidanceType;
     }
 
     #region IComponentSerializer implementation
     public byte[] Serialize(Component component) {
-        var agent = (NavMeshAgent)component;
+        var agent = (UnityEngine.AI.NavMeshAgent)component;
         return UnitySerializer.Serialize(new StoredInfo {
             x = agent.destination.x,
             y = agent.destination.y,
@@ -604,8 +604,8 @@ public class SerializeNavMeshAgent : IComponentSerializer {
     }
 
     public void Deserialize(byte[] data, Component instance) {
-        var path = new NavMeshPath();
-        var agent = (NavMeshAgent)instance;
+        var path = new UnityEngine.AI.NavMeshPath();
+        var agent = (UnityEngine.AI.NavMeshAgent)instance;
         agent.enabled = false;
 
         Loom.QueueOnMainThread(() => {
@@ -632,7 +632,7 @@ public class SerializeNavMeshAgent : IComponentSerializer {
                 //	}
 
 
-                if (NavMesh.CalculatePath(agent.transform.position, new Vector3(si.x, si.y, si.z), si.passable, path))
+                if (UnityEngine.AI.NavMesh.CalculatePath(agent.transform.position, new Vector3(si.x, si.y, si.z), si.passable, path))
                     agent.SetPath(path);
             }
         }, 0.1f);
