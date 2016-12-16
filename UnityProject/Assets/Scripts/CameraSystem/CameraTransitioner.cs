@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityStandardAssets.ImageEffects;
+
 using UnityEngine.Events;
 
 public class CameraTransitioner : MonoBehaviour 

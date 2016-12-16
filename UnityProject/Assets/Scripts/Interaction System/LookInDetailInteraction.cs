@@ -1,11 +1,9 @@
 using System;
 using UnityEngine;
 using System.Collections;
-
-using UnityStandardAssets.ImageEffects;
-
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityStandardAssets.CinematicEffects;
 
 public class LookInDetailInteraction : IInteractableObject 
 {
@@ -210,8 +208,7 @@ public class LookInDetailInteraction : IInteractableObject
 			transform.position = fpCamTransform.TransformPoint(Vector3.forward * _faceDistance);
 
             _dof.enabled = true;
-			_dof.focalLength = _faceDistance;
-			_dof.aperture = 50f;
+            _dof.focus.transform = transform;
 
 			transform.LookAt(fpCamTransform);
 

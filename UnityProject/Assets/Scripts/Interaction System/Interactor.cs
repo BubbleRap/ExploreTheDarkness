@@ -185,12 +185,19 @@ public class Interactor : MonoBehaviour
     {
         CurrentObject = obj;
         CurrentObject.IsSelected = true;
+
+        if(obj.m_renderer != null)
+        {
+            HighlightsImageEffect.Instance.OnObjectMouseOver(obj.m_renderer, Color.white);
+        }
     }
 
     private void DeselectCurrentObject(IInteractableObject obj)
     {
         CurrentObject.IsSelected = false;
         CurrentObject = null;
+
+        HighlightsImageEffect.Instance.OnObjectMouseExit();
     }
 
     private void OnInteractionDestroyed(IInteractableObject obj)

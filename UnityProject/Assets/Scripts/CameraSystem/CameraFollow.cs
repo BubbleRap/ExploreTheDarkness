@@ -125,14 +125,6 @@ public class CameraFollow : MonoBehaviour
 		case CameraControlType.CCT_Overwritten:
 			break;
 		}
-
-
-    }
-
-    public void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(transform.position, 0.1f);
     }
 
 	private void UpdateTP()
@@ -198,8 +190,6 @@ public class CameraFollow : MonoBehaviour
         // swinging to the right when obstacle from the left
         if(left != null)
         {
-            Debug.DrawLine(transform.position, left.hitPoint, Color.blue);
-
             Vector3 localDirection = transform.InverseTransformDirection(left.direction);
             // -90 degrees = -1f, 90 degrees = 1f
             float angle = Vector3.Cross(Vector3.forward, localDirection).y;
@@ -213,8 +203,6 @@ public class CameraFollow : MonoBehaviour
         // swinging to the left when obstacle from the right
         if(right != null)
         {
-            Debug.DrawLine(transform.position, right.hitPoint, Color.blue);
-
             Vector3 localDirection = transform.InverseTransformDirection(right.direction);
             // -90 degrees = -1f, 90 degrees = 1f
             float angle = Vector3.Cross(Vector3.forward, localDirection).y;
@@ -298,11 +286,9 @@ public class CameraFollow : MonoBehaviour
                 direction,
                 out outHit,
                 result.distance,
-                1 << LayerMask.NameToLayer("Default")
+                1   // Default layer
             );
-
-        Debug.DrawLine(fromPoint, fromPoint + direction * result.distance, hasHit ? Color.red : Color.green);
-
+                
         result.hasHit = hasHit;
         result.direction = direction;
 
@@ -320,13 +306,12 @@ public class CameraFollow : MonoBehaviour
         Vector3 direction = (target.position - origin.position).normalized;
 
         for(int i = 0; i < 10; i++)
-        //while(count > 0)
         {      
             count = Physics.OverlapSphereNonAlloc(
                 origin.position, 
                 radius, 
                 m_collidersBuffer, 
-                1 << LayerMask.NameToLayer("Default")
+                1   // Default layer
             );
 
             if(count == 0)

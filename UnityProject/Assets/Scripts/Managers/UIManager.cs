@@ -20,11 +20,15 @@ public class UIManager : MonoBehaviour
 	public RectTransform mouseBack;
     public GameObject m_buttonPromtPrefab;
 
+    private CanvasGroup mouseBackGroup;
+
 	private void Awake()
 	{
 		s_Instance = this;
         s_camera = Camera.main;
         s_canvas = FindObjectOfType<Canvas>();
+
+        mouseBackGroup = mouseBack.GetComponent<CanvasGroup>();
 
 		hideCursor();
 	}
@@ -51,7 +55,7 @@ public class UIManager : MonoBehaviour
 
 	public void lookAtUI(bool boolean)
 	{
-		mouseBack.gameObject.SetActive(boolean);
+        mouseBackGroup.alpha = boolean ? 1f : 0f;
 	}
 
     public static Vector2 WorldToCanvasPosition(Vector3 position) 
