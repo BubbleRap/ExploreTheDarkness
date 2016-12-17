@@ -94,13 +94,11 @@ GameObject:
   - component: {fileID: 114760514028069808}
   - component: {fileID: 114142649446830122}
   - component: {fileID: 11412696}
-  - component: {fileID: 114773639246051146}
   - component: {fileID: 114574548353287148}
   - component: {fileID: 11449944}
   - component: {fileID: 114580176647274550}
   - component: {fileID: 114927523259516452}
   - component: {fileID: 11469434}
-  - component: {fileID: 114592693229685578}
   m_Layer: 9
   m_Name: Camera
   m_TagString: MainCamera
@@ -5528,7 +5526,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100332}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a970acddb8696a4792ca6e022840a0e, type: 3}
   m_Name: 
@@ -6243,7 +6241,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100332}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58a7625302996c94ba07a8ca3351f668, type: 3}
   m_Name: 
@@ -6423,22 +6421,6 @@ MonoBehaviour:
     color: {r: 0, g: 1, b: 0, a: 1}
     amount: 0
   m_Shader: {fileID: 4800000, guid: 136ab50fe2b9ad64d9c22adc3668abb7, type: 3}
---- !u!114 &114592693229685578
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100332}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fc6bde01469c7b4badee5362f191d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  downsample: 1
-  blurSize: 3
-  blurIterations: 2
-  blurType: 0
-  blurShader: {fileID: 4800000, guid: f9d5fa183cd6b45eeb1491f74863cd91, type: 3}
 --- !u!114 &114760514028069808
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6454,27 +6436,10 @@ MonoBehaviour:
     threshold: 0.9
     softKnee: 0.5
     radius: 2
-    intensity: 0.7
+    intensity: 0.4
     highQuality: 1
-    antiFlicker: 0
+    antiFlicker: 1
   m_Shader: {fileID: 4800000, guid: e45d4f28262b04d10a075856ab5fdb5e, type: 3}
---- !u!114 &114773639246051146
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd04ee9d3be14451e9a907547a9c8bee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_selectionType: 0
-  m_drawType: 0
-  highlightShader: {fileID: 4800000, guid: 1811ae66bcf4d41e789233238606ed0e, type: 3}
-  m_cutoffValue: 1
-  m_intensity: 1
-  DrawStencilBuffer: 0
 --- !u!114 &114927523259516452
 MonoBehaviour:
   m_ObjectHideFlags: 1
