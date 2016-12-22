@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using UnityStandardAssets.ImageEffects;
 
 [RequireComponent(typeof(Camera))]
-[RequireComponent(typeof(BlurOptimized))]
 public partial class HighlightsImageEffect : MonoBehaviour 
 {
     public enum HighlightType
@@ -71,6 +70,8 @@ public partial class HighlightsImageEffect : MonoBehaviour
     private void Reset()
     {
         highlightShader = Shader.Find("Custom/Highlight");
+        m_blurImageEffect = gameObject.AddComponent<BlurOptimized>();
+        m_blurImageEffect.enabled = false;
     }
 
     private void OnRenderImage (RenderTexture src, RenderTexture dst)

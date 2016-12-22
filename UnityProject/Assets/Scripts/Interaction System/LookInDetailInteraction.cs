@@ -37,8 +37,7 @@ public class LookInDetailInteraction : IInteractableObject
 	private Quaternion _originalRot;
 
 	private Collider _collider;
-
-	private DepthOfField _dof;
+   
 
     private Vector2 m_velocity;
     private Vector2 m_targetVelocity;
@@ -64,9 +63,7 @@ public class LookInDetailInteraction : IInteractableObject
         base.Awake();
 
 		_collider = GetComponent<Collider>();
-
-		_dof = Camera.main.GetComponent<DepthOfField>();
-        _dof.enabled = false;
+       
 
         m_animator = GetComponentInParent<Animator>();
 
@@ -207,8 +204,6 @@ public class LookInDetailInteraction : IInteractableObject
 			Transform fpCamTransform = transitioner.FPPCameraTransform;
 			transform.position = fpCamTransform.TransformPoint(Vector3.forward * _faceDistance);
 
-            _dof.enabled = true;
-            _dof.focus.transform = transform;
 
 			transform.LookAt(fpCamTransform);
 
@@ -233,7 +228,6 @@ public class LookInDetailInteraction : IInteractableObject
         CameraTransitioner transitioner = _siljaBeh.camTransitioner;
         CameraFollow camControl = _siljaBeh.cameraFollow;
 
-		_dof.enabled = false;
 
         UnityAction finishAction = () =>
         {   
