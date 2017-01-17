@@ -20,7 +20,7 @@ public class CameraFollow : MonoBehaviour
 
     public float CameraDistance { get; private set; }
 
-	public Transform cameraFocusTarget = null; 
+	public Transform cameraFocusTarget; 
 
     private float m_distanceControlSpeed = 0.5f;
 

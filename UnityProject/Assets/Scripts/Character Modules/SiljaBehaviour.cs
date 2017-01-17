@@ -100,6 +100,9 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
         flshCtrl = gameObject.GetComponent<FlashlightController>();
 
 		firstPersonRig.gameObject.SetActive(false);
+
+        var neckBone = siljaAnimation.GetBoneTransform(HumanBodyBones.Neck);
+        cameraFollow.cameraFocusTarget = neckBone;
 	}
 	
 
@@ -260,7 +263,18 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
             cameraFollow.CameraSwingControl();
             RotateCharacterTowards(forward);
         }
-        
+            
+        if(siljaAnimation.enabled)
+        {
+            // apply velocities in animator
+            //Vector2 moveSpeed = m_movementController.MoveSpeed;
+            m_characterAnimation.SetForwardSpeed (v);
+            m_characterAnimation.SetSidewaysSpeed (h);
+
+            // retrieving root motion
+            moveDir = siljaAnimation.velocity;
+        }
+
         MoveCharacterTowards(moveDir, new Vector2(h, v));
 
         oldVerticalAxis = v;
