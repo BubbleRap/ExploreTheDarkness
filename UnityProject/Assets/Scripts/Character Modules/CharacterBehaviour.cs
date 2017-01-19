@@ -3,9 +3,9 @@ using System.Collections;
 
 public class CharacterBehaviour : MonoBehaviour 
 {
-    protected MovementController m_movementController; 
-    protected CharacterAudio m_characterAudio;
-    protected CharacterAnimation m_characterAnimation;
+    public MovementController m_movementController {get; private set;} 
+    public CharacterAudio m_characterAudio {get; private set;} 
+    public CharacterAnimation m_characterAnimation {get; private set;} 
 
     protected void Awake()
     {

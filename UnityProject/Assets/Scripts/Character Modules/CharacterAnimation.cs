@@ -8,8 +8,18 @@ public class CharacterAnimation : MonoBehaviour
     public string m_turningSpeedKey = "turningspeed";
 
     private Animator m_animator;
-    private Vector3 m_lookDirection;
-    private float m_lookWeight;
+
+    private Vector3 m_currentLookDirection;
+    private Vector3 m_targetLookDirection;
+
+    private Vector3 m_currentRightHandPos;
+    private Vector3 m_targetRightHandPos;
+
+    private float m_currentRightHandIKWeight;
+    private float m_targetRightHandIKWeight;
+
+    private float m_currentLookIKWeight;
+    private float m_targetLookIKWeight;
 
     private void Awake()
     {
@@ -30,11 +40,17 @@ public class CharacterAnimation : MonoBehaviour
 
         Transform m_headBone = m_animator.GetBoneTransform(HumanBodyBones.Head);
 
-        if (m_headBone != null)
-        {
-            m_animator.SetLookAtPosition(transform.position + m_lookDirection);
-            m_animator.SetLookAtWeight(m_lookWeight);
-        }
+        m_currentLookIKWeight = Mathf.MoveTowards(m_currentLookIKWeight, m_targetLookIKWeight, Time.deltaTime);
+        m_currentLookDirection = Vector3.MoveTowards(m_currentLookDirection, m_targetLookDirection, Time.deltaTime);
+        m_currentRightHandPos = Vector3.MoveTowards(m_currentRightHandPos, m_targetRightHandPos, Time.deltaTime);
+        m_currentRightHandIKWeight = Mathf.MoveTowards(m_currentRightHandIKWeight, m_targetRightHandIKWeight, Time.deltaTime);
+       
+
+        m_animator.SetLookAtPosition(transform.position + m_currentLookDirection);
+        m_animator.SetLookAtWeight(m_currentLookIKWeight);
+
+        m_animator.SetIKPosition(AvatarIKGoal.RightHand, m_currentRightHandPos);
+        m_animator.SetIKPositionWeight(AvatarIKGoal.RightHand, m_currentRightHandIKWeight);
     }
 
     public void SetForwardSpeed(float speed)
@@ -54,8 +70,14 @@ public class CharacterAnimation : MonoBehaviour
 
     public void SetLookingPoint(Vector3 dir, float weight = 1f)
     {
-        m_lookDirection = dir;
-        m_lookWeight = weight;
+        m_targetLookDirection = dir;
+        m_targetLookIKWeight = weight;
+    }
+
+    public void SetRightHandIK(Vector3 pos, float weight = 1f)
+    {
+        m_targetRightHandPos = pos;
+        m_targetRightHandIKWeight = weight;
     }
 
     public void SetAnimationState(string name)

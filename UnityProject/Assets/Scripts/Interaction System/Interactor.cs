@@ -13,6 +13,7 @@ public class Interactor : MonoBehaviour
     private List<IInteractableObject> m_sceneInteractions;
     private Dictionary<IInteractableObject, ButtonPrompt> interactionObjects;
 
+    private SiljaBehaviour m_charBeh;
 
     void Start()
     {
@@ -20,6 +21,8 @@ public class Interactor : MonoBehaviour
 
         // search for all the interactions in the scene
         m_sceneInteractions = new List<IInteractableObject>(FindObjectsOfType<IInteractableObject>());
+
+        m_charBeh = GetComponent<SiljaBehaviour>();
     }
 
     void Update () 
@@ -186,10 +189,17 @@ public class Interactor : MonoBehaviour
         CurrentObject = obj;
         CurrentObject.IsSelected = true;
 
-        if(obj.m_renderer != null)
-        {
-            HighlightsImageEffect.Instance.OnObjectMouseOver(obj.m_renderer, Color.white);
-        }
+        var headTransf =  m_charBeh.siljaAnimation.GetBoneTransform(HumanBodyBones.Head);
+        var position = obj.transform.position;
+        var direction = (obj.transform.position - headTransf.position).normalized;
+
+        m_charBeh.m_characterAnimation.SetLookingPoint(direction, 0.5f);
+        //m_charBeh.m_characterAnimation.SetRightHandIK(obj.transform.position, 0.3f);
+
+        //if(obj.m_renderer != null)
+        //{
+        //    HighlightsImageEffect.Instance.OnObjectMouseOver(obj.m_renderer, Color.white);
+        //}
     }
 
     private void DeselectCurrentObject(IInteractableObject obj)
@@ -197,7 +207,10 @@ public class Interactor : MonoBehaviour
         CurrentObject.IsSelected = false;
         CurrentObject = null;
 
-        HighlightsImageEffect.Instance.OnObjectMouseExit();
+        m_charBeh.m_characterAnimation.SetLookingPoint(transform.forward, 0f);
+        //m_charBeh.m_characterAnimation.SetRightHandIK(Vector3.zero, 0f);
+
+        //HighlightsImageEffect.Instance.OnObjectMouseExit();
     }
 
     private void OnInteractionDestroyed(IInteractableObject obj)

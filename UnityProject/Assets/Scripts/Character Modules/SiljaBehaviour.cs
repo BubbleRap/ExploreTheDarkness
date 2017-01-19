@@ -31,6 +31,10 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
     private bool inputChanged;
     private Vector3 oldForwardVector;
     private float oldVerticalAxis, oldHorizontalAxis;
+
+    // Look IK
+    private float m_lookIKTarget;
+    private Transform m_eyesTransform;
 	
 	public bool isFlashLightCollected;
 	public bool FlashLightCollected
@@ -103,6 +107,8 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
 
         var neckBone = siljaAnimation.GetBoneTransform(HumanBodyBones.Neck);
         cameraFollow.cameraFocusTarget = neckBone;
+
+        m_eyesTransform = siljaAnimation.GetBoneTransform(HumanBodyBones.Head);
 	}
 	
 
@@ -122,10 +128,10 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
         UpdateMovementInput();
         UpdateCameraControl();
 
-
         UpdateFlashlight();
         UpdateAudio();
     }
+
 
     private void UpdateCameraControl()
     {
