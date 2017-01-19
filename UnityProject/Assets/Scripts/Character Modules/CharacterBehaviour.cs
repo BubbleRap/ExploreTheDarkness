@@ -17,6 +17,14 @@ public class CharacterBehaviour : MonoBehaviour
     protected virtual void MoveCharacterTowards(Vector3 direction, Vector2 inputAxis)
     {
         m_movementController.MoveTowardsDirection(direction, inputAxis);
+
+        if(m_characterAnimation.gameObject.activeInHierarchy)
+        {
+            Vector2 moveSpeed = m_movementController.MoveSpeed;
+            m_characterAnimation.SetForwardSpeed (moveSpeed.y);
+            m_characterAnimation.SetSidewaysSpeed (moveSpeed.x);
+        }
+
     }
 
     protected virtual void RotateCharacterTowards(Vector3 direction)

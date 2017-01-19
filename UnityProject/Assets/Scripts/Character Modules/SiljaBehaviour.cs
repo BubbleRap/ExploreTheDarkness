@@ -264,16 +264,16 @@ public class SiljaBehaviour : CharacterBehaviour, IInput
             RotateCharacterTowards(forward);
         }
             
-        if(siljaAnimation.enabled)
-        {
-            // apply velocities in animator
-            //Vector2 moveSpeed = m_movementController.MoveSpeed;
-            m_characterAnimation.SetForwardSpeed (v);
-            m_characterAnimation.SetSidewaysSpeed (h);
-
-            // retrieving root motion
-            moveDir = siljaAnimation.velocity;
-        }
+        //if(siljaAnimation.enabled)
+        //{
+        //    // apply velocities in animator
+        //    //Vector2 moveSpeed = m_movementController.MoveSpeed;
+        //    m_characterAnimation.SetForwardSpeed (v);
+        //    m_characterAnimation.SetSidewaysSpeed (h);
+        //
+        //    // retrieving root motion
+        //    moveDir = siljaAnimation.velocity;
+        //}
 
         MoveCharacterTowards(moveDir, new Vector2(h, v));
 
