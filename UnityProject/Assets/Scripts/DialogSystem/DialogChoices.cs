@@ -275,6 +275,10 @@ public class DialogChoices : MonoBehaviour {
 			changeBackground(settings[settingNumber].background);
 			StartCoroutine(FadeOutBg(fadeImage,fadeOutBlack));
 		}
+		else if(isEnd)
+		{
+			fade.color = new Color(fade.color.r,fade.color.g,fade.color.b,1);
+		}
 	}
 
 	IEnumerator FadeOutBg (Image fade, float time)
