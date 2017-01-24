@@ -54,6 +54,9 @@ public class DialogChoices : MonoBehaviour {
 		fadeImage.color = new Color(fadeImage.color.r,fadeImage.color.g,fadeImage.color.b,1.0f);
 		StartCoroutine(FadeOutBgBegin(fadeImage,beginingDelay,fadeOutBlack));
 
+		if(settings[0].changeAtID == 0)
+		changeBackground(settings[0].background);
+
 		Cursor.visible = true;
 		Screen.lockCursor = false;
 
