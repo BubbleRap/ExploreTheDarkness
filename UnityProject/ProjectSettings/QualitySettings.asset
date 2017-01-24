@@ -23,7 +23,7 @@ QualitySettings:
     antiAliasing: 0
     softParticles: 1
     softVegetation: 1
-    realtimeReflectionProbes: 1
+    realtimeReflectionProbes: 0
     billboardsFaceCameraPosition: 1
     vSyncCount: 2
     lodBias: 2

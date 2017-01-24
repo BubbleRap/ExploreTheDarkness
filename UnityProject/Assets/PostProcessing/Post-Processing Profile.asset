@@ -25,23 +25,23 @@ MonoBehaviour:
         motionVectorsResolution: 24
         motionVectorsAmplitude: 64
   antialiasing:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       method: 1
       fxaaSettings:
-        preset: 2
+        preset: 4
       taaSettings:
         jitterSpread: 0.5
         sharpen: 0.35
         stationaryBlending: 0.75
         motionBlending: 0.75
   ambientOcclusion:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       intensity: 1
       radius: 0.3
       sampleCount: 10
-      downsampling: 1
+      downsampling: 0
       forceForwardCompatibility: 0
       ambientOnly: 0
       highPrecision: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   depthOfField:
     m_Enabled: 0
     m_Settings:
-      focusDistance: 10
+      focusDistance: 2
       aperture: 5.6
       focalLength: 50
       useCameraFov: 0
