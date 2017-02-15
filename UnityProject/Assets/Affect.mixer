@@ -18,6 +18,7 @@ AudioMixerController:
   m_StartSnapshot: {fileID: 24500003}
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
+  m_UpdateMode: 0
   m_ExposedParameters:
   - guid: 8ce521c5ac519244cae801bbd480fc5e
     name: atmosFade
