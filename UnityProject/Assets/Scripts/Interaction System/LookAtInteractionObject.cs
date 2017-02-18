@@ -51,15 +51,7 @@ public class LookAtInteractionObject : IInteractableObject
         }
 		
 		_siljaBeh.cameraFollow.focusPoint = transform.position;
-		
-        if (IsInteracting)
-        {
-            _siljaBeh.IsMoveEnabled = false;
-        }
-        else
-        {
-            StartCoroutine(UnfreezeSiljaAfterTransition(transitioner));
-        }
+
 
         if(IsInteracting)
 		{
@@ -105,6 +97,16 @@ public class LookAtInteractionObject : IInteractableObject
                     transitioner.TransitionFPPtoFPP();
             }
         }
+
+		if (IsInteracting)
+		{
+			_siljaBeh.IsMoveEnabled = false;
+			StartCoroutine(ActivateEventAfterTransition(transitioner));
+		}
+		else
+		{
+			StartCoroutine(UnfreezeSiljaAfterTransition(transitioner));
+		}
         
         ObjectivesManager.Instance.OnInteractionComplete( this, true );
         return IsInteracting;
@@ -113,8 +115,16 @@ public class LookAtInteractionObject : IInteractableObject
     private IEnumerator UnfreezeSiljaAfterTransition(CameraTransitioner t)
     {
         while (t.Mode == CameraTransitioner.CameraMode.Transitioning)
-            yield return 0;
+			yield return null;
 
         _siljaBeh.IsMoveEnabled = true;
     }
+
+	private IEnumerator ActivateEventAfterTransition(CameraTransitioner t)
+	{
+		while (t.Mode == CameraTransitioner.CameraMode.Transitioning)
+			yield return null;
+
+		m_onInteractionActivated.Invoke();
+	}
 }

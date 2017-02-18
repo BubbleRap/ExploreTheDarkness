@@ -8,18 +8,15 @@ public class AudioMixerControls : MonoBehaviour
 {
     public enum MixingType
     {
-        PlayOneShot,
+		PlayOneShot,
         FadeInOutParameter,
         FadeToSnapshot,
-		ContextBasedListRandom,
-		ContextBasedListOrdered
     }
 
 	[Serializable]
 	public class AudioListContainer
 	{
 		public List<AudioClip> m_clips;
-		public AudioSource m_outputSource;
 	}
 
     public MixingType m_mixingType;
@@ -33,40 +30,15 @@ public class AudioMixerControls : MonoBehaviour
 
 	public float m_time = 1f;
 
+	public bool m_loopLastClip;
+	public bool m_playClipsRandomly;
 	public AudioMixer m_audioMixer;
-	//public AudioSource m_audioSource;
+	public AudioSource m_audioSource;
 	public List<AudioListContainer> m_audioContainer;
-
-
 	public List<AudioMixerSnapshot> m_snapshots;
 
 	private int m_audioIndex;
 	private int m_stateIndex;
-
-	void Awake()
-	{
-        //if( m_mixingType == MixingType.PlayOneShot )
-        //{
-        //    if( m_audioSource == null )
-        //        Debug.LogError( gameObject.name + " AudioSource is not assigned" ); 
-        //}
-
-        if( m_mixingType == MixingType.FadeInOutParameter )
-        {
-		    if( m_audioMixer == null )
-			    Debug.LogError( gameObject.name + " AudioMixer is not assigned" );
-            //if( m_audioSource == null )
-            //    Debug.LogError( gameObject.name + " AudioSource is not assigned" ); 
-        }
-
-        //if( m_mixingType == MixingType.FadeToSnapshot )
-        //{
-        //    if( !string.IsNullOrEmpty(m_snapshotName) )
-        //        m_snapshot = m_audioMixer.FindSnapshot(m_snapshotName);
-        //    else
-        //        Debug.LogError( gameObject.name + " Snapshot name isn't assigned" );
-        //}
-	}
 
 	public void FadeInAudio()
 	{
@@ -85,25 +57,27 @@ public class AudioMixerControls : MonoBehaviour
 		if( m_stateIndex >= m_audioContainer.Count)
 			return;
 
-		if(m_mixingType == MixingType.ContextBasedListRandom)
+		var clips = m_audioContainer[m_stateIndex].m_clips;
+
+		if(m_playClipsRandomly)
 		{	
-			m_audioIndex = UnityEngine.Random.Range(0,m_audioContainer[m_stateIndex].m_clips.Count);
+			m_audioIndex = UnityEngine.Random.Range(0, clips.Count);
 		}
 
-		if(m_audioContainer[m_stateIndex].m_clips.Count <= 0)
+		if(clips.Count <= 0)
 			return;
+		
+		var audioClip = clips[m_audioIndex];
 
-
-
-		var audioSource = m_audioContainer[m_stateIndex].m_outputSource;
-		var audioClip = m_audioContainer[m_stateIndex].m_clips[m_audioIndex];
-
-		audioSource.clip = audioClip;
+		m_audioSource.clip = audioClip;
 
         StopAllCoroutines();
-		StartCoroutine(PlayOneShot(audioSource));
+		StartCoroutine(PlayOneShot());
+		
+		bool keep = m_loopLastClip && clips.Count <= 1;
 
-		m_audioContainer[m_stateIndex].m_clips.Remove(m_audioContainer[m_stateIndex].m_clips[m_audioIndex]);
+		if(!keep) 
+			clips.RemoveAt(m_audioIndex);
     }
 
     public void FadeToSnapshot()
@@ -142,18 +116,18 @@ public class AudioMixerControls : MonoBehaviour
 		m_audioMixer.SetFloat(m_paramName, m_minValue);
 	}
 
-	private IEnumerator PlayOneShot(AudioSource source)
+	private IEnumerator PlayOneShot()
     {
-		if( source != null )
-			source.enabled = true;
+		if( m_audioSource != null )
+			m_audioSource.enabled = true;
 		
-		source.volume = m_volume;
-		source.Play();
+		m_audioSource.volume = m_volume;
+		m_audioSource.Play();
 
-		yield return new WaitForSeconds(source.clip.length);
+		yield return new WaitForSeconds(m_audioSource.clip.length);
 
-		source.Stop();
-		if( source != null )
-			source.enabled = false;
+		m_audioSource.Stop();
+		if( m_audioSource != null )
+			m_audioSource.enabled = false;
     }
 }
