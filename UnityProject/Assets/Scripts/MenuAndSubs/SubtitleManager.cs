@@ -420,9 +420,8 @@ public class SubtitleManager : MonoBehaviour {
     Dictionary<float, string> BusCardSubs = new Dictionary<float, string>()
     {
         { 0.5f, "Hi, Dad"},
-        { 2f, "I just forgot the bus card."},
-        { 4f, "Did you see where I put it?"},
-        { 6f, ""},
+        { 1f, "I'm Home!"},
+        { 2f, ""},
     };
 
     public void Buscard(){
