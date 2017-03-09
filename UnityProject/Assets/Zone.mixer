@@ -15,6 +15,7 @@ AudioMixerController:
   - {fileID: 24554948}
   - {fileID: 24530018}
   - {fileID: 24535970}
+  - {fileID: 245977581199130182}
   - {fileID: 24590370}
   - {fileID: 24505516}
   - {fileID: 24578738}
@@ -48,7 +49,7 @@ AudioMixerController:
     - 23be2a6b574af06439ce572c399979b2
     name: View
   m_CurrentViewIndex: 0
-  m_TargetSnapshot: {fileID: 24554948}
+  m_TargetSnapshot: {fileID: 245977581199130182}
 --- !u!243 &24300001
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -807,7 +808,7 @@ AudioMixerSnapshotController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Living room - TV
+  m_Name: Living room - TV ON
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 5cdfb18b73400ef49a8ba7eda2a151dd
   m_FloatValues:
@@ -1138,3 +1139,35 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!245 &245977581199130182
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Living room - TV OFF
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: b8eff199896130b44b6e604eb50400d0
+  m_FloatValues:
+    7d99b30047f27df4b8c97be5b6127c5a: 530
+    403d26109b130b74fba31956ae34223b: 1
+    06e366106102c664382989e1b726ae16: -80
+    b0ea92616f18e2f49b9f282b395a75b1: -80
+    66bb5f71f3a5b2247b69f09659dfe988: 0
+    160898e12c8f0464eae2560483fa0d91: 2.750018
+    e343e162e2d6cdb4db9ee0800d9de9e8: 144
+    a2a9a683906ddad40aafa34ca2e63db3: -80
+    7cff1d644fa84d6438b0e57eb787441a: 75
+    82678cf43e9496243b8a48c8d1e4ebd7: 10
+    d3ace8d6a7cb4754981d9e95be2fd70e: 3359
+    ec371ab80a9ffac4a976da9c68abdd9e: -10.867779
+    4a5156d9d4eca4f40a02cdf96ca5d88f: -80
+    6ececad9202cb6c48aa70fd686507993: 0
+    a3e8ed2aa7750da43a8de480279dfcd1: 245
+    bf9b10da081f16a4996b3baa3bbc3a57: 1
+    c66d3dda83617b641b70cb2743a172d0: -10.345207
+    940ca83bc6cc5ee42aa327a46c4b38f2: -0.025776558
+    1fc2588b72574584cbc034729959b106: -4.9356413
+    47ef23dd125f5cf4aaec1e3e24b85b5b: -10.345207
+    8d46776eb942db74b9c9c410beb21dd9: 0
+    966e627fe11ce034b8db7f80396c71f6: 0.10800299
+  m_TransitionOverrides: {}
