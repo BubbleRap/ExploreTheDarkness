@@ -193,7 +193,7 @@ public class Interactor : MonoBehaviour
         var position = obj.transform.position;
         var direction = (obj.transform.position - headTransf.position).normalized;
 
-        m_charBeh.m_characterAnimation.SetLookingPoint(direction, 0.5f);
+		//m_charBeh.m_characterAnimation.SetLookingPoint(direction, 0.5f);
         //m_charBeh.m_characterAnimation.SetRightHandIK(obj.transform.position, 0.3f);
 
         //if(obj.m_renderer != null)
@@ -207,7 +207,7 @@ public class Interactor : MonoBehaviour
         CurrentObject.IsSelected = false;
         CurrentObject = null;
 
-        m_charBeh.m_characterAnimation.SetLookingPoint(transform.forward, 0f);
+		//m_charBeh.m_characterAnimation.SetLookingPoint(transform.forward, 0f);
         //m_charBeh.m_characterAnimation.SetRightHandIK(Vector3.zero, 0f);
 
         //HighlightsImageEffect.Instance.OnObjectMouseExit();

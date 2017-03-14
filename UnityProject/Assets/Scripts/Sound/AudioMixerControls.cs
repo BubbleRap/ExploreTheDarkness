@@ -6,20 +6,12 @@ using UnityEngine.Audio;
 
 public class AudioMixerControls : MonoBehaviour 
 {
-    public enum MixingType
-    {
-		PlayOneShot,
-        FadeInOutParameter,
-        FadeToSnapshot,
-    }
-
 	[Serializable]
 	public class AudioListContainer
 	{
 		public List<AudioClip> m_clips;
 	}
 
-    public MixingType m_mixingType;
 
     public float m_volume = 1f;
 
@@ -54,6 +46,9 @@ public class AudioMixerControls : MonoBehaviour
 
     public void PlayAudioSource()
     {
+		if (m_audioSource.isPlaying)
+			return;
+
 		if( m_stateIndex >= m_audioContainer.Count)
 			return;
 
@@ -130,4 +125,16 @@ public class AudioMixerControls : MonoBehaviour
 		if( m_audioSource != null )
 			m_audioSource.enabled = false;
     }
+
+	public void SetState(int stateIndex)
+	{
+		m_audioIndex = 0;
+		m_stateIndex = stateIndex;
+	}
+
+	public void IncrementState()
+	{
+		m_audioIndex = 0;
+		m_stateIndex++;
+	}
 }

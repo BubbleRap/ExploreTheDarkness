@@ -3,7 +3,6 @@ using UnityEditor;
 using UnityEngine.Audio;
 using System.Collections;
 using System.Collections.Generic;
-using SwitchType = AudioMixerControls.MixingType;
 
 [CustomEditor(typeof(AudioMixerControls))]
 public class AudioMixerControlsEditor : Editor {

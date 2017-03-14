@@ -171,7 +171,8 @@ public class LookInDetailInteraction : IInteractableObject
 
 			ObjectivesManager.Instance.OnInteractionComplete( this, true );
 
-			m_onInteractionActivated.Invoke();
+			CameraTransitioner transitioner = _siljaBeh.thisCamera.GetComponent<CameraTransitioner>();
+			StartCoroutine(ActivateEventAfterTransition(transitioner));
 		}
 		else
 		{
@@ -302,4 +303,12 @@ public class LookInDetailInteraction : IInteractableObject
 			Cursor.SetCursor(null, Vector2.zero, cursorMode);
 		}
     }
+
+	private IEnumerator ActivateEventAfterTransition(CameraTransitioner t)
+	{
+		while (t.Mode == CameraTransitioner.CameraMode.Transitioning)
+			yield return null;
+
+		m_onInteractionActivated.Invoke();
+	}
 }
