@@ -30,7 +30,7 @@ public class FlickerController : MonoBehaviour {
 
 		if(!activateFlick)
 		{
-			thisRenderer.material.SetColor("_EmissionColor", emitColorOn);
+			thisRenderer.material.SetColor("_EmissionColor", emitColorOn*2f);
 		}
 	}
 }
