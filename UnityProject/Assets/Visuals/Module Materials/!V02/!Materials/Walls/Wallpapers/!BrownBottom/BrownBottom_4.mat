@@ -87,7 +87,7 @@ Material:
       second: 10
     - first:
         name: _BumpScale
-      second: 0.65
+      second: 0.85
     - first:
         name: _Cutoff
       second: 0.5
