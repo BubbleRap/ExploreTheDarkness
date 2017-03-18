@@ -26,11 +26,11 @@ public class IInteractableObject : MonoBehaviour
 
     public UnityEvent m_onInteractionActivated = new UnityEvent();	
 
-    public Renderer m_renderer { get; private set; }
+    public Renderer[] m_renderers { get; private set; }
 
     protected virtual void Awake()
     {
-        m_renderer = GetComponentInChildren<Renderer>();    
+        m_renderers = GetComponentsInChildren<Renderer>();    
     }
 
     protected void Start()

@@ -14,6 +14,7 @@ public class Interactor : MonoBehaviour
     private Dictionary<IInteractableObject, ButtonPrompt> interactionObjects;
 
     private SiljaBehaviour m_charBeh;
+	private Transform headTransf;
 
     void Start()
     {
@@ -23,6 +24,8 @@ public class Interactor : MonoBehaviour
         m_sceneInteractions = new List<IInteractableObject>(FindObjectsOfType<IInteractableObject>());
 
         m_charBeh = GetComponent<SiljaBehaviour>();
+
+		headTransf =  m_charBeh.siljaAnimation.GetBoneTransform(HumanBodyBones.Head);
     }
 
     void Update () 
@@ -127,12 +130,14 @@ public class Interactor : MonoBehaviour
         if(!IsInteracting && Input.GetMouseButtonDown(0))
         {
             IsInteracting = false;
+			GlowController.ResetAllObjects();
             IsInteracting = CurrentObject.Activate() || IsInteracting;
         }
 
         if(IsInteracting && Input.GetMouseButtonDown(1))
         {
             IsInteracting = false;
+			GlowController.ResetAllObjects();
             CurrentObject.Activate();
         }
     }
@@ -189,17 +194,17 @@ public class Interactor : MonoBehaviour
         CurrentObject = obj;
         CurrentObject.IsSelected = true;
 
-        var headTransf =  m_charBeh.siljaAnimation.GetBoneTransform(HumanBodyBones.Head);
         var position = obj.transform.position;
         var direction = (obj.transform.position - headTransf.position).normalized;
 
 		//m_charBeh.m_characterAnimation.SetLookingPoint(direction, 0.5f);
         //m_charBeh.m_characterAnimation.SetRightHandIK(obj.transform.position, 0.3f);
 
-        //if(obj.m_renderer != null)
-        //{
-        //    HighlightsImageEffect.Instance.OnObjectMouseOver(obj.m_renderer, Color.white);
-        //}
+		foreach(var rend in obj.m_renderers)
+        {
+            //HighlightsImageEffect.Instance.OnObjectMouseOver(obj.m_renderer, Color.white);
+			GlowController.RegisterObject(rend);
+        }
     }
 
     private void DeselectCurrentObject(IInteractableObject obj)
@@ -211,6 +216,7 @@ public class Interactor : MonoBehaviour
         //m_charBeh.m_characterAnimation.SetRightHandIK(Vector3.zero, 0f);
 
         //HighlightsImageEffect.Instance.OnObjectMouseExit();
+		GlowController.ResetAllObjects();
     }
 
     private void OnInteractionDestroyed(IInteractableObject obj)
