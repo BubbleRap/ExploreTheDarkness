@@ -1,4 +1,6 @@
-﻿Shader "Custom/HeatDistortion" {
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Custom/HeatDistortion" {
 
 Properties 
 {
@@ -68,7 +70,7 @@ v2f vert(appdata_base i){
     o.distortion /= 1+depth;        // scale effect with vertex depth
     o.distortion *= _Strength;   // multiply with user controlled strength
     
-    o.position = mul(UNITY_MATRIX_MVP, i.vertex);      // compute transformed vertex position
+    o.position = UnityObjectToClipPos(i.vertex);      // compute transformed vertex position
 	o.screenPos = o.position;   // pass the position to the pixel shader
 
     return o;
